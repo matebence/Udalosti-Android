@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Aplikacia -->
+    <dimen name="activity_aplikacia_titul_velkost_pisma">20sp</dimen>
+    <dimen name="activity_aplikacia_tien">4dp</dimen>
+
+    <!-- Dialog chyb -->
+    <dimen name="dialog_chyb_margin">20dp</dimen>
+    <dimen name="dialog_chyb_velkost_titulu">20sp</dimen>
+    <dimen name="dialog_chyb_velkost_textu">15sp</dimen>
+    <dimen name="dialog_chyb_velkost_tlacidla_zatvorit">15sp</dimen>
+
+    <!-- Uvodna Obrazovka -->
+    <dimen name="uvodna_obrazovka_sirka_a_vyska">220dp</dimen>
+    <dimen name="uvodna_obrazovka_logo_padding">60dp</dimen>
+    <dimen name="uvodna_obrazovka_nazov_aplikacie_margin">30dp</dimen>
+    <dimen name="uvodna_obrazovka_velkost_pisma">40sp</dimen>
+
+    <!-- Rychla ukazka aplikacie -->
+    <dimen name="rychla_ukazka_aplikacie_navigacia_vyska">30dp</dimen>
+    <dimen name="rychla_ukazka_aplikacie_navigacia_margin_bottom">20dp</dimen>
+    <dimen name="rychla_ukazka_aplikacie_sirka_a_vyska_obrazka">120dp</dimen>
+    <dimen name="rychla_ukazka_aplikacie_margin_titul">16dp</dimen>
+    <dimen name="rychla_ukazka_aplikacie_margin_text">16dp</dimen>
+    <dimen name="rychla_ukazka_aplikacie_padding_text">40dp</dimen>
+    <dimen name="rychla_ukazka_aplikacie_tlacidla_margin">15dp</dimen>
+    <dimen name="rychla_ukazka_aplikacie_titul_velkost_pisma">20sp</dimen>
+    <dimen name="rychla_ukazka_aplikacie_text_velkost_pisma">16sp</dimen>
+
+    <!-- Autentifikator -->
+    <dimen name="autentifikacia_sirka_vstupov">280dp</dimen>
+    <dimen name="autentifikacia_vyska_vstupov">45dp</dimen>
+    <dimen name="autentifikacia_oddelenie_vstupov">20dp</dimen>
+    <dimen name="autentifikacia_titul_margin_bottom">5dp</dimen>
+    <dimen name="autentifikacia_text_margin_bottom">30dp</dimen>
+    <dimen name="autentifikacia_text_margin_top">20dp</dimen>
+    <dimen name="autentifikacia_sirka_textu">230dp</dimen>
+    <dimen name="autentifikacia_titul_velkost_pisma">60sp</dimen>
+    <dimen name="autentifikacia_velkost_pisma_textu">14sp</dimen>
+    <dimen name="autentifikacia_velkost_pisma_vstupov">18sp</dimen>
+
+    <!-- Autentifikator prihlasenie -->
+    <dimen name="autentifikacia_prihlasenie_velkost_pisma_pre_zabudnute_heslo_a_registracia">12sp
+    </dimen>
+
+    <!-- Autentifikator registracia -->
+    <dimen name="autentifikacia_registracia_radio__tlacidlo_margin">10dp</dimen>
+    <dimen name="autentifikacia_registracia_sirka_a_vyska_profilovej_fotky">100dp</dimen>
+</resources>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/ic_dialog_pozadie">
+
+    <TextView
+        android:id="@+id/dialog_chyb_titul"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="@dimen/dialog_chyb_margin"
+        android:layout_marginStart="@dimen/dialog_chyb_margin"
+        android:layout_marginTop="@dimen/dialog_chyb_margin"
+        android:fontFamily="@font/raleway_bold"
+        android:textColor="@color/dialog_titul"
+        android:textSize="@dimen/dialog_chyb_velkost_titulu"/>
+
+    <TextView
+        android:id="@+id/dialog_chyb_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/dialog_chyb_titul"
+        android:layout_marginBottom="@dimen/dialog_chyb_margin"
+        android:layout_marginEnd="@dimen/dialog_chyb_margin"
+        android:layout_marginLeft="@dimen/dialog_chyb_margin"
+        android:layout_marginRight="@dimen/dialog_chyb_margin"
+        android:layout_marginStart="@dimen/dialog_chyb_margin"
+        android:layout_marginTop="@dimen/dialog_chyb_margin"
+        android:fontFamily="@font/raleway_medium"
+        android:textColor="@color/dialog_text"
+        android:textSize="@dimen/dialog_chyb_velkost_textu"/>
+
+    <Button
+        android:id="@+id/dialog_chyb_zatvorit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/dialog_chyb_text"
+        android:layout_marginBottom="@dimen/dialog_chyb_margin"
+        android:layout_marginEnd="@dimen/dialog_chyb_margin"
+        android:layout_marginRight="@dimen/dialog_chyb_margin"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/raleway_bold"
+        android:text="@string/dialog_chyb_zavorit"
+        android:textAllCaps="true"
+        android:textColor="@color/dialog_zavorit"
+        android:textSize="@dimen/dialog_chyb_velkost_tlacidla_zatvorit" />
+</RelativeLayout>

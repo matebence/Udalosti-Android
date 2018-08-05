@@ -1,6 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <!--Aplikacia-->
+    <color name="statusbar">#00457c</color>
+    <color name="toolbar">#005ba6</color>
+    <color name="nacitavanie">#0397d6</color>
+
+    <!--Dialog oznameni-->
+    <color name="dialog_titul">#404040</color>
+    <color name="dialog_text">#9a9a9a</color>
+    <color name="dialog_zavorit">#0397d6</color>
+
+    <!--Tab Layout-->
+    <color name="tab_ikona_aktivna">#005ba6</color>
+    <color name="tab_ikona_inaktivna">#000000</color>
+
+    <!-- Uvodna obrazovka -->
+    <color name="uvodna_obrazovka_logo_text">#424242</color>
+
+    <!--Rychla ukazka aplikacie-->
+    <color name="pozadie_cast_prva">#084e7b</color>
+    <color name="pozadie_cast_druha">#015d97</color>
+    <color name="pozadie_cast_tretia">#1175b4</color>
+
+    <color name="inaktivna_farba_cast_prva">#5383a3</color>
+    <color name="inaktivna_farba_cast_druha">#4e98c2</color>
+    <color name="inaktivna_farba_cast_tretia">#599fcb</color>
+
+    <color name="aktivna_farba_cast_prva">#b5cad8</color>
+    <color name="aktivna_farba_cast_druha">#b4d3e4</color>
+    <color name="aktivna_farba_cast_tretia">#b8d6e9</color>
+
+    <array name="pole_farieb_pre_aktivnu_obrazovku">
+        <item>@color/aktivna_farba_cast_prva</item>
+        <item>@color/aktivna_farba_cast_druha</item>
+        <item>@color/aktivna_farba_cast_tretia</item>
+    </array>
+
+    <array name="pole_farieb_pre_inaktivnu_obrazovku">
+        <item>@color/inaktivna_farba_cast_prva</item>
+        <item>@color/inaktivna_farba_cast_druha</item>
+        <item>@color/inaktivna_farba_cast_tretia</item>
+    </array>
+
+    <!-- Autentifikator -->
+    <color name="autentifikacia_tlacidlo">#0397d6</color>
 </resources>

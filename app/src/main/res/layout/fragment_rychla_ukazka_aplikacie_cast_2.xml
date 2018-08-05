@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/pozadie_cast_druha">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+
+        <ImageView
+            android:layout_width="@dimen/rychla_ukazka_aplikacie_sirka_a_vyska_obrazka"
+            android:layout_height="@dimen/rychla_ukazka_aplikacie_sirka_a_vyska_obrazka"
+            android:contentDescription="@string/rychla_ukazka_aplikacie_cast_druha_popis_illustracie"
+            android:src="@drawable/ic_objavuj"
+            android:tint="@android:color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/rychla_ukazka_aplikacie_margin_titul"
+            android:fontFamily="@font/raleway_semi_bold"
+            android:text="@string/rychla_ukazka_aplikacie_cast_druha_titul"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/rychla_ukazka_aplikacie_titul_velkost_pisma"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/rychla_ukazka_aplikacie_margin_titul"
+            android:fontFamily="@font/raleway_regular"
+            android:paddingLeft="@dimen/rychla_ukazka_aplikacie_padding_text"
+            android:paddingRight="@dimen/rychla_ukazka_aplikacie_padding_text"
+            android:text="@string/rychla_ukazka_aplikacie_cast_druha_podtittul"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/rychla_ukazka_aplikacie_text_velkost_pisma" />
+    </LinearLayout>
+</RelativeLayout>

@@ -21,7 +21,6 @@ import android.widget.Toast;
 
 import com.mate.bence.udalosti.Activity.Autentifikacia.Fragment.Prihlasenie;
 import com.mate.bence.udalosti.Activity.Autentifikacia.Fragment.Registracia;
-import com.mate.bence.udalosti.Activity.Autentifikacia.Fragment.ZabudnuteHeslo;
 import com.mate.bence.udalosti.Activity.Navigacia.Navigacia;
 import com.mate.bence.udalosti.Dialog.Oznamenie.DialogOznameni;
 import com.mate.bence.udalosti.Udaje.Nastavenia.Premenne;

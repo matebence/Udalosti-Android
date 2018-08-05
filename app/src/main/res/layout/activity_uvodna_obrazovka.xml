@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="@dimen/uvodna_obrazovka_sirka_a_vyska"
+        android:layout_height="@dimen/uvodna_obrazovka_sirka_a_vyska"
+        android:layout_centerInParent="true"
+        android:contentDescription="@string/uvodna_obrazovka_logo_popis_illustracie"
+        android:paddingBottom="@dimen/uvodna_obrazovka_logo_padding"
+        android:src="@drawable/udalosti_logo" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/nacitavanie"
+        android:fontFamily="@font/raleway_regular"
+        android:text="@string/nazov_aplikacie"
+        android:textAlignment="center"
+        android:textColor="@color/uvodna_obrazovka_logo_text"
+        android:textSize="@dimen/uvodna_obrazovka_velkost_pisma" />
+
+    <ProgressBar
+        android:id="@+id/nacitavanie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/uvodna_obrazovka_nazov_aplikacie_margin"
+        android:theme="@style/Nacitavanie" />
+</RelativeLayout>

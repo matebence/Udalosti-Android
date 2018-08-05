@@ -1,3 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Aplikacia -->
     <string name="nazov_aplikacie">Udalosti</string>
+    <string name="activity_aplikacia_titul">Udalosti</string>
+
+    <!-- Dialog -->
+    <string name="dialog_chyb_zavorit">Zatvoriť</string>
+
+    <!-- Pomoc -->
+    <string name="pomoc_meno">Meno</string>
+    <string name="pomoc_email">Email</string>
+    <string name="pomoc_heslo">Heslo</string>
+    <string name="pomoc_potvrdte_heslo">Potvrdte heslo</string>
+
+    <!-- Chyby -->
+    <string name="chyba_ziadne_spojenie">Žiadné spojenie!</string>
+    <string name="chyba_automatickeho_prihlasenia">Prosím prihláste sa!</string>
+    <string name="chyba_servera">Server je momentalne nedostupný!</string>
+    <string name="chyba_gcm_registracia_nedostupna">Registrácia je nedostupná!</string>
+
+    <!-- Uvodna obrazovka -->
+    <string name="uvodna_obrazovka_logo_popis_illustracie">Logo aplikácie Udalosti</string>
+
+    <!-- Rychla ukazka aplikacie -->
+    <string name="rychla_ukazka_aplikacie_tlacidlo_preskocit">Preskočiť</string>
+    <string name="rychla_ukazka_aplikacie_tlacidlo_dalej">Ďalej</string>
+    <string name="rychla_ukazka_aplikacie_tlacidlo_ok">OK</string>
+    <string name="rychla_ukazka_aplikacie_cast_prva_popis_illustracie">Illustrácia pre registráciu a prihlásenie</string>
+    <string name="rychla_ukazka_aplikacie_cast_druha_popis_illustracie">Illustrácia pre Objavuj</string>
+    <string name="rychla_ukazka_aplikacie_cast_tretia_popis_illustracie">Illustrácia pre Vlastné Udalosti</string>
+    <string name="rychla_ukazka_aplikacie_cast_prva_titul">Registrácia a Prihlásenie</string>
+    <string name="rychla_ukazka_aplikacie_cast_druha_titul">Objavujte</string>
+    <string name="rychla_ukazka_aplikacie_cast_tretia_titul">Podľa pozície</string>
+    <string name="rychla_ukazka_aplikacie_cast_prva_podtittul">Registrujte sa, a majte prehľad nad všetkými udalosťami</string>
+    <string name="rychla_ukazka_aplikacie_cast_druha_podtittul">Vyhldávajte z udalostí a nájdite tie ktoré Vás zaujímajú</string>
+    <string name="rychla_ukazka_aplikacie_cast_tretia_podtittul">Hladajte udalosti ktoré sú najbližšie k Vám podla Vašej pozície</string>
+
+    <!-- Autentifikator prihlasenie -->
+    <string name="autentifikacia_prihlasenie_text">Udržiavajte informácie o tom, čo sa deje vo Vašom okolí.</string>
+    <string name="autentifikacia_tlacidlo_prihlasit_sa">Prihlásíť sa</string>
+
+    <!-- Autentifikator registracia -->
+    <string name="autentifikacia_registracia_text">Staňte sa naším členom ešte dnes, udalosť spája všetkých!</string>
+    <string name="autentifikacia_uspesna_registracia">Registrácia prebehla úspesne! Možete sa prihlásiť.</string>
+
+    <!-- Autentifikator -->
+    <string name="autentifikacia_zabudol_som_heslo">Zabudol som heslo</string>
+    <string name="autentifikacia_registrovat">Registrovať</string>
 </resources>
