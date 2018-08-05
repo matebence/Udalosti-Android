@@ -1,4 +1,4 @@
-package com.mate.bence.udalosti.Dialog.Oznamenie;
+package com.mate.bence.udalosti.Dialog;
 
 import android.app.Activity;
 import android.app.Dialog;

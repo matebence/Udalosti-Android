@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 
-import com.mate.bence.udalosti.Udaje.Nastavenia.Status;
+import com.mate.bence.udalosti.Udaje.Nastavenia.Nastavenia;
 import com.mate.bence.udalosti.Udaje.Siet.Model.KommunikaciaOdpoved;
 
 import java.util.HashMap;
@@ -41,8 +41,8 @@ public class Odhlasenie extends Service implements KommunikaciaOdpoved {
     @Override
     public void odpovedServera(String odpoved, String od, HashMap<String, String> udaje) {
         switch (od) {
-            case Status.AUTENTIFIKACIA_ODHLASENIE:
-                if (odpoved.equals(Status.VSETKO_V_PORIADKU)) {
+            case Nastavenia.AUTENTIFIKACIA_ODHLASENIE:
+                if (odpoved.equals(Nastavenia.VSETKO_V_PORIADKU)) {
                     Log.v(TAG, "Systém odhlásil");
                 }
         }

@@ -38,7 +38,7 @@
     <dimen name="autentifikacia_velkost_pisma_textu">14sp</dimen>
     <dimen name="autentifikacia_velkost_pisma_vstupov">18sp</dimen>
 
-    <!-- Autentifikator prihlasenie -->
+    <!-- Autentifikator pouzivatel -->
     <dimen name="autentifikacia_prihlasenie_logo_sirka">50dp</dimen>
     <dimen name="autentifikacia_prihlasenie_logo_vyska">70dp</dimen>
     <dimen name="autentifikacia_prihlasenie_logo_margin_bottom">10dp</dimen>
@@ -46,4 +46,17 @@
     <dimen name="autentifikacia_prihlaenie_zaregistrovat_sa_margin_bottom">20dp</dimen>
     <dimen name="autentifikacia_prihlasenie_zaregistrovat_sa_margin_top">5dp</dimen>
     <dimen name="autentifikacia_prihlasenie_nemate_ucet_velkost_pisma">14sp</dimen>
+
+    <!-- Zoznam udalosti -->
+    <dimen name="list_zoznam_udalosti_obsah_margin">20dp</dimen>
+    <dimen name="list_zoznam_udalosti_vyska_obrazka">200dp</dimen>
+    <dimen name="list_zoznam_udalosti_informacie_margin">10dp</dimen>
+    <dimen name="list_zoznam_udalosti_velkost_ikoni_miesto">27dp</dimen>
+    <dimen name="list_zoznam_udalosti_velkost_ikoni_cas">25dp</dimen>
+    <dimen name="list_zoznam_udalosti_margin_miesto">5dp</dimen>
+    <dimen name="list_zoznam_udalosti_velkost_pisma_nazvov">20sp</dimen>
+    <dimen name="list_zoznam_udalosti_velkost_pisma_miesto">17sp</dimen>
+    <dimen name="list_zoznam_udalosti_velkost_pisma_mesiac">18sp</dimen>
+    <dimen name="list_zoznam_udalosti_velkost_pisma_den">20sp</dimen>
+    <dimen name="list_zoznam_udalosti_velkost_pisma_cas">20sp</dimen>
 </resources>

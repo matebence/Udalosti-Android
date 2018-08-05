@@ -8,7 +8,7 @@ import com.mate.bence.udalosti.Activity.Autentifikacia.Autentifikacia;
 import com.mate.bence.udalosti.Activity.Autentifikacia.AutentifikaciaUdaje;
 import com.mate.bence.udalosti.Activity.RychlaUkazkaAplikacie.RychlaUkazkaAplikacie;
 import com.mate.bence.udalosti.Udaje.Data.Preferencie;
-import com.mate.bence.udalosti.Udaje.Nastavenia.Status;
+import com.mate.bence.udalosti.Udaje.Nastavenia.Nastavenia;
 import com.mate.bence.udalosti.Udaje.Siet.Model.KommunikaciaOdpoved;
 import com.mate.bence.udalosti.Nastroje.Pripojenie;
 import com.mate.bence.udalosti.R;
@@ -60,9 +60,9 @@ public class UvodnaObrazovka extends AppCompatActivity implements KommunikaciaOd
     @Override
     public void odpovedServera(String odpoved, String od, HashMap<String, String> udaje) {
         switch (od) {
-            case Status.AUTENTIFIKACIA_PRIHLASENIE:
+            case Nastavenia.AUTENTIFIKACIA_PRIHLASENIE:
                 Intent podlaSpravnosti;
-                if (odpoved.equals(Status.VSETKO_V_PORIADKU)) {
+                if (odpoved.equals(Nastavenia.VSETKO_V_PORIADKU)) {
 //                    podlaSpravnosti = new Intent(UvodnaObrazovka.this, Navigacia.class);
 //                    podlaSpravnosti.putExtra("email", udaje.get("email"));
 //                    podlaSpravnosti.putExtra("meno", udaje.get("meno"));

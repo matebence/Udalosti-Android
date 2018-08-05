@@ -16,7 +16,6 @@
     <string name="chyba_ziadne_spojenie">Žiadné spojenie!</string>
     <string name="chyba_automatickeho_prihlasenia">Prosím prihláste sa!</string>
     <string name="chyba_servera">Server je momentalne nedostupný!</string>
-    <string name="chyba_gcm_registracia_nedostupna">Registrácia je nedostupná!</string>
 
     <!-- Uvodna obrazovka -->
     <string name="uvodna_obrazovka_logo_popis_illustracie">Logo aplikácie Udalosti</string>
@@ -35,7 +34,7 @@
     <string name="rychla_ukazka_aplikacie_cast_druha_podtittul">Vyhldávajte z udalostí a nájdite tie ktoré Vás zaujímajú</string>
     <string name="rychla_ukazka_aplikacie_cast_tretia_podtittul">Hladajte udalosti ktoré sú najbližšie k Vám podla Vašej pozície</string>
 
-    <!-- Autentifikator prihlasenie -->
+    <!-- Autentifikator pouzivatel -->
     <string name="autentifikacia_prihlasenie_text">Udržiavajte informácie o tom, čo sa deje vo Vašom okolí.</string>
     <string name="autentifikacia_tlacidlo_prihlasit_sa">Prihlásíť sa</string>
     <string name="autentifikacia_nemate_este_ucet">Nemáte ešte používatelské konto?</string>
@@ -46,4 +45,8 @@
     <string name="autentifikacia_registracia_text">Staňte sa naším členom ešte dnes, udalosť spája všetkých!</string>
     <string name="autentifikacia_registrovat">Registrovať</string>
     <string name="autentifikacia_uspesna_registracia">Registrácia prebehla úspesne! Možete sa prihlásiť.</string>
+
+    <!-- Zoznam udalosti -->
+    <string name="list_zoznam_udalosti_popis_illustracie">Obrázok udalosti</string>
+    <string name="list_zoznam_udalosti_tlacidlo_budem_tam">Budem tam</string>
 </resources>

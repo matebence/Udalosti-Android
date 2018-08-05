@@ -44,4 +44,10 @@
 
     <!-- Autentifikator -->
     <color name="autentifikacia">#0397d6</color>
+
+    <!-- Udalost zoznam -->
+    <color name="udalosti_zoznam_datum">#c33939</color>
+    <color name="udalosti_zoznam_miesto">#005ba6</color>
+    <color name="udalosti_zoznam_pozadie">#f2f2f2</color>
+    <color name="udalosti_zoznam_hlavicka">#eaeaea</color>
 </resources>

@@ -7,17 +7,13 @@ public class Validacia {
     private String email;
     private String heslo;
     private String potvrd;
-    private String pohlavie;
-    private String idTelefonu;
 
-    public Validacia(String oznam, String meno, String email, String heslo, String potvrd, String pohlavie, String idTelefonu) {
+    public Validacia(String oznam, String meno, String email, String heslo, String potvrd) {
         this.oznam = oznam;
         this.meno = meno;
         this.email = email;
         this.heslo = heslo;
         this.potvrd = potvrd;
-        this.pohlavie = pohlavie;
-        this.idTelefonu = idTelefonu;
     }
 
     public String getOznam() {
@@ -60,22 +56,6 @@ public class Validacia {
         this.potvrd = potvrd;
     }
 
-    public String getPohlavie() {
-        return pohlavie;
-    }
-
-    public void setPohlavie(String pohlavie) {
-        this.pohlavie = pohlavie;
-    }
-
-    public String getIdTelefonu() {
-        return idTelefonu;
-    }
-
-    public void setIdTelefonu(String idTelefonu) {
-        this.idTelefonu = idTelefonu;
-    }
-
     @Override
     public String toString() {
         return "Validacia{" +
@@ -84,8 +64,6 @@ public class Validacia {
                 ", email='" + email + '\'' +
                 ", heslo='" + heslo + '\'' +
                 ", potvrd='" + potvrd + '\'' +
-                ", pohlavie='" + pohlavie + '\'' +
-                ", idTelefonu='" + idTelefonu + '\'' +
                 '}';
     }
 }

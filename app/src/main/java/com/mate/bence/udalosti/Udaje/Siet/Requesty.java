@@ -30,17 +30,14 @@ public interface Requesty {
     Call<Autentifikator> odhlasenie(
             @Field("email") String email);
 
-    @Multipart
+    @FormUrlEncoded
     @POST("udalosti/index.php/registracia")
     Call<Autentifikator> registracia(
-            @Part("meno") RequestBody meno,
-            @Part("email") RequestBody email,
-            @Part("heslo") RequestBody heslo,
-            @Part("potvrd") RequestBody potvrd,
-            @Part("pohlavie") RequestBody pohlavie,
-            @Part("idTelefonu") RequestBody idTelefonu,
-            @Part MultipartBody.Part file,
-            @Part("nova_registracia") RequestBody registracia);
+            @Field("meno") String meno,
+            @Field("email") String email,
+            @Field("heslo") String heslo,
+            @Field("potvrd") String potvrd,
+            @Field("nova_registracia") String registracia);
 
     @FormUrlEncoded
     @POST("udalosti/index.php/pomoc")
