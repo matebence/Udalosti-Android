@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Aplikacia -->
-    <dimen name="activity_aplikacia_titul_velkost_pisma">20sp</dimen>
-    <dimen name="activity_aplikacia_tien">4dp</dimen>
-
     <!-- Dialog chyb -->
     <dimen name="dialog_chyb_margin">20dp</dimen>
     <dimen name="dialog_chyb_velkost_titulu">20sp</dimen>
@@ -40,10 +36,11 @@
     <dimen name="autentifikacia_velkost_pisma_vstupov">18sp</dimen>
 
     <!-- Autentifikator prihlasenie -->
-    <dimen name="autentifikacia_prihlasenie_velkost_pisma_pre_zabudnute_heslo_a_registracia">12sp
-    </dimen>
-
-    <!-- Autentifikator registracia -->
-    <dimen name="autentifikacia_registracia_radio__tlacidlo_margin">10dp</dimen>
-    <dimen name="autentifikacia_registracia_sirka_a_vyska_profilovej_fotky">100dp</dimen>
+    <dimen name="autentifikacia_prihlasenie_logo_sirka">50dp</dimen>
+    <dimen name="autentifikacia_prihlasenie_logo_vyska">70dp</dimen>
+    <dimen name="autentifikacia_prihlasenie_logo_margin_bottom">10dp</dimen>
+    <dimen name="autentifikacia_prihlasenie_logo_text_margin_left">10dp</dimen>
+    <dimen name="autentifikacia_prihlaenie_zaregistrovat_sa_margin_bottom">20dp</dimen>
+    <dimen name="autentifikacia_prihlasenie_zaregistrovat_sa_margin_top">5dp</dimen>
+    <dimen name="autentifikacia_prihlasenie_nemate_ucet_velkost_pisma">14sp</dimen>
 </resources>

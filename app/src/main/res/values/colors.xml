@@ -43,5 +43,5 @@
     </array>
 
     <!-- Autentifikator -->
-    <color name="autentifikacia_tlacidlo">#0397d6</color>
+    <color name="autentifikacia">#0397d6</color>
 </resources>

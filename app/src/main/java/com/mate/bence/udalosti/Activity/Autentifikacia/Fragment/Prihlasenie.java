@@ -44,9 +44,6 @@ public class Prihlasenie extends Fragment implements View.OnClickListener {
             case R.id.registrovat_sa:
                 autentifikaciaOvladanie.registracia();
                 break;
-            case R.id.zabudnute_heslo:
-                autentifikaciaOvladanie.zabudnuteHeslo();
-                break;
         }
     }
 
@@ -57,7 +54,7 @@ public class Prihlasenie extends Fragment implements View.OnClickListener {
         Button registracia = view.findViewById(R.id.registrovat_sa);
         registracia.setOnClickListener(this);
 
-        Button zabudnuteHeslo = view.findViewById(R.id.zabudnute_heslo);
+        Button zabudnuteHeslo = view.findViewById(R.id.registrovat_sa);
         zabudnuteHeslo.setOnClickListener(this);
 
         this.email = view.findViewById(R.id.prihlasenie_email_vstup);

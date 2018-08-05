@@ -5,9 +5,5 @@ public interface AutentifikaciaOvladanie {
 
     void tlacidloPrihlasitSa(String email, String heslo);
 
-    void tlacidloZabudnuteHeslo(String email);
-
     void registracia();
-
-    void zabudnuteHeslo();
 }

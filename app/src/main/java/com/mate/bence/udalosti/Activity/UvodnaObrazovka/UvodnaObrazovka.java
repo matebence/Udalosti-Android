@@ -3,11 +3,9 @@ package com.mate.bence.udalosti.Activity.UvodnaObrazovka;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.mate.bence.udalosti.Activity.Autentifikacia.Autentifikacia;
 import com.mate.bence.udalosti.Activity.Autentifikacia.AutentifikaciaUdaje;
-import com.mate.bence.udalosti.Activity.Navigacia.Navigacia;
 import com.mate.bence.udalosti.Activity.RychlaUkazkaAplikacie.RychlaUkazkaAplikacie;
 import com.mate.bence.udalosti.Udaje.Data.Preferencie;
 import com.mate.bence.udalosti.Udaje.Nastavenia.Status;
@@ -65,12 +63,12 @@ public class UvodnaObrazovka extends AppCompatActivity implements KommunikaciaOd
             case Status.AUTENTIFIKACIA_PRIHLASENIE:
                 Intent podlaSpravnosti;
                 if (odpoved.equals(Status.VSETKO_V_PORIADKU)) {
-                    podlaSpravnosti = new Intent(UvodnaObrazovka.this, Navigacia.class);
-                    podlaSpravnosti.putExtra("email", udaje.get("email"));
-                    podlaSpravnosti.putExtra("meno", udaje.get("meno"));
-                    podlaSpravnosti.putExtra("heslo", udaje.get("heslo"));
-                    podlaSpravnosti.putExtra("token", udaje.get("token"));
-                    podlaSpravnosti.putExtra("obrazok", udaje.get("obrazok"));
+//                    podlaSpravnosti = new Intent(UvodnaObrazovka.this, Navigacia.class);
+//                    podlaSpravnosti.putExtra("email", udaje.get("email"));
+//                    podlaSpravnosti.putExtra("meno", udaje.get("meno"));
+//                    podlaSpravnosti.putExtra("heslo", udaje.get("heslo"));
+//                    podlaSpravnosti.putExtra("token", udaje.get("token"));
+//                    podlaSpravnosti.putExtra("obrazok", udaje.get("obrazok"));
                 } else {
                     podlaSpravnosti = new Intent(UvodnaObrazovka.this, Autentifikacia.class);
                     podlaSpravnosti.putExtra("neUspesnePrihlasenie", true);
@@ -78,10 +76,10 @@ public class UvodnaObrazovka extends AppCompatActivity implements KommunikaciaOd
                         podlaSpravnosti.putExtra("email", udaje.get("email"));
                     }
                 }
-                podlaSpravnosti.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(podlaSpravnosti);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                finish();
+//                podlaSpravnosti.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                startActivity(podlaSpravnosti);
+//                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+//                finish();
                 break;
         }
     }

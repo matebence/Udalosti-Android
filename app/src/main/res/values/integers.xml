@@ -1,7 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Autentifikator prihlasenie -->
-    <integer name="autentifikacia_prihlasenie_pomer_jedna">1</integer>
-    <integer name="autentifikacia_prihlasenie_pomer_tri">3</integer>
-    <integer name="autentifikacia_prihlasenie_pomer_styri">4</integer>
 </resources>

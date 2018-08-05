@@ -3,32 +3,20 @@ package com.mate.bence.udalosti.Activity.Autentifikacia;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.mate.bence.udalosti.Activity.Autentifikacia.Fragment.Prihlasenie;
 import com.mate.bence.udalosti.Activity.Autentifikacia.Fragment.Registracia;
-import com.mate.bence.udalosti.Activity.Navigacia.Navigacia;
 import com.mate.bence.udalosti.Dialog.Oznamenie.DialogOznameni;
-import com.mate.bence.udalosti.Udaje.Nastavenia.Premenne;
 import com.mate.bence.udalosti.Udaje.Nastavenia.Status;
 import com.mate.bence.udalosti.Udaje.Siet.Model.KommunikaciaOdpoved;
 import com.mate.bence.udalosti.Nastroje.Pripojenie;
 import com.mate.bence.udalosti.R;
-import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.util.HashMap;
 
@@ -50,7 +38,6 @@ public class Autentifikacia extends AppCompatActivity implements AutentifikaciaO
         this.nacitavanie = findViewById(R.id.nacitavanie);
 
         pridajFragment(new Prihlasenie(), Status.AUTENTIFIKACIA_PRIHLASENIE);
-        nastavPozadie();
         automatickePrihlasenieChyba();
     }
 
@@ -60,27 +47,6 @@ public class Autentifikacia extends AppCompatActivity implements AutentifikaciaO
             fragmentManager.popBackStackImmediate();
         } else {
             super.onBackPressed();
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-            CropImage.ActivityResult vysledok = CropImage.getActivityResult(data);
-            if (resultCode == RESULT_OK) {
-                ImageView ukazkaFotky = findViewById(R.id.registracia_profil);
-                try {
-                    Bitmap orezanyObrazok = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), vysledok.getUri());
-                    RoundedBitmapDrawable okruhliObrazok = RoundedBitmapDrawableFactory.create(getResources(), orezanyObrazok);
-                    okruhliObrazok.setCircular(true);
-                    ukazkaFotky.setImageDrawable(okruhliObrazok);
-                } catch (Exception e) {
-                    Log.v(TAG, "Chyba pri zaokrúhlení fotky!");
-                }
-                this.adresaUpravenejFotky = vysledok.getUri();
-            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                Toast.makeText(this, getApplicationContext().getString(R.string.chyba_orezavania) + vysledok.getError(), Toast.LENGTH_LONG).show();
-            }
         }
     }
 
@@ -117,17 +83,17 @@ public class Autentifikacia extends AppCompatActivity implements AutentifikaciaO
                             udaje.get("heslo"),
                             udaje.get("meno"),
                             udaje.get("obrazok"));
-
-                    Intent uspesnePrihlasenie = new Intent(Autentifikacia.this, Navigacia.class);
-                    uspesnePrihlasenie.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    uspesnePrihlasenie.putExtra("email", udaje.get("email"));
-                    uspesnePrihlasenie.putExtra("heslo", udaje.get("heslo"));
-                    uspesnePrihlasenie.putExtra("token", udaje.get("token"));
-                    uspesnePrihlasenie.putExtra("meno", udaje.get("meno"));
-                    uspesnePrihlasenie.putExtra("obrazok", udaje.get("obrazok"));
-                    startActivity(uspesnePrihlasenie);
-                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                    finish();
+//
+//                    Intent uspesnePrihlasenie = new Intent(Autentifikacia.this, Navigacia.class);
+//                    uspesnePrihlasenie.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    uspesnePrihlasenie.putExtra("email", udaje.get("email"));
+//                    uspesnePrihlasenie.putExtra("heslo", udaje.get("heslo"));
+//                    uspesnePrihlasenie.putExtra("token", udaje.get("token"));
+//                    uspesnePrihlasenie.putExtra("meno", udaje.get("meno"));
+//                    uspesnePrihlasenie.putExtra("obrazok", udaje.get("obrazok"));
+//                    startActivity(uspesnePrihlasenie);
+//                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+//                    finish();
                 } else {
                     new DialogOznameni(this, "Chyba", odpoved);
                 }
@@ -162,30 +128,8 @@ public class Autentifikacia extends AppCompatActivity implements AutentifikaciaO
     }
 
     @Override
-    public void tlacidloZabudnuteHeslo(String email) {
-        if (Pripojenie.pripojenieExistuje(this)) {
-            this.nacitavanie.setVisibility(View.VISIBLE);
-            autentifikaciaUdaje.zabudnuteHeslo(email);
-        } else {
-            new DialogOznameni(this, "Chyba", getString(R.string.chyba_ziadne_spojenie));
-        }
-    }
-
-    @Override
     public void registracia() {
         pridajFragment(new Registracia(), Status.AUTENTIFIKACIA_REGISTRACIA);
-    }
-
-    @Override
-    public void zabudnuteHeslo() {
-        pridajFragment(new ZabudnuteHeslo(), Status.AUTENTIFIKACIA_ZABUDNUTE_HESLO);
-    }
-
-    private void nastavPozadie() {
-        int pozadie[] = {R.drawable.pozadie_tema_1, R.drawable.pozadie_tema_2, R.drawable.pozadie_tema_3,
-                R.drawable.pozadie_tema_4, R.drawable.pozadie_tema_5};
-        RelativeLayout aktualnePozadie = findViewById(R.id.autentifikacia_pozadie);
-        aktualnePozadie.setBackground(getResources().getDrawable(pozadie[(int) (Math.random() * pozadie.length)]));
     }
 
     private void pridajFragment(Fragment fragment, String nazov) {
