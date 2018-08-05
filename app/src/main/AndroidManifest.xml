@@ -26,6 +26,11 @@
             </intent-filter>
         </activity>
 
-
+        <activity
+            android:name=".Activity.RychlaUkazkaAplikacie.RychlaUkazkaAplikacie"
+            tools:ignore="InnerclassSeparator" />
+        <activity
+            android:name=".Activity.Autentifikacia.Autentifikacia"
+            tools:ignore="InnerclassSeparator" />
     </application>
 </manifest>
