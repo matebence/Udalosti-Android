@@ -15,14 +15,17 @@
         android:supportsRtl="true"
         android:theme="@style/AplikaciaBezToolbaru"
         tools:ignore="GoogleAppIndexingWarning">
-        
-        <activity android:name=".MainActivity">
+
+        <activity
+            android:name=".Activity.UvodnaObrazovka.UvodnaObrazovka"
+            tools:ignore="InnerclassSeparator">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
 
+
+    </application>
 </manifest>
