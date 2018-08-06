@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.mate.bence.udalosti.Activity.Udalosti.UdalostiUdaje;
 import com.mate.bence.udalosti.Udaje.Nastavenia.Nastavenia;
 import com.mate.bence.udalosti.Udaje.Siet.Model.KommunikaciaOdpoved;
 
@@ -33,8 +34,8 @@ public class Odhlasenie extends Service implements KommunikaciaOdpoved {
 
     @Override
     public void onTaskRemoved(Intent rootIntent) {
-//        NavigaciaUdaje navigaciaUdaje = new NavigaciaUdaje(this, getApplicationContext());
-//        navigaciaUdaje.odhlasenie(email);
+        UdalostiUdaje udalostiUdaje = new UdalostiUdaje(this, getApplicationContext());
+        udalostiUdaje.odhlasenie(email);
         stopSelf();
     }
 

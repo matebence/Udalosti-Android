@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/zoznam_udalosti"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical" />
+
+    <LinearLayout
+        android:id="@+id/ziadne_udalosti"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:layout_width="@dimen/udalosti_sirka_vyska_ziadne_udalosti"
+            android:layout_height="@dimen/udalosti_sirka_vyska_ziadne_udalosti"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/udalosti_ziadne_udalosti_margin"
+            android:contentDescription="@string/udalosti_ziadne_udalosti_popis_illustracie"
+            android:src="@drawable/ic_udalosti"
+            android:tint="@color/udalosti_chyba_informacia" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/raleway_bold"
+            android:gravity="center"
+            android:text="@string/udalosti_ziadne_udalosti"
+            android:textSize="@dimen/udalosti_ziadne_udalosti_velkost_pisma" />
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/nacitavanie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:theme="@style/Nacitavanie"
+        android:visibility="gone">
+    </ProgressBar>
+</RelativeLayout>

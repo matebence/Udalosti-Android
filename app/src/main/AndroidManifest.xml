@@ -36,5 +36,10 @@
         <activity
             android:name=".Activity.Udalosti.Udalosti"
             tools:ignore="InnerclassSeparator" />
+
+        <service
+            android:name=".Nastroje.Odhlasenie"
+            android:stopWithTask="false"
+            tools:ignore="InnerclassSeparator" />
     </application>
 </manifest>

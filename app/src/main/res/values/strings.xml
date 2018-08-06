@@ -46,6 +46,10 @@
     <string name="autentifikacia_registrovat">Registrovať</string>
     <string name="autentifikacia_uspesna_registracia">Registrácia prebehla úspesne! Možete sa prihlásiť.</string>
 
+    <!-- Udalosti -->
+    <string name="udalosti_ziadne_udalosti_popis_illustracie">Illustrácia pre žiadné udalosti</string>
+    <string name="udalosti_ziadne_udalosti">Žiadné udalosti</string>
+
     <!-- Zoznam udalosti -->
     <string name="list_zoznam_udalosti_popis_illustracie">Obrázok udalosti</string>
     <string name="list_zoznam_udalosti_tlacidlo_budem_tam">Budem tam</string>

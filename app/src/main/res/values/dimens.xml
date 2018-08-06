@@ -47,6 +47,11 @@
     <dimen name="autentifikacia_prihlasenie_zaregistrovat_sa_margin_top">5dp</dimen>
     <dimen name="autentifikacia_prihlasenie_nemate_ucet_velkost_pisma">14sp</dimen>
 
+    <!-- Udalosti -->
+    <dimen name="udalosti_sirka_vyska_ziadne_udalosti">110dp</dimen>
+    <dimen name="udalosti_ziadne_udalosti_margin">10dp</dimen>
+    <dimen name="udalosti_ziadne_udalosti_velkost_pisma">20sp</dimen>
+
     <!-- Zoznam udalosti -->
     <dimen name="list_zoznam_udalosti_obsah_margin">20dp</dimen>
     <dimen name="list_zoznam_udalosti_vyska_obrazka">200dp</dimen>
