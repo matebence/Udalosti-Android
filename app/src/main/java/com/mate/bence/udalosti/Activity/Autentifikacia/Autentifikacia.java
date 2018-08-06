@@ -3,6 +3,7 @@ package com.mate.bence.udalosti.Activity.Autentifikacia;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -12,6 +13,7 @@ import android.widget.LinearLayout;
 
 import com.mate.bence.udalosti.Activity.Autentifikacia.Fragment.Prihlasenie;
 import com.mate.bence.udalosti.Activity.Autentifikacia.Fragment.Registracia;
+import com.mate.bence.udalosti.Activity.Udalosti.Udalosti;
 import com.mate.bence.udalosti.Dialog.DialogOznameni;
 import com.mate.bence.udalosti.Udaje.Nastavenia.Nastavenia;
 import com.mate.bence.udalosti.Udaje.Siet.Model.KommunikaciaOdpoved;
@@ -24,7 +26,6 @@ public class Autentifikacia extends AppCompatActivity implements AutentifikaciaO
 
     private FragmentManager fragmentManager;
     private AutentifikaciaUdaje autentifikaciaUdaje;
-    private Uri adresaUpravenejFotky;
     private LinearLayout nacitavanie;
 
     @Override
@@ -62,7 +63,6 @@ public class Autentifikacia extends AppCompatActivity implements AutentifikaciaO
                     snackbar.setActionTextColor(getResources().getColor(android.R.color.white));
                     snackbar.show();
                 } else {
-
                     new DialogOznameni(this, "Chyba", odpoved);
                 }
                 break;
@@ -72,17 +72,15 @@ public class Autentifikacia extends AppCompatActivity implements AutentifikaciaO
                     autentifikaciaUdaje.ulozPrihlasovacieUdajeDoDatabazy(
                             udaje.get("email"),
                             udaje.get("heslo"));
-//
-//                    Intent uspesnePrihlasenie = new Intent(Autentifikacia.this, Navigacia.class);
-//                    uspesnePrihlasenie.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-//                    uspesnePrihlasenie.putExtra("email", udaje.get("email"));
-//                    uspesnePrihlasenie.putExtra("heslo", udaje.get("heslo"));
-//                    uspesnePrihlasenie.putExtra("token", udaje.get("token"));
-//                    uspesnePrihlasenie.putExtra("meno", udaje.get("meno"));
-//                    uspesnePrihlasenie.putExtra("obrazok", udaje.get("obrazok"));
-//                    startActivity(uspesnePrihlasenie);
-//                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-//                    finish();
+
+                    Intent uspesnePrihlasenie = new Intent(Autentifikacia.this, Udalosti.class);
+                    uspesnePrihlasenie.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    uspesnePrihlasenie.putExtra("email", udaje.get("email"));
+                    uspesnePrihlasenie.putExtra("heslo", udaje.get("heslo"));
+                    uspesnePrihlasenie.putExtra("token", udaje.get("token"));
+                    startActivity(uspesnePrihlasenie);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                    finish();
                 } else {
                     new DialogOznameni(this, "Chyba", odpoved);
                 }
@@ -102,7 +100,7 @@ public class Autentifikacia extends AppCompatActivity implements AutentifikaciaO
     }
 
     @Override
-    public void tlacidloRegistrovatSa(String meno, String email, String heslo, String potvrd, String pohlavie) {
+    public void tlacidloRegistrovatSa(String meno, String email, String heslo, String potvrd) {
         if (Pripojenie.pripojenieExistuje(this)) {
             this.nacitavanie.setVisibility(View.VISIBLE);
             autentifikaciaUdaje.registracia(meno, email, heslo, potvrd);

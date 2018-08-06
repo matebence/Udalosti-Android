@@ -1,4 +1,4 @@
 package com.mate.bence.udalosti.Activity.Udalosti;
 
-public class UdalostiUdaje {
+public class UdalostiUdaje implements UdalostiImplementacia{
 }

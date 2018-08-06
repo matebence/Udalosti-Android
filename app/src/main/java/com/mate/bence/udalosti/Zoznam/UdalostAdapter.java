@@ -29,19 +29,17 @@ import java.text.DateFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostHolder> implements Filterable {
+public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostHolder>{
 
     private boolean animacie = true;
 
     private List<Udalost> zoznamUdalosti;
-    private List<Udalost> hladanaUdalost;
 
     private Context context;
 
     public UdalostAdapter(List<Udalost> zoznamUdalosti, Context context) {
         this.context = context;
         this.zoznamUdalosti = zoznamUdalosti;
-        this.hladanaUdalost = zoznamUdalosti;
     }
 
     @NonNull
@@ -54,7 +52,7 @@ public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostH
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull UdalostHolder holder, int position) {
-        Udalost udalost = hladanaUdalost.get(position);
+        Udalost udalost = zoznamUdalosti.get(position);
 
         new ziskajObrazok(holder.obrazokUdalosti, context).execute(udalost.getObrazok());
 
@@ -73,45 +71,11 @@ public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostH
 
     @Override
     public int getItemCount() {
-        return hladanaUdalost.size();
-    }
-
-    @Override
-    public Filter getFilter() {
-        animacie = false;
-        return new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence hladanaUdalost) {
-                String slovo = hladanaUdalost.toString();
-                if (slovo.isEmpty()) {
-                    UdalostAdapter.this.hladanaUdalost = zoznamUdalosti;
-                } else {
-                    List<Udalost> udaje = new ArrayList<>();
-                    for (Udalost udalost : zoznamUdalosti) {
-                        if (udalost.getNazov().toLowerCase().contains(slovo.toLowerCase())) {
-                            udaje.add(udalost);
-                        }
-                    }
-                    UdalostAdapter.this.hladanaUdalost = udaje;
-                }
-                FilterResults vysledok = new FilterResults();
-                vysledok.values = UdalostAdapter.this.hladanaUdalost;
-                return vysledok;
-            }
-
-            @Override
-            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                hladanaUdalost = (ArrayList<Udalost>) filterResults.values;
-                if (hladanaUdalost.size() < zoznamUdalosti.size()) {
-                    animacie = true;
-                }
-                notifyDataSetChanged();
-            }
-        };
+        return zoznamUdalosti.size();
     }
 
     private void nastavMiestoUdalosti(UdalostHolder holder, String miesto) {
-        String miestoUdalosti[] = miesto.split(" ");
+        String miestoUdalosti[] = miesto.split(",");
         if (miestoUdalosti.length > 1) {
             holder.mestoUdalosti.setText(miestoUdalosti[0]);
             holder.miestoUdalosti.setText(miestoUdalosti[1]);

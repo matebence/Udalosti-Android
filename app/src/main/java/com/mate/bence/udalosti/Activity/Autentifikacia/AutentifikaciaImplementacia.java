@@ -1,7 +1,5 @@
 package com.mate.bence.udalosti.Activity.Autentifikacia;
 
-import android.net.Uri;
-
 public interface AutentifikaciaImplementacia {
     void ucetJeNePristupny(String email);
 

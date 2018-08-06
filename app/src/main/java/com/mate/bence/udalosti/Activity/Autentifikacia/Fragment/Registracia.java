@@ -19,7 +19,6 @@ public class Registracia extends Fragment implements View.OnClickListener {
     private static final String TAG = Registracia.class.getName();
     private AutentifikaciaOvladanie autentifikaciaOvladanie;
     private EditText meno, email, heslo, potrvd;
-    private RadioGroup pohlavie;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,8 +41,8 @@ public class Registracia extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.posli_registraciu:
-//                autentifikaciaOvladanie.tlacidloRegistrovatSa(meno.getText().toString(), email.getText().toString(),
-//                        heslo.getText().toString(), potrvd.getText().toString(), zisitPohlavie(pohlavie));
+                autentifikaciaOvladanie.tlacidloRegistrovatSa(meno.getText().toString(), email.getText().toString(),
+                        heslo.getText().toString(), potrvd.getText().toString());
                 break;
         }
     }

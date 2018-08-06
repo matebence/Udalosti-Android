@@ -54,9 +54,6 @@ public class Prihlasenie extends Fragment implements View.OnClickListener {
         Button registracia = view.findViewById(R.id.registrovat_sa);
         registracia.setOnClickListener(this);
 
-        Button zabudnuteHeslo = view.findViewById(R.id.registrovat_sa);
-        zabudnuteHeslo.setOnClickListener(this);
-
         this.email = view.findViewById(R.id.prihlasenie_email_vstup);
         this.heslo = view.findViewById(R.id.prihlasenie_heslo_vstup);
     }

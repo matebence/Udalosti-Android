@@ -33,5 +33,8 @@
         <activity
             android:name=".Activity.Autentifikacia.Autentifikacia"
             tools:ignore="InnerclassSeparator" />
+        <activity
+            android:name=".Activity.Udalosti.Udalosti"
+            tools:ignore="InnerclassSeparator" />
     </application>
 </manifest>
