@@ -13,8 +13,4 @@ public class GeoAdresa {
     public static void initNanovo() {
         HTTPRequest.setRequest(null);
     }
-
-    public static String getAdresa() {
-        return ADRESA;
-    }
 }

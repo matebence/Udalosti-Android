@@ -22,24 +22,12 @@ public class Autentifikator {
         return chyba;
     }
 
-    public void setChyba(Boolean chyba) {
-        this.chyba = chyba;
-    }
-
     public Pouzivatel getPouzivatel() {
         return pouzivatel;
     }
 
-    public void setPouzivatel(Pouzivatel pouzivatel) {
-        this.pouzivatel = pouzivatel;
-    }
-
     public Validacia getValidacia() {
         return validacia;
-    }
-
-    public void setSprava(Validacia validacia) {
-        this.validacia = validacia;
     }
 
     @Override

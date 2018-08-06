@@ -8,11 +8,11 @@ import com.mate.bence.udalosti.Activity.Autentifikacia.Autentifikacia;
 import com.mate.bence.udalosti.Activity.Autentifikacia.AutentifikaciaUdaje;
 import com.mate.bence.udalosti.Activity.RychlaUkazkaAplikacie.RychlaUkazkaAplikacie;
 import com.mate.bence.udalosti.Activity.Udalosti.Udalosti;
+import com.mate.bence.udalosti.Nastroje.Pripojenie;
+import com.mate.bence.udalosti.R;
 import com.mate.bence.udalosti.Udaje.Data.Preferencie;
 import com.mate.bence.udalosti.Udaje.Nastavenia.Nastavenia;
 import com.mate.bence.udalosti.Udaje.Siet.Model.KommunikaciaOdpoved;
-import com.mate.bence.udalosti.Nastroje.Pripojenie;
-import com.mate.bence.udalosti.R;
 
 import java.util.HashMap;
 

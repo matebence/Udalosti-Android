@@ -20,16 +20,8 @@ public class Validacia {
         return oznam;
     }
 
-    public void setOznam(String oznam) {
-        this.oznam = oznam;
-    }
-
     public String getMeno() {
         return meno;
-    }
-
-    public void setMeno(String meno) {
-        this.meno = meno;
     }
 
     public String getEmail() {
@@ -50,10 +42,6 @@ public class Validacia {
 
     public String getPotvrd() {
         return potvrd;
-    }
-
-    public void setPotvrd(String potvrd) {
-        this.potvrd = potvrd;
     }
 
     @Override

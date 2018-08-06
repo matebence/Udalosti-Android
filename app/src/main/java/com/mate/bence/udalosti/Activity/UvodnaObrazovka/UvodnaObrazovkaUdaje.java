@@ -3,7 +3,6 @@ package com.mate.bence.udalosti.Activity.UvodnaObrazovka;
 import android.content.Context;
 import android.util.Log;
 
-import com.mate.bence.udalosti.Activity.Autentifikacia.Fragment.Prihlasenie;
 import com.mate.bence.udalosti.Udaje.Data.SQLiteDatabaza;
 
 import java.util.HashMap;

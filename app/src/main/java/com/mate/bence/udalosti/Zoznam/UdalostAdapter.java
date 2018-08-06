@@ -13,28 +13,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
-import android.widget.Button;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.mate.bence.udalosti.Udaje.Siet.UdalostiAdresa;
 import com.mate.bence.udalosti.R;
+import com.mate.bence.udalosti.Udaje.Siet.UdalostiAdresa;
 
 import java.io.InputStream;
-import java.lang.ref.WeakReference;
 import java.text.DateFormatSymbols;
-import java.util.ArrayList;
 import java.util.List;
 
-public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostHolder>{
-
-    private boolean animacie = true;
+public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostHolder> {
 
     private List<Udalost> zoznamUdalosti;
-
     private Context context;
 
     public UdalostAdapter(List<Udalost> zoznamUdalosti, Context context) {
@@ -64,9 +56,7 @@ public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostH
 
         nastavMiestoUdalosti(holder, udalost.getMiesto());
 
-        if (animacie) {
-            nacitajObsah(holder.udalost);
-        }
+        nacitajObsah(holder.udalost);
     }
 
     @Override
@@ -102,7 +92,7 @@ public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostH
         view.startAnimation(animacia);
     }
 
-    public class UdalostHolder extends RecyclerView.ViewHolder {
+    class UdalostHolder extends RecyclerView.ViewHolder {
 
         private RelativeLayout udalost;
         private ImageView obrazokUdalosti;

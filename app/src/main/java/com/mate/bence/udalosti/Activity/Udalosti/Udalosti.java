@@ -1,11 +1,19 @@
 package com.mate.bence.udalosti.Activity.Udalosti;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.mate.bence.udalosti.Activity.Autentifikacia.Autentifikacia;
 import com.mate.bence.udalosti.Activity.Udalosti.Karty.Objavuj;
@@ -14,23 +22,24 @@ import com.mate.bence.udalosti.Dialog.DialogOznameni;
 import com.mate.bence.udalosti.Nastroje.Odhlasenie;
 import com.mate.bence.udalosti.R;
 import com.mate.bence.udalosti.Udaje.Nastavenia.Nastavenia;
+import com.mate.bence.udalosti.Udaje.Siet.Model.KommunikaciaData;
 import com.mate.bence.udalosti.Udaje.Siet.Model.KommunikaciaOdpoved;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Udalosti extends AppCompatActivity implements KommunikaciaOdpoved {
-
-    private static final String TAG = Udalosti.class.getSimpleName();
-
-    private boolean odhlasenieZoServera = false;
-    private String email, heslo, token;
+public class Udalosti extends AppCompatActivity implements KommunikaciaOdpoved, KommunikaciaData {
 
     private UdalostiUdaje udalostiUdaje;
+
+    public TextView titul;
     private FragmentManager fragmentManager;
 
+    private String email, token;
     private HashMap<String, String> miestoPrihlasenia;
+
+    private boolean odhlasenieZoServera = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +47,12 @@ public class Udalosti extends AppCompatActivity implements KommunikaciaOdpoved {
         setContentView(R.layout.activity_udalosti);
 
         if (pristup()) {
-            this.udalostiUdaje = new UdalostiUdaje(this, getApplicationContext());
+            this.udalostiUdaje = new UdalostiUdaje(this, this, getApplicationContext());
             this.miestoPrihlasenia = udalostiUdaje.miestoPrihlasenia();
             this.fragmentManager = getSupportFragmentManager();
 
             spustiBezpecneOdhlasenie();
+            init();
         }
     }
 
@@ -51,6 +61,23 @@ public class Udalosti extends AppCompatActivity implements KommunikaciaOdpoved {
         super.onDestroy();
         this.odhlasenieZoServera = true;
         udalostiUdaje.odhlasenie(email);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.ikona_odhlasit, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.nav_odhlasit:
+                udalostiUdaje.odhlasenie(email);
+                return true;
+        }
+        return false;
     }
 
     @Override
@@ -79,11 +106,8 @@ public class Udalosti extends AppCompatActivity implements KommunikaciaOdpoved {
         }
     }
 
-    private void spustiBezpecneOdhlasenie() {
-        Intent bezpecneOdhlasenie = new Intent(getApplicationContext(), Odhlasenie.class);
-        bezpecneOdhlasenie.putExtra("email", email);
-        startService(bezpecneOdhlasenie);
-    }
+    @Override
+    public void dataZoServera(String odpoved, String od, ArrayList udaje) {}
 
     private boolean pristup() {
         Bundle udaje = getIntent().getExtras();
@@ -101,7 +125,6 @@ public class Udalosti extends AppCompatActivity implements KommunikaciaOdpoved {
                 finish();
             } else {
                 this.email = udaje.getString("email");
-                this.heslo = udaje.getString("heslo");
                 this.token = udaje.getString("token");
             }
             return true;
@@ -109,6 +132,102 @@ public class Udalosti extends AppCompatActivity implements KommunikaciaOdpoved {
             return false;
         }
     }
+
+    private void spustiBezpecneOdhlasenie() {
+        Intent bezpecneOdhlasenie = new Intent(getApplicationContext(), Odhlasenie.class);
+        bezpecneOdhlasenie.putExtra("email", email);
+        startService(bezpecneOdhlasenie);
+    }
+
+    public void init() {
+        this.titul = findViewById(R.id.titulok);
+        this.titul.setText(miestoPrihlasenia.get("stat"));
+
+        ViewPager dalsieKarty = findViewById(R.id.udalosti_gesta);
+        TabLayout karty = findViewById(R.id.udalosti_karty);
+
+        Toolbar toolBar = findViewById(R.id.toolbar);
+        nastavToolbar(toolBar);
+
+        nastavKarty(dalsieKarty);
+        karty.setupWithViewPager(dalsieKarty);
+        karty.addOnTabSelectedListener(zmenFarbuIkonov);
+
+        nastavIkonyKartov(karty);
+    }
+
+    private void nastavToolbar(Toolbar toolBar) {
+        setSupportActionBar(toolBar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+    }
+
+    private void nastavIkonyKartov(TabLayout karty) {
+        int ikonyKartov[] = {R.drawable.ic_objavuj, R.drawable.ic_podla_pozicie};
+        for (int i = 0; i < karty.getTabCount(); i++) {
+            karty.getTabAt(i).setIcon(ikonyKartov[i]);
+        }
+    }
+
+    private void nastavKarty(ViewPager viewPager) {
+        GestaKariet gestaKariet = new GestaKariet(fragmentManager);
+
+        Bundle bundle = new Bundle();
+        Objavuj objavuj = new Objavuj();
+        PodlaPozicie podlaPozicie = new PodlaPozicie();
+
+        bundle.putString("stat", miestoPrihlasenia.get("stat"));
+        bundle.putString("okres", miestoPrihlasenia.get("okres"));
+        bundle.putString("mesto", miestoPrihlasenia.get("mesto"));
+        bundle.putString("email", email);
+        bundle.putString("token", token);
+
+        objavuj.setArguments(bundle);
+        podlaPozicie.setArguments(bundle);
+
+        gestaKariet.nacitajFragment(objavuj, "OBJAVUJTE UDALOSTI");
+        gestaKariet.nacitajFragment(podlaPozicie, "NAJBLIZŠIE UDALOSTI");
+
+        viewPager.setOffscreenPageLimit(2);
+        viewPager.setAdapter(gestaKariet);
+    }
+
+    private TabLayout.OnTabSelectedListener zmenFarbuIkonov = new TabLayout.OnTabSelectedListener() {
+        @Override
+        public void onTabSelected(TabLayout.Tab tab) {
+            switch (tab.getPosition()) {
+                case 0:
+                    titul.setText(miestoPrihlasenia.get("stat"));
+                    break;
+                case 1:
+                    if (miestoPrihlasenia.get("mesto") != null) {
+                        titul.setText(miestoPrihlasenia.get("mesto"));
+                    } else if (miestoPrihlasenia.get("okres") != null) {
+                        titul.setText(miestoPrihlasenia.get("okres"));
+                    } else if (miestoPrihlasenia.get("stat") != null) {
+                        titul.setText(miestoPrihlasenia.get("stat"));
+                    }
+                    break;
+            }
+
+            int tabIconColor = ContextCompat.getColor(getApplicationContext(), R.color.tab_ikona_aktivna);
+            assert tab.getIcon() != null;
+            tab.getIcon().setColorFilter(tabIconColor, PorterDuff.Mode.SRC_IN);
+        }
+
+        @Override
+        public void onTabUnselected(TabLayout.Tab tab) {
+            int tabIconColor = ContextCompat.getColor(getApplicationContext(), R.color.tab_ikona_inaktivna);
+            assert tab.getIcon() != null;
+            tab.getIcon().setColorFilter(tabIconColor, PorterDuff.Mode.SRC_IN);
+        }
+
+        @Override
+        public void onTabReselected(TabLayout.Tab tab) {
+            int tabIconColor = ContextCompat.getColor(getApplicationContext(), R.color.tab_ikona_aktivna);
+            assert tab.getIcon() != null;
+            tab.getIcon().setColorFilter(tabIconColor, PorterDuff.Mode.SRC_IN);
+        }
+    };
 
     private class GestaKariet extends FragmentPagerAdapter {
 
@@ -125,6 +244,9 @@ public class Udalosti extends AppCompatActivity implements KommunikaciaOdpoved {
             Objavuj objavuj = new Objavuj();
             PodlaPozicie podlaPozicie = new PodlaPozicie();
 
+            bundle.putString("stat", miestoPrihlasenia.get("stat"));
+            bundle.putString("okres", miestoPrihlasenia.get("okres"));
+            bundle.putString("mesto", miestoPrihlasenia.get("mesto"));
             bundle.putString("email", email);
             bundle.putString("token", token);
 

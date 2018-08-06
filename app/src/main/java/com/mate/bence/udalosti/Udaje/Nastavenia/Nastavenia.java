@@ -7,7 +7,6 @@ public class Nastavenia {
     public static final String UKAZKA_APLIKACIE = "ukazka-aplikacie";
 
     public static final String VSETKO_V_PORIADKU = "OK";
-    public static final String NASTALA_CHYBA = "CHYBA";
 
     public static final String AUTENTIFIKACIA_PRIHLASENIE = "prihlasenie";
     public static final String AUTENTIFIKACIA_ODHLASENIE = "odhlasenie";

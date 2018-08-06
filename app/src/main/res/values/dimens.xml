@@ -2,6 +2,8 @@
 <resources>
     <!-- Aplikacia -->
     <dimen name="activity_aplikacia_tien">4dp</dimen>
+    <dimen name="activity_aplikacia_titul_velkost_pisma">23sp</dimen>
+    <dimen name="activit_karty_velkost_pisma">15sp</dimen>
 
     <!-- Dialog chyb -->
     <dimen name="dialog_chyb_margin">20dp</dimen>

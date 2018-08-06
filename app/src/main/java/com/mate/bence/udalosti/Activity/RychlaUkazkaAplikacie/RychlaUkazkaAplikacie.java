@@ -20,8 +20,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.mate.bence.udalosti.Activity.Autentifikacia.Autentifikacia;
-import com.mate.bence.udalosti.Udaje.Data.Preferencie;
 import com.mate.bence.udalosti.R;
+import com.mate.bence.udalosti.Udaje.Data.Preferencie;
 
 public class RychlaUkazkaAplikacie extends AppCompatActivity implements View.OnClickListener {
 

@@ -22,48 +22,24 @@ public class Udalost {
         return idUdalost;
     }
 
-    public void setIdUdalost(String idUdalost) {
-        this.idUdalost = idUdalost;
-    }
-
     public String getObrazok() {
         return obrazok;
-    }
-
-    public void setObrazok(String obrazok) {
-        this.obrazok = obrazok;
     }
 
     public String getNazov() {
         return nazov;
     }
 
-    public void setNazov(String nazov) {
-        this.nazov = nazov;
-    }
-
     public String getDatum() {
         return datum;
-    }
-
-    public void setDatum(String datum) {
-        this.datum = datum;
     }
 
     public String getCas() {
         return cas;
     }
 
-    public void setCas(String cas) {
-        this.cas = cas;
-    }
-
     public String getMiesto() {
         return miesto;
-    }
-
-    public void setMiesto(String miesto) {
-        this.miesto = miesto;
     }
 
     @Override

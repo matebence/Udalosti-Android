@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.mate.bence.udalosti.Udaje.Data.Tabulky.Miesto;
+import com.mate.bence.udalosti.Udaje.Data.Tabulky.Pouzivatel;
 
 import java.util.HashMap;
 
@@ -27,7 +28,7 @@ public class SQLiteDatabaza extends SQLiteOpenHelper {
                         SQLiteTabulky.Pouzivatel.NAZOV_TABULKY +
                         "(" + SQLiteTabulky.Pouzivatel.ID_STLPCA + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                         SQLiteTabulky.Pouzivatel.EMAIL + "  VARCHAR(255)," +
-                        SQLiteTabulky.Pouzivatel.HESLO + "  VARCHAR(128)" +")";
+                        SQLiteTabulky.Pouzivatel.HESLO + "  VARCHAR(128)" + ")";
 
         final String VYTVOR_TABULKU_MIESTO =
                 "CREATE TABLE " +
@@ -47,36 +48,33 @@ public class SQLiteDatabaza extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public long novePouzivatelskeUdaje(com.mate.bence.udalosti.Udaje.Data.Tabulky.Pouzivatel pouzivatel) {
+    public void novePouzivatelskeUdaje(Pouzivatel pouzivatel) {
         ContentValues data = new ContentValues();
         data.put(SQLiteTabulky.Pouzivatel.EMAIL, pouzivatel.getEmail());
         data.put(SQLiteTabulky.Pouzivatel.HESLO, pouzivatel.getHeslo());
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        long id = sqLiteDatabase.insert(SQLiteTabulky.Pouzivatel.NAZOV_TABULKY, null, data);
+        sqLiteDatabase.insert(SQLiteTabulky.Pouzivatel.NAZOV_TABULKY, null, data);
         sqLiteDatabase.close();
-        return id;
     }
 
-    public boolean aktualizujPouzivatelskeUdaje(com.mate.bence.udalosti.Udaje.Data.Tabulky.Pouzivatel pouzivatel) {
+    public void aktualizujPouzivatelskeUdaje(Pouzivatel pouzivatel) {
         ContentValues data = new ContentValues();
         data.put(SQLiteTabulky.Pouzivatel.EMAIL, pouzivatel.getEmail());
         data.put(SQLiteTabulky.Pouzivatel.HESLO, pouzivatel.getHeslo());
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        int riadok = sqLiteDatabase.update(
+        sqLiteDatabase.update(
                 SQLiteTabulky.Pouzivatel.NAZOV_TABULKY,
                 data,
                 SQLiteTabulky.Pouzivatel.EMAIL + "= ?", new String[]{pouzivatel.getEmail()});
         sqLiteDatabase.close();
-        return riadok > 0;
     }
 
-    public boolean odstranPouzivatelskeUdaje(String email) {
+    public void odstranPouzivatelskeUdaje(String email) {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        int riadok = sqLiteDatabase.delete(
+        sqLiteDatabase.delete(
                 SQLiteTabulky.Pouzivatel.NAZOV_TABULKY,
                 SQLiteTabulky.Pouzivatel.EMAIL + "= ?", new String[]{email});
         sqLiteDatabase.close();
-        return riadok > 0;
     }
 
     public boolean pouzivatelskeUdaje() {
@@ -91,13 +89,11 @@ public class SQLiteDatabaza extends SQLiteOpenHelper {
                 null,
                 null,
                 null);
-        boolean riadok = false;
         if (data.moveToFirst()) {
-            riadok = true;
-            return riadok;
+            return true;
         }
         sqLiteDatabase.close();
-        return riadok;
+        return false;
     }
 
     public HashMap<String, String> vratAktualnehoPouzivatela() {
@@ -125,30 +121,28 @@ public class SQLiteDatabaza extends SQLiteOpenHelper {
         }
     }
 
-    public long noveMiestoPrihlasenia(Miesto miesto) {
+    public void noveMiestoPrihlasenia(Miesto miesto) {
         ContentValues data = new ContentValues();
         data.put(SQLiteTabulky.Miesto.STAT, miesto.getStat());
         data.put(SQLiteTabulky.Miesto.OKRES, miesto.getOkres());
         data.put(SQLiteTabulky.Miesto.MESTO, miesto.getMesto());
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        long id = sqLiteDatabase.insert(SQLiteTabulky.Miesto.NAZOV_TABULKY, null, data);
+        sqLiteDatabase.insert(SQLiteTabulky.Miesto.NAZOV_TABULKY, null, data);
         sqLiteDatabase.close();
-        return id;
     }
 
-    public boolean aktualizujMiestoPrihlasenia(Miesto miesto) {
+    public void aktualizujMiestoPrihlasenia(Miesto miesto) {
         int idMiesto = 0;
         ContentValues data = new ContentValues();
         data.put(SQLiteTabulky.Miesto.STAT, miesto.getStat());
         data.put(SQLiteTabulky.Miesto.OKRES, miesto.getOkres());
         data.put(SQLiteTabulky.Miesto.MESTO, miesto.getMesto());
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        int riadok = sqLiteDatabase.update(
+        sqLiteDatabase.update(
                 SQLiteTabulky.Miesto.NAZOV_TABULKY,
                 data,
                 SQLiteTabulky.Miesto.ID_STLPCA + "= ?", new String[]{Integer.toString(idMiesto)});
         sqLiteDatabase.close();
-        return riadok > 0;
     }
 
     public boolean miestoPrihlasenia() {
@@ -163,13 +157,11 @@ public class SQLiteDatabaza extends SQLiteOpenHelper {
                 null,
                 null,
                 null);
-        boolean riadok = false;
         if (data.moveToFirst()) {
-            riadok = true;
-            return riadok;
+            return true;
         }
         sqLiteDatabase.close();
-        return riadok;
+        return false;
     }
 
     public HashMap<String, String> vratMiestoPrihlasenia() {

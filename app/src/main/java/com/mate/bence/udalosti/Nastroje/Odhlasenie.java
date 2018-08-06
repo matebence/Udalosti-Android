@@ -7,11 +7,13 @@ import android.util.Log;
 
 import com.mate.bence.udalosti.Activity.Udalosti.UdalostiUdaje;
 import com.mate.bence.udalosti.Udaje.Nastavenia.Nastavenia;
+import com.mate.bence.udalosti.Udaje.Siet.Model.KommunikaciaData;
 import com.mate.bence.udalosti.Udaje.Siet.Model.KommunikaciaOdpoved;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Odhlasenie extends Service implements KommunikaciaOdpoved {
+public class Odhlasenie extends Service implements KommunikaciaOdpoved, KommunikaciaData {
 
     private static final String TAG = Odhlasenie.class.getName();
     private String email;
@@ -34,7 +36,7 @@ public class Odhlasenie extends Service implements KommunikaciaOdpoved {
 
     @Override
     public void onTaskRemoved(Intent rootIntent) {
-        UdalostiUdaje udalostiUdaje = new UdalostiUdaje(this, getApplicationContext());
+        UdalostiUdaje udalostiUdaje = new UdalostiUdaje(this,this, getApplicationContext());
         udalostiUdaje.odhlasenie(email);
         stopSelf();
     }
@@ -48,4 +50,7 @@ public class Odhlasenie extends Service implements KommunikaciaOdpoved {
                 }
         }
     }
+
+    @Override
+    public void dataZoServera(String odpoved, String od, ArrayList udaje) {}
 }

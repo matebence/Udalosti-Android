@@ -2,6 +2,8 @@
 <resources>
     <!-- Aplikacia -->
     <string name="nazov_aplikacie">Udalosti</string>
+    <string name="activity_aplikacia_titul">Udalosti</string>
+    <string name="activity_odhlasit">Odhlásť sa</string>
 
     <!-- Dialog -->
     <string name="dialog_chyb_zavorit">Zatvoriť</string>

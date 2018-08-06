@@ -10,10 +10,6 @@ public class UdalostiAdresa {
         return HTTPRequest.posliRequest(ADRESA).create(Requesty.class);
     }
 
-    public static void initNanovo() {
-        HTTPRequest.setRequest(null);
-    }
-
     public static String getAdresa() {
         return ADRESA;
     }

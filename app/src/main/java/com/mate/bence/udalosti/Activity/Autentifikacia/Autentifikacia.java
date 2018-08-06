@@ -4,7 +4,6 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -15,10 +14,10 @@ import com.mate.bence.udalosti.Activity.Autentifikacia.Fragment.Prihlasenie;
 import com.mate.bence.udalosti.Activity.Autentifikacia.Fragment.Registracia;
 import com.mate.bence.udalosti.Activity.Udalosti.Udalosti;
 import com.mate.bence.udalosti.Dialog.DialogOznameni;
-import com.mate.bence.udalosti.Udaje.Nastavenia.Nastavenia;
-import com.mate.bence.udalosti.Udaje.Siet.Model.KommunikaciaOdpoved;
 import com.mate.bence.udalosti.Nastroje.Pripojenie;
 import com.mate.bence.udalosti.R;
+import com.mate.bence.udalosti.Udaje.Nastavenia.Nastavenia;
+import com.mate.bence.udalosti.Udaje.Siet.Model.KommunikaciaOdpoved;
 
 import java.util.HashMap;
 

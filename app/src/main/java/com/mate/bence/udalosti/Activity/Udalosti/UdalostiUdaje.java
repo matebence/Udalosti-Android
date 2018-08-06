@@ -8,7 +8,9 @@ import com.mate.bence.udalosti.R;
 import com.mate.bence.udalosti.Udaje.Data.SQLiteDatabaza;
 import com.mate.bence.udalosti.Udaje.Nastavenia.Nastavenia;
 import com.mate.bence.udalosti.Udaje.Siet.Model.Autentifikator.Autentifikator;
+import com.mate.bence.udalosti.Udaje.Siet.Model.KommunikaciaData;
 import com.mate.bence.udalosti.Udaje.Siet.Model.KommunikaciaOdpoved;
+import com.mate.bence.udalosti.Udaje.Siet.Model.Obsah.Obsah;
 import com.mate.bence.udalosti.Udaje.Siet.Requesty;
 import com.mate.bence.udalosti.Udaje.Siet.UdalostiAdresa;
 
@@ -23,13 +25,55 @@ public class UdalostiUdaje implements UdalostiImplementacia{
     private static final String TAG = UdalostiUdaje.class.getName();
 
     private KommunikaciaOdpoved odpovedeOdServera;
+    private KommunikaciaData udajeZoServera;
     private SQLiteDatabaza databaza;
     private Context context;
 
-    public UdalostiUdaje(KommunikaciaOdpoved odpovedeOdServera, Context context) {
+    public UdalostiUdaje(KommunikaciaOdpoved odpovedeOdServera,KommunikaciaData udajeZoServera, Context context) {
         this.odpovedeOdServera = odpovedeOdServera;
+        this.udajeZoServera = udajeZoServera;
         this.databaza = new SQLiteDatabaza(context);
         this.context = context;
+    }
+
+    @Override
+    public void zoznamUdalosti(String email, String stat, String token) {
+        Log.v(TAG, "Metoda zoznamUdalosti bola vykonana");
+
+        Requesty requesty = UdalostiAdresa.initAdresu();
+        requesty.udalosti(email, stat,token).enqueue(new Callback<Obsah>() {
+            @Override
+            public void onResponse(@NonNull Call<Obsah> call, @NonNull Response<Obsah> response) {
+                if (response.isSuccessful()) {
+                    udajeZoServera.dataZoServera(Nastavenia.VSETKO_V_PORIADKU, Nastavenia.UDALOSTI_OBJAVUJ, response.body().getUdalosti());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Obsah> call, @NonNull Throwable t) {
+                udajeZoServera.dataZoServera(context.getString(R.string.chyba_servera), Nastavenia.UDALOSTI_OBJAVUJ, null);
+            }
+        });
+    }
+
+    @Override
+    public void zoznamUdalostiPodlaPozicie(String email, String stat, String okres, String mesto, String token) {
+        Log.v(TAG, "Metoda zoznamUdalostiPodlaPozicie bola vykonana");
+
+        Requesty requesty = UdalostiAdresa.initAdresu();
+        requesty.udalostiPodlaPozicie(email, stat, okres, mesto, token).enqueue(new Callback<Obsah>() {
+            @Override
+            public void onResponse(@NonNull Call<Obsah> call, @NonNull Response<Obsah> response) {
+                if(response.isSuccessful()){
+                    udajeZoServera.dataZoServera(Nastavenia.VSETKO_V_PORIADKU, Nastavenia.UDALOSTI_PODLA_POZICIE, response.body().getUdalosti());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Obsah> call, @NonNull Throwable t) {
+                udajeZoServera.dataZoServera(context.getString(R.string.chyba_servera), Nastavenia.UDALOSTI_PODLA_POZICIE, null);
+            }
+        });
     }
 
     @Override

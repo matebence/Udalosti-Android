@@ -1,33 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/udalosti_karty"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:tabGravity="fill"
-        app:tabIndicatorColor="@android:color/transparent"
-        app:tabMode="fixed" />
+        android:layout_height="match_parent"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/udalosti_karty">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/toolbar"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/udalosti_gesta"
+            <TextView
+                android:id="@+id/titulok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/raleway_medium"
+                android:text="@string/activity_aplikacia_titul"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/activity_aplikacia_titul_velkost_pisma" />
+        </android.support.v7.widget.Toolbar>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/udalosti_karty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@android:color/transparent"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/tab_ikona_aktivna"
+            app:tabTextAppearance="@style/UdalostiKarty"
+            app:tabTextColor="@color/tab_ikona_inaktivna" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/activity_aplikacia_tien"
-            android:background="@drawable/ic_tien_karty" />
-    </FrameLayout>
-</RelativeLayout>
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/udalosti_karty">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/udalosti_gesta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_aplikacia_tien"
+                android:background="@drawable/ic_tien_karty" />
+        </FrameLayout>
+    </android.support.design.widget.AppBarLayout>
+</LinearLayout>

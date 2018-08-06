@@ -3,7 +3,8 @@
     <!--Aplikacia-->
     <color name="statusbar">#00457c</color>
     <color name="toolbar">#005ba6</color>
-    <color name="nacitavanie">#0397d6</color>
+    <color name="nacitavanie_progressbar">#0397d6</color>
+    <color name="nacitavanie">#70000000</color>
 
     <!--Dialog oznameni-->
     <color name="dialog_titul">#404040</color>

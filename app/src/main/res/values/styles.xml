@@ -9,7 +9,15 @@
         <item name="colorPrimaryDark">@color/statusbar</item>
     </style>
 
-    <style name="Nacitavanie">
-        <item name="colorAccent">@color/nacitavanie</item>
+    <style name="UdalostiKarty" parent="Widget.Design.TabLayout">
+        <item name="android:fontFamily">@font/raleway_semi_bold</item>
+        <item name="android:textSize">@dimen/activit_karty_velkost_pisma</item>
     </style>
+
+    <style name="Nacitavanie">
+        <item name="colorAccent">@color/nacitavanie_progressbar</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

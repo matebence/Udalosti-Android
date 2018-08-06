@@ -1,15 +1,13 @@
 package com.mate.bence.udalosti.Activity.Autentifikacia.Fragment;
 
 import android.app.Activity;
-import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RadioGroup;
 
 import com.mate.bence.udalosti.Activity.Autentifikacia.AutentifikaciaOvladanie;
 import com.mate.bence.udalosti.R;

@@ -1,14 +1,10 @@
 package com.mate.bence.udalosti.Activity.Autentifikacia;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.support.annotation.NonNull;
-import android.text.TextUtils;
 import android.util.Log;
 
-import com.mate.bence.udalosti.Udaje.Data.Preferencie;
+import com.mate.bence.udalosti.R;
 import com.mate.bence.udalosti.Udaje.Data.SQLiteDatabaza;
 import com.mate.bence.udalosti.Udaje.Data.Tabulky.Miesto;
 import com.mate.bence.udalosti.Udaje.Data.Tabulky.Pouzivatel;
@@ -17,19 +13,12 @@ import com.mate.bence.udalosti.Udaje.Siet.GeoAdresa;
 import com.mate.bence.udalosti.Udaje.Siet.Model.Autentifikator.Autentifikator;
 import com.mate.bence.udalosti.Udaje.Siet.Model.KommunikaciaOdpoved;
 import com.mate.bence.udalosti.Udaje.Siet.Model.Pozicia.Pozicia;
-import com.mate.bence.udalosti.Udaje.Siet.UdalostiAdresa;
 import com.mate.bence.udalosti.Udaje.Siet.Requesty;
-import com.mate.bence.udalosti.R;
+import com.mate.bence.udalosti.Udaje.Siet.UdalostiAdresa;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.UUID;
 
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
