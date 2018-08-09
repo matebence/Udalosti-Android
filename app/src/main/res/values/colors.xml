@@ -12,8 +12,9 @@
     <color name="dialog_zavorit">#0397d6</color>
 
     <!--Tab Layout-->
-    <color name="tab_ikona_aktivna">#005ba6</color>
-    <color name="tab_ikona_inaktivna">#000000</color>
+    <color name="tab_pozadie">#005ba6</color>
+    <color name="tab_ikona_aktivna">#ffffff</color>
+    <color name="tab_ikona_inaktivna">#b5cad8</color>
 
     <!-- Uvodna obrazovka -->
     <color name="uvodna_obrazovka_logo_text">#424242</color>

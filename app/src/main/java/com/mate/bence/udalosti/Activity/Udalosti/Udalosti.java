@@ -184,8 +184,8 @@ public class Udalosti extends AppCompatActivity implements KommunikaciaOdpoved, 
         objavuj.setArguments(bundle);
         podlaPozicie.setArguments(bundle);
 
-        gestaKariet.nacitajFragment(objavuj, "OBJAVUJTE UDALOSTI");
-        gestaKariet.nacitajFragment(podlaPozicie, "NAJBLIZŠIE UDALOSTI");
+        gestaKariet.nacitajFragment(objavuj, "Objavujte udalosti");
+        gestaKariet.nacitajFragment(podlaPozicie, "Najblizšie udalosti");
 
         viewPager.setOffscreenPageLimit(2);
         viewPager.setAdapter(gestaKariet);
