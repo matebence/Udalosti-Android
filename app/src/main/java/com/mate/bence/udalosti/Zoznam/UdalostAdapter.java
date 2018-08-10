@@ -50,9 +50,9 @@ public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostH
 
         holder.nazovUdalosti.setText(udalost.getNazov());
         holder.idUdalosti.setText(udalost.getIdUdalost());
-        holder.denUdalosti.setText(nastavDenUdalosti(udalost.getDatum()));
-        holder.mesiacUdalosti.setText(nastavMesiacUdalosti(udalost.getDatum()));
-        holder.casUdalosti.setText(ziskajHodinyMinuty(udalost.getCas()));
+        holder.denUdalosti.setText(udalost.getDen());
+        holder.mesiacUdalosti.setText(udalost.getMesiac());
+        holder.casUdalosti.setText(udalost.getCas());
 
         nastavMiestoUdalosti(holder, udalost.getMiesto());
 
@@ -72,18 +72,6 @@ public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostH
         } else {
             holder.mestoUdalosti.setText(miesto);
         }
-    }
-
-    private String nastavDenUdalosti(String den) {
-        return den.substring(den.lastIndexOf("-") + 1, den.length()) + ".";
-    }
-
-    private String nastavMesiacUdalosti(String mesiac) {
-        return new DateFormatSymbols().getMonths()[Integer.parseInt(mesiac.substring(mesiac.indexOf("-") + 1, mesiac.lastIndexOf("-"))) - 1];
-    }
-
-    private String ziskajHodinyMinuty(String cas) {
-        return cas.substring(0, cas.lastIndexOf(":"));
     }
 
     private void nacitajObsah(View view) {

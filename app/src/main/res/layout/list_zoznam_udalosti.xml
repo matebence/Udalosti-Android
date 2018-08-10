@@ -29,14 +29,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/udalosti_obrazok"
-        android:layout_marginTop="@dimen/list_zoznam_udalosti_informacie_margin"
         android:layout_marginBottom="@dimen/list_zoznam_udalosti_informacie_margin"
+        android:layout_marginTop="@dimen/list_zoznam_udalosti_informacie_margin"
         android:orientation="horizontal"
         tools:ignore="DisableBaselineAlignment">
 
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/list_zoznam_udalosti_margin"
             android:layout_weight="1"
             tools:ignore="UselessParent">
 
@@ -45,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:fontFamily="@font/raleway_bold"
+                android:fontFamily="@font/raleway_medium"
                 android:textColor="@color/udalosti_zoznam_datum"
                 android:textSize="@dimen/list_zoznam_udalosti_velkost_pisma_den" />
 
@@ -95,7 +96,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/list_zoznam_udalosti_margin_miesto"
                     android:layout_marginStart="@dimen/list_zoznam_udalosti_margin_miesto"
-                    android:fontFamily="@font/raleway_black"
+                    android:fontFamily="@font/raleway_bold"
                     android:textColor="@color/udalosti_zoznam_miesto"
                     android:textSize="@dimen/list_zoznam_udalosti_velkost_pisma_miesto" />
 
@@ -135,6 +136,7 @@
                 tools:ignore="ContentDescription" />
         </RelativeLayout>
     </LinearLayout>
+
     <View
         android:id="@+id/zoznam_udalosti_tien"
         android:layout_width="match_parent"
