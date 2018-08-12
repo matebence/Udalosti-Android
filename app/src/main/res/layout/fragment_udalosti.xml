@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/zoznam_udalosti"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/aktualizuj_udalosti"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="vertical" />
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/zoznam_udalosti"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <LinearLayout
         android:id="@+id/ziadne_udalosti"
@@ -23,9 +28,9 @@
         <ImageView
             android:layout_width="@dimen/udalosti_sirka_vyska_ziadne_udalosti"
             android:layout_height="@dimen/udalosti_sirka_vyska_ziadne_udalosti"
-            android:layout_gravity="center"
             android:layout_marginBottom="@dimen/udalosti_ziadne_udalosti_margin"
             android:contentDescription="@string/udalosti_ziadne_udalosti_popis_illustracie"
+            android:layout_gravity="center"
             android:src="@drawable/ic_udalosti"
             android:tint="@color/udalosti_chyba_informacia" />
 

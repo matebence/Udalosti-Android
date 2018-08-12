@@ -1,15 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Aplikacia -->
+    <dimen name="activity_aplikacia_titul_velkost_pisma">20sp</dimen>
     <dimen name="activity_aplikacia_tien">4dp</dimen>
-    <dimen name="activity_aplikacia_titul_velkost_pisma">23sp</dimen>
-    <dimen name="activit_karty_velkost_pisma">13sp</dimen>
+
+    <!-- Styles -->
+    <dimen name="styles_bocne_menu_velkost_pisma">18sp</dimen>
+    <dimen name="styles_ludia_karty_velkost_pisma">15sp</dimen>
 
     <!-- Dialog chyb -->
     <dimen name="dialog_chyb_margin">20dp</dimen>
     <dimen name="dialog_chyb_velkost_titulu">20sp</dimen>
     <dimen name="dialog_chyb_velkost_textu">15sp</dimen>
     <dimen name="dialog_chyb_velkost_tlacidla_zatvorit">15sp</dimen>
+
+    <!-- Dialog potvrdeni  -->
+    <dimen name="dialog_potvrdeni_margin">20dp</dimen>
+    <dimen name="dialog_potvrdeni_velkost_pisma_vstupu">20sp</dimen>
+
+    <!-- Dialog Podrobnosti  -->
+    <dimen name="dialog_podrobnosti_min_sirka">300dp</dimen>
+    <dimen name="dialog_podrobnosti_padding_top">10dp</dimen>
+    <dimen name="dialog_podrobnosti_padding">5dp</dimen>
+
+    <!-- Dialog pozvanok -->
+    <dimen name="dialog_pozvanok_titul_margin_bottom">40dp</dimen>
+    <dimen name="dialog_pozvanok_titul_margin_top">30dp</dimen>
+    <dimen name="dialog_pozvanok_titul_margin_left_right">20dp</dimen>
+    <dimen name="dialog_pozvanok_velkost_zoznamu">230dp</dimen>
+    <dimen name="dialog_pozvanok_zoznam_margin">40dp</dimen>
+    <dimen name="dialog_pozvanok_sirka_prazdneho_zoznamu">180dp</dimen>
+    <dimen name="dialog_pozvanok_velkost_titulu">26sp</dimen>
+    <dimen name="dialog_pozvanok_velkost_pisma_pre_prazdny_zoznam">15sp</dimen>
+
+    <!-- Bocne menu titul -->
+    <dimen name="bocne_menu_velkost_hlavicky">176dp</dimen>
+    <dimen name="bocne_meno_profilova_fotka_sirva_vyska">70dp</dimen>
+    <dimen name="bocne_menu_meno_margin">10dp</dimen>
+    <dimen name="bocne_menu_velkost_pisma_meno">20sp</dimen>
 
     <!-- Uvodna Obrazovka -->
     <dimen name="uvodna_obrazovka_sirka_a_vyska">220dp</dimen>
@@ -20,8 +48,8 @@
     <!-- Rychla ukazka aplikacie -->
     <dimen name="rychla_ukazka_aplikacie_navigacia_vyska">30dp</dimen>
     <dimen name="rychla_ukazka_aplikacie_navigacia_margin_bottom">20dp</dimen>
-    <dimen name="rychla_ukazka_aplikacie_sirka_a_vyska_obrazka">180dp</dimen>
-    <dimen name="rychla_ukazka_aplikacie_margin_titul">25dp</dimen>
+    <dimen name="rychla_ukazka_aplikacie_sirka_a_vyska_obrazka">120dp</dimen>
+    <dimen name="rychla_ukazka_aplikacie_margin_titul">16dp</dimen>
     <dimen name="rychla_ukazka_aplikacie_margin_text">16dp</dimen>
     <dimen name="rychla_ukazka_aplikacie_padding_text">40dp</dimen>
     <dimen name="rychla_ukazka_aplikacie_tlacidla_margin">15dp</dimen>
@@ -40,20 +68,99 @@
     <dimen name="autentifikacia_velkost_pisma_textu">14sp</dimen>
     <dimen name="autentifikacia_velkost_pisma_vstupov">18sp</dimen>
 
-    <!-- Autentifikator pouzivatel -->
-    <dimen name="autentifikacia_prihlasenie_logo_sirka">50dp</dimen>
-    <dimen name="autentifikacia_prihlasenie_logo_vyska">70dp</dimen>
-    <dimen name="autentifikacia_prihlasenie_logo_margin_bottom">10dp</dimen>
-    <dimen name="autentifikacia_prihlasenie_logo_text_margin_left">10dp</dimen>
-    <dimen name="autentifikacia_prihlaenie_zaregistrovat_sa_margin_bottom">20dp</dimen>
-    <dimen name="autentifikacia_prihlasenie_zaregistrovat_sa_margin_top">5dp</dimen>
-    <dimen name="autentifikacia_prihlasenie_nemate_ucet_velkost_pisma">14sp</dimen>
+    <!-- Autentifikator prihlasenie -->
+    <dimen name="autentifikacia_prihlasenie_velkost_pisma_pre_zabudnute_heslo_a_registracia">12sp
+    </dimen>
+
+    <!-- Autentifikator registracia -->
+    <dimen name="autentifikacia_registracia_radio__tlacidlo_margin">10dp</dimen>
+    <dimen name="autentifikacia_registracia_sirka_a_vyska_profilovej_fotky">100dp</dimen>
+
+    <!-- Autentifikator zabudnute heslo -->
+    <dimen name="autentifikacia_zabudnute_heslo_margin">40dp</dimen>
+    <dimen name="autentifikacia_zabudnute_heslo_velkost_podtitulu">40sp</dimen>
 
     <!-- Udalosti -->
-    <dimen name="udalosti_sirka_vyska_ziadne_udalosti">90dp</dimen>
-    <dimen name="udalosti_vyska_tab_layoutu">60dp</dimen>
+    <dimen name="udalosti_sirka_vyska_ziadne_udalosti">110dp</dimen>
     <dimen name="udalosti_ziadne_udalosti_margin">10dp</dimen>
     <dimen name="udalosti_ziadne_udalosti_velkost_pisma">20sp</dimen>
+
+    <!-- Ludia priatelia -->
+    <dimen name="ludia_priatelia_velkost_ikony">110dp</dimen>
+    <dimen name="ludia_priatelia_ikona_margin">10dp</dimen>
+    <dimen name="ludia_priatelia_sirka_oznamenia">170dp</dimen>
+    <dimen name="ludia_priatelia_velkost_pisma_oznamenia">20sp</dimen>
+
+    <!-- Udalosti kalendar -->
+    <dimen name="udalosti_kalendar_velkost_ikony">110dp</dimen>
+    <dimen name="udalosti_kalendar_ikona_margin">10dp</dimen>
+    <dimen name="udalosti_kalendar_sirka_oznamenia">200dp</dimen>
+    <dimen name="udalosti_kalendar_velkost_pisma_oznamenia">20sp</dimen>
+
+    <!-- Udalosti oznamenia -->
+    <dimen name="udalosti_oznamenia_velkost_ikony">110dp</dimen>
+    <dimen name="udalosti_oznamenia_ikona_margin">10dp</dimen>
+    <dimen name="udalosti_oznamenia_sirka_oznamenia">200dp</dimen>
+    <dimen name="udalosti_oznamenia_zoznam_ziadosti_margin">20dp</dimen>
+    <dimen name="udalosti_oznamenia_ciara_margin">20dp</dimen>
+    <dimen name="udalosti_oznamenia_velkost_pisma_oznamenia">20sp</dimen>
+
+    <!-- Nastavenia -->
+    <dimen name="nastavenia_velkost_profilovej_fotky">110dp</dimen>
+    <dimen name="nastavenia_profil_margin">40dp</dimen>
+    <dimen name="nastavenia_velkost_tiena_profilu">100dp</dimen>
+    <dimen name="nastavenia_sirka_vstupov">260dp</dimen>
+    <dimen name="nastavenia_vyska_vstupov">45dp</dimen>
+    <dimen name="nastavenia_oddelenie_vstupov">20dp</dimen>
+    <dimen name="nastavenia_sirka_a_vyska_ikonov">40dp</dimen>
+    <dimen name="nastavenia_margin_ikonov">10dp</dimen>
+    <dimen name="nastavenia_odstranit_ucet_velkost_tlacidla">60dp</dimen>
+    <dimen name="nastavenia_odstranit_ucet_margin">10dp</dimen>
+    <dimen name="nastavenia_velkost_pisma_vstupov">18sp</dimen>
+    <dimen name="nastavenia_odstranit_ucet">20sp</dimen>
+
+    <!-- Zoznam hlavicka -->
+    <dimen name="list_zoznam_hlavicka_padding_left">10dp</dimen>
+    <dimen name="list_zoznam_hlavicka_padding_top_bottom">3dp</dimen>
+    <dimen name="list_zoznam_hlavicka_velkost_pisma">25sp</dimen>
+
+    <!-- Zoznam zoznamPouzivatelov -->
+    <dimen name="list_zoznam_ludia_vsetci_obsah_padding_top_bottom">10dp</dimen>
+    <dimen name="list_zoznam_ludia_vsetci_velkost_profilovej_fotky">60dp</dimen>
+    <dimen name="list_zoznam_ludia_vsetci_profilova_fotka_margin">40dp</dimen>
+    <dimen name="list_zoznam_ludia_vsetci_meno_margin">40dp</dimen>
+    <dimen name="list_zoznam_ludia_velkost_ikoni_novy_priatel">25dp</dimen>
+    <dimen name="list_zoznam_ludia_obrazok_pridat_priatela_margin">10dp</dimen>
+    <dimen name="list_zoznam_ludia_pridat_margin">20dp</dimen>
+    <dimen name="list_zoznam_ludia_pridat_velkost_pisma">18sp</dimen>
+    <dimen name="list_zoznam_ludia_vsetci_velkost_pisma_meno">22sp</dimen>
+
+    <!-- Zoznam oznameni -->
+    <dimen name="list_zoznam_oznameni_obsah_padding">10dp</dimen>
+    <dimen name="list_zoznam_oznameni_velkost_profilovej_fotky">70dp</dimen>
+    <dimen name="list_zoznam_oznameni_profilova_fotka_margin">20dp</dimen>
+    <dimen name="list_zoznam_oznameni_meno_margin">10dp</dimen>
+    <dimen name="list_zoznam_oznameni_pozvanka_margin">10dp</dimen>
+    <dimen name="list_zoznam_oznameni_velkost_pisma_meno">15sp</dimen>
+    <dimen name="list_zoznam_oznameni_velkost_pisma_pozvanka">12sp</dimen>
+
+    <!-- Zoznam poziadaviek -->
+    <dimen name="list_zoznam_poziadaviek_obsah_margin">10dp</dimen>
+    <dimen name="list_zoznam_poziadaviek_velkost_profilovej_fotky">70dp</dimen>
+    <dimen name="list_zoznam_poziadaviek_margin_poziadavka">10dp</dimen>
+    <dimen name="list_zoznam_poziadaviek_tlacidla_margin">28dp</dimen>
+    <dimen name="list_zoznam_poziadaviek_sirka_tlacidla">100dp</dimen>
+    <dimen name="list_zoznam_poziadaviek_vyska_tlacidla">28dp</dimen>
+    <dimen name="list_zoznam_poziadaviek_velkost_pisma_tlacidla">13sp</dimen>
+    <dimen name="list_zoznam_poziadaviek_velkost_pisma_poziadavky">12sp</dimen>
+
+    <!-- Zoznam pozvanok -->
+    <dimen name="list_zoznam_pozvanok_obsah_margin">8dp</dimen>
+    <dimen name="list_zoznam_pozvanok_velkost_profilovej_fotky">53dp</dimen>
+    <dimen name="list_zoznam_pozvanok_obrazok_margin">25dp</dimen>
+    <dimen name="list_zoznam_pozvanok_sirka_tlacidla_pozvat">55dp</dimen>
+    <dimen name="list_zoznam_pozvanok_vyska_tlacidla_pozvat">30dp</dimen>
+    <dimen name="list_zoznam_pozvanok_velkost_pisma_meno">18sp</dimen>
 
     <!-- Zoznam udalosti -->
     <dimen name="list_zoznam_udalosti_obsah_margin">20dp</dimen>
@@ -62,10 +169,22 @@
     <dimen name="list_zoznam_udalosti_velkost_ikoni_miesto">27dp</dimen>
     <dimen name="list_zoznam_udalosti_velkost_ikoni_cas">25dp</dimen>
     <dimen name="list_zoznam_udalosti_margin_miesto">5dp</dimen>
-    <dimen name="list_zoznam_udalosti_margin">5dp</dimen>
-    <dimen name="list_zoznam_udalosti_velkost_pisma_nazvov">23sp</dimen>
-    <dimen name="list_zoznam_udalosti_velkost_pisma_miesto">20sp</dimen>
-    <dimen name="list_zoznam_udalosti_velkost_pisma_mesiac">20sp</dimen>
-    <dimen name="list_zoznam_udalosti_velkost_pisma_den">25sp</dimen>
+    <dimen name="list_zoznam_udalosti_vyska_tlacidiel">35dp</dimen>
+    <dimen name="list_zoznam_udalosti_velkost_pisma_nazvov">20sp</dimen>
+    <dimen name="list_zoznam_udalosti_velkost_pisma_miesto">17sp</dimen>
+    <dimen name="list_zoznam_udalosti_velkost_pisma_mesiac">18sp</dimen>
+    <dimen name="list_zoznam_udalosti_velkost_pisma_den">20sp</dimen>
     <dimen name="list_zoznam_udalosti_velkost_pisma_cas">20sp</dimen>
+
+    <!-- Zoznam udalosti kalendar -->
+    <dimen name="list_zoznam_udalosti_kalendar_velkost_ikoni_odstranit">25dp</dimen>
+    <dimen name="list_zoznam_udalosti_kalendar_obrazok_odstranit_margin">10dp</dimen>
+    <dimen name="list_zoznam_udalosti_kalendar_odstranit_margin">20dp</dimen>
+    <dimen name="list_zoznam_udalosti_kalendar_obsah_padding">10dp</dimen>
+    <dimen name="list_zoznam_udalosti_kalendar_vyska_ikoni_miesto">20dp</dimen>
+    <dimen name="list_zoznam_udalosti_kalendar_odstranit_velkost_pisma">18sp</dimen>
+    <dimen name="list_zoznam_udalosti_kalendar_velkost_pisma_den">33sp</dimen>
+    <dimen name="list_zoznam_udalosti_kalendar_velkost_pisma_nazov">25sp</dimen>
+    <dimen name="list_zoznam_udalosti_kalendar_velkost_pisma_mesto">15sp</dimen>
+    <dimen name="list_zoznam_udalosti_kalendar_velkost_pisma_miesto">15sp</dimen>
 </resources>

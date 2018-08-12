@@ -3,21 +3,44 @@
     <!-- Aplikacia -->
     <string name="nazov_aplikacie">Udalosti</string>
     <string name="activity_aplikacia_titul">Udalosti</string>
-    <string name="activity_odhlasit">Odhlásť sa</string>
+
+    <!-- Toolbar -->
+    <string name="pouzit">Použiť</string>
+    <string name="hladat">Hladat</string>
+    <string name="spat">Späť</string>
 
     <!-- Dialog -->
     <string name="dialog_chyb_zavorit">Zatvoriť</string>
+    <string name="dialog_potvrdeni_potvrdit">Potvrdiť</string>
+    <string name="dialog_pozvanok_titul">Priatelia</string>
+    <string name="dialog_pozvanok_zoznam_je_prazdny">Zoznam priatelov je prázdny</string>
 
     <!-- Pomoc -->
     <string name="pomoc_meno">Meno</string>
     <string name="pomoc_email">Email</string>
     <string name="pomoc_heslo">Heslo</string>
     <string name="pomoc_potvrdte_heslo">Potvrdte heslo</string>
+    <string name="pomoc_nove_heslo">Nové heslo</string>
+    <string name="pomoc_nove_meno">Nové meno</string>
 
     <!-- Chyby -->
     <string name="chyba_ziadne_spojenie">Žiadné spojenie!</string>
     <string name="chyba_automatickeho_prihlasenia">Prosím prihláste sa!</string>
     <string name="chyba_servera">Server je momentalne nedostupný!</string>
+    <string name="chyba_orezavania">Pri orezávaní došlo chybe!</string>
+    <string name="chyba_gcm_registracia_nedostupna">Registrácia je nedostupná!</string>
+    <string name="chyba_udalost_je_nedostupna">Udalosť je nedostupná alebo bola odstranená</string>
+
+    <!-- Bocne menu -->
+    <string name="bocne_menu_udalosti">Udalosti</string>
+    <string name="bocne_menu_podla_pozicie">Podľa pozície</string>
+    <string name="bocne_menu_ludia">Ludia</string>
+    <string name="bocne_menu_nastavenia">Nastavenia</string>
+    <string name="bocne_menu_odhlasit_sa">Odhlasiť sa</string>
+    <string name="bocne_menu_profilova_fotka">Profilová fotka prihláseného používatela</string>
+    <string name="bocne_menu_meno_pouzivatela">Meno</string>
+    <string name="bocne_menu_otvorene">Bočné menu je otvorené</string>
+    <string name="bocne_menu_zatvorene">Bočné menu je zatvorné</string>
 
     <!-- Uvodna obrazovka -->
     <string name="uvodna_obrazovka_logo_popis_illustracie">Logo aplikácie Udalosti</string>
@@ -36,23 +59,73 @@
     <string name="rychla_ukazka_aplikacie_cast_druha_podtittul">Vyhldávajte z udalostí a nájdite tie ktoré Vás zaujímajú</string>
     <string name="rychla_ukazka_aplikacie_cast_tretia_podtittul">Hladajte udalosti ktoré sú najbližšie k Vám podla Vašej pozície</string>
 
-    <!-- Autentifikator pouzivatel -->
+    <!-- Autentifikator -->
+    <string name="autentifikacia_zabudol_som_heslo">Zabudol som heslo</string>
+    <string name="autentifikacia_registrovat">Registrovať</string>
+
+    <!-- Autentifikator prihlasenie -->
     <string name="autentifikacia_prihlasenie_text">Udržiavajte informácie o tom, čo sa deje vo Vašom okolí.</string>
     <string name="autentifikacia_tlacidlo_prihlasit_sa">Prihlásíť sa</string>
-    <string name="autentifikacia_nemate_este_ucet">Nemáte ešte používatelské konto?</string>
-    <string name="autentifikacia_zaregistrovat_sa">Zaregistrovať sa</string>
-    <string name="autentifikacia_logo_popis_illustracie">Illustrácia logo aplikácie</string>
 
     <!-- Autentifikator registracia -->
     <string name="autentifikacia_registracia_text">Staňte sa naším členom ešte dnes, udalosť spája všetkých!</string>
-    <string name="autentifikacia_registrovat">Registrovať</string>
+    <string name="autentifikacia_registracia_popis_illustracie">Frame pre nahratie profilového obrázka</string>
+    <string name="autentifikacia_registracia_radio_tlacidlo_muz">Muž</string>
+    <string name="autentifikacia_registracia_radio_tlacidlo_zena">Žena</string>
     <string name="autentifikacia_uspesna_registracia">Registrácia prebehla úspesne! Možete sa prihlásiť.</string>
+
+    <!-- Autentifikator zabudnute heslo -->
+    <string name="autentifikacia_zabudnute_heslo_titul_cast_prva">Zabudli</string>
+    <string name="autentifikacia_zabudnute_heslo_titul_cast_druha">ste heslo ?</string>
+    <string name="autentifikacia_zabudnute_heslo_text">Zadajte svoju emailovú adresu, na ktorú vám zašleme mail</string>
+    <string name="autentifikacia_zabudnute_heslo_tlacidlo_poslat">Poslať</string>
 
     <!-- Udalosti -->
     <string name="udalosti_ziadne_udalosti_popis_illustracie">Illustrácia pre žiadné udalosti</string>
     <string name="udalosti_ziadne_udalosti">Žiadné udalosti</string>
 
+    <!-- Ludia priatelia -->
+    <string name="ludia_priatelia_popis_illustracie">Illustrácia pre prázdny zoznam priatelov</string>
+    <string name="ludia_priatelia_prazdny_zoznam">Zoznam priatelov je prázdny</string>
+
+    <!-- Udalosti kalendar -->
+    <string name="udalosti_kalendar_popis_illustracie">Illustrácia pre prázdny zoznam naplánovaných udalostí</string>
+    <string name="udalosti_kalendar_prazdny_zoznam">Žiadné naplánované udalosti</string>
+
+    <!-- Udalosti kalendar -->
+    <string name="udalosti_oznamenia_popis_illustracie">Illustrácia pre prázdny zoznam oznamení</string>
+    <string name="udalosti_oznamenia_prazdny_zoznam">Žiadné nové pozvánky</string>
+
+    <!-- Nastavenia -->
+    <string name="nastavenia_profilova_fotka_popis_illustracie">Profilová fotka používatela</string>
+    <string name="nastavenia_potvrdenie">Prosím potvrdte to Vaším heslom</string>
+    <string name="nastavenia_aktualizacia_prebehla_uspesne">Aktualizácia prebehla úspešne</string>
+    <string name="nastavenia_nove_heslo">Zadajte Vaše nové heslo</string>
+    <string name="nastavenia_nespravne_heslo">Nesprávné heslo!</string>
+    <string name="nastavenia_hesla_sa_nezhoduju">Heslá sa nezhodujú!</string>
+    <string name="nastavenia_ziadne_nove_udaje">Žiadné nové údaje!</string>
+    <string name="nastavenia_odstranit_ucet">Odstrániť účet</string>
+
+    <!-- Zoznam -->
+    <string name="list_zoznam">Fotka používatela</string>
+
+    <!-- Zoznam Ludia -->
+    <string name="list_zoznam_ludia_popis_illustracie">Ikona pre pridanie používatela ako priatel</string>
+    <string name="list_zoznam_ludia_pridat_noveho_priatela">Označiť ako priatel</string>
+    <string name="list_zoznam_ludia_odstranit_priatela">Odstrániť priatela</string>
+
+    <!-- Zoznam poziadaviek -->
+    <string name="list_zoznam_poziadaviek_poziadavka">Vás požiadal o priatelstvo</string>
+    <string name="list_zoznam_poziadaviek_tlacidlo_potvrdit">Potvrdiť</string>
+    <string name="list_zoznam_poziadaviek_odmietnut">Odmietnúť</string>
+
     <!-- Zoznam udalosti -->
     <string name="list_zoznam_udalosti_popis_illustracie">Obrázok udalosti</string>
     <string name="list_zoznam_udalosti_tlacidlo_budem_tam">Budem tam</string>
+    <string name="list_zoznam_udalosti_tlacidlo_mam_zaujem">Mám záujem</string>
+    <string name="list_zoznam_udalosti_tlacidlo_pozvat">Pozvať</string>
+
+    <!-- Zoznam udalosti kalendar -->
+    <string name="list_zoznam_udalosti_kalendar_popis_illustracie">Ikona pre odstránenie udalosti z kalendára</string>
+    <string name="list_zoznam_udalosti_kalendar_odstranit">Odstrániť</string>
 </resources>

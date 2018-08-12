@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_dialog_pozadie">
+
+    <TextView
+        android:id="@+id/dialog_pozvanok_titul"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="@dimen/dialog_pozvanok_titul_margin_bottom"
+        android:layout_marginLeft="@dimen/dialog_pozvanok_titul_margin_left_right"
+        android:layout_marginStart="@dimen/dialog_pozvanok_titul_margin_left_right"
+        android:layout_marginTop="@dimen/dialog_pozvanok_titul_margin_top"
+        android:fontFamily="@font/raleway_semi_bold"
+        android:text="@string/dialog_pozvanok_titul"
+        android:textColor="@color/dialog_titul"
+        android:textSize="@dimen/dialog_pozvanok_velkost_titulu" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/zoznam_priatelov_pre_pozvanku"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialog_pozvanok_velkost_zoznamu"
+        android:layout_below="@+id/dialog_pozvanok_titul"
+        android:layout_marginBottom="@dimen/dialog_pozvanok_zoznam_margin"
+        android:scrollbars="vertical" />
+
+    <TextView
+        android:id="@+id/dialog_pozvanok_priatelia"
+        android:layout_width="@dimen/dialog_pozvanok_sirka_prazdneho_zoznamu"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/raleway_medium"
+        android:gravity="center"
+        android:text="@string/dialog_pozvanok_zoznam_je_prazdny"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/dialog_pozvanok_velkost_pisma_pre_prazdny_zoznam"
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/nacitavanie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:theme="@style/Nacitavanie"
+        android:visibility="gone">
+    </ProgressBar>
+</RelativeLayout>

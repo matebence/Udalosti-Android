@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_gravity="center">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:orientation="vertical"
         tools:ignore="UselessParent">
 
@@ -41,13 +41,22 @@
             android:textColor="@android:color/white"
             android:textSize="@dimen/autentifikacia_velkost_pisma_textu" />
 
+        <ImageView
+            android:id="@+id/registracia_profil"
+            android:layout_width="@dimen/autentifikacia_registracia_sirka_a_vyska_profilovej_fotky"
+            android:layout_height="@dimen/autentifikacia_registracia_sirka_a_vyska_profilovej_fotky"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/autentifikacia_oddelenie_vstupov"
+            android:contentDescription="@string/autentifikacia_registracia_popis_illustracie"
+            android:src="@drawable/profilova_fotka_pouzivatela" />
+
         <EditText
             android:id="@+id/registracia_meno"
             android:layout_width="@dimen/autentifikacia_sirka_vstupov"
             android:layout_height="@dimen/autentifikacia_vyska_vstupov"
             android:layout_gravity="center"
             android:layout_marginBottom="@dimen/autentifikacia_oddelenie_vstupov"
-            android:background="@drawable/ic_edittext"
+            android:background="@drawable/ic_edittext_autentifikacia"
             android:fontFamily="@font/raleway_light"
             android:gravity="center"
             android:hint="@string/pomoc_meno"
@@ -63,7 +72,7 @@
             android:layout_height="@dimen/autentifikacia_vyska_vstupov"
             android:layout_gravity="center"
             android:layout_marginBottom="@dimen/autentifikacia_oddelenie_vstupov"
-            android:background="@drawable/ic_edittext"
+            android:background="@drawable/ic_edittext_autentifikacia"
             android:fontFamily="@font/raleway_light"
             android:gravity="center"
             android:hint="@string/pomoc_email"
@@ -79,7 +88,7 @@
             android:layout_height="@dimen/autentifikacia_vyska_vstupov"
             android:layout_gravity="center"
             android:layout_marginBottom="@dimen/autentifikacia_oddelenie_vstupov"
-            android:background="@drawable/ic_edittext"
+            android:background="@drawable/ic_edittext_autentifikacia"
             android:fontFamily="@font/raleway_light"
             android:gravity="center"
             android:hint="@string/pomoc_heslo"
@@ -95,7 +104,7 @@
             android:layout_height="@dimen/autentifikacia_vyska_vstupov"
             android:layout_gravity="center"
             android:layout_marginBottom="@dimen/autentifikacia_oddelenie_vstupov"
-            android:background="@drawable/ic_edittext"
+            android:background="@drawable/ic_edittext_autentifikacia"
             android:fontFamily="@font/raleway_light"
             android:gravity="center"
             android:hint="@string/pomoc_potvrdte_heslo"
@@ -105,13 +114,56 @@
             android:textColorHint="@android:color/white"
             android:textSize="@dimen/autentifikacia_velkost_pisma_vstupov" />
 
+        <RadioGroup
+            android:id="@+id/registracia_pohlavie"
+            android:layout_width="@dimen/autentifikacia_sirka_vstupov"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/autentifikacia_oddelenie_vstupov"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/registracia_muz"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:theme="@style/RadioTlacidla" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/autentifikacia_registracia_radio__tlacidlo_margin"
+                android:layout_marginRight="@dimen/autentifikacia_registracia_radio__tlacidlo_margin"
+                android:fontFamily="@font/raleway_light"
+                android:text="@string/autentifikacia_registracia_radio_tlacidlo_muz"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/autentifikacia_velkost_pisma_vstupov" />
+
+            <RadioButton
+                android:id="@+id/registracia_zena"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/autentifikacia_registracia_radio__tlacidlo_margin"
+                android:layout_marginStart="@dimen/autentifikacia_registracia_radio__tlacidlo_margin"
+                android:theme="@style/RadioTlacidla" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/raleway_light"
+                android:text="@string/autentifikacia_registracia_radio_tlacidlo_zena"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/autentifikacia_velkost_pisma_vstupov" />
+        </RadioGroup>
+
         <Button
             android:id="@+id/posli_registraciu"
             android:layout_width="@dimen/autentifikacia_sirka_vstupov"
             android:layout_height="@dimen/autentifikacia_vyska_vstupov"
             android:layout_gravity="center"
             android:layout_marginBottom="@dimen/autentifikacia_oddelenie_vstupov"
-            android:background="@drawable/ic_tlacidlo_autentifikacia"
+            android:background="@drawable/ic_tlacidlo_autentifikacia_aktivna"
             android:fontFamily="@font/raleway_regular"
             android:gravity="center"
             android:text="@string/autentifikacia_registrovat"
@@ -120,4 +172,4 @@
             android:textColor="@android:color/white"
             android:textSize="@dimen/autentifikacia_velkost_pisma_vstupov" />
     </LinearLayout>
-</RelativeLayout>
+</ScrollView>

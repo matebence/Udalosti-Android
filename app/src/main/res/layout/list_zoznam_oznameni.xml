@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/oznamenie_riadok"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/list_zoznam_oznameni_obsah_padding"
+    android:paddingBottom="@dimen/list_zoznam_oznameni_obsah_padding">
+
+    <TextView
+        android:id="@+id/id_udalost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/oznamenie_obrazok"
+        android:layout_width="@dimen/list_zoznam_oznameni_velkost_profilovej_fotky"
+        android:layout_height="@dimen/list_zoznam_oznameni_velkost_profilovej_fotky"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/list_zoznam_oznameni_profilova_fotka_margin"
+        android:layout_marginStart="@dimen/list_zoznam_oznameni_profilova_fotka_margin"
+        android:contentDescription="@string/list_zoznam"
+        android:src="@drawable/ic_profil_muz" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/oznamenie_obrazok"
+        android:layout_toRightOf="@+id/oznamenie_obrazok"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+
+        <TextView
+            android:id="@+id/oznamenie_meno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/list_zoznam_oznameni_meno_margin"
+            android:layout_marginStart="@dimen/list_zoznam_oznameni_meno_margin"
+            android:fontFamily="@font/raleway_bold"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/list_zoznam_oznameni_velkost_pisma_meno" />
+
+        <TextView
+            android:id="@+id/oznamenie_pozvanka"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/list_zoznam_oznameni_pozvanka_margin"
+            android:layout_marginStart="@dimen/list_zoznam_oznameni_pozvanka_margin"
+            android:fontFamily="@font/raleway_regular"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/list_zoznam_oznameni_velkost_pisma_pozvanka" />
+    </LinearLayout>
+</RelativeLayout>

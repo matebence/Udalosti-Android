@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/raleway_regular"
+            android:gravity="center"
+            android:shadowColor="@android:color/black"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="3"
+            android:text="@string/autentifikacia_zabudnute_heslo_titul_cast_prva"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/autentifikacia_titul_velkost_pisma" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginBottom="@dimen/autentifikacia_titul_margin_bottom"
+            android:layout_marginRight="@dimen/autentifikacia_zabudnute_heslo_margin"
+            android:fontFamily="@font/raleway_regular"
+            android:gravity="end"
+            android:shadowColor="@android:color/black"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="3"
+            android:text="@string/autentifikacia_zabudnute_heslo_titul_cast_druha"
+            android:textAlignment="textEnd"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/autentifikacia_zabudnute_heslo_velkost_podtitulu"
+            tools:ignore="RtlHardcoded" />
+
+        <TextView
+            android:layout_width="@dimen/autentifikacia_sirka_textu"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/autentifikacia_text_margin_bottom"
+            android:fontFamily="@font/raleway_light"
+            android:gravity="center"
+            android:text="@string/autentifikacia_zabudnute_heslo_text"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/autentifikacia_velkost_pisma_textu" />
+
+        <EditText
+            android:id="@+id/vstup_zabudnute_heslo"
+            android:layout_width="@dimen/autentifikacia_sirka_vstupov"
+            android:layout_height="@dimen/autentifikacia_vyska_vstupov"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/autentifikacia_oddelenie_vstupov"
+            android:background="@drawable/ic_edittext_autentifikacia"
+            android:fontFamily="@font/raleway_light"
+            android:gravity="center"
+            android:hint="@string/pomoc_email"
+            android:inputType="textEmailAddress"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
+            android:textSize="@dimen/autentifikacia_velkost_pisma_vstupov" />
+
+        <Button
+            android:id="@+id/posli_zabudnute_heslo"
+            android:layout_width="@dimen/autentifikacia_sirka_vstupov"
+            android:layout_height="@dimen/autentifikacia_vyska_vstupov"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_tlacidlo_autentifikacia_aktivna"
+            android:fontFamily="@font/raleway_regular"
+            android:gravity="center"
+            android:text="@string/autentifikacia_zabudnute_heslo_tlacidlo_poslat"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/autentifikacia_velkost_pisma_vstupov" />
+    </LinearLayout>
+</RelativeLayout>

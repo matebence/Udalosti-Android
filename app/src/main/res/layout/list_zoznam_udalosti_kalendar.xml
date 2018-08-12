@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/udalosti_kalendar_riadok"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="UselessParent">
+
+        <RelativeLayout
+            android:id="@+id/udalosti_kalendar_odstranit_z_kalendara"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/udalosti_zoznam_datum">
+
+            <ImageView
+                android:id="@+id/udalosti_kalendar_odstranit"
+                android:layout_width="@dimen/list_zoznam_udalosti_kalendar_velkost_ikoni_odstranit"
+                android:layout_height="@dimen/list_zoznam_udalosti_kalendar_velkost_ikoni_odstranit"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/list_zoznam_udalosti_kalendar_obrazok_odstranit_margin"
+                android:layout_marginRight="@dimen/list_zoznam_udalosti_kalendar_obrazok_odstranit_margin"
+                android:contentDescription="@string/list_zoznam_udalosti_kalendar_popis_illustracie"
+                android:src="@drawable/ic_odstranit" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/list_zoznam_udalosti_kalendar_odstranit_margin"
+                android:layout_marginRight="@dimen/list_zoznam_udalosti_kalendar_odstranit_margin"
+                android:layout_toLeftOf="@id/udalosti_kalendar_odstranit"
+                android:layout_toStartOf="@id/udalosti_kalendar_odstranit"
+                android:fontFamily="@font/raleway_regular"
+                android:text="@string/list_zoznam_udalosti_kalendar_odstranit"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/list_zoznam_udalosti_kalendar_odstranit_velkost_pisma" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/udalosti_kalendar_obsah"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/list_zoznam_udalosti_kalendar_obsah_padding"
+            android:paddingTop="@dimen/list_zoznam_udalosti_kalendar_obsah_padding">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="@integer/list_zoznam_udalosti_kalendar_pomer_prazdny_obsah_pred"
+                />
+
+            <TextView
+                android:id="@+id/udalosti_kalendar_den"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="@integer/list_zoznam_udalosti_kalendar_pomer_den"
+                android:fontFamily="@font/raleway_bold"
+                android:textColor="@color/udalosti_zoznam_datum"
+                android:textSize="@dimen/list_zoznam_udalosti_kalendar_velkost_pisma_den" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="@integer/list_zoznam_udalosti_kalendar_pomer_miesto_a_mesto"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/udalosti_kalendar_nazov"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/raleway_medium"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/list_zoznam_udalosti_kalendar_velkost_pisma_nazov" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/list_zoznam_udalosti_kalendar_vyska_ikoni_miesto"
+                        android:layout_weight="@integer/list_zoznam_udalosti_kalendar_pomer_miesto_obrazok"
+                        android:src="@drawable/ic_podla_pozicie"
+                        android:tint="#005ba6"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/udalosti_kalendar_mesto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="@integer/list_zoznam_udalosti_kalendar_pomer_mesto"
+                        android:fontFamily="@font/raleway_black"
+                        android:textColor="#005ba6"
+                        android:textSize="@dimen/list_zoznam_udalosti_kalendar_velkost_pisma_mesto" />
+
+                    <TextView
+                        android:id="@+id/udalosti_kalendar_miesto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="@integer/list_zoznam_udalosti_kalendar_pomer_miesto"
+                        android:fontFamily="@font/raleway_regular"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/list_zoznam_udalosti_kalendar_velkost_pisma_miesto" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="@integer/list_zoznam_udalosti_kalendar_pomer_prazdny_obsah_po"
+                />
+        </LinearLayout>
+    </FrameLayout>
+</RelativeLayout>

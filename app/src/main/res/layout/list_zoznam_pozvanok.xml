@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pozvanka_riadok"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/list_zoznam_pozvanok_obsah_margin"
+    android:layout_marginTop="@dimen/list_zoznam_pozvanok_obsah_margin">
+
+    <TextView
+        android:id="@+id/id_pouzivatel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent">
+
+        <ImageView
+            android:id="@+id/pozvanka_obrazok"
+            android:layout_width="@dimen/list_zoznam_pozvanok_velkost_profilovej_fotky"
+            android:layout_height="@dimen/list_zoznam_pozvanok_velkost_profilovej_fotky"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/list_zoznam_pozvanok_obrazok_margin"
+            android:layout_marginStart="@dimen/list_zoznam_pozvanok_obrazok_margin"
+            android:contentDescription="@string/list_zoznam"
+            android:src="@drawable/ic_profil_muz" />
+
+        <TextView
+            android:id="@+id/pozvanka_meno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/list_zoznam_pozvanok_obrazok_margin"
+            android:layout_marginStart="@dimen/list_zoznam_pozvanok_obrazok_margin"
+            android:fontFamily="@font/raleway_light"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/list_zoznam_pozvanok_velkost_pisma_meno" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="@integer/list_zoznam_pozvanok_pomer_jedna" />
+
+        <Button
+            android:id="@+id/pozvat"
+            android:layout_width="@dimen/list_zoznam_pozvanok_sirka_tlacidla_pozvat"
+            android:layout_height="@dimen/list_zoznam_pozvanok_vyska_tlacidla_pozvat"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/list_zoznam_pozvanok_obrazok_margin"
+            android:layout_marginRight="@dimen/list_zoznam_pozvanok_obrazok_margin"
+            android:background="@drawable/ic_tlacidlo_udalosti_inaktivna"
+            android:fontFamily="@font/raleway_regular"
+            android:text="@string/list_zoznam_udalosti_tlacidlo_pozvat"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+</RelativeLayout>

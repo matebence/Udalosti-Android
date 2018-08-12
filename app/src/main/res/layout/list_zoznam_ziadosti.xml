@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/poziadavka_riadok"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/list_zoznam_poziadaviek_obsah_margin"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent">
+
+        <TextView
+            android:id="@+id/id_vztah"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/poziadavka_obrazok"
+            android:layout_width="@dimen/list_zoznam_poziadaviek_velkost_profilovej_fotky"
+            android:layout_height="@dimen/list_zoznam_poziadaviek_velkost_profilovej_fotky"
+            android:contentDescription="@string/list_zoznam"
+            android:src="@drawable/ic_profil_muz" />
+
+        <LinearLayout
+            android:id="@+id/poziadavka_obsah"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            tools:ignore="UselessParent">
+
+            <TextView
+                android:id="@+id/poziadavka_meno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/raleway_bold"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/poziadavka"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/list_zoznam_poziadaviek_margin_poziadavka"
+                android:layout_marginStart="@dimen/list_zoznam_poziadaviek_margin_poziadavka"
+                android:fontFamily="@font/raleway_regular"
+                android:text="@string/list_zoznam_poziadaviek_poziadavka"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/list_zoznam_poziadaviek_velkost_pisma_poziadavky" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/list_zoznam_poziadaviek_tlacidla_margin"
+            android:layout_marginStart="@dimen/list_zoznam_poziadaviek_tlacidla_margin"
+            android:gravity="center"
+            android:orientation="vertical"
+            tools:ignore="UselessParent">
+
+            <Button
+                android:id="@+id/poziadavka_potvrdit"
+                android:layout_width="@dimen/list_zoznam_poziadaviek_sirka_tlacidla"
+                android:layout_height="@dimen/list_zoznam_poziadaviek_vyska_tlacidla"
+                android:layout_gravity="center"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/ic_tlacidlo_udalosti_inaktivna"
+                android:fontFamily="@font/raleway_regular"
+                android:text="@string/list_zoznam_poziadaviek_tlacidlo_potvrdit"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/list_zoznam_poziadaviek_velkost_pisma_tlacidla" />
+
+            <Button
+                android:id="@+id/poziadavka_odmietnut"
+                android:layout_width="@dimen/list_zoznam_poziadaviek_sirka_tlacidla"
+                android:layout_height="@dimen/list_zoznam_poziadaviek_vyska_tlacidla"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_tlacidlo_udalosti_inaktivna"
+                android:fontFamily="@font/raleway_regular"
+                android:text="@string/list_zoznam_poziadaviek_odmietnut"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/list_zoznam_poziadaviek_velkost_pisma_tlacidla" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

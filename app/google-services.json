@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "538271519792",
+    "firebase_url": "https://udalosti-bence-mate.firebaseio.com",
+    "project_id": "udalosti-bence-mate",
+    "storage_bucket": "udalosti-bence-mate.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:538271519792:android:6a41b05265d8923e",
+        "android_client_info": {
+          "package_name": "com.mate.bence.udalosti"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "538271519792-splkupnmjmjc02gf6ho26nqmhqmnvc9a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mate.bence.udalosti",
+            "certificate_hash": "10b3b67644406c51857c990fabb559d0c73d2015"
+          }
+        },
+        {
+          "client_id": "538271519792-rpbnd53jeq8oqveo9nut5udd5bs91uok.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqs6oNauFkxISsbCat5bccpXBMAjVXk2M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "538271519792-rpbnd53jeq8oqveo9nut5udd5bs91uok.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

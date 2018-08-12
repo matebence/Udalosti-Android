@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="aplikacia_bocne_menu">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_udalosti"
+            android:icon="@drawable/ic_udalosti"
+            android:title="@string/bocne_menu_udalosti" />
+        <item
+            android:id="@+id/nav_podla_pozicie"
+            android:icon="@drawable/ic_podla_pozicie"
+            android:title="@string/bocne_menu_podla_pozicie" />
+        <item
+            android:id="@+id/nav_ludia"
+            android:icon="@drawable/ic_ludia"
+            android:title="@string/bocne_menu_ludia" />
+    </group>
+    <item android:title="">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_nastavenia"
+                    android:icon="@drawable/ic_nastavenia"
+                    android:title="@string/bocne_menu_nastavenia" />
+                <item
+                    android:id="@+id/nav_odhlasit_sa"
+                    android:icon="@drawable/ic_odhlasit_sa"
+                    android:title="@string/bocne_menu_odhlasit_sa" />
+            </group>
+        </menu>
+    </item>
+</menu>

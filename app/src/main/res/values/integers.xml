@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Zoznam udalosti kalendar -->
+    <integer name="list_zoznam_udalosti_kalendar_pomer_miesto">1</integer>
+    <integer name="list_zoznam_udalosti_kalendar_pomer_mesto">1</integer>
+    <integer name="list_zoznam_udalosti_kalendar_pomer_miesto_obrazok">20</integer>
+    <integer name="list_zoznam_udalosti_kalendar_pomer_miesto_a_mesto">4</integer>
+    <integer name="list_zoznam_udalosti_kalendar_pomer_den">2</integer>
+    <integer name="list_zoznam_udalosti_kalendar_pomer_prazdny_obsah_po">1</integer>
+    <integer name="list_zoznam_udalosti_kalendar_pomer_prazdny_obsah_pred">2</integer>
+
+    <!-- Autentifikator prihlasenie -->
+    <integer name="autentifikacia_prihlasenie_pomer_jedna">1</integer>
+    <integer name="autentifikacia_prihlasenie_pomer_tri">3</integer>
+    <integer name="autentifikacia_prihlasenie_pomer_styri">4</integer>
+
+    <!-- Zoznam udalosti -->
+    <integer name="list_zoznam_udalosti_pomer_jedna">1</integer>
+    <integer name="list_zoznam_udalosti_pomer_dva">2</integer>
+
+    <!-- Zoznam pozvanok -->
+    <integer name="list_zoznam_pozvanok_pomer_jedna">1</integer>
+</resources>

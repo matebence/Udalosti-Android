@@ -6,12 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.mate.bence.udalosti.Activity.Autentifikacia.Autentifikacia;
 import com.mate.bence.udalosti.Activity.Autentifikacia.AutentifikaciaUdaje;
+import com.mate.bence.udalosti.Activity.Navigacia.Navigacia;
 import com.mate.bence.udalosti.Activity.RychlaUkazkaAplikacie.RychlaUkazkaAplikacie;
-import com.mate.bence.udalosti.Activity.Udalosti.Udalosti;
 import com.mate.bence.udalosti.Nastroje.Pripojenie;
 import com.mate.bence.udalosti.R;
 import com.mate.bence.udalosti.Udaje.Data.Preferencie;
-import com.mate.bence.udalosti.Udaje.Nastavenia.Nastavenia;
+import com.mate.bence.udalosti.Udaje.Nastavenia.Status;
 import com.mate.bence.udalosti.Udaje.Siet.Model.KommunikaciaOdpoved;
 
 import java.util.HashMap;
@@ -61,13 +61,15 @@ public class UvodnaObrazovka extends AppCompatActivity implements KommunikaciaOd
     @Override
     public void odpovedServera(String odpoved, String od, HashMap<String, String> udaje) {
         switch (od) {
-            case Nastavenia.AUTENTIFIKACIA_PRIHLASENIE:
+            case Status.AUTENTIFIKACIA_PRIHLASENIE:
                 Intent podlaSpravnosti;
-                if (odpoved.equals(Nastavenia.VSETKO_V_PORIADKU)) {
-                    podlaSpravnosti = new Intent(UvodnaObrazovka.this, Udalosti.class);
+                if (odpoved.equals(Status.VSETKO_V_PORIADKU)) {
+                    podlaSpravnosti = new Intent(UvodnaObrazovka.this, Navigacia.class);
                     podlaSpravnosti.putExtra("email", udaje.get("email"));
+                    podlaSpravnosti.putExtra("meno", udaje.get("meno"));
                     podlaSpravnosti.putExtra("heslo", udaje.get("heslo"));
                     podlaSpravnosti.putExtra("token", udaje.get("token"));
+                    podlaSpravnosti.putExtra("obrazok", udaje.get("obrazok"));
                 } else {
                     podlaSpravnosti = new Intent(UvodnaObrazovka.this, Autentifikacia.class);
                     podlaSpravnosti.putExtra("neUspesnePrihlasenie", true);

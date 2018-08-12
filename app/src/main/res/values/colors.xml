@@ -3,6 +3,9 @@
     <!--Aplikacia-->
     <color name="statusbar">#00457c</color>
     <color name="toolbar">#005ba6</color>
+    <color name="bocne_menu">#005ba6</color>
+
+    <!--Nacitavanie-->
     <color name="nacitavanie_progressbar">#0397d6</color>
     <color name="nacitavanie">#70000000</color>
 
@@ -12,9 +15,8 @@
     <color name="dialog_zavorit">#0397d6</color>
 
     <!--Tab Layout-->
-    <color name="tab_pozadie">#005ba6</color>
-    <color name="tab_ikona_aktivna">#ffffff</color>
-    <color name="tab_ikona_inaktivna">#b5cad8</color>
+    <color name="tab_ikona_aktivna">#005ba6</color>
+    <color name="tab_ikona_inaktivna">#000000</color>
 
     <!-- Uvodna obrazovka -->
     <color name="uvodna_obrazovka_logo_text">#424242</color>
@@ -45,14 +47,25 @@
     </array>
 
     <!-- Autentifikator -->
-    <color name="autentifikacia">#0397d6</color>
+    <color name="autentifikacia_tlacidlo">#0397d6</color>
 
     <!-- Udalosti -->
     <color name="udalosti_chyba_informacia">#b6b5b5</color>
+    <color name="udalosti_neprecitana_sprava">#c2e6e6e6</color>
+    <color name="udalosti_ciara">#999999</color>
 
     <!-- Udalost zoznam -->
     <color name="udalosti_zoznam_datum">#c33939</color>
     <color name="udalosti_zoznam_miesto">#005ba6</color>
     <color name="udalosti_zoznam_pozadie">#f2f2f2</color>
     <color name="udalosti_zoznam_hlavicka">#eaeaea</color>
+
+    <!-- Ludia -->
+    <color name="ludia_riadok">#999999</color>
+    <color name="ludia_karta">#cbd7e7</color>
+
+    <!-- Nastavenia -->
+    <color name="nastavenia_odstranit_ucet">#bc3a3a</color>
+    <color name="nastavenia_farba_vstupu">#999999</color>
+    <color name="nastavenia_tien">#bcbcbc</color>
 </resources>

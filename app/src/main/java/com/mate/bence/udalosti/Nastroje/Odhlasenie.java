@@ -5,15 +5,13 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 
-import com.mate.bence.udalosti.Activity.Udalosti.UdalostiUdaje;
-import com.mate.bence.udalosti.Udaje.Nastavenia.Nastavenia;
-import com.mate.bence.udalosti.Udaje.Siet.Model.KommunikaciaData;
+import com.mate.bence.udalosti.Activity.Navigacia.NavigaciaUdaje;
+import com.mate.bence.udalosti.Udaje.Nastavenia.Status;
 import com.mate.bence.udalosti.Udaje.Siet.Model.KommunikaciaOdpoved;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Odhlasenie extends Service implements KommunikaciaOdpoved, KommunikaciaData {
+public class Odhlasenie extends Service implements KommunikaciaOdpoved {
 
     private static final String TAG = Odhlasenie.class.getName();
     private String email;
@@ -36,21 +34,18 @@ public class Odhlasenie extends Service implements KommunikaciaOdpoved, Kommunik
 
     @Override
     public void onTaskRemoved(Intent rootIntent) {
-        UdalostiUdaje udalostiUdaje = new UdalostiUdaje(this,this, getApplicationContext());
-        udalostiUdaje.odhlasenie(email);
+        NavigaciaUdaje navigaciaUdaje = new NavigaciaUdaje(this, getApplicationContext());
+        navigaciaUdaje.odhlasenie(email);
         stopSelf();
     }
 
     @Override
     public void odpovedServera(String odpoved, String od, HashMap<String, String> udaje) {
         switch (od) {
-            case Nastavenia.AUTENTIFIKACIA_ODHLASENIE:
-                if (odpoved.equals(Nastavenia.VSETKO_V_PORIADKU)) {
+            case Status.AUTENTIFIKACIA_ODHLASENIE:
+                if (odpoved.equals(Status.VSETKO_V_PORIADKU)) {
                     Log.v(TAG, "Systém odhlásil");
                 }
         }
     }
-
-    @Override
-    public void dataZoServera(String odpoved, String od, ArrayList udaje) {}
 }

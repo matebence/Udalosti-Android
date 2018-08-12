@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/nastavenia_profilova_fotka"
+        android:layout_width="@dimen/nastavenia_velkost_profilovej_fotky"
+        android:layout_height="@dimen/nastavenia_velkost_profilovej_fotky"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/nastavenia_profil_margin"
+        android:layout_marginTop="@dimen/nastavenia_oddelenie_vstupov"
+        android:background="@drawable/ic_tien_profilu"
+        android:contentDescription="@string/nastavenia_profilova_fotka_popis_illustracie"
+        android:src="@drawable/ic_profil_muz" />
+
+    <LinearLayout
+        android:id="@+id/nastavenia_vstup_meno"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nastavenia_profilova_fotka"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/nastavenia_oddelenie_vstupov"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/nastavenia_sirka_a_vyska_ikonov"
+            android:layout_height="@dimen/nastavenia_sirka_a_vyska_ikonov"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/nastavenia_margin_ikonov"
+            android:layout_marginRight="@dimen/nastavenia_margin_ikonov"
+            android:src="@drawable/ic_editovat"
+            tools:ignore="ContentDescription" />
+
+        <EditText
+            android:id="@+id/nastavenia_meno"
+            android:layout_width="@dimen/nastavenia_sirka_vstupov"
+            android:layout_height="@dimen/nastavenia_vyska_vstupov"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_edittext_nastavenia"
+            android:fontFamily="@font/raleway_light"
+            android:gravity="center"
+            android:hint="@string/pomoc_nove_meno"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/black"
+            android:textSize="@dimen/nastavenia_velkost_pisma_vstupov" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nastavenia_vstup_meno"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/nastavenia_sirka_a_vyska_ikonov"
+            android:layout_height="@dimen/nastavenia_sirka_a_vyska_ikonov"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/nastavenia_margin_ikonov"
+            android:layout_marginRight="@dimen/nastavenia_margin_ikonov"
+            android:src="@drawable/ic_heslo"
+            tools:ignore="ContentDescription" />
+
+        <EditText
+            android:id="@+id/nastavenia_heslo"
+            android:layout_width="@dimen/nastavenia_sirka_vstupov"
+            android:layout_height="@dimen/nastavenia_vyska_vstupov"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_edittext_nastavenia"
+            android:fontFamily="@font/raleway_light"
+            android:gravity="center"
+            android:hint="@string/pomoc_nove_heslo"
+            android:inputType="textPassword"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/black"
+            android:textSize="@dimen/nastavenia_velkost_pisma_vstupov" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/nastavenia_odstranit_ucet"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/nastavenia_odstranit_ucet_margin"
+        android:fontFamily="@font/raleway_light"
+        android:text="@string/nastavenia_odstranit_ucet"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/nastavenia_odstranit_ucet" />
+
+    <Button
+        android:id="@+id/nastavenia_odstranit_ucet"
+        android:layout_width="@dimen/nastavenia_odstranit_ucet_velkost_tlacidla"
+        android:layout_height="@dimen/nastavenia_odstranit_ucet_velkost_tlacidla"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/nastavenia_oddelenie_vstupov"
+        android:background="@drawable/ic_odstranit_ucet" />
+
+    <LinearLayout
+        android:id="@+id/nacitavanie"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerInParent="true"
+        android:background="#70000000"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:theme="@style/Nacitavanie">
+        </ProgressBar>
+    </LinearLayout>
+</RelativeLayout>

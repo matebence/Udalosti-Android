@@ -6,6 +6,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -34,12 +36,23 @@
             android:name=".Activity.Autentifikacia.Autentifikacia"
             tools:ignore="InnerclassSeparator" />
         <activity
-            android:name=".Activity.Udalosti.Udalosti"
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/UpravaFotky" />
+        <activity
+            android:name=".Activity.Navigacia.Navigacia"
             tools:ignore="InnerclassSeparator" />
 
         <service
             android:name=".Nastroje.Odhlasenie"
             android:stopWithTask="false"
             tools:ignore="InnerclassSeparator" />
+
+        <service
+            android:name=".Sluzby.Firebase"
+            tools:ignore="ExportedService,InnerclassSeparator">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 </manifest>

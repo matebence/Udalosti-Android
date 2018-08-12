@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/ic_dialog_pozadie">
+
+    <TextView
+        android:id="@+id/dialog_potvrdeni_titul"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="@dimen/dialog_potvrdeni_margin"
+        android:layout_marginStart="@dimen/dialog_potvrdeni_margin"
+        android:layout_marginTop="@dimen/dialog_potvrdeni_margin"
+        android:fontFamily="@font/raleway_bold"
+        android:textColor="@color/dialog_titul"
+        android:textSize="@dimen/dialog_chyb_velkost_titulu"/>
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/dialog_potvrdeni_heslo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialog_potvrdeni_titul"
+        android:layout_marginBottom="@dimen/dialog_potvrdeni_margin"
+        android:layout_marginEnd="@dimen/dialog_potvrdeni_margin"
+        android:layout_marginLeft="@dimen/dialog_potvrdeni_margin"
+        android:layout_marginRight="@dimen/dialog_potvrdeni_margin"
+        android:layout_marginStart="@dimen/dialog_potvrdeni_margin"
+        android:layout_marginTop="@dimen/dialog_potvrdeni_margin"
+        android:fontFamily="@font/raleway_medium"
+        android:hint="Heslo"
+        android:inputType="textPassword"
+        android:textColor="@color/dialog_text"
+        android:textSize="@dimen/dialog_potvrdeni_velkost_pisma_vstupu"
+        app:backgroundTint="@color/dialog_text"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/dialog_potvrdeni_potvrdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/dialog_potvrdeni_heslo"
+        android:layout_marginBottom="@dimen/dialog_potvrdeni_margin"
+        android:layout_marginEnd="@dimen/dialog_potvrdeni_margin"
+        android:layout_marginRight="@dimen/dialog_potvrdeni_margin"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/raleway_bold"
+        android:text="@string/dialog_potvrdeni_potvrdit"
+        android:textAllCaps="true"
+        android:textColor="@color/dialog_zavorit"
+        android:textSize="@dimen/dialog_chyb_velkost_tlacidla_zatvorit" />
+</RelativeLayout>

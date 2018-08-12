@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.mate.bence.udalosti.Udaje.Data.Tabulky.Miesto;
-import com.mate.bence.udalosti.Udaje.Data.Tabulky.Pouzivatel;
+import com.mate.bence.udalosti.Udaje.Data.Tabulky.Prihlasenie;
 
 import java.util.HashMap;
 
@@ -23,13 +23,14 @@ public class SQLiteDatabaza extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        final String VYTVOR_TABULKU_POUZIVATEL =
+        final String VYTVOR_TABULKU_PRIHLASENIE =
                 "CREATE TABLE " +
-                        SQLiteTabulky.Pouzivatel.NAZOV_TABULKY +
-                        "(" + SQLiteTabulky.Pouzivatel.ID_STLPCA + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        SQLiteTabulky.Pouzivatel.EMAIL + "  VARCHAR(255)," +
-                        SQLiteTabulky.Pouzivatel.HESLO + "  VARCHAR(128)" + ")";
-
+                        SQLiteTabulky.Prihlasenie.NAZOV_TABULKY +
+                        "(" + SQLiteTabulky.Prihlasenie.ID_STLPCA + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        SQLiteTabulky.Prihlasenie.EMAIL + "  VARCHAR(255)," +
+                        SQLiteTabulky.Prihlasenie.HESLO + "  VARCHAR(128)," +
+                        SQLiteTabulky.Prihlasenie.MENO + "  VARCHAR(20)," +
+                        SQLiteTabulky.Prihlasenie.OBRAZOK + "  VARCHAR(200)" + ")";
         final String VYTVOR_TABULKU_MIESTO =
                 "CREATE TABLE " +
                         SQLiteTabulky.Miesto.NAZOV_TABULKY +
@@ -38,71 +39,78 @@ public class SQLiteDatabaza extends SQLiteOpenHelper {
                         SQLiteTabulky.Miesto.OKRES + "  VARCHAR(30)," +
                         SQLiteTabulky.Miesto.MESTO + "  VARCHAR(30)" + ")";
 
-        sqLiteDatabase.execSQL(VYTVOR_TABULKU_POUZIVATEL);
+        sqLiteDatabase.execSQL(VYTVOR_TABULKU_PRIHLASENIE);
         sqLiteDatabase.execSQL(VYTVOR_TABULKU_MIESTO);
     }
 
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int staraVerzia, int novaVerzia) {
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + SQLiteTabulky.Pouzivatel.NAZOV_TABULKY);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + SQLiteTabulky.Prihlasenie.NAZOV_TABULKY);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + SQLiteTabulky.Miesto.NAZOV_TABULKY);
         onCreate(sqLiteDatabase);
     }
 
-    public void novePouzivatelskeUdaje(Pouzivatel pouzivatel) {
+    public void novePouzivatelskeUdaje(Prihlasenie prihlasenie) {
         ContentValues data = new ContentValues();
-        data.put(SQLiteTabulky.Pouzivatel.EMAIL, pouzivatel.getEmail());
-        data.put(SQLiteTabulky.Pouzivatel.HESLO, pouzivatel.getHeslo());
+        data.put(SQLiteTabulky.Prihlasenie.EMAIL, prihlasenie.getEmail());
+        data.put(SQLiteTabulky.Prihlasenie.HESLO, prihlasenie.getHeslo());
+        data.put(SQLiteTabulky.Prihlasenie.MENO, prihlasenie.getMeno());
+        data.put(SQLiteTabulky.Prihlasenie.OBRAZOK, prihlasenie.getObrazok());
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        sqLiteDatabase.insert(SQLiteTabulky.Pouzivatel.NAZOV_TABULKY, null, data);
+        long id = sqLiteDatabase.insert(SQLiteTabulky.Prihlasenie.NAZOV_TABULKY, null, data);
         sqLiteDatabase.close();
     }
 
-    public void aktualizujPouzivatelskeUdaje(Pouzivatel pouzivatel) {
+    public void aktualizujPouzivatelskeUdaje(Prihlasenie prihlasenie) {
         ContentValues data = new ContentValues();
-        data.put(SQLiteTabulky.Pouzivatel.EMAIL, pouzivatel.getEmail());
-        data.put(SQLiteTabulky.Pouzivatel.HESLO, pouzivatel.getHeslo());
+        data.put(SQLiteTabulky.Prihlasenie.EMAIL, prihlasenie.getEmail());
+        data.put(SQLiteTabulky.Prihlasenie.HESLO, prihlasenie.getHeslo());
+        data.put(SQLiteTabulky.Prihlasenie.MENO, prihlasenie.getMeno());
+        data.put(SQLiteTabulky.Prihlasenie.OBRAZOK, prihlasenie.getObrazok());
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        sqLiteDatabase.update(
-                SQLiteTabulky.Pouzivatel.NAZOV_TABULKY,
+        int riadok = sqLiteDatabase.update(
+                SQLiteTabulky.Prihlasenie.NAZOV_TABULKY,
                 data,
-                SQLiteTabulky.Pouzivatel.EMAIL + "= ?", new String[]{pouzivatel.getEmail()});
+                SQLiteTabulky.Prihlasenie.EMAIL + "= ?", new String[]{prihlasenie.getEmail()});
         sqLiteDatabase.close();
     }
 
     public void odstranPouzivatelskeUdaje(String email) {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        sqLiteDatabase.delete(
-                SQLiteTabulky.Pouzivatel.NAZOV_TABULKY,
-                SQLiteTabulky.Pouzivatel.EMAIL + "= ?", new String[]{email});
+        int riadok = sqLiteDatabase.delete(
+                SQLiteTabulky.Prihlasenie.NAZOV_TABULKY,
+                SQLiteTabulky.Prihlasenie.EMAIL + "= ?", new String[]{email});
         sqLiteDatabase.close();
     }
 
     public boolean pouzivatelskeUdaje() {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        String[] stlpce = {SQLiteTabulky.Pouzivatel.EMAIL};
+        String[] stlpce = {SQLiteTabulky.Prihlasenie.EMAIL};
         @SuppressLint("Recycle")
         Cursor data = sqLiteDatabase.query(
-                SQLiteTabulky.Pouzivatel.NAZOV_TABULKY,
+                SQLiteTabulky.Prihlasenie.NAZOV_TABULKY,
                 stlpce,
                 null,
                 null,
                 null,
                 null,
                 null);
+        boolean riadok = false;
         if (data.moveToFirst()) {
-            return true;
+            riadok = true;
+            return riadok;
         }
         sqLiteDatabase.close();
-        return false;
+        return riadok;
     }
 
     public HashMap<String, String> vratAktualnehoPouzivatela() {
         HashMap<String, String> pouzivatelskeUdaje;
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        String[] stlpce = {SQLiteTabulky.Pouzivatel.EMAIL, SQLiteTabulky.Pouzivatel.HESLO};
+        String[] stlpce = {SQLiteTabulky.Prihlasenie.EMAIL, SQLiteTabulky.Prihlasenie.HESLO,
+                SQLiteTabulky.Prihlasenie.MENO, SQLiteTabulky.Prihlasenie.OBRAZOK};
         @SuppressLint("Recycle")
         Cursor data = sqLiteDatabase.query(
-                SQLiteTabulky.Pouzivatel.NAZOV_TABULKY,
+                SQLiteTabulky.Prihlasenie.NAZOV_TABULKY,
                 stlpce,
                 null,
                 null,
@@ -111,8 +119,10 @@ public class SQLiteDatabaza extends SQLiteOpenHelper {
                 null);
         if (data.moveToFirst()) {
             pouzivatelskeUdaje = new HashMap<>();
-            pouzivatelskeUdaje.put("email", data.getString(data.getColumnIndex(SQLiteTabulky.Pouzivatel.EMAIL)));
-            pouzivatelskeUdaje.put("heslo", data.getString(data.getColumnIndex(SQLiteTabulky.Pouzivatel.HESLO)));
+            pouzivatelskeUdaje.put("email", data.getString(data.getColumnIndex(SQLiteTabulky.Prihlasenie.EMAIL)));
+            pouzivatelskeUdaje.put("heslo", data.getString(data.getColumnIndex(SQLiteTabulky.Prihlasenie.HESLO)));
+            pouzivatelskeUdaje.put("meno", data.getString(data.getColumnIndex(SQLiteTabulky.Prihlasenie.MENO)));
+            pouzivatelskeUdaje.put("obrazok", data.getString(data.getColumnIndex(SQLiteTabulky.Prihlasenie.OBRAZOK)));
             sqLiteDatabase.close();
             return pouzivatelskeUdaje;
         } else {
@@ -127,18 +137,18 @@ public class SQLiteDatabaza extends SQLiteOpenHelper {
         data.put(SQLiteTabulky.Miesto.OKRES, miesto.getOkres());
         data.put(SQLiteTabulky.Miesto.MESTO, miesto.getMesto());
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        sqLiteDatabase.insert(SQLiteTabulky.Miesto.NAZOV_TABULKY, null, data);
+        long id = sqLiteDatabase.insert(SQLiteTabulky.Miesto.NAZOV_TABULKY, null, data);
         sqLiteDatabase.close();
     }
 
-    public void aktualizujMiestoPrihlasenia(Miesto miesto) {
+    public void aktualizujMiestoPrihlasenie(Miesto miesto) {
         int idMiesto = 0;
         ContentValues data = new ContentValues();
         data.put(SQLiteTabulky.Miesto.STAT, miesto.getStat());
         data.put(SQLiteTabulky.Miesto.OKRES, miesto.getOkres());
         data.put(SQLiteTabulky.Miesto.MESTO, miesto.getMesto());
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        sqLiteDatabase.update(
+        int riadok = sqLiteDatabase.update(
                 SQLiteTabulky.Miesto.NAZOV_TABULKY,
                 data,
                 SQLiteTabulky.Miesto.ID_STLPCA + "= ?", new String[]{Integer.toString(idMiesto)});
@@ -157,11 +167,13 @@ public class SQLiteDatabaza extends SQLiteOpenHelper {
                 null,
                 null,
                 null);
+        boolean riadok = false;
         if (data.moveToFirst()) {
-            return true;
+            riadok = true;
+            return riadok;
         }
         sqLiteDatabase.close();
-        return false;
+        return riadok;
     }
 
     public HashMap<String, String> vratMiestoPrihlasenia() {

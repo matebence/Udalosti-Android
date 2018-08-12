@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/list_zoznam_hlavicka"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/udalosti_zoznam_hlavicka"
+        android:fontFamily="@font/raleway_light"
+        android:paddingBottom="@dimen/list_zoznam_hlavicka_padding_top_bottom"
+        android:paddingLeft="@dimen/list_zoznam_hlavicka_padding_left"
+        android:paddingStart="@dimen/list_zoznam_hlavicka_padding_left"
+        android:paddingTop="@dimen/list_zoznam_hlavicka_padding_top_bottom"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/list_zoznam_hlavicka_velkost_pisma"
+        tools:ignore="RtlSymmetry" />
+</RelativeLayout>

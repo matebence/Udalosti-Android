@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/bocne_menu_velkost_hlavicky"
+    android:background="@color/bocne_menu">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        tools:ignore="UseCompoundDrawables,UselessParent">
+
+        <ImageView
+            android:id="@+id/profilova_fotka_pouzivatela"
+            android:layout_width="@dimen/bocne_meno_profilova_fotka_sirva_vyska"
+            android:layout_height="@dimen/bocne_meno_profilova_fotka_sirva_vyska"
+            android:layout_gravity="center"
+            android:contentDescription="@string/bocne_menu_profilova_fotka"
+            android:src="@drawable/ic_muz" />
+
+        <TextView
+            android:id="@+id/pouzivatelske_meno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/bocne_menu_meno_margin"
+            android:fontFamily="@font/raleway_medium"
+            android:text="@string/bocne_menu_meno_pouzivatela"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/bocne_menu_velkost_pisma_meno" />
+    </LinearLayout>
+</RelativeLayout>
