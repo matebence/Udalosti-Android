@@ -58,10 +58,12 @@ public class AutentifikaciaUdaje implements AutentifikaciaImplementacia {
             @Override
             public void onResponse(@NonNull Call<Pozicia> call, @NonNull Response<Pozicia> response) {
                 GeoAdresa.initNanovo();
+
                 String stat, okres, mesto;
                 stat = okres = mesto = "";
 
-                if (response.body() != null) {
+                if (response.isSuccessful()) {
+
                     if (response.body().getStat() != null) {
                         stat = response.body().getStat();
                     }
@@ -159,6 +161,8 @@ public class AutentifikaciaUdaje implements AutentifikaciaImplementacia {
 
             @Override
             public void onResponse(@NonNull Call<Autentifikator> call, @NonNull Response<Autentifikator> response) {
+                GeoAdresa.initNanovo();
+
                 if (response.body().getChyba()) {
                     if (response.body().getValidacia().getOznam() != null) {
                         odpovedeOdServera.odpovedServera(response.body().getValidacia().getOznam(), Status.AUTENTIFIKACIA_REGISTRACIA, null);

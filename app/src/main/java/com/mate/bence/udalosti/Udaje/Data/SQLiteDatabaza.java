@@ -56,7 +56,7 @@ public class SQLiteDatabaza extends SQLiteOpenHelper {
         data.put(SQLiteTabulky.Prihlasenie.MENO, prihlasenie.getMeno());
         data.put(SQLiteTabulky.Prihlasenie.OBRAZOK, prihlasenie.getObrazok());
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        long id = sqLiteDatabase.insert(SQLiteTabulky.Prihlasenie.NAZOV_TABULKY, null, data);
+        sqLiteDatabase.insert(SQLiteTabulky.Prihlasenie.NAZOV_TABULKY, null, data);
         sqLiteDatabase.close();
     }
 
@@ -67,7 +67,7 @@ public class SQLiteDatabaza extends SQLiteOpenHelper {
         data.put(SQLiteTabulky.Prihlasenie.MENO, prihlasenie.getMeno());
         data.put(SQLiteTabulky.Prihlasenie.OBRAZOK, prihlasenie.getObrazok());
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        int riadok = sqLiteDatabase.update(
+        sqLiteDatabase.update(
                 SQLiteTabulky.Prihlasenie.NAZOV_TABULKY,
                 data,
                 SQLiteTabulky.Prihlasenie.EMAIL + "= ?", new String[]{prihlasenie.getEmail()});
@@ -76,7 +76,7 @@ public class SQLiteDatabaza extends SQLiteOpenHelper {
 
     public void odstranPouzivatelskeUdaje(String email) {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        int riadok = sqLiteDatabase.delete(
+        sqLiteDatabase.delete(
                 SQLiteTabulky.Prihlasenie.NAZOV_TABULKY,
                 SQLiteTabulky.Prihlasenie.EMAIL + "= ?", new String[]{email});
         sqLiteDatabase.close();
@@ -94,13 +94,11 @@ public class SQLiteDatabaza extends SQLiteOpenHelper {
                 null,
                 null,
                 null);
-        boolean riadok = false;
         if (data.moveToFirst()) {
-            riadok = true;
-            return riadok;
+            return data.getString(data.getColumnIndex(SQLiteTabulky.Prihlasenie.EMAIL)) != null;
         }
         sqLiteDatabase.close();
-        return riadok;
+        return false;
     }
 
     public HashMap<String, String> vratAktualnehoPouzivatela() {
@@ -137,7 +135,7 @@ public class SQLiteDatabaza extends SQLiteOpenHelper {
         data.put(SQLiteTabulky.Miesto.OKRES, miesto.getOkres());
         data.put(SQLiteTabulky.Miesto.MESTO, miesto.getMesto());
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        long id = sqLiteDatabase.insert(SQLiteTabulky.Miesto.NAZOV_TABULKY, null, data);
+        sqLiteDatabase.insert(SQLiteTabulky.Miesto.NAZOV_TABULKY, null, data);
         sqLiteDatabase.close();
     }
 
@@ -148,7 +146,7 @@ public class SQLiteDatabaza extends SQLiteOpenHelper {
         data.put(SQLiteTabulky.Miesto.OKRES, miesto.getOkres());
         data.put(SQLiteTabulky.Miesto.MESTO, miesto.getMesto());
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        int riadok = sqLiteDatabase.update(
+        sqLiteDatabase.update(
                 SQLiteTabulky.Miesto.NAZOV_TABULKY,
                 data,
                 SQLiteTabulky.Miesto.ID_STLPCA + "= ?", new String[]{Integer.toString(idMiesto)});
@@ -167,13 +165,11 @@ public class SQLiteDatabaza extends SQLiteOpenHelper {
                 null,
                 null,
                 null);
-        boolean riadok = false;
         if (data.moveToFirst()) {
-            riadok = true;
-            return riadok;
+            return data.getString(data.getColumnIndex(SQLiteTabulky.Miesto.STAT)) != null;
         }
         sqLiteDatabase.close();
-        return riadok;
+        return false;
     }
 
     public HashMap<String, String> vratMiestoPrihlasenia() {
