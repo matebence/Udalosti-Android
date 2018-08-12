@@ -97,11 +97,11 @@ public class AutentifikaciaUdaje implements AutentifikaciaImplementacia {
                         odpovedeOdServera.odpovedServera(response.body().getValidacia().getOznam(), Nastavenia.AUTENTIFIKACIA_PRIHLASENIE, udaje);
                     }
                 } else {
-                        udaje.put("email", email);
-                        udaje.put("heslo", heslo);
-                        udaje.put("token", response.body().getPouzivatel().getToken());
+                    udaje.put("email", email);
+                    udaje.put("heslo", heslo);
+                    udaje.put("token", response.body().getPouzivatel().getToken());
 
-                        odpovedeOdServera.odpovedServera(Nastavenia.VSETKO_V_PORIADKU, Nastavenia.AUTENTIFIKACIA_PRIHLASENIE, udaje);
+                    odpovedeOdServera.odpovedServera(Nastavenia.VSETKO_V_PORIADKU, Nastavenia.AUTENTIFIKACIA_PRIHLASENIE, udaje);
                 }
             }
 
@@ -117,9 +117,11 @@ public class AutentifikaciaUdaje implements AutentifikaciaImplementacia {
         Log.v(TAG, "Metoda registracia bola vykonana");
 
         Requesty requesty = UdalostiAdresa.initAdresu();
-        requesty.registracia(meno,email,heslo,potvrd,UUID.randomUUID().toString()).enqueue(new Callback<Autentifikator>() {
+        requesty.registracia(meno, email, heslo, potvrd, UUID.randomUUID().toString()).enqueue(new Callback<Autentifikator>() {
             @Override
             public void onResponse(@NonNull Call<Autentifikator> call, @NonNull Response<Autentifikator> response) {
+                GeoAdresa.initNanovo();
+
                 if (response.body().getChyba()) {
                     if (response.body().getValidacia().getOznam() != null) {
                         odpovedeOdServera.odpovedServera(response.body().getValidacia().getOznam(), Nastavenia.AUTENTIFIKACIA_REGISTRACIA, null);

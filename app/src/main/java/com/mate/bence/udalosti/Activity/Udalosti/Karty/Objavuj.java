@@ -73,7 +73,8 @@ public class Objavuj extends Fragment implements KommunikaciaData, KommunikaciaO
     }
 
     @Override
-    public void odpovedServera(String odpoved, String od, HashMap<String, String> udaje) {}
+    public void odpovedServera(String odpoved, String od, HashMap<String, String> udaje) {
+    }
 
     protected void ziskajUdalosti(ArrayList<Udalost> udalosti) {
         obsahUdalosti.addAll(udalosti);

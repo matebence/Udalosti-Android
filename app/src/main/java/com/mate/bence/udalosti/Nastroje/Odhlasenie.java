@@ -36,7 +36,7 @@ public class Odhlasenie extends Service implements KommunikaciaOdpoved, Kommunik
 
     @Override
     public void onTaskRemoved(Intent rootIntent) {
-        UdalostiUdaje udalostiUdaje = new UdalostiUdaje(this,this, getApplicationContext());
+        UdalostiUdaje udalostiUdaje = new UdalostiUdaje(this, this, getApplicationContext());
         udalostiUdaje.odhlasenie(email);
         stopSelf();
     }
@@ -52,5 +52,6 @@ public class Odhlasenie extends Service implements KommunikaciaOdpoved, Kommunik
     }
 
     @Override
-    public void dataZoServera(String odpoved, String od, ArrayList udaje) {}
+    public void dataZoServera(String odpoved, String od, ArrayList udaje) {
+    }
 }

@@ -20,7 +20,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UdalostiUdaje implements UdalostiImplementacia{
+public class UdalostiUdaje implements UdalostiImplementacia {
 
     private static final String TAG = UdalostiUdaje.class.getName();
 
@@ -29,7 +29,7 @@ public class UdalostiUdaje implements UdalostiImplementacia{
     private SQLiteDatabaza databaza;
     private Context context;
 
-    public UdalostiUdaje(KommunikaciaOdpoved odpovedeOdServera,KommunikaciaData udajeZoServera, Context context) {
+    public UdalostiUdaje(KommunikaciaOdpoved odpovedeOdServera, KommunikaciaData udajeZoServera, Context context) {
         this.odpovedeOdServera = odpovedeOdServera;
         this.udajeZoServera = udajeZoServera;
         this.databaza = new SQLiteDatabaza(context);
@@ -41,7 +41,7 @@ public class UdalostiUdaje implements UdalostiImplementacia{
         Log.v(TAG, "Metoda zoznamUdalosti bola vykonana");
 
         Requesty requesty = UdalostiAdresa.initAdresu();
-        requesty.udalosti(email, stat,token).enqueue(new Callback<Obsah>() {
+        requesty.udalosti(email, stat, token).enqueue(new Callback<Obsah>() {
             @Override
             public void onResponse(@NonNull Call<Obsah> call, @NonNull Response<Obsah> response) {
                 if (response.isSuccessful()) {
@@ -64,7 +64,7 @@ public class UdalostiUdaje implements UdalostiImplementacia{
         requesty.udalostiPodlaPozicie(email, stat, okres, mesto, token).enqueue(new Callback<Obsah>() {
             @Override
             public void onResponse(@NonNull Call<Obsah> call, @NonNull Response<Obsah> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     udajeZoServera.dataZoServera(Nastavenia.VSETKO_V_PORIADKU, Nastavenia.UDALOSTI_PODLA_POZICIE, response.body().getUdalosti());
                 }
             }

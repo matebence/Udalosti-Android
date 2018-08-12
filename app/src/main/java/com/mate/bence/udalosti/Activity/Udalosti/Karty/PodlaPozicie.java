@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class PodlaPozicie extends Fragment implements KommunikaciaData, KommunikaciaOdpoved{
+public class PodlaPozicie extends Fragment implements KommunikaciaData, KommunikaciaOdpoved {
 
     private List<Udalost> obsahUdalostiPodlaPozicie;
 
@@ -75,7 +75,8 @@ public class PodlaPozicie extends Fragment implements KommunikaciaData, Kommunik
     }
 
     @Override
-    public void odpovedServera(String odpoved, String od, HashMap<String, String> udaje) {}
+    public void odpovedServera(String odpoved, String od, HashMap<String, String> udaje) {
+    }
 
     private void ziskajUdalosti(ArrayList<Udalost> udalosti) {
         obsahUdalostiPodlaPozicie.addAll(udalosti);

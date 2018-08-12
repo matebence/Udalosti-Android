@@ -16,7 +16,7 @@ public class Prihlasenie extends Fragment implements View.OnClickListener {
 
     private static final String TAG = Prihlasenie.class.getName();
     private AutentifikaciaOvladanie autentifikaciaOvladanie;
-    private EditText email,heslo;
+    private EditText email, heslo;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

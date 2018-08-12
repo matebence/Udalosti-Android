@@ -107,7 +107,8 @@ public class Udalosti extends AppCompatActivity implements KommunikaciaOdpoved, 
     }
 
     @Override
-    public void dataZoServera(String odpoved, String od, ArrayList udaje) {}
+    public void dataZoServera(String odpoved, String od, ArrayList udaje) {
+    }
 
     private boolean pristup() {
         Bundle udaje = getIntent().getExtras();

@@ -21,7 +21,6 @@ import com.mate.bence.udalosti.R;
 import com.mate.bence.udalosti.Udaje.Siet.UdalostiAdresa;
 
 import java.io.InputStream;
-import java.text.DateFormatSymbols;
 import java.util.List;
 
 public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostHolder> {
