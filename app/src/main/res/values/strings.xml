@@ -36,7 +36,7 @@
     <string name="rychla_ukazka_aplikacie_cast_druha_podtittul">Vyhldávajte z udalostí a nájdite tie ktoré Vás zaujímajú</string>
     <string name="rychla_ukazka_aplikacie_cast_tretia_podtittul">Hladajte udalosti ktoré sú najbližšie k Vám podla Vašej pozície</string>
 
-    <!-- Autentifikator pouzivatel -->
+    <!-- Autentifikator prihlasenie -->
     <string name="autentifikacia_prihlasenie_text">Udržiavajte informácie o tom, čo sa deje vo Vašom okolí.</string>
     <string name="autentifikacia_tlacidlo_prihlasit_sa">Prihlásíť sa</string>
     <string name="autentifikacia_nemate_este_ucet">Nemáte ešte používatelské konto?</string>
