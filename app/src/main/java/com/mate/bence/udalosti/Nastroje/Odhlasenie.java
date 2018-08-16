@@ -48,6 +48,7 @@ public class Odhlasenie extends Service implements KommunikaciaOdpoved, Kommunik
                 if (odpoved.equals(Nastavenia.VSETKO_V_PORIADKU)) {
                     Log.v(TAG, "Systém odhlásil");
                 }
+                break;
         }
     }
 
