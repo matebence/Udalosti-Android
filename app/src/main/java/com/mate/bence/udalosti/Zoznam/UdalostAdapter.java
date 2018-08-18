@@ -52,8 +52,8 @@ public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostH
         holder.denUdalosti.setText(udalost.getDen());
         holder.mesiacUdalosti.setText(udalost.getMesiac());
         holder.casUdalosti.setText(udalost.getCas());
-
-        nastavMiestoUdalosti(holder, udalost.getMiesto());
+        holder.mestoUdalosti.setText(udalost.getMesto());
+        holder.miestoUdalosti.setText(udalost.getMiesto());
 
         nacitajObsah(holder.udalost);
     }
@@ -61,16 +61,6 @@ public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostH
     @Override
     public int getItemCount() {
         return zoznamUdalosti.size();
-    }
-
-    private void nastavMiestoUdalosti(UdalostHolder holder, String miesto) {
-        String miestoUdalosti[] = miesto.split(",");
-        if (miestoUdalosti.length > 1) {
-            holder.mestoUdalosti.setText(miestoUdalosti[0]);
-            holder.miestoUdalosti.setText(miestoUdalosti[1]);
-        } else {
-            holder.mestoUdalosti.setText(miesto);
-        }
     }
 
     private void nacitajObsah(View view) {

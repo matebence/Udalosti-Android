@@ -4,20 +4,22 @@ public class Udalost {
 
     private String idUdalost;
     private String obrazok;
-    private String nazov;
     private String den;
     private String mesiac;
-    private String cas;
+    private String nazov;
+    private String mesto;
     private String miesto;
+    private String cas;
 
-    public Udalost(String idUdalost, String obrazok, String nazov, String den, String mesiac, String cas, String miesto) {
+    public Udalost(String idUdalost, String obrazok, String den, String mesiac, String nazov, String mesto, String miesto, String cas) {
         this.idUdalost = idUdalost;
         this.obrazok = obrazok;
-        this.nazov = nazov;
         this.den = den;
         this.mesiac = mesiac;
-        this.cas = cas;
+        this.nazov = nazov;
+        this.mesto = mesto;
         this.miesto = miesto;
+        this.cas = cas;
     }
 
     public String getIdUdalost() {
@@ -36,14 +38,6 @@ public class Udalost {
         this.obrazok = obrazok;
     }
 
-    public String getNazov() {
-        return nazov;
-    }
-
-    public void setNazov(String nazov) {
-        this.nazov = nazov;
-    }
-
     public String getDen() {
         return den;
     }
@@ -60,12 +54,20 @@ public class Udalost {
         this.mesiac = mesiac;
     }
 
-    public String getCas() {
-        return cas;
+    public String getNazov() {
+        return nazov;
     }
 
-    public void setCas(String cas) {
-        this.cas = cas;
+    public void setNazov(String nazov) {
+        this.nazov = nazov;
+    }
+
+    public String getMesto() {
+        return mesto;
+    }
+
+    public void setMesto(String mesto) {
+        this.mesto = mesto;
     }
 
     public String getMiesto() {
@@ -76,16 +78,25 @@ public class Udalost {
         this.miesto = miesto;
     }
 
+    public String getCas() {
+        return cas;
+    }
+
+    public void setCas(String cas) {
+        this.cas = cas;
+    }
+
     @Override
     public String toString() {
         return "Udalost{" +
                 "idUdalost='" + idUdalost + '\'' +
                 ", obrazok='" + obrazok + '\'' +
-                ", nazov='" + nazov + '\'' +
                 ", den='" + den + '\'' +
                 ", mesiac='" + mesiac + '\'' +
-                ", cas='" + cas + '\'' +
+                ", nazov='" + nazov + '\'' +
+                ", mesto='" + mesto + '\'' +
                 ", miesto='" + miesto + '\'' +
+                ", cas='" + cas + '\'' +
                 '}';
     }
 }

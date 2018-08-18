@@ -64,7 +64,7 @@
     <dimen name="list_zoznam_udalosti_margin_miesto">5dp</dimen>
     <dimen name="list_zoznam_udalosti_margin">5dp</dimen>
     <dimen name="list_zoznam_udalosti_velkost_pisma_nazvov">23sp</dimen>
-    <dimen name="list_zoznam_udalosti_velkost_pisma_miesto">20sp</dimen>
+    <dimen name="list_zoznam_udalosti_velkost_pisma_miesto">17sp</dimen>
     <dimen name="list_zoznam_udalosti_velkost_pisma_mesiac">20sp</dimen>
     <dimen name="list_zoznam_udalosti_velkost_pisma_den">25sp</dimen>
     <dimen name="list_zoznam_udalosti_velkost_pisma_cas">20sp</dimen>

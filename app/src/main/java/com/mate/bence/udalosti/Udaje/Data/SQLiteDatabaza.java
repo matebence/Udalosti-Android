@@ -12,7 +12,7 @@ import com.mate.bence.udalosti.Udaje.Data.Tabulky.Pouzivatel;
 
 import java.util.HashMap;
 
-public class SQLiteDatabaza extends SQLiteOpenHelper {
+public class SQLiteDatabaza extends SQLiteOpenHelper implements SQLDateImplementacia{
 
     private static final int VERZIA_DATABAZY = 1;
     private static final String NAZOV_DATABAZY = "udalosti";
