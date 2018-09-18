@@ -13,7 +13,7 @@ import retrofit2.http.POST;
 public interface Requesty {
 
     @FormUrlEncoded
-    @POST("udalosti/index.php/prihlasenie")
+    @POST("udalosti/index.php/prihlasenie/prihlasit_sa")
     Call<Autentifikator> prihlasenie(
             @Field("email") String email,
             @Field("heslo") String heslo,

@@ -40,7 +40,7 @@ public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostH
         return new UdalostHolder(obsah);
     }
 
-    @SuppressLint("ResourceAsColor")
+    @SuppressLint({"ResourceAsColor", "SetTextI18n"})
     @Override
     public void onBindViewHolder(@NonNull UdalostHolder holder, int position) {
         Udalost udalost = zoznamUdalosti.get(position);
@@ -50,7 +50,7 @@ public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostH
         holder.nazovUdalosti.setText(udalost.getNazov());
         holder.idUdalosti.setText(udalost.getIdUdalost());
         holder.denUdalosti.setText(udalost.getDen());
-        holder.mesiacUdalosti.setText(udalost.getMesiac());
+        holder.mesiacUdalosti.setText(udalost.getMesiac().substring(0,4)+".");
         holder.casUdalosti.setText(udalost.getCas());
         holder.mestoUdalosti.setText(udalost.getMesto());
         holder.miestoUdalosti.setText(udalost.getMiesto());

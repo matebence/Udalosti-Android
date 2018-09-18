@@ -12,6 +12,7 @@ import com.mate.bence.udalosti.Udaje.Siet.Model.KommunikaciaOdpoved;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 public class Odhlasenie extends Service implements KommunikaciaOdpoved, KommunikaciaData {
 
@@ -38,7 +39,13 @@ public class Odhlasenie extends Service implements KommunikaciaOdpoved, Kommunik
     public void onTaskRemoved(Intent rootIntent) {
         UdalostiUdaje udalostiUdaje = new UdalostiUdaje(this, this, getApplicationContext());
         udalostiUdaje.odhlasenie(email);
-        stopSelf();
+
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            Log.v(TAG, "Pri odhlasovaní pomocou systému nastala chyba");
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -46,6 +53,7 @@ public class Odhlasenie extends Service implements KommunikaciaOdpoved, Kommunik
         switch (od) {
             case Nastavenia.AUTENTIFIKACIA_ODHLASENIE:
                 if (odpoved.equals(Nastavenia.VSETKO_V_PORIADKU)) {
+                    stopSelf();
                     Log.v(TAG, "Systém odhlásil");
                 }
                 break;
