@@ -19,6 +19,7 @@
 
         <activity
             android:name=".Activity.UvodnaObrazovka.UvodnaObrazovka"
+            android:screenOrientation="portrait"
             tools:ignore="InnerclassSeparator">
 
             <intent-filter>
@@ -29,12 +30,15 @@
 
         <activity
             android:name=".Activity.RychlaUkazkaAplikacie.RychlaUkazkaAplikacie"
+            android:screenOrientation="portrait"
             tools:ignore="InnerclassSeparator" />
         <activity
             android:name=".Activity.Autentifikacia.Autentifikacia"
+            android:screenOrientation="portrait"
             tools:ignore="InnerclassSeparator" />
         <activity
             android:name=".Activity.Udalosti.Udalosti"
+            android:screenOrientation="portrait"
             tools:ignore="InnerclassSeparator" />
 
         <service
