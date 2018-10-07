@@ -4,51 +4,66 @@ import com.google.gson.annotations.SerializedName;
 
 public class Pozicia {
 
+    @SerializedName("city_district")
+    private String pozicia;
+
+    @SerializedName("city")
+    private String okres;
+
+    @SerializedName("state")
+    private String kraj;
+
+    @SerializedName("postcode")
+    private String psc;
+
     @SerializedName("country")
     private String stat;
 
-    @SerializedName("regionName")
-    private String okres;
+    @SerializedName("country_code")
+    private String znakStatu;
 
-    @SerializedName("city")
-    private String mesto;
-
-    public Pozicia(String stat, String okres, String mesto) {
-        this.stat = stat;
+    public Pozicia(String pozicia, String okres, String kraj, String psc, String stat, String znakStatu) {
+        this.pozicia = pozicia;
         this.okres = okres;
-        this.mesto = mesto;
-    }
-
-    public String getStat() {
-        return stat;
-    }
-
-    public void setStat(String stat) {
+        this.kraj = kraj;
+        this.psc = psc;
         this.stat = stat;
+        this.znakStatu = znakStatu;
+    }
+
+    public String getPozicia() {
+        return pozicia;
     }
 
     public String getOkres() {
         return okres;
     }
 
-    public void setOkres(String okres) {
-        this.okres = okres;
+    public String getKraj() {
+        return kraj;
     }
 
-    public String getMesto() {
-        return mesto;
+    public String getPsc() {
+        return psc;
     }
 
-    public void setMesto(String mesto) {
-        this.mesto = mesto;
+    public String getStat() {
+        return stat;
+    }
+
+    public String getZnakStatu() {
+        return znakStatu;
     }
 
     @Override
     public String toString() {
         return "Pozicia{" +
-                "stat='" + stat + '\'' +
+                "pozicia='" + pozicia + '\'' +
                 ", okres='" + okres + '\'' +
-                ", mesto='" + mesto + '\'' +
+                ", kraj='" + kraj + '\'' +
+                ", psc='" + psc + '\'' +
+                ", stat='" + stat + '\'' +
+                ", znakStatu='" + znakStatu + '\'' +
                 '}';
     }
 }

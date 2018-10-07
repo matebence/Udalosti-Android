@@ -1,22 +1,29 @@
 package com.mate.bence.udalosti.Udaje.Data.Tabulky;
 
 public class Miesto {
-    private String stat;
+
+    private String pozicia;
     private String okres;
-    private String mesto;
+    private String kraj;
+    private String psc;
+    private String stat;
+    private String znakStatu;
 
-    public Miesto(String stat, String okres, String mesto) {
-        this.stat = stat;
+    public Miesto(String pozicia, String okres, String kraj, String psc, String stat, String znakStatu) {
+        this.pozicia = pozicia;
         this.okres = okres;
-        this.mesto = mesto;
-    }
-
-    public String getStat() {
-        return stat;
-    }
-
-    public void setStat(String stat) {
+        this.kraj = kraj;
+        this.psc = psc;
         this.stat = stat;
+        this.znakStatu = znakStatu;
+    }
+
+    public String getPozicia() {
+        return pozicia;
+    }
+
+    public void setPozicia(String pozicia) {
+        this.pozicia = pozicia;
     }
 
     public String getOkres() {
@@ -27,20 +34,47 @@ public class Miesto {
         this.okres = okres;
     }
 
-    public String getMesto() {
-        return mesto;
+    public String getKraj() {
+        return kraj;
     }
 
-    public void setMesto(String mesto) {
-        this.mesto = mesto;
+    public void setKraj(String kraj) {
+        this.kraj = kraj;
+    }
+
+    public String getPsc() {
+        return psc;
+    }
+
+    public void setPsc(String psc) {
+        this.psc = psc;
+    }
+
+    public String getStat() {
+        return stat;
+    }
+
+    public void setStat(String stat) {
+        this.stat = stat;
+    }
+
+    public String getZnakStatu() {
+        return znakStatu;
+    }
+
+    public void setZnakStatu(String znakStatu) {
+        this.znakStatu = znakStatu;
     }
 
     @Override
     public String toString() {
         return "Miesto{" +
-                "stat='" + stat + '\'' +
+                "pozicia='" + pozicia + '\'' +
                 ", okres='" + okres + '\'' +
-                ", mesto='" + mesto + '\'' +
+                ", kraj='" + kraj + '\'' +
+                ", psc='" + psc + '\'' +
+                ", stat='" + stat + '\'' +
+                ", znakStatu='" + znakStatu + '\'' +
                 '}';
     }
 }

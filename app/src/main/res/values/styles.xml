@@ -17,6 +17,21 @@
         <item name="android:textAllCaps">false</item>
     </style>
 
+    <style name="NastaveniaGPS" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:textColorPrimary">@color/dialog_text</item>
+        <item name="android:textColor">@color/dialog_titul</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/nastaveniaNegativTlacidlo</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/nastaveniaPozitivTlacidlo</item>
+    </style>
+
+    <style name="nastaveniaNegativTlacidlo" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/dialog_text</item>
+    </style>
+
+    <style name="nastaveniaPozitivTlacidlo" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/dialog_zavorit</item>
+    </style>
+
     <style name="Nacitavanie">
         <item name="colorAccent">@color/nacitavanie_progressbar</item>
     </style>

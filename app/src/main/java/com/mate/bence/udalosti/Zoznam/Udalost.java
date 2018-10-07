@@ -8,17 +8,17 @@ public class Udalost {
     private String mesiac;
     private String nazov;
     private String mesto;
-    private String miesto;
+    private String ulica;
     private String cas;
 
-    public Udalost(String idUdalost, String obrazok, String den, String mesiac, String nazov, String mesto, String miesto, String cas) {
+    public Udalost(String idUdalost, String obrazok, String den, String mesiac, String nazov, String mesto, String ulica, String cas) {
         this.idUdalost = idUdalost;
         this.obrazok = obrazok;
         this.den = den;
         this.mesiac = mesiac;
         this.nazov = nazov;
         this.mesto = mesto;
-        this.miesto = miesto;
+        this.ulica = ulica;
         this.cas = cas;
     }
 
@@ -70,12 +70,12 @@ public class Udalost {
         this.mesto = mesto;
     }
 
-    public String getMiesto() {
-        return miesto;
+    public String getUlica() {
+        return ulica;
     }
 
-    public void setMiesto(String miesto) {
-        this.miesto = miesto;
+    public void setUlica(String ulica) {
+        this.ulica = ulica;
     }
 
     public String getCas() {
@@ -95,7 +95,7 @@ public class Udalost {
                 ", mesiac='" + mesiac + '\'' +
                 ", nazov='" + nazov + '\'' +
                 ", mesto='" + mesto + '\'' +
-                ", miesto='" + miesto + '\'' +
+                ", ulica='" + ulica + '\'' +
                 ", cas='" + cas + '\'' +
                 '}';
     }

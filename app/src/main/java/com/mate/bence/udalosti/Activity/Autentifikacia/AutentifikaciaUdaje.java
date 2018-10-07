@@ -12,6 +12,7 @@ import com.mate.bence.udalosti.Udaje.Nastavenia.Nastavenia;
 import com.mate.bence.udalosti.Udaje.Siet.GeoAdresa;
 import com.mate.bence.udalosti.Udaje.Siet.Model.Autentifikator.Autentifikator;
 import com.mate.bence.udalosti.Udaje.Siet.Model.KommunikaciaOdpoved;
+import com.mate.bence.udalosti.Udaje.Siet.Model.Pozicia.LocationIQ;
 import com.mate.bence.udalosti.Udaje.Siet.Model.Pozicia.Pozicia;
 import com.mate.bence.udalosti.Udaje.Siet.Requesty;
 import com.mate.bence.udalosti.Udaje.Siet.UdalostiAdresa;
@@ -38,47 +39,56 @@ public class AutentifikaciaUdaje implements AutentifikaciaImplementacia {
     }
 
     @Override
-    public void miestoPrihlasenia(final String email, final String heslo) {
+    public void miestoPrihlasenia(final String email, final String heslo, final double zemepisnaSirka, final double zemepisnaDlzka) {
         Log.v(TAG, "Metoda miestoPrihlasenia bola vykonana");
 
         Requesty requesty = GeoAdresa.initAdresu();
-        requesty.pozicia().enqueue(new Callback<Pozicia>() {
+        requesty.pozicia(Nastavenia.POZICIA_TOKEN, zemepisnaSirka,zemepisnaDlzka,Nastavenia.POZICIA_FORMAT, Nastavenia.POZICIA_JAZYK).enqueue(new Callback<LocationIQ>() {
 
             @Override
-            public void onResponse(@NonNull Call<Pozicia> call, @NonNull Response<Pozicia> response) {
+            public void onResponse(@NonNull Call<LocationIQ> call, @NonNull Response<LocationIQ> response) {
                 GeoAdresa.initNanovo();
-                String stat, okres, mesto;
-                stat = okres = mesto = "";
+                String pozicia, okres, kraj, psc, stat, znakStatu;
+                pozicia = okres = kraj = psc = stat = znakStatu = "";
 
                 if (response.body() != null) {
-                    if (response.body().getStat() != null) {
-                        stat = response.body().getStat();
+                    if (response.body().getPozicia().getPozicia() != null) {
+                        pozicia = response.body().getPozicia().getPozicia();
                     }
-                    if (response.body().getOkres() != null) {
-                        okres = response.body().getOkres();
+                    if (response.body().getPozicia().getOkres() != null) {
+                        okres = response.body().getPozicia().getOkres();
                     }
-                    if (response.body().getMesto() != null) {
-                        mesto = response.body().getMesto();
+                    if (response.body().getPozicia().getKraj() != null) {
+                        kraj = response.body().getPozicia().getKraj();
+                    }
+                    if (response.body().getPozicia().getPsc() != null) {
+                        psc = response.body().getPozicia().getPsc();
+                    }
+                    if (response.body().getPozicia().getStat() != null) {
+                        stat = response.body().getPozicia().getStat();
+                    }
+                    if (response.body().getPozicia().getZnakStatu() != null) {
+                        znakStatu = response.body().getPozicia().getZnakStatu();
                     }
 
                     if (databaza.miestoPrihlasenia()) {
-                        databaza.aktualizujMiestoPrihlasenia(new Miesto(stat, okres, mesto));
+                        databaza.aktualizujMiestoPrihlasenia(new Miesto(pozicia, okres, kraj, psc, stat, znakStatu));
                     } else {
-                        databaza.noveMiestoPrihlasenia(new Miesto(stat, okres, mesto));
+                        databaza.noveMiestoPrihlasenia(new Miesto(pozicia, okres, kraj, psc, stat, znakStatu));
                     }
                 }
-                prihlasenie(email, heslo, stat, okres, mesto);
+                prihlasenie(email, heslo);
             }
 
             @Override
-            public void onFailure(@NonNull Call<Pozicia> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<LocationIQ> call, @NonNull Throwable t) {
                 odpovedeOdServera.odpovedServera(context.getString(R.string.chyba_servera), Nastavenia.AUTENTIFIKACIA_PRIHLASENIE, null);
             }
         });
     }
 
     @Override
-    public void prihlasenie(final String email, final String heslo, String stat, String okres, String mesto) {
+    public void prihlasenie(final String email, final String heslo) {
         Log.v(TAG, "Metoda prihlasenie bola vykonana");
 
         Requesty requesty = UdalostiAdresa.initAdresu();

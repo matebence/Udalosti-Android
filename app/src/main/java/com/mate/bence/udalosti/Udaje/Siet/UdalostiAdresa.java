@@ -4,7 +4,7 @@ public class UdalostiAdresa {
     private UdalostiAdresa() {
     }
 
-    private static final String ADRESA = "https://bmate18.student.ki.fpv.ukf.sk/";
+    private static final String ADRESA = " http://192.168.55.148/";
 
     public static Requesty initAdresu() {
         return HTTPRequest.posliRequest(ADRESA).create(Requesty.class);

@@ -1,11 +1,23 @@
 package com.mate.bence.udalosti.Activity.Autentifikacia;
 
+import android.Manifest;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -21,11 +33,16 @@ import com.mate.bence.udalosti.Udaje.Siet.Model.KommunikaciaOdpoved;
 
 import java.util.HashMap;
 
-public class Autentifikacia extends AppCompatActivity implements AutentifikaciaOvladanie, KommunikaciaOdpoved {
+public class Autentifikacia extends AppCompatActivity implements AutentifikaciaOvladanie, KommunikaciaOdpoved, LocationListener {
+
+    private final int REQUEST_CODE_GPS = 101;
+    private String email, heslo;
 
     private FragmentManager fragmentManager;
-    private AutentifikaciaUdaje autentifikaciaUdaje;
     private LinearLayout nacitavanie;
+
+    private LocationManager managerPozicie;
+    private AutentifikaciaUdaje autentifikaciaUdaje;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +50,7 @@ public class Autentifikacia extends AppCompatActivity implements AutentifikaciaO
         setContentView(R.layout.activity_autentifikacia);
 
         this.fragmentManager = getFragmentManager();
+        this.managerPozicie = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         this.autentifikaciaUdaje = new AutentifikaciaUdaje(this, getApplicationContext());
         this.nacitavanie = findViewById(R.id.nacitavanie);
 
@@ -91,8 +109,33 @@ public class Autentifikacia extends AppCompatActivity implements AutentifikaciaO
     @Override
     public void tlacidloPrihlasitSa(String email, String heslo) {
         if (Pripojenie.pripojenieExistuje(this)) {
-            this.nacitavanie.setVisibility(View.VISIBLE);
-            autentifikaciaUdaje.miestoPrihlasenia(email, heslo);
+            if(!(managerPozicie.isProviderEnabled(LocationManager.GPS_PROVIDER))){
+
+                AlertDialog.Builder nastavenieGPS = new AlertDialog.Builder(this, R.style.NastaveniaGPS);
+                nastavenieGPS.setTitle(getString(R.string.udalosti_gps_titul));
+                nastavenieGPS.setMessage(getString(R.string.udalosti_gps_text));
+
+                nastavenieGPS.setPositiveButton(getString(R.string.udalosti_gps_tlacidlo_ano), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int which) {
+                        Intent nastavenia = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        startActivity(nastavenia);
+                    }
+                });
+
+                nastavenieGPS.setNegativeButton(getString(R.string.udalosti_gps_tlacidlo_nie), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                nastavenieGPS.show();
+            }else{
+                this.nacitavanie.setVisibility(View.VISIBLE);
+                this.email = email;
+                this.heslo = heslo;
+
+                zistiPoziciu();
+            }
         } else {
             new DialogOznameni(this, "Chyba", getString(R.string.chyba_ziadne_spojenie));
         }
@@ -123,6 +166,40 @@ public class Autentifikacia extends AppCompatActivity implements AutentifikaciaO
         fragmentTransaction.commit();
     }
 
+    @Override
+    public void onLocationChanged(Location location) {
+        this.autentifikaciaUdaje.miestoPrihlasenia(email, heslo, location.getLatitude(), location.getLongitude());
+        this.managerPozicie.removeUpdates(this);
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch (requestCode) {
+            case REQUEST_CODE_GPS: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    zistiPoziciu();
+                } else {
+                    this.nacitavanie.setVisibility(View.INVISIBLE);
+                    new DialogOznameni(this, "Chyba", getString(R.string.udalosti_gps_pristup));
+                }
+            }
+        }
+    }
+
     private void animujObsah(String fragment, FragmentTransaction fragmentTransaction) {
         switch (fragment) {
             case Nastavenia.AUTENTIFIKACIA_REGISTRACIA:
@@ -131,6 +208,14 @@ public class Autentifikacia extends AppCompatActivity implements AutentifikaciaO
             default:
                 fragmentTransaction.setCustomAnimations(R.animator.zviditelnit, 0, 0, 0);
                 break;
+        }
+    }
+
+    public void zistiPoziciu() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_CODE_GPS);
+        } else {
+            managerPozicie.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
         }
     }
 

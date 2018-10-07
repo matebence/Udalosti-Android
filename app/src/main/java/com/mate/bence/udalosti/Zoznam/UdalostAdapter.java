@@ -53,7 +53,7 @@ public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostH
         holder.mesiacUdalosti.setText(udalost.getMesiac().substring(0,4)+".");
         holder.casUdalosti.setText(udalost.getCas());
         holder.mestoUdalosti.setText(udalost.getMesto());
-        holder.miestoUdalosti.setText(udalost.getMiesto());
+        holder.miestoUdalosti.setText(udalost.getUlica());
 
         nacitajObsah(holder.udalost);
     }

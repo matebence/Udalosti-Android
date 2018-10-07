@@ -14,4 +14,8 @@ public class Nastavenia {
 
     public static final String UDALOSTI_OBJAVUJ = "objavuj";
     public static final String UDALOSTI_PODLA_POZICIE = "podla_pozicie";
+
+    public static final String POZICIA_TOKEN = "097c58e2ea9355";
+    public static final String POZICIA_FORMAT = "json";
+    public static final String POZICIA_JAZYK = "sk";
 }

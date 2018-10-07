@@ -34,9 +34,12 @@ public class SQLiteDatabaza extends SQLiteOpenHelper implements SQLDateImplement
                 "CREATE TABLE " +
                         SQLiteTabulky.Miesto.NAZOV_TABULKY +
                         "(" + SQLiteTabulky.Miesto.ID_STLPCA + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        SQLiteTabulky.Miesto.STAT + "  VARCHAR(30)," +
+                        SQLiteTabulky.Miesto.POZICIA + "  VARCHAR(30)," +
                         SQLiteTabulky.Miesto.OKRES + "  VARCHAR(30)," +
-                        SQLiteTabulky.Miesto.MESTO + "  VARCHAR(30)" + ")";
+                        SQLiteTabulky.Miesto.KRAJ + "  VARCHAR(30)," +
+                        SQLiteTabulky.Miesto.PSC + "  VARCHAR(10)," +
+                        SQLiteTabulky.Miesto.STAT + "  VARCHAR(30)," +
+                        SQLiteTabulky.Miesto.ZNAK_STATU + "  VARCHAR(10)" + ")";
 
         sqLiteDatabase.execSQL(VYTVOR_TABULKU_POUZIVATEL);
         sqLiteDatabase.execSQL(VYTVOR_TABULKU_MIESTO);
@@ -123,20 +126,26 @@ public class SQLiteDatabaza extends SQLiteOpenHelper implements SQLDateImplement
 
     public void noveMiestoPrihlasenia(Miesto miesto) {
         ContentValues data = new ContentValues();
-        data.put(SQLiteTabulky.Miesto.STAT, miesto.getStat());
+        data.put(SQLiteTabulky.Miesto.POZICIA, miesto.getPozicia());
         data.put(SQLiteTabulky.Miesto.OKRES, miesto.getOkres());
-        data.put(SQLiteTabulky.Miesto.MESTO, miesto.getMesto());
+        data.put(SQLiteTabulky.Miesto.KRAJ, miesto.getKraj());
+        data.put(SQLiteTabulky.Miesto.PSC, miesto.getPsc());
+        data.put(SQLiteTabulky.Miesto.STAT, miesto.getStat());
+        data.put(SQLiteTabulky.Miesto.ZNAK_STATU, miesto.getZnakStatu());
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         sqLiteDatabase.insert(SQLiteTabulky.Miesto.NAZOV_TABULKY, null, data);
         sqLiteDatabase.close();
     }
 
     public void aktualizujMiestoPrihlasenia(Miesto miesto) {
-        int idMiesto = 0;
+        int idMiesto = 1;
         ContentValues data = new ContentValues();
-        data.put(SQLiteTabulky.Miesto.STAT, miesto.getStat());
+        data.put(SQLiteTabulky.Miesto.POZICIA, miesto.getPozicia());
         data.put(SQLiteTabulky.Miesto.OKRES, miesto.getOkres());
-        data.put(SQLiteTabulky.Miesto.MESTO, miesto.getMesto());
+        data.put(SQLiteTabulky.Miesto.KRAJ, miesto.getKraj());
+        data.put(SQLiteTabulky.Miesto.PSC, miesto.getPsc());
+        data.put(SQLiteTabulky.Miesto.STAT, miesto.getStat());
+        data.put(SQLiteTabulky.Miesto.ZNAK_STATU, miesto.getZnakStatu());
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         sqLiteDatabase.update(
                 SQLiteTabulky.Miesto.NAZOV_TABULKY,
@@ -167,8 +176,9 @@ public class SQLiteDatabaza extends SQLiteOpenHelper implements SQLDateImplement
     public HashMap<String, String> vratMiestoPrihlasenia() {
         HashMap<String, String> miestoPrihlasenia;
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        String[] stlpce = {SQLiteTabulky.Miesto.STAT, SQLiteTabulky.Miesto.OKRES,
-                SQLiteTabulky.Miesto.MESTO};
+        String[] stlpce = {SQLiteTabulky.Miesto.POZICIA, SQLiteTabulky.Miesto.OKRES,
+                SQLiteTabulky.Miesto.KRAJ, SQLiteTabulky.Miesto.PSC,
+                SQLiteTabulky.Miesto.STAT, SQLiteTabulky.Miesto.ZNAK_STATU};
         @SuppressLint("Recycle")
         Cursor data = sqLiteDatabase.query(
                 SQLiteTabulky.Miesto.NAZOV_TABULKY,
@@ -180,9 +190,12 @@ public class SQLiteDatabaza extends SQLiteOpenHelper implements SQLDateImplement
                 null);
         if (data.moveToFirst()) {
             miestoPrihlasenia = new HashMap<>();
-            miestoPrihlasenia.put("stat", data.getString(data.getColumnIndex(SQLiteTabulky.Miesto.STAT)));
+            miestoPrihlasenia.put("pozicia", data.getString(data.getColumnIndex(SQLiteTabulky.Miesto.POZICIA)));
             miestoPrihlasenia.put("okres", data.getString(data.getColumnIndex(SQLiteTabulky.Miesto.OKRES)));
-            miestoPrihlasenia.put("mesto", data.getString(data.getColumnIndex(SQLiteTabulky.Miesto.MESTO)));
+            miestoPrihlasenia.put("kraj", data.getString(data.getColumnIndex(SQLiteTabulky.Miesto.KRAJ)));
+            miestoPrihlasenia.put("psc", data.getString(data.getColumnIndex(SQLiteTabulky.Miesto.PSC)));
+            miestoPrihlasenia.put("stat", data.getString(data.getColumnIndex(SQLiteTabulky.Miesto.STAT)));
+            miestoPrihlasenia.put("znakStatu", data.getString(data.getColumnIndex(SQLiteTabulky.Miesto.ZNAK_STATU)));
             sqLiteDatabase.close();
             return miestoPrihlasenia;
         } else {

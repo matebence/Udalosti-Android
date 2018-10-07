@@ -4,7 +4,7 @@ public class GeoAdresa {
     private GeoAdresa() {
     }
 
-    private static final String ADRESA = "http://ip-api.com/";
+    private static final String ADRESA = "https://eu1.locationiq.com/v1/";
 
     public static Requesty initAdresu() {
         return HTTPRequest.posliRequest(ADRESA).create(Requesty.class);

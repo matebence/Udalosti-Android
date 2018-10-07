@@ -192,20 +192,30 @@ public class Udalosti extends AppCompatActivity implements KommunikaciaOdpoved, 
         viewPager.setAdapter(gestaKariet);
     }
 
+    private String nastavTitulKariet(String nazov){
+        String[] strArray = nazov.split(" ");
+        StringBuilder titul = new StringBuilder();
+        for (String s : strArray) {
+            String prvePismeno = s.substring(0, 1).toUpperCase() + s.substring(1);
+            titul.append(prvePismeno + " ");
+        }
+        return titul.toString();
+    }
+
     private TabLayout.OnTabSelectedListener zmenFarbuIkonov = new TabLayout.OnTabSelectedListener() {
         @Override
         public void onTabSelected(TabLayout.Tab tab) {
             switch (tab.getPosition()) {
                 case 0:
-                    titul.setText(miestoPrihlasenia.get("stat"));
+                    titul.setText(nastavTitulKariet(miestoPrihlasenia.get("stat")));
                     break;
                 case 1:
-                    if (miestoPrihlasenia.get("mesto") != null) {
-                        titul.setText(miestoPrihlasenia.get("mesto"));
+                    if (miestoPrihlasenia.get("pozicia") != null) {
+                        titul.setText(nastavTitulKariet(getApplicationContext().getString(R.string.udalosti_okolie)+" " + miestoPrihlasenia.get("pozicia")));
                     } else if (miestoPrihlasenia.get("okres") != null) {
-                        titul.setText(miestoPrihlasenia.get("okres"));
-                    } else if (miestoPrihlasenia.get("stat") != null) {
-                        titul.setText(miestoPrihlasenia.get("stat"));
+                        titul.setText(nastavTitulKariet(miestoPrihlasenia.get("okres")));
+                    } else if (miestoPrihlasenia.get("kraj") != null) {
+                        titul.setText(nastavTitulKariet(miestoPrihlasenia.get("kraj")));
                     }
                     break;
             }
