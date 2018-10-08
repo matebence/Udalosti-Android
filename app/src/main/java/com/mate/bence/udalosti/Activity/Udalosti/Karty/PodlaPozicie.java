@@ -110,10 +110,11 @@ public class PodlaPozicie extends Fragment implements KommunikaciaData, Kommunik
         @Override
         public void onRefresh() {
             obsahUdalostiPodlaPozicie.clear();
+            ziadneUdalostiPodlaPozcie.setVisibility(View.GONE);
             udalostAdapter.notifyItemRangeRemoved(0, obsahUdalostiPodlaPozicie.size());
 
             nacitavanie.setVisibility(View.VISIBLE);
-            udalostiUdaje.zoznamUdalosti(email, stat, token);
+            udalostiUdaje.zoznamUdalostiPodlaPozicie(email, stat, okres, mesto, token);
 
             aktualizujUdalosti.setRefreshing(false);
         }

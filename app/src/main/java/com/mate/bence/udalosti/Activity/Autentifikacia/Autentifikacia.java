@@ -49,13 +49,7 @@ public class Autentifikacia extends AppCompatActivity implements AutentifikaciaO
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_autentifikacia);
 
-        this.fragmentManager = getFragmentManager();
-        this.managerPozicie = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        this.autentifikaciaUdaje = new AutentifikaciaUdaje(this, getApplicationContext());
-        this.nacitavanie = findViewById(R.id.nacitavanie);
-
-        pridajFragment(new Prihlasenie(), Nastavenia.AUTENTIFIKACIA_PRIHLASENIE);
-        automatickePrihlasenieChyba();
+        init();
     }
 
     @Override
@@ -198,6 +192,16 @@ public class Autentifikacia extends AppCompatActivity implements AutentifikaciaO
                 }
             }
         }
+    }
+
+    private void init(){
+        this.fragmentManager = getFragmentManager();
+        this.managerPozicie = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        this.autentifikaciaUdaje = new AutentifikaciaUdaje(this, getApplicationContext());
+        this.nacitavanie = findViewById(R.id.nacitavanie);
+
+        pridajFragment(new Prihlasenie(), Nastavenia.AUTENTIFIKACIA_PRIHLASENIE);
+        automatickePrihlasenieChyba();
     }
 
     private void animujObsah(String fragment, FragmentTransaction fragmentTransaction) {

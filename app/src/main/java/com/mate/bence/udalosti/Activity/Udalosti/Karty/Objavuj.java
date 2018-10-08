@@ -107,6 +107,7 @@ public class Objavuj extends Fragment implements KommunikaciaData, KommunikaciaO
         @Override
         public void onRefresh() {
             obsahUdalosti.clear();
+            ziadneUdalosti.setVisibility(View.GONE);
             udalostAdapter.notifyItemRangeRemoved(0, obsahUdalosti.size());
 
             nacitavanie.setVisibility(View.VISIBLE);

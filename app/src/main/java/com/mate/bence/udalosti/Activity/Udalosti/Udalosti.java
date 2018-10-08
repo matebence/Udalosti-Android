@@ -134,12 +134,6 @@ public class Udalosti extends AppCompatActivity implements KommunikaciaOdpoved, 
         }
     }
 
-    private void spustiBezpecneOdhlasenie() {
-        Intent bezpecneOdhlasenie = new Intent(getApplicationContext(), Odhlasenie.class);
-        bezpecneOdhlasenie.putExtra("email", email);
-        startService(bezpecneOdhlasenie);
-    }
-
     public void init() {
         this.titul = findViewById(R.id.titulok);
         this.titul.setText(miestoPrihlasenia.get("stat"));
@@ -155,6 +149,12 @@ public class Udalosti extends AppCompatActivity implements KommunikaciaOdpoved, 
         karty.addOnTabSelectedListener(zmenFarbuIkonov);
 
         nastavIkonyKartov(karty);
+    }
+
+    private void spustiBezpecneOdhlasenie() {
+        Intent bezpecneOdhlasenie = new Intent(getApplicationContext(), Odhlasenie.class);
+        bezpecneOdhlasenie.putExtra("email", email);
+        startService(bezpecneOdhlasenie);
     }
 
     private void nastavToolbar(Toolbar toolBar) {
