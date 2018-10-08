@@ -3,6 +3,7 @@ package com.mate.bence.udalosti.Activity.Udalosti.Karty;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -27,6 +28,7 @@ import java.util.List;
 public class PodlaPozicie extends Fragment implements KommunikaciaData, KommunikaciaOdpoved {
 
     private List<Udalost> obsahUdalostiPodlaPozicie;
+    private SwipeRefreshLayout aktualizujUdalosti;
 
     private UdalostiUdaje udalostiUdaje;
     private UdalostAdapter udalostAdapter;
@@ -78,11 +80,6 @@ public class PodlaPozicie extends Fragment implements KommunikaciaData, Kommunik
     public void odpovedServera(String odpoved, String od, HashMap<String, String> udaje) {
     }
 
-    private void ziskajUdalosti(ArrayList<Udalost> udalosti) {
-        obsahUdalostiPodlaPozicie.addAll(udalosti);
-        udalostAdapter.notifyItemRangeInserted(obsahUdalostiPodlaPozicie.size() - 1, udalosti.size());
-    }
-
     private void init(View view) {
         this.email = getArguments().getString("email");
         this.token = getArguments().getString("token");
@@ -93,12 +90,34 @@ public class PodlaPozicie extends Fragment implements KommunikaciaData, Kommunik
         this.zoznamUdalostiPodlaPozcie = view.findViewById(R.id.zoznam_udalosti);
         this.ziadneUdalostiPodlaPozcie = view.findViewById(R.id.ziadne_udalosti);
         this.nacitavanie = view.findViewById(R.id.nacitavanie);
+        this.aktualizujUdalosti = view.findViewById(R.id.aktualizuj);
+
+        this.aktualizujUdalosti.setOnRefreshListener(noveUdalostiPodlaPozicie);
+        this.aktualizujUdalosti.setColorSchemeColors(getResources().getColor(R.color.nacitavanie_progressbar));
 
         this.obsahUdalostiPodlaPozicie = new ArrayList<>();
         nastavZoznamUdalosti(obsahUdalostiPodlaPozicie);
 
         this.udalostiUdaje = new UdalostiUdaje(this, this, getContext());
     }
+
+    private void ziskajUdalosti(ArrayList<Udalost> udalosti) {
+        obsahUdalostiPodlaPozicie.addAll(udalosti);
+        udalostAdapter.notifyItemRangeInserted(0, udalosti.size());
+    }
+
+    private SwipeRefreshLayout.OnRefreshListener noveUdalostiPodlaPozicie = new SwipeRefreshLayout.OnRefreshListener() {
+        @Override
+        public void onRefresh() {
+            obsahUdalostiPodlaPozicie.clear();
+            udalostAdapter.notifyItemRangeRemoved(0, obsahUdalostiPodlaPozicie.size());
+
+            nacitavanie.setVisibility(View.VISIBLE);
+            udalostiUdaje.zoznamUdalosti(email, stat, token);
+
+            aktualizujUdalosti.setRefreshing(false);
+        }
+    };
 
     private void nastavZoznamUdalosti(List<Udalost> udaje) {
         PoskitovelObsahu poskitovelObsahu = new PoskitovelObsahu(getContext());
