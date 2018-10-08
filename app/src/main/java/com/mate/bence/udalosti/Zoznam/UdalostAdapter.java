@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -45,7 +46,7 @@ public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostH
     public void onBindViewHolder(@NonNull UdalostHolder holder, int position) {
         Udalost udalost = zoznamUdalosti.get(position);
 
-        new ziskajObrazok(holder.obrazokUdalosti, context).execute(udalost.getObrazok());
+        new ziskajObrazok(holder.obrazokUdalosti, holder.nacitavenie, context).execute(udalost.getObrazok());
 
         holder.nazovUdalosti.setText(udalost.getNazov());
         holder.idUdalosti.setText(udalost.getIdUdalost());
@@ -73,6 +74,7 @@ public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostH
 
         private RelativeLayout udalost;
         private ImageView obrazokUdalosti;
+        private ProgressBar nacitavenie;
 
         private TextView idUdalosti;
         private TextView nazovUdalosti;
@@ -87,6 +89,7 @@ public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostH
 
             this.udalost = view.findViewById(R.id.udalosti_riadok);
             this.obrazokUdalosti = view.findViewById(R.id.udalosti_obrazok);
+            this.nacitavenie = view.findViewById(R.id.nacitavenieObrazka);
 
             this.idUdalosti = view.findViewById(R.id.id_udalost);
             this.nazovUdalosti = view.findViewById(R.id.udalosti_nazov);
@@ -100,12 +103,21 @@ public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostH
 
     @SuppressLint("StaticFieldLeak")
     private class ziskajObrazok extends AsyncTask<String, Void, Bitmap> {
+
         private ImageView obrazok;
+        private ProgressBar nacitavanie;
         private Context context;
 
-        ziskajObrazok(ImageView obrazok, Context context) {
+        ziskajObrazok(ImageView obrazok, ProgressBar nacitavanie, Context context) {
             this.obrazok = obrazok;
             this.context = context;
+            this.nacitavanie = nacitavanie;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            nacitavanie.setVisibility(View.VISIBLE);
         }
 
         protected Bitmap doInBackground(String... adresa) {
@@ -124,6 +136,7 @@ public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostH
         }
 
         protected void onPostExecute(Bitmap result) {
+            nacitavanie.setVisibility(View.GONE);
             obrazok.setImageBitmap(result);
         }
     }

@@ -193,7 +193,7 @@ public class Autentifikacia extends AppCompatActivity implements AutentifikaciaO
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     zistiPoziciu();
                 } else {
-                    this.nacitavanie.setVisibility(View.INVISIBLE);
+                    this.nacitavanie.setVisibility(View.GONE);
                     new DialogOznameni(this, "Chyba", getString(R.string.udalosti_gps_pristup));
                 }
             }

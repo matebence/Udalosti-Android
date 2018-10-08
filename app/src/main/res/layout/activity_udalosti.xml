@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/raleway_medium"
-            android:text="@string/activity_aplikacia_titul"
+            android:text="@string/nazov_aplikacie"
             android:textColor="@android:color/white"
             android:textSize="@dimen/activity_aplikacia_titul_velkost_pisma" />
     </android.support.v7.widget.Toolbar>

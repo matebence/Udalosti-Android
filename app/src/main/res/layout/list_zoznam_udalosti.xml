@@ -24,6 +24,17 @@
         android:contentDescription="@string/list_zoznam_udalosti_popis_illustracie"
         android:scaleType="centerCrop" />
 
+    <ProgressBar
+        android:id="@+id/nacitavenieObrazka"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/list_zoznam_udalosti_nacitavenie_obrazka_margin"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:theme="@style/Nacitavanie">
+    </ProgressBar>
+
     <LinearLayout
         android:id="@+id/udalosti_informacie"
         android:layout_width="match_parent"

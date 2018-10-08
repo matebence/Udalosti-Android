@@ -58,6 +58,7 @@
     <!-- Zoznam udalosti -->
     <dimen name="list_zoznam_udalosti_obsah_margin">20dp</dimen>
     <dimen name="list_zoznam_udalosti_vyska_obrazka">200dp</dimen>
+    <dimen name="list_zoznam_udalosti_nacitavenie_obrazka_margin">100dp</dimen>
     <dimen name="list_zoznam_udalosti_informacie_margin">10dp</dimen>
     <dimen name="list_zoznam_udalosti_velkost_ikoni_miesto">27dp</dimen>
     <dimen name="list_zoznam_udalosti_velkost_ikoni_cas">25dp</dimen>
