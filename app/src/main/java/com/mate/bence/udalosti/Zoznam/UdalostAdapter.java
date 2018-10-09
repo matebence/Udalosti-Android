@@ -27,6 +27,7 @@ import java.util.List;
 public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostHolder> {
 
     private List<Udalost> zoznamUdalosti;
+    private ZvolenaUdalost zvolenaUdalost;
     private Context context;
 
     public UdalostAdapter(List<Udalost> zoznamUdalosti, Context context) {
@@ -51,7 +52,7 @@ public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostH
         holder.nazovUdalosti.setText(udalost.getNazov());
         holder.idUdalosti.setText(udalost.getIdUdalost());
         holder.denUdalosti.setText(udalost.getDen());
-        holder.mesiacUdalosti.setText(udalost.getMesiac().substring(0,4)+".");
+        holder.mesiacUdalosti.setText(udalost.getMesiac().substring(0, 4) + ".");
         holder.casUdalosti.setText(udalost.getCas());
         holder.mestoUdalosti.setText(udalost.getMesto());
         holder.miestoUdalosti.setText(udalost.getUlica());
@@ -70,7 +71,11 @@ public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostH
         view.startAnimation(animacia);
     }
 
-    class UdalostHolder extends RecyclerView.ViewHolder {
+    public void zvolenaUdalost(ZvolenaUdalost zvolenaUdalost) {
+        this.zvolenaUdalost = zvolenaUdalost;
+    }
+
+    class UdalostHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private RelativeLayout udalost;
         private ImageView obrazokUdalosti;
@@ -86,6 +91,7 @@ public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostH
 
         private UdalostHolder(View view) {
             super(view);
+            view.setOnClickListener(this);
 
             this.udalost = view.findViewById(R.id.udalosti_riadok);
             this.obrazokUdalosti = view.findViewById(R.id.udalosti_obrazok);
@@ -98,6 +104,13 @@ public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostH
             this.mestoUdalosti = view.findViewById(R.id.udalosti_mesto);
             this.miestoUdalosti = view.findViewById(R.id.udalosti_miesto);
             this.casUdalosti = view.findViewById(R.id.udalosti_cas);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (zvolenaUdalost != null) {
+                zvolenaUdalost.podrobnostiUdalosti(view, getAdapterPosition());
+            }
         }
     }
 

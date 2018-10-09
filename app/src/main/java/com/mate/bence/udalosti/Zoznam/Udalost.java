@@ -4,22 +4,26 @@ public class Udalost {
 
     private String idUdalost;
     private String obrazok;
+    private String nazov;
     private String den;
     private String mesiac;
-    private String nazov;
+    private String cas;
     private String mesto;
     private String ulica;
-    private String cas;
+    private String vstupenka;
+    private String zaujemcovia;
 
-    public Udalost(String idUdalost, String obrazok, String den, String mesiac, String nazov, String mesto, String ulica, String cas) {
+    public Udalost(String idUdalost, String obrazok, String nazov, String den, String mesiac, String cas, String mesto, String ulica, String vstupenka, String zaujemcovia) {
         this.idUdalost = idUdalost;
         this.obrazok = obrazok;
+        this.nazov = nazov;
         this.den = den;
         this.mesiac = mesiac;
-        this.nazov = nazov;
+        this.cas = cas;
         this.mesto = mesto;
         this.ulica = ulica;
-        this.cas = cas;
+        this.vstupenka = vstupenka;
+        this.zaujemcovia = zaujemcovia;
     }
 
     public String getIdUdalost() {
@@ -38,6 +42,14 @@ public class Udalost {
         this.obrazok = obrazok;
     }
 
+    public String getNazov() {
+        return nazov;
+    }
+
+    public void setNazov(String nazov) {
+        this.nazov = nazov;
+    }
+
     public String getDen() {
         return den;
     }
@@ -54,12 +66,12 @@ public class Udalost {
         this.mesiac = mesiac;
     }
 
-    public String getNazov() {
-        return nazov;
+    public String getCas() {
+        return cas;
     }
 
-    public void setNazov(String nazov) {
-        this.nazov = nazov;
+    public void setCas(String cas) {
+        this.cas = cas;
     }
 
     public String getMesto() {
@@ -78,12 +90,20 @@ public class Udalost {
         this.ulica = ulica;
     }
 
-    public String getCas() {
-        return cas;
+    public String getVstupenka() {
+        return vstupenka;
     }
 
-    public void setCas(String cas) {
-        this.cas = cas;
+    public void setVstupenka(String vstupenka) {
+        this.vstupenka = vstupenka;
+    }
+
+    public String getZaujemcovia() {
+        return zaujemcovia;
+    }
+
+    public void setZaujemcovia(String zaujemcovia) {
+        this.zaujemcovia = zaujemcovia;
     }
 
     @Override
@@ -91,12 +111,14 @@ public class Udalost {
         return "Udalost{" +
                 "idUdalost='" + idUdalost + '\'' +
                 ", obrazok='" + obrazok + '\'' +
+                ", nazov='" + nazov + '\'' +
                 ", den='" + den + '\'' +
                 ", mesiac='" + mesiac + '\'' +
-                ", nazov='" + nazov + '\'' +
+                ", cas='" + cas + '\'' +
                 ", mesto='" + mesto + '\'' +
                 ", ulica='" + ulica + '\'' +
-                ", cas='" + cas + '\'' +
+                ", vstupenka='" + vstupenka + '\'' +
+                ", zaujemcovia='" + zaujemcovia + '\'' +
                 '}';
     }
 }

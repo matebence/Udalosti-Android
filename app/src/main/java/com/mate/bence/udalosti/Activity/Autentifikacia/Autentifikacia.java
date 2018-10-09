@@ -1,7 +1,6 @@
 package com.mate.bence.udalosti.Activity.Autentifikacia;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -207,7 +206,7 @@ public class Autentifikacia extends AppCompatActivity implements AutentifikaciaO
     private void animujObsah(String fragment, FragmentTransaction fragmentTransaction) {
         switch (fragment) {
             case Nastavenia.AUTENTIFIKACIA_REGISTRACIA:
-                fragmentTransaction.setCustomAnimations(R.animator.z_prava_do_lava, R.animator.vysunut_z_lava_do_prava, R.animator.vysunut_z_prava_do_lava, R.animator.z_lava_do_prava);
+                fragmentTransaction.setCustomAnimations(R.animator.vstupit_vychod_fragment_xml, R.animator.ukoncit_vchod_fragment, R.animator.vstupit_vchod_fragment, R.animator.ukoncit_vychod_fragment);
                 break;
             default:
                 fragmentTransaction.setCustomAnimations(R.animator.zviditelnit, 0, 0, 0);

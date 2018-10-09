@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.mate.bence.udalosti">
 
@@ -19,18 +17,16 @@
         android:supportsRtl="true"
         android:theme="@style/AplikaciaBezToolbaru"
         tools:ignore="GoogleAppIndexingWarning">
-
         <activity
             android:name=".Activity.UvodnaObrazovka.UvodnaObrazovka"
             android:screenOrientation="portrait"
             tools:ignore="InnerclassSeparator">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Activity.RychlaUkazkaAplikacie.RychlaUkazkaAplikacie"
             android:screenOrientation="portrait"
@@ -48,5 +44,8 @@
             android:name=".Nastroje.Odhlasenie"
             android:stopWithTask="false"
             tools:ignore="InnerclassSeparator" />
+
+        <activity android:name=".Activity.Udalosti.Podrobnosti.Podrobnosti"></activity>
     </application>
+
 </manifest>

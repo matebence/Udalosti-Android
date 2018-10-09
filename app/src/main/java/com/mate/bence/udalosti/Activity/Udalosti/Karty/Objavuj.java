@@ -1,5 +1,6 @@
 package com.mate.bence.udalosti.Activity.Udalosti.Karty;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
+import com.mate.bence.udalosti.Activity.Udalosti.Podrobnosti.Podrobnosti;
 import com.mate.bence.udalosti.Activity.Udalosti.UdalostiUdaje;
 import com.mate.bence.udalosti.R;
 import com.mate.bence.udalosti.Udaje.Nastavenia.Nastavenia;
@@ -20,12 +22,13 @@ import com.mate.bence.udalosti.Udaje.Siet.Model.KommunikaciaOdpoved;
 import com.mate.bence.udalosti.Zoznam.PoskitovelObsahu;
 import com.mate.bence.udalosti.Zoznam.Udalost;
 import com.mate.bence.udalosti.Zoznam.UdalostAdapter;
+import com.mate.bence.udalosti.Zoznam.ZvolenaUdalost;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Objavuj extends Fragment implements KommunikaciaData, KommunikaciaOdpoved {
+public class Objavuj extends Fragment implements KommunikaciaData, KommunikaciaOdpoved, ZvolenaUdalost {
 
     private List<Udalost> obsahUdalosti = new ArrayList<>();
     private SwipeRefreshLayout aktualizujUdalosti;
@@ -79,6 +82,26 @@ public class Objavuj extends Fragment implements KommunikaciaData, KommunikaciaO
     public void odpovedServera(String odpoved, String od, HashMap<String, String> udaje) {
     }
 
+    @Override
+    public void podrobnostiUdalosti(View view, int pozicia) {
+        Udalost udalost = obsahUdalosti.get(pozicia);
+        Intent zvolenaUdalost = new Intent(getActivity(), Podrobnosti.class);
+
+        zvolenaUdalost.putExtra("idUdalost", udalost.getIdUdalost());
+        zvolenaUdalost.putExtra("obrazok", udalost.getObrazok());
+        zvolenaUdalost.putExtra("nazov", udalost.getNazov());
+        zvolenaUdalost.putExtra("den", udalost.getDen());
+        zvolenaUdalost.putExtra("mesiac", udalost.getMesiac());
+        zvolenaUdalost.putExtra("cas", udalost.getCas());
+        zvolenaUdalost.putExtra("mesto", udalost.getMesto());
+        zvolenaUdalost.putExtra("ulica", udalost.getUlica());
+        zvolenaUdalost.putExtra("vstupenka", udalost.getVstupenka());
+        zvolenaUdalost.putExtra("zaujemcovia", udalost.getZaujemcovia());
+
+        startActivity(zvolenaUdalost);
+        getActivity().overridePendingTransition(R.anim.vstupit_vchod_activity, R.anim.vstupit_vychod_activity);
+    }
+
     private void init(View view) {
         this.email = getArguments().getString("email");
         this.stat = getArguments().getString("stat");
@@ -124,5 +147,6 @@ public class Objavuj extends Fragment implements KommunikaciaData, KommunikaciaO
         zoznamUdalosti.setLayoutManager(poskitovelObsahu);
         zoznamUdalosti.setItemAnimator(new DefaultItemAnimator());
         zoznamUdalosti.setAdapter(udalostAdapter);
+        udalostAdapter.zvolenaUdalost(this);
     }
 }
