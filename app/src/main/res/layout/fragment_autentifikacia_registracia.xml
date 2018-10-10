@@ -1,35 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+
     android:layout_weight="1"
-    android:fillViewport="true">
+
+    android:fillViewport="true"
+
+    tools:context=".Activity.Autentifikacia.Autentifikacia">
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+
             android:orientation="vertical"
+
             tools:ignore="UselessParent">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:gravity="center"
                 android:layout_marginBottom="@dimen/autentifikacia_titul_margin_bottom"
                 android:layout_marginTop="@dimen/autentifikacia_text_margin_top"
-                android:fontFamily="@font/raleway_regular"
-                android:gravity="center"
+
                 android:shadowColor="@android:color/black"
                 android:shadowDx="2"
                 android:shadowDy="2"
                 android:shadowRadius="3"
+
+                android:fontFamily="@font/raleway_regular"
                 android:text="@string/autentifikacia_registrovat"
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
@@ -39,9 +49,10 @@
                 android:layout_width="@dimen/autentifikacia_sirka_textu"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="@dimen/autentifikacia_text_margin_bottom"
-                android:fontFamily="@font/raleway_light"
                 android:gravity="center"
+                android:layout_marginBottom="@dimen/autentifikacia_text_margin_bottom"
+
+                android:fontFamily="@font/raleway_light"
                 android:text="@string/autentifikacia_registracia_text"
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
@@ -49,77 +60,92 @@
 
             <EditText
                 android:id="@+id/registracia_meno"
+
                 android:layout_width="@dimen/autentifikacia_sirka_vstupov"
                 android:layout_height="@dimen/autentifikacia_vyska_vstupov"
                 android:layout_gravity="center"
-                android:layout_marginBottom="@dimen/autentifikacia_oddelenie_vstupov"
-                android:background="@drawable/ic_edittext"
-                android:fontFamily="@font/raleway_light"
                 android:gravity="center"
-                android:hint="@string/pomoc_meno"
+                android:layout_marginBottom="@dimen/autentifikacia_oddelenie_vstupov"
+
+                android:background="@drawable/ac_edittext"
                 android:inputType="textPersonName"
+
+                android:fontFamily="@font/raleway_light"
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
                 android:textColorHint="@android:color/white"
-                android:textSize="@dimen/autentifikacia_velkost_pisma_vstupov" />
+                android:textSize="@dimen/autentifikacia_velkost_pisma_vstupov"
+                android:hint="@string/pomoc_meno"/>
 
             <EditText
                 android:id="@+id/registracia_email"
+
                 android:layout_width="@dimen/autentifikacia_sirka_vstupov"
                 android:layout_height="@dimen/autentifikacia_vyska_vstupov"
                 android:layout_gravity="center"
-                android:layout_marginBottom="@dimen/autentifikacia_oddelenie_vstupov"
-                android:background="@drawable/ic_edittext"
-                android:fontFamily="@font/raleway_light"
                 android:gravity="center"
-                android:hint="@string/pomoc_email"
+                android:layout_marginBottom="@dimen/autentifikacia_oddelenie_vstupov"
+
+                android:background="@drawable/ac_edittext"
                 android:inputType="textEmailAddress"
+
+                android:fontFamily="@font/raleway_light"
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
                 android:textColorHint="@android:color/white"
-                android:textSize="@dimen/autentifikacia_velkost_pisma_vstupov" />
+                android:textSize="@dimen/autentifikacia_velkost_pisma_vstupov"
+                android:hint="@string/pomoc_email"/>
 
             <EditText
                 android:id="@+id/registracia_heslo"
+
                 android:layout_width="@dimen/autentifikacia_sirka_vstupov"
                 android:layout_height="@dimen/autentifikacia_vyska_vstupov"
                 android:layout_gravity="center"
-                android:layout_marginBottom="@dimen/autentifikacia_oddelenie_vstupov"
-                android:background="@drawable/ic_edittext"
-                android:fontFamily="@font/raleway_light"
                 android:gravity="center"
-                android:hint="@string/pomoc_heslo"
+                android:layout_marginBottom="@dimen/autentifikacia_oddelenie_vstupov"
+
+                android:background="@drawable/ac_edittext"
                 android:inputType="textPassword"
+
+                android:fontFamily="@font/raleway_light"
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
                 android:textColorHint="@android:color/white"
-                android:textSize="@dimen/autentifikacia_velkost_pisma_vstupov" />
+                android:textSize="@dimen/autentifikacia_velkost_pisma_vstupov"
+                android:hint="@string/pomoc_heslo"/>
 
             <EditText
                 android:id="@+id/registracia_potvrd"
+
                 android:layout_width="@dimen/autentifikacia_sirka_vstupov"
                 android:layout_height="@dimen/autentifikacia_vyska_vstupov"
                 android:layout_gravity="center"
-                android:layout_marginBottom="@dimen/autentifikacia_oddelenie_vstupov"
-                android:background="@drawable/ic_edittext"
-                android:fontFamily="@font/raleway_light"
                 android:gravity="center"
-                android:hint="@string/pomoc_potvrdte_heslo"
+                android:layout_marginBottom="@dimen/autentifikacia_oddelenie_vstupov"
+
+                android:background="@drawable/ac_edittext"
                 android:inputType="textPassword"
+
+                android:fontFamily="@font/raleway_light"
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
                 android:textColorHint="@android:color/white"
-                android:textSize="@dimen/autentifikacia_velkost_pisma_vstupov" />
+                android:textSize="@dimen/autentifikacia_velkost_pisma_vstupov"
+                android:hint="@string/pomoc_potvrdte_heslo"/>
 
             <Button
                 android:id="@+id/posli_registraciu"
+
                 android:layout_width="@dimen/autentifikacia_sirka_vstupov"
                 android:layout_height="@dimen/autentifikacia_vyska_vstupov"
                 android:layout_gravity="center"
-                android:layout_marginBottom="@dimen/autentifikacia_oddelenie_vstupov"
-                android:background="@drawable/ic_tlacidlo_autentifikacia"
-                android:fontFamily="@font/raleway_regular"
                 android:gravity="center"
+                android:layout_marginBottom="@dimen/autentifikacia_oddelenie_vstupov"
+
+                android:background="@drawable/ac_tlacidlo_autentifikacia"
+
+                android:fontFamily="@font/raleway_regular"
                 android:text="@string/autentifikacia_registrovat"
                 android:textAlignment="center"
                 android:textAllCaps="false"

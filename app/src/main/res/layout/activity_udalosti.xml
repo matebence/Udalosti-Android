@@ -4,23 +4,31 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:orientation="vertical"
+
     tools:context=".Activity.Udalosti.Udalosti">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
+
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/toolbar"
+
+        android:background="@color/farba_sekundarna"
+
         app:popupTheme="@style/AppTheme.PopupOverlay">
 
         <TextView
             android:id="@+id/titulok"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+
             android:fontFamily="@font/raleway_medium"
             android:text="@string/nazov_aplikacie"
             android:textColor="@android:color/white"
@@ -29,16 +37,22 @@
 
     <android.support.v4.view.ViewPager
         android:id="@+id/udalosti_gesta"
+
         android:layout_width="match_parent"
         android:layout_height="0dp"
+
         android:layout_weight="1"
+
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <android.support.design.widget.TabLayout
         android:id="@+id/udalosti_karty"
+
         android:layout_width="match_parent"
         android:layout_height="@dimen/udalosti_vyska_tab_layoutu"
-        android:background="@color/toolbar"
+
+        android:background="@color/farba_sekundarna"
+
         app:tabGravity="fill"
         app:tabIndicatorColor="@android:color/transparent"
         app:tabMode="fixed"

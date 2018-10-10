@@ -13,7 +13,6 @@ import com.mate.bence.udalosti.Udaje.Siet.GeoAdresa;
 import com.mate.bence.udalosti.Udaje.Siet.Model.Autentifikator.Autentifikator;
 import com.mate.bence.udalosti.Udaje.Siet.Model.KommunikaciaOdpoved;
 import com.mate.bence.udalosti.Udaje.Siet.Model.Pozicia.LocationIQ;
-import com.mate.bence.udalosti.Udaje.Siet.Model.Pozicia.Pozicia;
 import com.mate.bence.udalosti.Udaje.Siet.Requesty;
 import com.mate.bence.udalosti.Udaje.Siet.UdalostiAdresa;
 

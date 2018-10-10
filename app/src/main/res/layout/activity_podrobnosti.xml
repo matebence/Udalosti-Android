@@ -3,35 +3,45 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+
     android:layout_weight="1"
+
     android:fillViewport="true"
+
     tools:context=".Activity.Udalosti.Podrobnosti.Podrobnosti">
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/obrazok_zvolenej_udalosti"
+
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="@dimen/podrobnosti_vyska_obrazka_aktualnej_udalosti"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
+
             android:adjustViewBounds="true"
-            android:contentDescription="Obrázok aktuálnej udalosti"
             android:scaleType="centerCrop"
-            android:src="@drawable/chyba_obrazka" />
+
+            android:src="@drawable/obrazok_nenajdeni"
+            android:contentDescription="@string/podrobnosti_popis_obrazka_aktualnej_udalosti"/>
 
         <LinearLayout
-            android:id="@+id/hlavicka"
+            android:id="@+id/hlavicka_zvolenej_udalosti"
+
             android:layout_width="wrap_content"
-            android:layout_height="70dp"
+            android:layout_height="@dimen/podrobnosti_vyska_hlavicky_aktualnej_udalosti"
             android:layout_below="@+id/obrazok_zvolenej_udalosti"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginBottom="@dimen/podrobnosti_top_bottom_margin_hlavicky"
+            android:layout_marginTop="@dimen/podrobnosti_top_bottom_margin_hlavicky"
+            android:layout_marginLeft="@dimen/podrobnosti_left_margin_hlavicky"
+            android:layout_marginStart="@dimen/podrobnosti_left_margin_hlavicky"
+
             android:orientation="horizontal">
 
             <RelativeLayout
@@ -44,186 +54,233 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
+
                     android:fontFamily="@font/raleway_bold"
-                    android:text="15"
-                    android:textColor="@color/udalosti_zoznam_datum"
-                    android:textSize="30sp" />
+                    android:textColor="@color/zoznam_datum"
+                    android:textSize="@dimen/podrobnosti_velkost_pisma_dna" />
 
                 <TextView
                     android:id="@+id/mesiac_zvolenej_udalosti"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/den_zvolenej_udalosti"
                     android:layout_centerHorizontal="true"
+
                     android:fontFamily="@font/raleway_regular"
-                    android:text="Sept."
                     android:textColor="@android:color/black"
-                    android:textSize="22sp" />
+                    android:textSize="@dimen/podrobnosti_velkost_pisma_mesiac" />
             </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="@dimen/podrobnosti_nazov_margin"
+                android:layout_marginStart="@dimen/podrobnosti_nazov_margin"
+
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/nazov_zvolenej_udalosti"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+
                     android:fontFamily="@font/raleway_regular"
-                    android:text="Triatlon"
                     android:textColor="@android:color/black"
-                    android:textSize="30sp" />
+                    android:textSize="@dimen/podrobnosti_velkost_pisma_nazov" />
 
                 <TextView
+                    android:id="@+id/miesto_zvolenej_udalosti"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+
                     android:fontFamily="@font/raleway_light"
-                    android:text="Bratislava, Karlova"
                     android:textColor="@android:color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/podrobnosti_velkost_pisma_miesto" />
             </LinearLayout>
         </LinearLayout>
 
         <View
             android:id="@+id/oddelovac"
+
             android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/hlavicka"
+            android:layout_height="@dimen/podrobnosti_oddelovac_vyska"
+            android:layout_below="@id/hlavicka_zvolenej_udalosti"
+
             android:background="#bababa" />
 
         <LinearLayout
             android:id="@+id/sekcia_pocet_zaujemcov_zvolenej_udalosti"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:layout_marginLeft="30dp"
             android:layout_below="@id/oddelovac"
+            android:layout_marginTop="@dimen/podrobnosti_sekcia_pocet_zaujemcov_margin_top"
+            android:layout_marginLeft="@dimen/podrobnosti_sekcia_pocet_zaujemcov_margin_left"
+            android:layout_marginStart="@dimen/podrobnosti_sekcia_pocet_zaujemcov_margin_left"
+
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="@dimen/podrobnosti_informacne_obrazky_sirka_vyska"
+                android:layout_height="@dimen/podrobnosti_informacne_obrazky_sirka_vyska"
                 android:layout_gravity="center"
-                android:tint="@color/toolbar"
-                android:src="@drawable/ic_ludia"/>
+
+                android:src="@drawable/ic_ludia"
+                android:tint="@color/farba_sekundarna"
+                android:contentDescription="@string/podrobnosti_popis_pocet_zaujemcov_aktualnej_udalosti" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="@dimen/podrobnosti_pocet_zaujemcov_margin"
+                android:layout_marginStart="@dimen/podrobnosti_pocet_zaujemcov_margin"
+
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+
                     android:fontFamily="@font/raleway_regular"
-                    android:text="Počet záujemcov"
+                    android:text="@string/podrobnosti_pocet_zaujemcov"
                     android:textColor="#bababa"
-                    android:textSize="18sp" />
+                    android:textSize="@dimen/podrobnosti_velkost_pisma_pocet_zaujemcov" />
+
                 <TextView
+                    android:id="@+id/pocet_zaujemcov_zvolenej_udalosti"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+
                     android:fontFamily="@font/raleway_light"
-                    android:text="578"
                     android:textColor="@android:color/black"
-                    android:textSize="18sp" />
+                    android:textSize="@dimen/podrobnosti_velkost_pisma_pocet_zaujemcov_udaj" />
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/sekcia_vstupenka_zvolenej_udalosti"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:layout_marginLeft="30dp"
             android:layout_below="@id/sekcia_pocet_zaujemcov_zvolenej_udalosti"
+            android:layout_marginTop="@dimen/podrobnosti_sekcia_vstupenka_margin_top"
+            android:layout_marginLeft="@dimen/podrobnosti_sekcia_vstupenka_margin_left"
+            android:layout_marginStart="@dimen/podrobnosti_sekcia_vstupenka_margin_left"
+
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="@dimen/podrobnosti_informacne_obrazky_sirka_vyska"
+                android:layout_height="@dimen/podrobnosti_informacne_obrazky_sirka_vyska"
                 android:layout_gravity="center"
-                android:tint="@color/toolbar"
-                android:src="@drawable/ic_peniaze"/>
+
+                android:src="@drawable/ic_peniaze"
+                android:tint="@color/farba_sekundarna"
+                android:contentDescription="@string/podrobnosti_popis_vstupenky_aktualnej_udalosti" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="@dimen/podrobnosti_vstupenka_margin"
+                android:layout_marginStart="@dimen/podrobnosti_vstupenka_margin"
+
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+
+                    android:text="@string/podrobnosti_vstupenka"
                     android:fontFamily="@font/raleway_regular"
-                    android:text="Vstupenka"
                     android:textColor="#bababa"
-                    android:textSize="18sp" />
+                    android:textSize="@dimen/podrobnosti_velkost_pisma_vstupenka" />
+
                 <TextView
+                    android:id="@+id/vstupenka_zvolenej_udalosti"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+
                     android:fontFamily="@font/raleway_light"
-                    android:text="5€"
                     android:textColor="@android:color/black"
-                    android:textSize="18sp" />
+                    android:textSize="@dimen/podrobnosti_velkost_pisma_vstupenka_udaj" />
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/sekcia_cas_zvolenej_udalosti"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:layout_marginLeft="30dp"
             android:layout_below="@id/sekcia_vstupenka_zvolenej_udalosti"
+            android:layout_marginTop="@dimen/podrobnosti_sekcia_cas_margin_top"
+            android:layout_marginLeft="@dimen/podrobnosti_sekcia_cas_margin_left"
+            android:layout_marginStart="@dimen/podrobnosti_sekcia_cas_margin_left"
+
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="@dimen/podrobnosti_informacne_obrazky_sirka_vyska"
+                android:layout_height="@dimen/podrobnosti_informacne_obrazky_sirka_vyska"
                 android:layout_gravity="center"
-                android:tint="@color/toolbar"
-                android:src="@drawable/ic_cas"/>
+
+                android:src="@drawable/ic_cas"
+                android:tint="@color/farba_sekundarna"
+                android:contentDescription="@string/podrobnosti_popis_casu_konania_aktualnej_udalosti" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="@dimen/podrobnosti_cas_margin"
+                android:layout_marginStart="@dimen/podrobnosti_cas_margin"
+
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+
+                    android:text="@string/podrobnosti_cas"
                     android:fontFamily="@font/raleway_regular"
-                    android:text="Čas"
                     android:textColor="#bababa"
-                    android:textSize="18sp" />
+                    android:textSize="@dimen/podrobnosti_velkost_pisma_cas" />
+
                 <TextView
+                    android:id="@+id/cas_zvolenej_udalosti"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+
                     android:fontFamily="@font/raleway_light"
-                    android:text="20:00"
                     android:textColor="@android:color/black"
-                    android:textSize="18sp" />
+                    android:textSize="@dimen/podrobnosti_velkost_pisma_cas_udaj" />
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/sekcia_tlacidlo_zvolenej_udalosti"
+
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:gravity="center_horizontal|bottom">
 
             <Button
+                android:id="@+id/tlacidlo_zvolenej_udalosti"
+
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="@color/toolbar"
+                android:layout_height="@dimen/podrobnosti_vyska_tlacidla"
+
+                android:background="@color/farba_sekundarna"
+
                 android:fontFamily="@font/raleway_regular"
-                android:text="Mám záujem"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
-                android:textSize="20sp" />
+                android:textSize="@dimen/podrobnosti_velkost_pisma_tlacidla" />
         </LinearLayout>
     </RelativeLayout>
 </ScrollView>

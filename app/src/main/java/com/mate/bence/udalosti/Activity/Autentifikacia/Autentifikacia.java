@@ -61,45 +61,6 @@ public class Autentifikacia extends AppCompatActivity implements AutentifikaciaO
     }
 
     @Override
-    public void odpovedServera(String odpoved, String od, HashMap<String, String> udaje) {
-        switch (od) {
-            case Nastavenia.AUTENTIFIKACIA_REGISTRACIA:
-                if (odpoved.equals(Nastavenia.VSETKO_V_PORIADKU)) {
-                    fragmentManager.popBackStackImmediate();
-
-                    Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), getString(R.string.autentifikacia_uspesna_registracia), Snackbar.LENGTH_SHORT);
-                    View pozadie = snackbar.getView();
-                    pozadie.setBackgroundColor(getResources().getColor(R.color.toolbar));
-                    snackbar.setActionTextColor(getResources().getColor(android.R.color.white));
-                    snackbar.show();
-                } else {
-                    new DialogOznameni(this, "Chyba", odpoved);
-                }
-                break;
-
-            case Nastavenia.AUTENTIFIKACIA_PRIHLASENIE:
-                if (odpoved.equals(Nastavenia.VSETKO_V_PORIADKU)) {
-                    autentifikaciaUdaje.ulozPrihlasovacieUdajeDoDatabazy(
-                            udaje.get("email"),
-                            udaje.get("heslo"));
-
-                    Intent uspesnePrihlasenie = new Intent(Autentifikacia.this, Udalosti.class);
-                    uspesnePrihlasenie.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    uspesnePrihlasenie.putExtra("email", udaje.get("email"));
-                    uspesnePrihlasenie.putExtra("heslo", udaje.get("heslo"));
-                    uspesnePrihlasenie.putExtra("token", udaje.get("token"));
-                    startActivity(uspesnePrihlasenie);
-                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                    finish();
-                } else {
-                    new DialogOznameni(this, "Chyba", odpoved);
-                }
-                break;
-        }
-        this.nacitavanie.setVisibility(View.GONE);
-    }
-
-    @Override
     public void tlacidloPrihlasitSa(String email, String heslo) {
         if (Pripojenie.pripojenieExistuje(this)) {
             if(!(managerPozicie.isProviderEnabled(LocationManager.GPS_PROVIDER))){
@@ -149,14 +110,43 @@ public class Autentifikacia extends AppCompatActivity implements AutentifikaciaO
         pridajFragment(new Registracia(), Nastavenia.AUTENTIFIKACIA_REGISTRACIA);
     }
 
-    private void pridajFragment(Fragment fragment, String nazov) {
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        animujObsah(nazov, fragmentTransaction);
-        fragmentTransaction.replace(R.id.prihlasenie_registracia_zabudnute_heslo, fragment);
-        if (!(nazov.equals(Nastavenia.AUTENTIFIKACIA_PRIHLASENIE))) {
-            fragmentTransaction.addToBackStack(nazov);
+    @Override
+    public void odpovedServera(String odpoved, String od, HashMap<String, String> udaje) {
+        switch (od) {
+            case Nastavenia.AUTENTIFIKACIA_REGISTRACIA:
+                if (odpoved.equals(Nastavenia.VSETKO_V_PORIADKU)) {
+                    fragmentManager.popBackStackImmediate();
+
+                    Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), getString(R.string.autentifikacia_uspesna_registracia), Snackbar.LENGTH_SHORT);
+                    View pozadie = snackbar.getView();
+                    pozadie.setBackgroundColor(getResources().getColor(R.color.farba_sekundarna));
+                    snackbar.setActionTextColor(getResources().getColor(android.R.color.white));
+                    snackbar.show();
+                } else {
+                    new DialogOznameni(this, "Chyba", odpoved);
+                }
+                break;
+
+            case Nastavenia.AUTENTIFIKACIA_PRIHLASENIE:
+                if (odpoved.equals(Nastavenia.VSETKO_V_PORIADKU)) {
+                    autentifikaciaUdaje.ulozPrihlasovacieUdajeDoDatabazy(
+                            udaje.get("email"),
+                            udaje.get("heslo"));
+
+                    Intent uspesnePrihlasenie = new Intent(Autentifikacia.this, Udalosti.class);
+                    uspesnePrihlasenie.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    uspesnePrihlasenie.putExtra("email", udaje.get("email"));
+                    uspesnePrihlasenie.putExtra("heslo", udaje.get("heslo"));
+                    uspesnePrihlasenie.putExtra("token", udaje.get("token"));
+                    startActivity(uspesnePrihlasenie);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                    finish();
+                } else {
+                    new DialogOznameni(this, "Chyba", odpoved);
+                }
+                break;
         }
-        fragmentTransaction.commit();
+        this.nacitavanie.setVisibility(View.GONE);
     }
 
     @Override
@@ -201,6 +191,16 @@ public class Autentifikacia extends AppCompatActivity implements AutentifikaciaO
 
         pridajFragment(new Prihlasenie(), Nastavenia.AUTENTIFIKACIA_PRIHLASENIE);
         automatickePrihlasenieChyba();
+    }
+
+    private void pridajFragment(Fragment fragment, String nazov) {
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        animujObsah(nazov, fragmentTransaction);
+        fragmentTransaction.replace(R.id.prihlasenie_registracia_zabudnute_heslo, fragment);
+        if (!(nazov.equals(Nastavenia.AUTENTIFIKACIA_PRIHLASENIE))) {
+            fragmentTransaction.addToBackStack(nazov);
+        }
+        fragmentTransaction.commit();
     }
 
     private void animujObsah(String fragment, FragmentTransaction fragmentTransaction) {

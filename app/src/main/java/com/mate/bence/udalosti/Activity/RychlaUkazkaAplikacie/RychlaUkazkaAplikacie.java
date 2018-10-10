@@ -51,6 +51,23 @@ public class RychlaUkazkaAplikacie extends AppCompatActivity implements View.OnC
         navigaciaObsahu.addOnPageChangeListener(zmenaObsahu);
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.preskocit:
+                Autentifikacia();
+                break;
+            case R.id.dalej:
+                int current = cast(+1);
+                if (current < obsah.length) {
+                    navigaciaObsahu.setCurrentItem(current);
+                } else {
+                    Autentifikacia();
+                }
+                break;
+        }
+    }
+
     private void init() {
         this.preskocit = findViewById(R.id.preskocit);
         preskocit.setOnClickListener(this);
@@ -103,23 +120,6 @@ public class RychlaUkazkaAplikacie extends AppCompatActivity implements View.OnC
         startActivity(new Intent(RychlaUkazkaAplikacie.this, Autentifikacia.class));
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         finish();
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.preskocit:
-                Autentifikacia();
-                break;
-            case R.id.dalej:
-                int current = cast(+1);
-                if (current < obsah.length) {
-                    navigaciaObsahu.setCurrentItem(current);
-                } else {
-                    Autentifikacia();
-                }
-                break;
-        }
     }
 
     ViewPager.OnPageChangeListener zmenaObsahu = new ViewPager.OnPageChangeListener() {

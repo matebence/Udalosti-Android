@@ -2,23 +2,31 @@
 
 <resources>
     <!--Aplikacia-->
-    <color name="statusbar">#00457c</color>
-    <color name="toolbar">#005ba6</color>
-    <color name="nacitavanie_progressbar">#0397d6</color>
-    <color name="nacitavanie">#70000000</color>
+    <color name="farba_primarna">#00457c</color>
+    <color name="farba_sekundarna">#005ba6</color>
+    <color name="nacitavanie">#0397d6</color>
+    <color name="nacitavanie_pozadie">#70000000</color>
+    <color name="autentifikacia">#0397d6</color>
+    <color name="chyba_pozadie">#b6b5b5</color>
 
-    <!--Dialog oznameni-->
-    <color name="dialog_titul">#404040</color>
-    <color name="dialog_text">#9a9a9a</color>
-    <color name="dialog_zavorit">#0397d6</color>
+    <!-- Udalost zoznam -->
+    <color name="zoznam_datum">#c33939</color>
+    <color name="zoznam_miesto">#005ba6</color>
+    <color name="zoznam_pozadie">#f2f2f2</color>
+    <color name="zoznam_hlavicka">#eaeaea</color>
 
     <!--Tab Layout-->
     <color name="tab_pozadie">#005ba6</color>
     <color name="tab_ikona_aktivna">#ffffff</color>
     <color name="tab_ikona_inaktivna">#b5cad8</color>
 
+    <!--Dialog oznameni-->
+    <color name="dialog_titul">#404040</color>
+    <color name="dialog_text">#9a9a9a</color>
+    <color name="dialog_zavorit">#0397d6</color>
+
     <!-- Uvodna obrazovka -->
-    <color name="uvodna_obrazovka_logo_text">#424242</color>
+    <color name="uvodna_obrazovka">#424242</color>
 
     <!--Rychla ukazka aplikacie-->
     <color name="pozadie_cast_prva">#084e7b</color>
@@ -44,16 +52,4 @@
         <item>@color/inaktivna_farba_cast_druha</item>
         <item>@color/inaktivna_farba_cast_tretia</item>
     </array>
-
-    <!-- Autentifikator -->
-    <color name="autentifikacia">#0397d6</color>
-
-    <!-- Udalosti -->
-    <color name="udalosti_chyba_informacia">#b6b5b5</color>
-
-    <!-- Udalost zoznam -->
-    <color name="udalosti_zoznam_datum">#c33939</color>
-    <color name="udalosti_zoznam_miesto">#005ba6</color>
-    <color name="udalosti_zoznam_pozadie">#f2f2f2</color>
-    <color name="udalosti_zoznam_hlavicka">#eaeaea</color>
 </resources>

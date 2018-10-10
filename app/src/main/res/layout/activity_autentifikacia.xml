@@ -3,31 +3,41 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:id="@+id/autentifikacia_pozadie"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:background="@drawable/pozadie"
+
     tools:context=".Activity.Autentifikacia.Autentifikacia">
 
     <FrameLayout
         android:id="@+id/prihlasenie_registracia_zabudnute_heslo"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </FrameLayout>
 
     <LinearLayout
         android:id="@+id/nacitavanie"
+
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_centerInParent="true"
-        android:background="@color/nacitavanie"
         android:gravity="center"
+
+        android:background="@color/nacitavanie_pozadie"
+
         android:orientation="vertical"
+
         android:visibility="gone">
 
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:theme="@style/Nacitavanie">
         </ProgressBar>
     </LinearLayout>

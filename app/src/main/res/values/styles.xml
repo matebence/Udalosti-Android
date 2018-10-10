@@ -4,12 +4,12 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="AplikaciaBezToolbaru" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimaryDark">@color/statusbar</item>
+        <item name="colorPrimaryDark">@color/farba_primarna</item>
     </style>
 
     <style name="AplikaciaToolbarom" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/toolbar</item>
-        <item name="colorPrimaryDark">@color/statusbar</item>
+        <item name="colorPrimary">@color/farba_sekundarna</item>
+        <item name="colorPrimaryDark">@color/farba_primarna</item>
     </style>
 
     <style name="UdalostiKarty" parent="Widget.Design.TabLayout">
@@ -34,6 +34,6 @@
     </style>
 
     <style name="Nacitavanie">
-        <item name="colorAccent">@color/nacitavanie_progressbar</item>
+        <item name="colorAccent">@color/nacitavanie</item>
     </style>
 </resources>

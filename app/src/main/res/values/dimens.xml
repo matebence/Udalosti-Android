@@ -70,4 +70,34 @@
     <dimen name="list_zoznam_udalosti_velkost_pisma_mesiac">20sp</dimen>
     <dimen name="list_zoznam_udalosti_velkost_pisma_den">25sp</dimen>
     <dimen name="list_zoznam_udalosti_velkost_pisma_cas">20sp</dimen>
+
+    <!-- Podrobnosti -->
+    <dimen name="podrobnosti_vyska_obrazka_aktualnej_udalosti">250dp</dimen>
+    <dimen name="podrobnosti_vyska_hlavicky_aktualnej_udalosti">70dp</dimen>
+    <dimen name="podrobnosti_top_bottom_margin_hlavicky">10dp</dimen>
+    <dimen name="podrobnosti_left_margin_hlavicky">30dp</dimen>
+    <dimen name="podrobnosti_nazov_margin">30dp</dimen>
+    <dimen name="podrobnosti_oddelovac_vyska">1dp</dimen>
+    <dimen name="podrobnosti_sekcia_pocet_zaujemcov_margin_top">18dp</dimen>
+    <dimen name="podrobnosti_sekcia_pocet_zaujemcov_margin_left">30dp</dimen>
+    <dimen name="podrobnosti_informacne_obrazky_sirka_vyska">30dp</dimen>
+    <dimen name="podrobnosti_pocet_zaujemcov_margin">20dp</dimen>
+    <dimen name="podrobnosti_sekcia_vstupenka_margin_top">18dp</dimen>
+    <dimen name="podrobnosti_sekcia_vstupenka_margin_left">30dp</dimen>
+    <dimen name="podrobnosti_vstupenka_margin">20dp</dimen>
+    <dimen name="podrobnosti_sekcia_cas_margin_top">18dp</dimen>
+    <dimen name="podrobnosti_sekcia_cas_margin_left">30dp</dimen>
+    <dimen name="podrobnosti_cas_margin">20dp</dimen>
+    <dimen name="podrobnosti_vyska_tlacidla">60dp</dimen>
+    <dimen name="podrobnosti_velkost_pisma_dna">30sp</dimen>
+    <dimen name="podrobnosti_velkost_pisma_mesiac">22sp</dimen>
+    <dimen name="podrobnosti_velkost_pisma_nazov">30sp</dimen>
+    <dimen name="podrobnosti_velkost_pisma_miesto">20sp</dimen>
+    <dimen name="podrobnosti_velkost_pisma_pocet_zaujemcov">18sp</dimen>
+    <dimen name="podrobnosti_velkost_pisma_pocet_zaujemcov_udaj">18sp</dimen>
+    <dimen name="podrobnosti_velkost_pisma_vstupenka">18sp</dimen>
+    <dimen name="podrobnosti_velkost_pisma_vstupenka_udaj">18sp</dimen>
+    <dimen name="podrobnosti_velkost_pisma_cas">18sp</dimen>
+    <dimen name="podrobnosti_velkost_pisma_cas_udaj">18sp</dimen>
+    <dimen name="podrobnosti_velkost_pisma_tlacidla">20sp</dimen>
 </resources>

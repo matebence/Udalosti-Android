@@ -3,22 +3,27 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".Activity.UvodnaObrazovka.UvodnaObrazovka">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/navigacia_obsahu"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
     <LinearLayout
         android:id="@+id/navigacia"
+
         android:layout_width="match_parent"
         android:layout_height="@dimen/rychla_ukazka_aplikacie_navigacia_vyska"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/rychla_ukazka_aplikacie_navigacia_margin_bottom"
         android:gravity="center"
+
         android:orientation="horizontal">
     </LinearLayout>
 
@@ -26,11 +31,13 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_above="@id/navigacia"
+
         android:alpha=".5"
         android:background="@android:color/white" />
 
     <Button
         android:id="@+id/dalej"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -39,16 +46,20 @@
         android:layout_gravity="end"
         android:layout_marginEnd="@dimen/rychla_ukazka_aplikacie_tlacidla_margin"
         android:layout_marginRight="@dimen/rychla_ukazka_aplikacie_tlacidla_margin"
+
         android:background="@null"
+
         android:fontFamily="@font/raleway_medium"
         android:text="@string/rychla_ukazka_aplikacie_tlacidlo_dalej"
         android:textAlignment="textEnd"
         android:textColor="@android:color/white"
         android:textSize="13sp"
+
         tools:ignore="RelativeOverlap,SmallSp" />
 
     <Button
         android:id="@+id/preskocit"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -57,7 +68,9 @@
         android:layout_gravity="start"
         android:layout_marginLeft="@dimen/rychla_ukazka_aplikacie_tlacidla_margin"
         android:layout_marginStart="@dimen/rychla_ukazka_aplikacie_tlacidla_margin"
+
         android:background="@null"
+
         android:fontFamily="@font/raleway_medium"
         android:text="@string/rychla_ukazka_aplikacie_tlacidlo_preskocit"
         android:textAlignment="textStart"

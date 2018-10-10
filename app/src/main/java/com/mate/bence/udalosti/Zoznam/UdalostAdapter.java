@@ -140,7 +140,7 @@ public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostH
                 InputStream zdroj = new java.net.URL(adresaObrazka).openStream();
                 bitmap = BitmapFactory.decodeStream(zdroj);
             } catch (Exception e) {
-                bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chyba_obrazka);
+                bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.obrazok_nenajdeni);
                 Log.e("Chyba ", e.getMessage());
                 e.printStackTrace();
 

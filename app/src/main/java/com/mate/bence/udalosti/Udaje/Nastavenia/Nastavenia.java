@@ -6,8 +6,6 @@ public class Nastavenia {
 
     public static final String UKAZKA_APLIKACIE = "ukazka-aplikacie";
 
-    public static final String VSETKO_V_PORIADKU = "OK";
-
     public static final String AUTENTIFIKACIA_PRIHLASENIE = "prihlasenie";
     public static final String AUTENTIFIKACIA_ODHLASENIE = "odhlasenie";
     public static final String AUTENTIFIKACIA_REGISTRACIA = "registracia";
@@ -18,4 +16,6 @@ public class Nastavenia {
     public static final String POZICIA_TOKEN = "097c58e2ea9355";
     public static final String POZICIA_FORMAT = "json";
     public static final String POZICIA_JAZYK = "sk";
+
+    public static final String VSETKO_V_PORIADKU = "OK";
 }

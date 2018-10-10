@@ -11,13 +11,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
 import com.mate.bence.udalosti.Activity.Autentifikacia.Autentifikacia;
 import com.mate.bence.udalosti.Activity.Autentifikacia.AutentifikaciaUdaje;
 import com.mate.bence.udalosti.Activity.RychlaUkazkaAplikacie.RychlaUkazkaAplikacie;
 import com.mate.bence.udalosti.Activity.Udalosti.Udalosti;
-import com.mate.bence.udalosti.Dialog.DialogOznameni;
 import com.mate.bence.udalosti.Nastroje.Pripojenie;
 import com.mate.bence.udalosti.R;
 import com.mate.bence.udalosti.Udaje.Data.Preferencie;

@@ -44,7 +44,7 @@ public class Objavuj extends Fragment implements KommunikaciaData, KommunikaciaO
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_udalosti, container, false);
+        View view = inflater.inflate(R.layout.fragment_udalosti_lokalizator_udalosti, container, false);
         init(view);
 
         return view;
@@ -112,8 +112,8 @@ public class Objavuj extends Fragment implements KommunikaciaData, KommunikaciaO
         this.nacitavanie = view.findViewById(R.id.nacitavanie);
         this.aktualizujUdalosti = view.findViewById(R.id.aktualizuj);
 
-        this.aktualizujUdalosti.setOnRefreshListener(noveUdalosti);
-        this.aktualizujUdalosti.setColorSchemeColors(getResources().getColor(R.color.nacitavanie_progressbar));
+        this.aktualizujUdalosti.setOnRefreshListener(aktualizuj);
+        this.aktualizujUdalosti.setColorSchemeColors(getResources().getColor(R.color.nacitavanie));
 
         this.obsahUdalosti = new ArrayList<>();
         nastavZoznamUdalosti(obsahUdalosti);
@@ -126,7 +126,17 @@ public class Objavuj extends Fragment implements KommunikaciaData, KommunikaciaO
         udalostAdapter.notifyItemRangeInserted(0, udalosti.size());
     }
 
-    private SwipeRefreshLayout.OnRefreshListener noveUdalosti = new SwipeRefreshLayout.OnRefreshListener() {
+    private void nastavZoznamUdalosti(List<Udalost> udaje) {
+        PoskitovelObsahu poskitovelObsahu = new PoskitovelObsahu(getContext());
+
+        udalostAdapter = new UdalostAdapter(udaje, getContext());
+        zoznamUdalosti.setLayoutManager(poskitovelObsahu);
+        zoznamUdalosti.setItemAnimator(new DefaultItemAnimator());
+        zoznamUdalosti.setAdapter(udalostAdapter);
+        udalostAdapter.zvolenaUdalost(this);
+    }
+
+    private SwipeRefreshLayout.OnRefreshListener aktualizuj = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
         public void onRefresh() {
             obsahUdalosti.clear();
@@ -139,14 +149,4 @@ public class Objavuj extends Fragment implements KommunikaciaData, KommunikaciaO
             aktualizujUdalosti.setRefreshing(false);
         }
     };
-
-    private void nastavZoznamUdalosti(List<Udalost> udaje) {
-        PoskitovelObsahu poskitovelObsahu = new PoskitovelObsahu(getContext());
-
-        udalostAdapter = new UdalostAdapter(udaje, getContext());
-        zoznamUdalosti.setLayoutManager(poskitovelObsahu);
-        zoznamUdalosti.setItemAnimator(new DefaultItemAnimator());
-        zoznamUdalosti.setAdapter(udalostAdapter);
-        udalostAdapter.zvolenaUdalost(this);
-    }
 }

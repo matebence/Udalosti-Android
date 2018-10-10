@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class PodlaPozicie extends Fragment implements KommunikaciaData, KommunikaciaOdpoved {
+public class Lokalizator extends Fragment implements KommunikaciaData, KommunikaciaOdpoved {
 
     private List<Udalost> obsahUdalostiPodlaPozicie;
     private SwipeRefreshLayout aktualizujUdalosti;
@@ -41,7 +41,7 @@ public class PodlaPozicie extends Fragment implements KommunikaciaData, Kommunik
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_udalosti, container, false);
+        View view = inflater.inflate(R.layout.fragment_udalosti_lokalizator_udalosti, container, false);
         init(view);
 
         return view;
@@ -92,8 +92,8 @@ public class PodlaPozicie extends Fragment implements KommunikaciaData, Kommunik
         this.nacitavanie = view.findViewById(R.id.nacitavanie);
         this.aktualizujUdalosti = view.findViewById(R.id.aktualizuj);
 
-        this.aktualizujUdalosti.setOnRefreshListener(noveUdalostiPodlaPozicie);
-        this.aktualizujUdalosti.setColorSchemeColors(getResources().getColor(R.color.nacitavanie_progressbar));
+        this.aktualizujUdalosti.setOnRefreshListener(aktualizuj);
+        this.aktualizujUdalosti.setColorSchemeColors(getResources().getColor(R.color.nacitavanie));
 
         this.obsahUdalostiPodlaPozicie = new ArrayList<>();
         nastavZoznamUdalosti(obsahUdalostiPodlaPozicie);
@@ -106,7 +106,15 @@ public class PodlaPozicie extends Fragment implements KommunikaciaData, Kommunik
         udalostAdapter.notifyItemRangeInserted(0, udalosti.size());
     }
 
-    private SwipeRefreshLayout.OnRefreshListener noveUdalostiPodlaPozicie = new SwipeRefreshLayout.OnRefreshListener() {
+    private void nastavZoznamUdalosti(List<Udalost> udaje) {
+        PoskitovelObsahu poskitovelObsahu = new PoskitovelObsahu(getContext());
+        udalostAdapter = new UdalostAdapter(udaje, getContext());
+        zoznamUdalostiPodlaPozcie.setLayoutManager(poskitovelObsahu);
+        zoznamUdalostiPodlaPozcie.setItemAnimator(new DefaultItemAnimator());
+        zoznamUdalostiPodlaPozcie.setAdapter(udalostAdapter);
+    }
+
+    private SwipeRefreshLayout.OnRefreshListener aktualizuj = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
         public void onRefresh() {
             obsahUdalostiPodlaPozicie.clear();
@@ -119,12 +127,4 @@ public class PodlaPozicie extends Fragment implements KommunikaciaData, Kommunik
             aktualizujUdalosti.setRefreshing(false);
         }
     };
-
-    private void nastavZoznamUdalosti(List<Udalost> udaje) {
-        PoskitovelObsahu poskitovelObsahu = new PoskitovelObsahu(getContext());
-        udalostAdapter = new UdalostAdapter(udaje, getContext());
-        zoznamUdalostiPodlaPozcie.setLayoutManager(poskitovelObsahu);
-        zoznamUdalostiPodlaPozcie.setItemAnimator(new DefaultItemAnimator());
-        zoznamUdalostiPodlaPozcie.setAdapter(udalostAdapter);
-    }
 }

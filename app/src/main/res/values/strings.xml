@@ -5,6 +5,11 @@
     <string name="nazov_aplikacie">Udalosti</string>
     <string name="activity_odhlasit">Odhlásť sa</string>
 
+    <!-- Karty Aplikacie -->
+    <string name="karta_prva">Udalosti</string>
+    <string name="karta_druha">Lokalizátor</string>
+    <string name="karta_tretia">Záujmy</string>
+
     <!-- Dialog -->
     <string name="dialog_chyb_zavorit">Zatvoriť</string>
 
@@ -63,6 +68,12 @@
     <string name="list_zoznam_udalosti_popis_illustracie">Obrázok udalosti</string>
     <string name="list_zoznam_udalosti_tlacidlo_budem_tam">Budem tam</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Podrobnosti -->
+    <string name="podrobnosti_popis_obrazka_aktualnej_udalosti">Obrázok aktuálnej udalosti</string>
+    <string name="podrobnosti_popis_pocet_zaujemcov_aktualnej_udalosti">Illustrácia pre počet záujemcov udalosti</string>
+    <string name="podrobnosti_popis_vstupenky_aktualnej_udalosti">Illustrácia pre cenu vstupenky udalosti</string>
+    <string name="podrobnosti_popis_casu_konania_aktualnej_udalosti">Illustrácia pre začiatok konania udalosti</string>
+    <string name="podrobnosti_cas">Čas</string>
+    <string name="podrobnosti_vstupenka">Vstupenka</string>
+    <string name="podrobnosti_pocet_zaujemcov">Počet záujemcov</string>
 </resources>
