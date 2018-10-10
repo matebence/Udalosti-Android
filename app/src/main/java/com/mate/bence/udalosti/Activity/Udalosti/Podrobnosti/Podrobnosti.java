@@ -16,6 +16,6 @@ public class Podrobnosti extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        overridePendingTransition(R.anim.ukoncit_vychod_activity, R.anim.ukoncit_vchod_activity);
+        overridePendingTransition(R.anim.ukoncit_vchod_activity, R.anim.ukoncit_vychod_activity);
     }
 }

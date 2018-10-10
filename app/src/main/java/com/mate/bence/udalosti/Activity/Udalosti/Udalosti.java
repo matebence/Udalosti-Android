@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.mate.bence.udalosti.Activity.Autentifikacia.Autentifikacia;
 import com.mate.bence.udalosti.Activity.Udalosti.Karty.Objavuj;
 import com.mate.bence.udalosti.Activity.Udalosti.Karty.PodlaPozicie;
+import com.mate.bence.udalosti.Activity.Udalosti.Karty.Zaujmy;
 import com.mate.bence.udalosti.Dialog.DialogOznameni;
 import com.mate.bence.udalosti.Nastroje.Odhlasenie;
 import com.mate.bence.udalosti.R;
@@ -163,7 +164,7 @@ public class Udalosti extends AppCompatActivity implements KommunikaciaOdpoved, 
     }
 
     private void nastavIkonyKartov(TabLayout karty) {
-        int ikonyKartov[] = {R.drawable.ic_objavuj, R.drawable.ic_podla_pozicie};
+        int ikonyKartov[] = {R.drawable.ic_objavuj, R.drawable.ic_podla_pozicie, R.drawable.ic_zaujmy};
         for (int i = 0; i < karty.getTabCount(); i++) {
             karty.getTabAt(i).setIcon(ikonyKartov[i]);
         }
@@ -175,6 +176,7 @@ public class Udalosti extends AppCompatActivity implements KommunikaciaOdpoved, 
         Bundle bundle = new Bundle();
         Objavuj objavuj = new Objavuj();
         PodlaPozicie podlaPozicie = new PodlaPozicie();
+        Zaujmy zaujmy = new Zaujmy();
 
         bundle.putString("stat", miestoPrihlasenia.get("stat"));
         bundle.putString("okres", miestoPrihlasenia.get("okres"));
@@ -185,10 +187,11 @@ public class Udalosti extends AppCompatActivity implements KommunikaciaOdpoved, 
         objavuj.setArguments(bundle);
         podlaPozicie.setArguments(bundle);
 
-        gestaKariet.nacitajFragment(objavuj, "Objavujte udalosti");
-        gestaKariet.nacitajFragment(podlaPozicie, "Najblizšie udalosti");
+        gestaKariet.nacitajFragment(objavuj, "Udalosti");
+        gestaKariet.nacitajFragment(podlaPozicie, "Lokalizátor");
+        gestaKariet.nacitajFragment(zaujmy, "Záujmy");
 
-        viewPager.setOffscreenPageLimit(2);
+        viewPager.setOffscreenPageLimit(3);
         viewPager.setAdapter(gestaKariet);
     }
 
@@ -254,6 +257,7 @@ public class Udalosti extends AppCompatActivity implements KommunikaciaOdpoved, 
             Bundle bundle = new Bundle();
             Objavuj objavuj = new Objavuj();
             PodlaPozicie podlaPozicie = new PodlaPozicie();
+            Zaujmy zaujmy = new Zaujmy();
 
             bundle.putString("stat", miestoPrihlasenia.get("stat"));
             bundle.putString("okres", miestoPrihlasenia.get("okres"));
@@ -269,6 +273,8 @@ public class Udalosti extends AppCompatActivity implements KommunikaciaOdpoved, 
                     return objavuj;
                 case 1:
                     return podlaPozicie;
+                case 2:
+                    return zaujmy;
             }
             return null;
         }

@@ -2,10 +2,12 @@
 
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/autentifikacia_pozadie"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/udalosti_pozadie">
+    android:background="@drawable/pozadie"
+    tools:context=".Activity.Autentifikacia.Autentifikacia">
 
     <FrameLayout
         android:id="@+id/prihlasenie_registracia_zabudnute_heslo"

@@ -51,10 +51,10 @@ public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostH
 
         holder.nazovUdalosti.setText(udalost.getNazov());
         holder.idUdalosti.setText(udalost.getIdUdalost());
-        holder.denUdalosti.setText(udalost.getDen());
+        holder.denUdalosti.setText(udalost.getDen()+".");
         holder.mesiacUdalosti.setText(udalost.getMesiac().substring(0, 4) + ".");
         holder.casUdalosti.setText(udalost.getCas());
-        holder.mestoUdalosti.setText(udalost.getMesto());
+        holder.mestoUdalosti.setText(udalost.getMesto()+",");
         holder.miestoUdalosti.setText(udalost.getUlica());
 
         nacitajObsah(holder.udalost);
@@ -140,7 +140,7 @@ public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostH
                 InputStream zdroj = new java.net.URL(adresaObrazka).openStream();
                 bitmap = BitmapFactory.decodeStream(zdroj);
             } catch (Exception e) {
-                bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.udalosti_chyba_obrazka);
+                bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.chyba_obrazka);
                 Log.e("Chyba ", e.getMessage());
                 e.printStackTrace();
 

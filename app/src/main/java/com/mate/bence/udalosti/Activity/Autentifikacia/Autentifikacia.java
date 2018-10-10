@@ -206,7 +206,7 @@ public class Autentifikacia extends AppCompatActivity implements AutentifikaciaO
     private void animujObsah(String fragment, FragmentTransaction fragmentTransaction) {
         switch (fragment) {
             case Nastavenia.AUTENTIFIKACIA_REGISTRACIA:
-                fragmentTransaction.setCustomAnimations(R.animator.vstupit_vychod_fragment_xml, R.animator.ukoncit_vchod_fragment, R.animator.vstupit_vchod_fragment, R.animator.ukoncit_vychod_fragment);
+                fragmentTransaction.setCustomAnimations(R.animator.vstupit_vychod_fragment, R.animator.ukoncit_vchod_fragment, R.animator.vstupit_vchod_fragment, R.animator.ukoncit_vychod_fragment);
                 break;
             default:
                 fragmentTransaction.setCustomAnimations(R.animator.zviditelnit, 0, 0, 0);

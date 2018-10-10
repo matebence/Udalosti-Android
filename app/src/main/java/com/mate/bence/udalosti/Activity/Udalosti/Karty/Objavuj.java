@@ -99,7 +99,7 @@ public class Objavuj extends Fragment implements KommunikaciaData, KommunikaciaO
         zvolenaUdalost.putExtra("zaujemcovia", udalost.getZaujemcovia());
 
         startActivity(zvolenaUdalost);
-        getActivity().overridePendingTransition(R.anim.vstupit_vchod_activity, R.anim.vstupit_vychod_activity);
+        getActivity().overridePendingTransition(R.anim.vstupit_vychod_activity, R.anim.vstupit_vchod_activity);
     }
 
     private void init(View view) {
