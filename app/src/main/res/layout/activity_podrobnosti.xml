@@ -31,6 +31,20 @@
             android:src="@drawable/obrazok_nenajdeni"
             android:contentDescription="@string/podrobnosti_popis_obrazka_aktualnej_udalosti"/>
 
+        <ProgressBar
+            android:id="@+id/nacitavenie_zvolenej_udalosti"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/podrobnosti_nacitavenie_obrazka_margin_top"
+            android:layout_centerHorizontal="true"
+
+            android:visibility="gone"
+
+            android:theme="@style/Nacitavanie">
+        </ProgressBar>
+
         <LinearLayout
             android:id="@+id/hlavicka_zvolenej_udalosti"
 

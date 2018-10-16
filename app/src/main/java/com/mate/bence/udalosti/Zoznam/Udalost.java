@@ -12,8 +12,9 @@ public class Udalost {
     private String ulica;
     private String vstupenka;
     private String zaujemcovia;
+    private String zaujem;
 
-    public Udalost(String idUdalost, String obrazok, String nazov, String den, String mesiac, String cas, String mesto, String ulica, String vstupenka, String zaujemcovia) {
+    public Udalost(String idUdalost, String obrazok, String nazov, String den, String mesiac, String cas, String mesto, String ulica, String vstupenka, String zaujemcovia, String zaujem) {
         this.idUdalost = idUdalost;
         this.obrazok = obrazok;
         this.nazov = nazov;
@@ -24,6 +25,7 @@ public class Udalost {
         this.ulica = ulica;
         this.vstupenka = vstupenka;
         this.zaujemcovia = zaujemcovia;
+        this.zaujem = zaujem;
     }
 
     public String getIdUdalost() {
@@ -106,6 +108,14 @@ public class Udalost {
         this.zaujemcovia = zaujemcovia;
     }
 
+    public String getZaujem() {
+        return zaujem;
+    }
+
+    public void setZaujem(String zaujem) {
+        this.zaujem = zaujem;
+    }
+
     @Override
     public String toString() {
         return "Udalost{" +
@@ -119,6 +129,7 @@ public class Udalost {
                 ", ulica='" + ulica + '\'' +
                 ", vstupenka='" + vstupenka + '\'' +
                 ", zaujemcovia='" + zaujemcovia + '\'' +
+                ", zaujem='" + zaujem + '\'' +
                 '}';
     }
 }

@@ -7,6 +7,7 @@ import android.util.Log;
 import com.mate.bence.udalosti.R;
 import com.mate.bence.udalosti.Udaje.Data.SQLiteDatabaza;
 import com.mate.bence.udalosti.Udaje.Nastavenia.Nastavenia;
+import com.mate.bence.udalosti.Udaje.Siet.Model.Akcia.Akcia;
 import com.mate.bence.udalosti.Udaje.Siet.Model.Autentifikator.Autentifikator;
 import com.mate.bence.udalosti.Udaje.Siet.Model.KommunikaciaData;
 import com.mate.bence.udalosti.Udaje.Siet.Model.KommunikaciaOdpoved;
@@ -114,5 +115,82 @@ public class UdalostiUdaje implements UdalostiImplementacia {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public void zoznamZaujmov(String token, String email) {
+        Log.v(TAG, "Metoda zoznamZaujmov bola vykonana");
+
+        Requesty requesty = UdalostiAdresa.initAdresu();
+        requesty.zaujmy(token, email).enqueue(new Callback<Obsah>() {
+            @Override
+            public void onResponse(Call<Obsah> call, Response<Obsah> response) {
+                if (response.isSuccessful()) {
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Obsah> call, Throwable t) {
+                odpovedeOdServera.odpovedServera(context.getString(R.string.chyba_servera), Nastavenia.ZAUJEM_ZOZNAM, null);
+            }
+        });
+    }
+
+    @Override
+    public void zaujemUdalost(String token, String email, String idUdalost) {
+        Log.v(TAG, "Metoda zaujemUdalost bola vykonana");
+
+        Requesty requesty = UdalostiAdresa.initAdresu();
+        requesty.zaujem(token, email, idUdalost).enqueue(new Callback<Akcia>() {
+            @Override
+            public void onResponse(Call<Akcia> call, Response<Akcia> response) {
+                if (response.isSuccessful()) {
+                    HashMap<String, String> udaje = new HashMap<>();
+
+                    if(response.body().getUspech() != null){
+                        udaje.put("uspech", response.body().getUspech());
+                        odpovedeOdServera.odpovedServera(Nastavenia.VSETKO_V_PORIADKU, Nastavenia.ZAUJEM, udaje);
+                    }
+                    if(response.body().getChyba() != null){
+                        udaje.put("chyba", response.body().getChyba());
+                        odpovedeOdServera.odpovedServera(Nastavenia.VSETKO_V_PORIADKU, Nastavenia.ZAUJEM, udaje);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Akcia> call, Throwable t) {
+                odpovedeOdServera.odpovedServera(context.getString(R.string.chyba_servera), Nastavenia.ZAUJEM, null);
+            }
+        });
+    }
+
+    @Override
+    public void odstranZaujem(String token, String email, String idUdalost) {
+        Log.v(TAG, "Metoda odstranZaujem bola vykonana");
+
+        Requesty requesty = UdalostiAdresa.initAdresu();
+        requesty.odstranZaujem(token, email, idUdalost).enqueue(new Callback<Akcia>() {
+            @Override
+            public void onResponse(Call<Akcia> call, Response<Akcia> response) {
+                if (response.isSuccessful()) {
+                    HashMap<String, String> udaje = new HashMap<>();
+
+                    if(response.body().getUspech() != null){
+                        udaje.put("uspech", response.body().getUspech());
+                        odpovedeOdServera.odpovedServera(Nastavenia.VSETKO_V_PORIADKU, Nastavenia.ZAUJEM_ODSTRANENIE, udaje);
+                    }
+                    if(response.body().getChyba() != null){
+                        udaje.put("chyba", response.body().getChyba());
+                        odpovedeOdServera.odpovedServera(Nastavenia.VSETKO_V_PORIADKU, Nastavenia.ZAUJEM_ODSTRANENIE, udaje);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Akcia> call, Throwable t) {
+                odpovedeOdServera.odpovedServera(context.getString(R.string.chyba_servera), Nastavenia.ZAUJEM_ODSTRANENIE, null);
+            }
+        });
     }
 }

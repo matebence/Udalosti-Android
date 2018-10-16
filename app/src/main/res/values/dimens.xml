@@ -89,6 +89,7 @@
     <dimen name="podrobnosti_sekcia_cas_margin_left">30dp</dimen>
     <dimen name="podrobnosti_cas_margin">20dp</dimen>
     <dimen name="podrobnosti_vyska_tlacidla">60dp</dimen>
+    <dimen name="podrobnosti_nacitavenie_obrazka_margin_top">100dp</dimen>
     <dimen name="podrobnosti_velkost_pisma_dna">30sp</dimen>
     <dimen name="podrobnosti_velkost_pisma_mesiac">22sp</dimen>
     <dimen name="podrobnosti_velkost_pisma_nazov">30sp</dimen>

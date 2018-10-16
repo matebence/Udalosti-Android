@@ -87,7 +87,12 @@ public class Objavuj extends Fragment implements KommunikaciaData, KommunikaciaO
         Udalost udalost = obsahUdalosti.get(pozicia);
         Intent zvolenaUdalost = new Intent(getActivity(), Podrobnosti.class);
 
+        zvolenaUdalost.putExtra("token", token);
+        zvolenaUdalost.putExtra("email", email);
+
         zvolenaUdalost.putExtra("idUdalost", udalost.getIdUdalost());
+        zvolenaUdalost.putExtra("zaujemUdalosti", udalost.getZaujem());
+
         zvolenaUdalost.putExtra("obrazok", udalost.getObrazok());
         zvolenaUdalost.putExtra("nazov", udalost.getNazov());
         zvolenaUdalost.putExtra("den", udalost.getDen());
@@ -124,6 +129,7 @@ public class Objavuj extends Fragment implements KommunikaciaData, KommunikaciaO
     protected void ziskajUdalosti(ArrayList<Udalost> udalosti) {
         obsahUdalosti.addAll(udalosti);
         udalostAdapter.notifyItemRangeInserted(0, udalosti.size());
+        zoznamUdalosti.setVisibility(View.VISIBLE);
     }
 
     private void nastavZoznamUdalosti(List<Udalost> udaje) {
@@ -140,10 +146,12 @@ public class Objavuj extends Fragment implements KommunikaciaData, KommunikaciaO
         @Override
         public void onRefresh() {
             obsahUdalosti.clear();
-            ziadneUdalosti.setVisibility(View.GONE);
-            udalostAdapter.notifyItemRangeRemoved(0, obsahUdalosti.size());
 
+            ziadneUdalosti.setVisibility(View.GONE);
+            zoznamUdalosti.setVisibility(View.GONE);
             nacitavanie.setVisibility(View.VISIBLE);
+
+            udalostAdapter.notifyItemRangeRemoved(0, obsahUdalosti.size());
             udalostiUdaje.zoznamUdalosti(email, stat, token);
 
             aktualizujUdalosti.setRefreshing(false);

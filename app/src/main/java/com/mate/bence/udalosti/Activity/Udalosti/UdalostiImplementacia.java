@@ -12,4 +12,10 @@ public interface UdalostiImplementacia {
     void odhlasenie(String email);
 
     HashMap miestoPrihlasenia();
+
+    void zoznamZaujmov(String token, String email);
+
+    void zaujemUdalost(String token, String email, String idUdalost);
+
+    void odstranZaujem(String token, String email, String idUdalost);
 }

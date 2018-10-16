@@ -17,5 +17,9 @@ public class Nastavenia {
     public static final String POZICIA_FORMAT = "json";
     public static final String POZICIA_JAZYK = "sk";
 
+    public static final String ZAUJEM = "zaujem";
+    public static final String ZAUJEM_ODSTRANENIE = "zaujem_odstranenie";
+    public static final String ZAUJEM_ZOZNAM = "zaujem_zoznam";
+
     public static final String VSETKO_V_PORIADKU = "OK";
 }

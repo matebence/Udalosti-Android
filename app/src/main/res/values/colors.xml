@@ -8,6 +8,7 @@
     <color name="nacitavanie_pozadie">#70000000</color>
     <color name="autentifikacia">#0397d6</color>
     <color name="chyba_pozadie">#b6b5b5</color>
+    <color name="zaujem_tlacidlo">#ab2727</color>
 
     <!-- Udalost zoznam -->
     <color name="zoznam_datum">#c33939</color>

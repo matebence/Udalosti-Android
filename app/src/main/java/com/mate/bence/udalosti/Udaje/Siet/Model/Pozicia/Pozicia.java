@@ -10,6 +10,9 @@ public class Pozicia {
     @SerializedName("city")
     private String okres;
 
+    @SerializedName("town")
+    private String okresMesta;
+
     @SerializedName("state")
     private String kraj;
 
@@ -22,9 +25,10 @@ public class Pozicia {
     @SerializedName("country_code")
     private String znakStatu;
 
-    public Pozicia(String pozicia, String okres, String kraj, String psc, String stat, String znakStatu) {
+    public Pozicia(String pozicia, String okres, String okresMesta, String kraj, String psc, String stat, String znakStatu) {
         this.pozicia = pozicia;
         this.okres = okres;
+        this.okresMesta = okresMesta;
         this.kraj = kraj;
         this.psc = psc;
         this.stat = stat;
@@ -37,6 +41,10 @@ public class Pozicia {
 
     public String getOkres() {
         return okres;
+    }
+
+    public String getOkresMesta() {
+        return okresMesta;
     }
 
     public String getKraj() {
@@ -60,6 +68,7 @@ public class Pozicia {
         return "Pozicia{" +
                 "pozicia='" + pozicia + '\'' +
                 ", okres='" + okres + '\'' +
+                ", okresMesta='" + okresMesta + '\'' +
                 ", kraj='" + kraj + '\'' +
                 ", psc='" + psc + '\'' +
                 ", stat='" + stat + '\'' +

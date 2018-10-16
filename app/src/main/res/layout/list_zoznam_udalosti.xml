@@ -21,6 +21,14 @@
 
         android:visibility="gone" />
 
+    <TextView
+        android:id="@+id/zaujem_o_udalosti"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:visibility="gone" />
+
     <ImageView
         android:id="@+id/udalosti_obrazok"
 

@@ -55,7 +55,12 @@ public class AutentifikaciaUdaje implements AutentifikaciaImplementacia {
                         pozicia = response.body().getPozicia().getPozicia();
                     }
                     if (response.body().getPozicia().getOkres() != null) {
-                        okres = response.body().getPozicia().getOkres();
+                        String nepotrebnaCastInformacie = "okres ";
+                        okres = response.body().getPozicia().getOkres().substring(nepotrebnaCastInformacie.length(),response.body().getPozicia().getOkres().length());
+                    }else{
+                        if (response.body().getPozicia().getOkresMesta() != null) {
+                            okres = response.body().getPozicia().getOkresMesta();
+                        }
                     }
                     if (response.body().getPozicia().getKraj() != null) {
                         kraj = response.body().getPozicia().getKraj();

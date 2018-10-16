@@ -1,5 +1,6 @@
 package com.mate.bence.udalosti.Udaje.Siet;
 
+import com.mate.bence.udalosti.Udaje.Siet.Model.Akcia.Akcia;
 import com.mate.bence.udalosti.Udaje.Siet.Model.Autentifikator.Autentifikator;
 import com.mate.bence.udalosti.Udaje.Siet.Model.Obsah.Obsah;
 import com.mate.bence.udalosti.Udaje.Siet.Model.Pozicia.LocationIQ;
@@ -33,6 +34,26 @@ public interface Requesty {
             @Field("heslo") String heslo,
             @Field("potvrd") String potvrd,
             @Field("nova_registracia") String registracia);
+
+    @FormUrlEncoded
+    @POST("udalosti/index.php/zaujmy")
+    Call<Akcia> zaujem(
+            @Field("token") String token,
+            @Field("email") String email,
+            @Field("idUdalost") String idUdalost);
+
+    @FormUrlEncoded
+    @POST("udalosti/index.php/zaujmy/odstran")
+    Call<Akcia> odstranZaujem(
+            @Field("token") String token,
+            @Field("email") String email,
+            @Field("idUdalost") String idUdalost);
+
+    @FormUrlEncoded
+    @POST("udalosti/index.php/zaujmy/zoznam")
+    Call<Obsah> zaujmy(
+            @Field("token") String token,
+            @Field("email") String email);
 
     @FormUrlEncoded
     @POST("udalosti/index.php/udalosti")

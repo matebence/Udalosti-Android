@@ -76,4 +76,6 @@
     <string name="podrobnosti_cas">Čas</string>
     <string name="podrobnosti_vstupenka">Vstupenka</string>
     <string name="podrobnosti_pocet_zaujemcov">Počet záujemcov</string>
+    <string name="podrobnosti_tlacidlo_zaujem">Mám záujem</string>
+    <string name="podrobnosti_tlacidlo_odstranit">Odstrániť zo záujmov</string>
 </resources>

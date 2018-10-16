@@ -18,6 +18,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.mate.bence.udalosti.Nastroje.Stream;
 import com.mate.bence.udalosti.R;
 import com.mate.bence.udalosti.Udaje.Siet.UdalostiAdresa;
 
@@ -47,12 +48,13 @@ public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostH
     public void onBindViewHolder(@NonNull UdalostHolder holder, int position) {
         Udalost udalost = zoznamUdalosti.get(position);
 
-        new ziskajObrazok(holder.obrazokUdalosti, holder.nacitavenie, context).execute(udalost.getObrazok());
+        new Stream(holder.obrazokUdalosti, holder.nacitavenie, context).execute(udalost.getObrazok());
 
         holder.nazovUdalosti.setText(udalost.getNazov());
         holder.idUdalosti.setText(udalost.getIdUdalost());
+        holder.zaujemUdalost.setText(udalost.getZaujem());
         holder.denUdalosti.setText(udalost.getDen()+".");
-        holder.mesiacUdalosti.setText(udalost.getMesiac().substring(0, 4) + ".");
+        holder.mesiacUdalosti.setText(udalost.getMesiac().substring(0, 3) + ".");
         holder.casUdalosti.setText(udalost.getCas());
         holder.mestoUdalosti.setText(udalost.getMesto()+",");
         holder.miestoUdalosti.setText(udalost.getUlica());
@@ -82,6 +84,7 @@ public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostH
         private ProgressBar nacitavenie;
 
         private TextView idUdalosti;
+        private TextView zaujemUdalost;
         private TextView nazovUdalosti;
         private TextView denUdalosti;
         private TextView mesiacUdalosti;
@@ -98,6 +101,7 @@ public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostH
             this.nacitavenie = view.findViewById(R.id.nacitavenieObrazka);
 
             this.idUdalosti = view.findViewById(R.id.id_udalost);
+            this.zaujemUdalost = view.findViewById(R.id.zaujem_o_udalosti);
             this.nazovUdalosti = view.findViewById(R.id.udalosti_nazov);
             this.denUdalosti = view.findViewById(R.id.udalosti_den);
             this.mesiacUdalosti = view.findViewById(R.id.udalosti_mesiac);
@@ -111,46 +115,6 @@ public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostH
             if (zvolenaUdalost != null) {
                 zvolenaUdalost.podrobnostiUdalosti(view, getAdapterPosition());
             }
-        }
-    }
-
-    @SuppressLint("StaticFieldLeak")
-    private class ziskajObrazok extends AsyncTask<String, Void, Bitmap> {
-
-        private ImageView obrazok;
-        private ProgressBar nacitavanie;
-        private Context context;
-
-        ziskajObrazok(ImageView obrazok, ProgressBar nacitavanie, Context context) {
-            this.obrazok = obrazok;
-            this.context = context;
-            this.nacitavanie = nacitavanie;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            nacitavanie.setVisibility(View.VISIBLE);
-        }
-
-        protected Bitmap doInBackground(String... adresa) {
-            String adresaObrazka = UdalostiAdresa.getAdresa() + "udalosti" + "/" + adresa[0];
-            Bitmap bitmap;
-            try {
-                InputStream zdroj = new java.net.URL(adresaObrazka).openStream();
-                bitmap = BitmapFactory.decodeStream(zdroj);
-            } catch (Exception e) {
-                bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.obrazok_nenajdeni);
-                Log.e("Chyba ", e.getMessage());
-                e.printStackTrace();
-
-            }
-            return bitmap;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            nacitavanie.setVisibility(View.GONE);
-            obrazok.setImageBitmap(result);
         }
     }
 }
