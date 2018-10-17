@@ -222,6 +222,9 @@ public class Udalosti extends AppCompatActivity implements KommunikaciaOdpoved, 
                         titul.setText(nastavTitulKariet(miestoPrihlasenia.get("kraj")));
                     }
                     break;
+                case 2:
+                    titul.setText(getString(R.string.zoznam_zaujmov));
+                    break;
             }
 
             int tabIconColor = ContextCompat.getColor(getApplicationContext(), R.color.tab_ikona_aktivna);

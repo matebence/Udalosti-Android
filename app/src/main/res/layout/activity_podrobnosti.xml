@@ -296,5 +296,27 @@
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/podrobnosti_velkost_pisma_tlacidla" />
         </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/spracovanie_zaujmu"
+
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+
+            android:background="@color/nacitavanie_pozadie"
+
+            android:orientation="vertical"
+
+            android:visibility="gone">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:theme="@style/Nacitavanie">
+            </ProgressBar>
+        </LinearLayout>
     </RelativeLayout>
 </ScrollView>

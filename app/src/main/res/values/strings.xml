@@ -4,6 +4,7 @@
     <!-- Aplikacia -->
     <string name="nazov_aplikacie">Udalosti</string>
     <string name="activity_odhlasit">Odhlásť sa</string>
+    <string name="zoznam_zaujmov">"Zoznam záujmov"</string>
 
     <!-- Karty Aplikacie -->
     <string name="karta_prva">Udalosti</string>
@@ -66,7 +67,6 @@
 
     <!-- Zoznam udalosti -->
     <string name="list_zoznam_udalosti_popis_illustracie">Obrázok udalosti</string>
-    <string name="list_zoznam_udalosti_tlacidlo_budem_tam">Budem tam</string>
 
     <!-- Podrobnosti -->
     <string name="podrobnosti_popis_obrazka_aktualnej_udalosti">Obrázok aktuálnej udalosti</string>

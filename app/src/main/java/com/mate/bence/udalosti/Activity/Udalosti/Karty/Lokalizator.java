@@ -1,17 +1,22 @@
 package com.mate.bence.udalosti.Activity.Udalosti.Karty;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
+import com.mate.bence.udalosti.Activity.Udalosti.Podrobnosti.Aktualizator;
+import com.mate.bence.udalosti.Activity.Udalosti.Podrobnosti.AktualizatorObsahu;
+import com.mate.bence.udalosti.Activity.Udalosti.Podrobnosti.Podrobnosti;
 import com.mate.bence.udalosti.Activity.Udalosti.UdalostiUdaje;
 import com.mate.bence.udalosti.R;
 import com.mate.bence.udalosti.Udaje.Nastavenia.Nastavenia;
@@ -20,14 +25,17 @@ import com.mate.bence.udalosti.Udaje.Siet.Model.KommunikaciaOdpoved;
 import com.mate.bence.udalosti.Zoznam.PoskitovelObsahu;
 import com.mate.bence.udalosti.Zoznam.Udalost;
 import com.mate.bence.udalosti.Zoznam.UdalostAdapter;
+import com.mate.bence.udalosti.Zoznam.ZvolenaUdalost;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Lokalizator extends Fragment implements KommunikaciaData, KommunikaciaOdpoved {
+public class Lokalizator extends Fragment implements KommunikaciaData, KommunikaciaOdpoved, ZvolenaUdalost, Aktualizator {
 
+    private ArrayList<Integer> zmeneneUdalostiPodlaPozicie;
     private List<Udalost> obsahUdalostiPodlaPozicie;
+
     private SwipeRefreshLayout aktualizujUdalosti;
 
     private UdalostiUdaje udalostiUdaje;
@@ -80,6 +88,58 @@ public class Lokalizator extends Fragment implements KommunikaciaData, Kommunika
     public void odpovedServera(String odpoved, String od, HashMap<String, String> udaje) {
     }
 
+    @Override
+    public void podrobnostiUdalosti(View view, int pozicia) {
+        boolean zmenene = false;
+        Udalost udalost = obsahUdalostiPodlaPozicie.get(pozicia);
+        Intent zvolenaUdalost = new Intent(getActivity(), Podrobnosti.class);
+
+        if(!zmeneneUdalostiPodlaPozicie.isEmpty()){
+            for(int i = 0; i<zmeneneUdalostiPodlaPozicie.size();i++){
+                if(zmeneneUdalostiPodlaPozicie.get(i) == udalost.getIdUdalost()){
+                    zmeneneUdalostiPodlaPozicie.remove(i);
+                    zmenene = true;
+                }
+            }
+        }
+
+        if(!zmenene){
+            zvolenaUdalost.putExtra("pozicia", pozicia);
+            zvolenaUdalost.putExtra("karta", Lokalizator.class.getSimpleName());
+
+            zvolenaUdalost.putExtra("zaujemUdalosti", udalost.getZaujem());
+
+            zvolenaUdalost.putExtra("obrazok", udalost.getObrazok());
+            zvolenaUdalost.putExtra("nazov", udalost.getNazov());
+            zvolenaUdalost.putExtra("den", udalost.getDen());
+            zvolenaUdalost.putExtra("mesiac", udalost.getMesiac());
+            zvolenaUdalost.putExtra("cas", udalost.getCas());
+            zvolenaUdalost.putExtra("mesto", udalost.getMesto());
+            zvolenaUdalost.putExtra("ulica", udalost.getUlica());
+            zvolenaUdalost.putExtra("vstupenka", udalost.getVstupenka());
+            zvolenaUdalost.putExtra("zaujemcovia", udalost.getZaujemcovia());
+        }
+
+        zvolenaUdalost.putExtra("idUdalost", udalost.getIdUdalost());
+        zvolenaUdalost.putExtra("token", token);
+        zvolenaUdalost.putExtra("email", email);
+
+        startActivity(zvolenaUdalost);
+        AktualizatorObsahu.stav().nastav(this);
+        getActivity().overridePendingTransition(R.anim.vstupit_vychod_activity, R.anim.vstupit_vchod_activity);
+    }
+
+    @Override
+    public void aktualizujObsahUdalosti() {
+        Log.v("MainAct", "Lokalizator");
+
+        if(AktualizatorObsahu.stav().getKarta().equals(Lokalizator.class.getSimpleName())){
+            obsahUdalostiPodlaPozicie.get(AktualizatorObsahu.stav().getPozcia()).setZaujem(AktualizatorObsahu.stav().getStav());
+        }else{
+            zmeneneUdalostiPodlaPozicie.add(AktualizatorObsahu.stav().getIdUdalost());
+        }
+    }
+
     private void init(View view) {
         this.email = getArguments().getString("email");
         this.token = getArguments().getString("token");
@@ -96,6 +156,8 @@ public class Lokalizator extends Fragment implements KommunikaciaData, Kommunika
         this.aktualizujUdalosti.setColorSchemeColors(getResources().getColor(R.color.nacitavanie));
 
         this.obsahUdalostiPodlaPozicie = new ArrayList<>();
+        this.zmeneneUdalostiPodlaPozicie = new ArrayList<>();
+
         nastavZoznamUdalosti(obsahUdalostiPodlaPozicie);
 
         this.udalostiUdaje = new UdalostiUdaje(this, this, getContext());
@@ -104,24 +166,29 @@ public class Lokalizator extends Fragment implements KommunikaciaData, Kommunika
     private void ziskajUdalosti(ArrayList<Udalost> udalosti) {
         obsahUdalostiPodlaPozicie.addAll(udalosti);
         udalostAdapter.notifyItemRangeInserted(0, udalosti.size());
+        zoznamUdalostiPodlaPozcie.setVisibility(View.VISIBLE);
     }
 
     private void nastavZoznamUdalosti(List<Udalost> udaje) {
         PoskitovelObsahu poskitovelObsahu = new PoskitovelObsahu(getContext());
+
         udalostAdapter = new UdalostAdapter(udaje, getContext());
         zoznamUdalostiPodlaPozcie.setLayoutManager(poskitovelObsahu);
         zoznamUdalostiPodlaPozcie.setItemAnimator(new DefaultItemAnimator());
         zoznamUdalostiPodlaPozcie.setAdapter(udalostAdapter);
+        udalostAdapter.zvolenaUdalost(this);
     }
 
     private SwipeRefreshLayout.OnRefreshListener aktualizuj = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
         public void onRefresh() {
             obsahUdalostiPodlaPozicie.clear();
-            ziadneUdalostiPodlaPozcie.setVisibility(View.GONE);
             udalostAdapter.notifyItemRangeRemoved(0, obsahUdalostiPodlaPozicie.size());
 
+            ziadneUdalostiPodlaPozcie.setVisibility(View.GONE);
+            zoznamUdalostiPodlaPozcie.setVisibility(View.GONE);
             nacitavanie.setVisibility(View.VISIBLE);
+
             udalostiUdaje.zoznamUdalostiPodlaPozicie(email, stat, okres, mesto, token);
 
             aktualizujUdalosti.setRefreshing(false);

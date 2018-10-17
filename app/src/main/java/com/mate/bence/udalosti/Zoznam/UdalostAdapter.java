@@ -51,8 +51,8 @@ public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostH
         new Stream(holder.obrazokUdalosti, holder.nacitavenie, context).execute(udalost.getObrazok());
 
         holder.nazovUdalosti.setText(udalost.getNazov());
-        holder.idUdalosti.setText(udalost.getIdUdalost());
-        holder.zaujemUdalost.setText(udalost.getZaujem());
+        holder.idUdalosti.setText(Integer.toString(udalost.getIdUdalost()));
+        holder.zaujemUdalost.setText(Integer.toString(udalost.getZaujem()));
         holder.denUdalosti.setText(udalost.getDen()+".");
         holder.mesiacUdalosti.setText(udalost.getMesiac().substring(0, 3) + ".");
         holder.casUdalosti.setText(udalost.getCas());

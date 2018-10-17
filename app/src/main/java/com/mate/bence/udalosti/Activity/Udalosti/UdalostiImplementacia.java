@@ -15,7 +15,9 @@ public interface UdalostiImplementacia {
 
     void zoznamZaujmov(String token, String email);
 
-    void zaujemUdalost(String token, String email, String idUdalost);
+    void zaujemUdalost(String token, String email, int idUdalost);
 
-    void odstranZaujem(String token, String email, String idUdalost);
+    void potvrdZaujem(String token, String email, int idUdalost);
+
+    void odstranZaujem(String token, String email, int idUdalost);
 }

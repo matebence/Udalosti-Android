@@ -137,7 +137,7 @@ public class UdalostiUdaje implements UdalostiImplementacia {
     }
 
     @Override
-    public void zaujemUdalost(String token, String email, String idUdalost) {
+    public void zaujemUdalost(String token, String email, int idUdalost) {
         Log.v(TAG, "Metoda zaujemUdalost bola vykonana");
 
         Requesty requesty = UdalostiAdresa.initAdresu();
@@ -166,8 +166,28 @@ public class UdalostiUdaje implements UdalostiImplementacia {
     }
 
     @Override
-    public void odstranZaujem(String token, String email, String idUdalost) {
+    public void potvrdZaujem(String token, String email, int idUdalost) {
         Log.v(TAG, "Metoda odstranZaujem bola vykonana");
+
+        Requesty requesty = UdalostiAdresa.initAdresu();
+        requesty.potvrd(token, email, idUdalost).enqueue(new Callback<Obsah>() {
+            @Override
+            public void onResponse(Call<Obsah> call, Response<Obsah> response) {
+                if (response.isSuccessful()) {
+                    udajeZoServera.dataZoServera(Nastavenia.VSETKO_V_PORIADKU, Nastavenia.ZAUJEM_POTVRD, response.body().getUdalosti());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Obsah> call, Throwable t) {
+                odpovedeOdServera.odpovedServera(context.getString(R.string.chyba_servera), Nastavenia.ZAUJEM_POTVRD, null);
+            }
+        });
+    }
+
+    @Override
+    public void odstranZaujem(String token, String email, int idUdalost) {
+        Log.v(TAG, "Metoda potvrdZaujem bola vykonana");
 
         Requesty requesty = UdalostiAdresa.initAdresu();
         requesty.odstranZaujem(token, email, idUdalost).enqueue(new Callback<Akcia>() {

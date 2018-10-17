@@ -40,14 +40,21 @@ public interface Requesty {
     Call<Akcia> zaujem(
             @Field("token") String token,
             @Field("email") String email,
-            @Field("idUdalost") String idUdalost);
+            @Field("idUdalost") int idUdalost);
+
+    @FormUrlEncoded
+    @POST("udalosti/index.php/zaujmy/potvrd")
+    Call<Obsah> potvrd(
+            @Field("token") String token,
+            @Field("email") String email,
+            @Field("idUdalost") int idUdalost);
 
     @FormUrlEncoded
     @POST("udalosti/index.php/zaujmy/odstran")
     Call<Akcia> odstranZaujem(
             @Field("token") String token,
             @Field("email") String email,
-            @Field("idUdalost") String idUdalost);
+            @Field("idUdalost") int idUdalost);
 
     @FormUrlEncoded
     @POST("udalosti/index.php/zaujmy/zoznam")

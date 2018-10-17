@@ -7,13 +7,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
+import com.mate.bence.udalosti.Activity.Udalosti.Podrobnosti.Aktualizator;
 import com.mate.bence.udalosti.Activity.Udalosti.Podrobnosti.Podrobnosti;
+import com.mate.bence.udalosti.Activity.Udalosti.Podrobnosti.AktualizatorObsahu;
 import com.mate.bence.udalosti.Activity.Udalosti.UdalostiUdaje;
 import com.mate.bence.udalosti.R;
 import com.mate.bence.udalosti.Udaje.Nastavenia.Nastavenia;
@@ -28,9 +31,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Objavuj extends Fragment implements KommunikaciaData, KommunikaciaOdpoved, ZvolenaUdalost {
+public class Objavuj extends Fragment implements KommunikaciaData, KommunikaciaOdpoved, ZvolenaUdalost, Aktualizator {
 
-    private List<Udalost> obsahUdalosti = new ArrayList<>();
+    private ArrayList<Integer> zmeneneUdalosti;
+    private List<Udalost> obsahUdalosti;
+
     private SwipeRefreshLayout aktualizujUdalosti;
 
     private UdalostiUdaje udalostiUdaje;
@@ -65,6 +70,7 @@ public class Objavuj extends Fragment implements KommunikaciaData, KommunikaciaO
         switch (od) {
             case Nastavenia.UDALOSTI_OBJAVUJ:
                 if (odpoved.equals(Nastavenia.VSETKO_V_PORIADKU)) {
+
                     if (udaje != null) {
                         ziadneUdalosti.setVisibility(View.GONE);
                         ziskajUdalosti(udaje);
@@ -84,30 +90,58 @@ public class Objavuj extends Fragment implements KommunikaciaData, KommunikaciaO
 
     @Override
     public void podrobnostiUdalosti(View view, int pozicia) {
+        boolean zmenene = false;
         Udalost udalost = obsahUdalosti.get(pozicia);
         Intent zvolenaUdalost = new Intent(getActivity(), Podrobnosti.class);
 
+        if(!zmeneneUdalosti.isEmpty()){
+            for(int i = 0; i<zmeneneUdalosti.size();i++){
+                if(zmeneneUdalosti.get(i) == udalost.getIdUdalost()){
+                    zmeneneUdalosti.remove(i);
+                    zmenene = true;
+                }
+            }
+        }
+
+        if(!zmenene){
+            zvolenaUdalost.putExtra("pozicia", pozicia);
+            zvolenaUdalost.putExtra("karta", Objavuj.class.getSimpleName());
+
+            zvolenaUdalost.putExtra("zaujemUdalosti", udalost.getZaujem());
+
+            zvolenaUdalost.putExtra("obrazok", udalost.getObrazok());
+            zvolenaUdalost.putExtra("nazov", udalost.getNazov());
+            zvolenaUdalost.putExtra("den", udalost.getDen());
+            zvolenaUdalost.putExtra("mesiac", udalost.getMesiac());
+            zvolenaUdalost.putExtra("cas", udalost.getCas());
+            zvolenaUdalost.putExtra("mesto", udalost.getMesto());
+            zvolenaUdalost.putExtra("ulica", udalost.getUlica());
+            zvolenaUdalost.putExtra("vstupenka", udalost.getVstupenka());
+            zvolenaUdalost.putExtra("zaujemcovia", udalost.getZaujemcovia());
+        }
+
+        zvolenaUdalost.putExtra("idUdalost", udalost.getIdUdalost());
         zvolenaUdalost.putExtra("token", token);
         zvolenaUdalost.putExtra("email", email);
 
-        zvolenaUdalost.putExtra("idUdalost", udalost.getIdUdalost());
-        zvolenaUdalost.putExtra("zaujemUdalosti", udalost.getZaujem());
-
-        zvolenaUdalost.putExtra("obrazok", udalost.getObrazok());
-        zvolenaUdalost.putExtra("nazov", udalost.getNazov());
-        zvolenaUdalost.putExtra("den", udalost.getDen());
-        zvolenaUdalost.putExtra("mesiac", udalost.getMesiac());
-        zvolenaUdalost.putExtra("cas", udalost.getCas());
-        zvolenaUdalost.putExtra("mesto", udalost.getMesto());
-        zvolenaUdalost.putExtra("ulica", udalost.getUlica());
-        zvolenaUdalost.putExtra("vstupenka", udalost.getVstupenka());
-        zvolenaUdalost.putExtra("zaujemcovia", udalost.getZaujemcovia());
-
+        AktualizatorObsahu.stav().nastav(this);
         startActivity(zvolenaUdalost);
         getActivity().overridePendingTransition(R.anim.vstupit_vychod_activity, R.anim.vstupit_vchod_activity);
     }
 
+    @Override
+    public void aktualizujObsahUdalosti() {
+        Log.v("MainAct", "Objavuj");
+
+        if(AktualizatorObsahu.stav().getKarta().equals(Objavuj.class.getSimpleName())){
+            obsahUdalosti.get(AktualizatorObsahu.stav().getPozcia()).setZaujem(AktualizatorObsahu.stav().getStav());
+        }else{
+            zmeneneUdalosti.add(AktualizatorObsahu.stav().getIdUdalost());
+        }
+    }
+
     private void init(View view) {
+
         this.email = getArguments().getString("email");
         this.stat = getArguments().getString("stat");
         this.token = getArguments().getString("token");
@@ -121,8 +155,9 @@ public class Objavuj extends Fragment implements KommunikaciaData, KommunikaciaO
         this.aktualizujUdalosti.setColorSchemeColors(getResources().getColor(R.color.nacitavanie));
 
         this.obsahUdalosti = new ArrayList<>();
-        nastavZoznamUdalosti(obsahUdalosti);
+        this.zmeneneUdalosti = new ArrayList<>();
 
+        nastavZoznamUdalosti(obsahUdalosti);
         this.udalostiUdaje = new UdalostiUdaje(this, this, getContext());
     }
 
@@ -146,12 +181,12 @@ public class Objavuj extends Fragment implements KommunikaciaData, KommunikaciaO
         @Override
         public void onRefresh() {
             obsahUdalosti.clear();
+            udalostAdapter.notifyItemRangeRemoved(0, obsahUdalosti.size());
 
             ziadneUdalosti.setVisibility(View.GONE);
             zoznamUdalosti.setVisibility(View.GONE);
             nacitavanie.setVisibility(View.VISIBLE);
 
-            udalostAdapter.notifyItemRangeRemoved(0, obsahUdalosti.size());
             udalostiUdaje.zoznamUdalosti(email, stat, token);
 
             aktualizujUdalosti.setRefreshing(false);

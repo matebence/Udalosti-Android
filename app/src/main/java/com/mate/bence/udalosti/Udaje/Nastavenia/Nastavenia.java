@@ -18,6 +18,7 @@ public class Nastavenia {
     public static final String POZICIA_JAZYK = "sk";
 
     public static final String ZAUJEM = "zaujem";
+    public static final String ZAUJEM_POTVRD = "zaujem_potvrd";
     public static final String ZAUJEM_ODSTRANENIE = "zaujem_odstranenie";
     public static final String ZAUJEM_ZOZNAM = "zaujem_zoznam";
 

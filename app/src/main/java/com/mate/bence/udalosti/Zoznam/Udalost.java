@@ -2,7 +2,7 @@ package com.mate.bence.udalosti.Zoznam;
 
 public class Udalost {
 
-    private String idUdalost;
+    private int idUdalost;
     private String obrazok;
     private String nazov;
     private String den;
@@ -12,9 +12,9 @@ public class Udalost {
     private String ulica;
     private String vstupenka;
     private String zaujemcovia;
-    private String zaujem;
+    private int zaujem;
 
-    public Udalost(String idUdalost, String obrazok, String nazov, String den, String mesiac, String cas, String mesto, String ulica, String vstupenka, String zaujemcovia, String zaujem) {
+    public Udalost(int idUdalost, String obrazok, String nazov, String den, String mesiac, String cas, String mesto, String ulica, String vstupenka, String zaujemcovia, int zaujem) {
         this.idUdalost = idUdalost;
         this.obrazok = obrazok;
         this.nazov = nazov;
@@ -28,11 +28,11 @@ public class Udalost {
         this.zaujem = zaujem;
     }
 
-    public String getIdUdalost() {
+    public int getIdUdalost() {
         return idUdalost;
     }
 
-    public void setIdUdalost(String idUdalost) {
+    public void setIdUdalost(int idUdalost) {
         this.idUdalost = idUdalost;
     }
 
@@ -108,18 +108,18 @@ public class Udalost {
         this.zaujemcovia = zaujemcovia;
     }
 
-    public String getZaujem() {
+    public int getZaujem() {
         return zaujem;
     }
 
-    public void setZaujem(String zaujem) {
+    public void setZaujem(int zaujem) {
         this.zaujem = zaujem;
     }
 
     @Override
     public String toString() {
         return "Udalost{" +
-                "idUdalost='" + idUdalost + '\'' +
+                "idUdalost=" + idUdalost +
                 ", obrazok='" + obrazok + '\'' +
                 ", nazov='" + nazov + '\'' +
                 ", den='" + den + '\'' +
@@ -129,7 +129,7 @@ public class Udalost {
                 ", ulica='" + ulica + '\'' +
                 ", vstupenka='" + vstupenka + '\'' +
                 ", zaujemcovia='" + zaujemcovia + '\'' +
-                ", zaujem='" + zaujem + '\'' +
+                ", zaujem=" + zaujem +
                 '}';
     }
 }
