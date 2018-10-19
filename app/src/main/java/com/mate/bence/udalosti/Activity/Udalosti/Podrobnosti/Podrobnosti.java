@@ -1,8 +1,9 @@
 package com.mate.bence.udalosti.Activity.Udalosti.Podrobnosti;
 
+import android.content.Intent;
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -11,9 +12,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.mate.bence.udalosti.Activity.Udalosti.Udalosti;
 import com.mate.bence.udalosti.Activity.Udalosti.UdalostiUdaje;
 import com.mate.bence.udalosti.Dialog.DialogOznameni;
+import com.mate.bence.udalosti.Nastroje.Pripojenie;
 import com.mate.bence.udalosti.Nastroje.Stream;
 import com.mate.bence.udalosti.R;
 import com.mate.bence.udalosti.Udaje.Nastavenia.Nastavenia;
@@ -26,15 +27,14 @@ import java.util.HashMap;
 
 public class Podrobnosti extends AppCompatActivity implements View.OnClickListener, KommunikaciaOdpoved, KommunikaciaData {
 
-    private Button zaujem;
-    private ImageView obrazok;
-    private ProgressBar nacitavanie;
     private TextView den, mesiac, nazov, miesto, pocetZaujemcov, vstupenka, cas;
+    private LinearLayout spracovanieZaujmu;
+    private ProgressBar nacitavanie;
+    private ImageView obrazok;
+    private Button zaujem;
 
     private UdalostiUdaje udalostiUdaje;
-
-    private LinearLayout spracovanieZaujmu;
-    private int zaujemUdalosti;
+    private int stavTlacidla, pozicia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,16 +57,13 @@ public class Podrobnosti extends AppCompatActivity implements View.OnClickListen
                 this.spracovanieZaujmu.setVisibility(View.VISIBLE);
 
                 if (udaje != null) {
-                    if (zaujemUdalosti == 1) {
-                        zaujemUdalosti = 0;
-
+                    if (stavTlacidla == 1) {
+                        stavTlacidla = 0;
                         udalostiUdaje.odstranZaujem(udaje.getString("token"), udaje.getString("email"), udaje.getInt("idUdalost"));
-                        AktualizatorObsahu.stav().hodnota(udaje.getInt("pozicia"), zaujemUdalosti, udaje.getInt("idUdalost"), udaje.getString("karta"));
-                    } else {
-                        zaujemUdalosti = 1;
 
-                        udalostiUdaje.zaujemUdalost(udaje.getString("token"), udaje.getString("email"), udaje.getInt("idUdalost"));
-                        AktualizatorObsahu.stav().hodnota(udaje.getInt("pozicia"), zaujemUdalosti, udaje.getInt("idUdalost"), udaje.getString("karta"));
+                    } else {
+                        stavTlacidla = 1;
+                        udalostiUdaje.zaujem(udaje.getString("token"), udaje.getString("email"), udaje.getInt("idUdalost"));
                     }
                 }
                 break;
@@ -78,23 +75,27 @@ public class Podrobnosti extends AppCompatActivity implements View.OnClickListen
         switch (od) {
             case Nastavenia.ZAUJEM_POTVRD:
                 if (odpoved.equals(Nastavenia.VSETKO_V_PORIADKU)) {
-
                     if (udaje != null) {
-                        if(udaje.size() == 1){
+                        if (udaje.size() == 1) {
+
                             Udalost udalost = (Udalost) udaje.get(0);
                             new Stream(obrazok, nacitavanie, this).execute(udalost.getObrazok());
+
+                            stavTlacidla = udalost.getZaujem();
+                            pocetZaujemcov.setText(Integer.toString(udalost.getZaujemcovia()));
 
                             den.setText(udalost.getDen());
                             mesiac.setText(udalost.getMesiac().substring(0, 3) + ".");
                             nazov.setText(udalost.getNazov());
                             miesto.setText(udalost.getMesto() + ", " + udalost.getUlica());
-                            pocetZaujemcov.setText(udalost.getZaujemcovia());
-                            vstupenka.setText(udalost.getVstupenka() + "€");
+                            vstupenka.setText(Float.toString(udalost.getVstupenka()) + "€");
                             cas.setText(udalost.getCas());
 
-                            nastavTlacidlo(zaujemUdalosti);
+                            nastavTlacdloPodrobnosti(stavTlacidla);
                         }
                     }
+                } else {
+                    new DialogOznameni(this, "Chyba", odpoved);
                 }
                 break;
         }
@@ -107,7 +108,13 @@ public class Podrobnosti extends AppCompatActivity implements View.OnClickListen
             case Nastavenia.ZAUJEM_ODSTRANENIE:
                 if (odpoved.equals(Nastavenia.VSETKO_V_PORIADKU)) {
                     if (udaje.get("uspech") != null) {
+
                         Toast.makeText(this, udaje.get("uspech"), Toast.LENGTH_SHORT).show();
+
+                        int zaujemcovia = Integer.parseInt(pocetZaujemcov.getText().toString());
+                        zaujemcovia--;
+                        pocetZaujemcov.setText(Integer.toString(zaujemcovia));
+                        AktualizatorObsahu.udalosti().hodnota(pozicia, stavTlacidla, zaujemcovia);
 
                         zaujem.setText(getResources().getString(R.string.podrobnosti_tlacidlo_zaujem));
                         zaujem.setBackgroundColor(getResources().getColor(R.color.farba_sekundarna));
@@ -118,10 +125,17 @@ public class Podrobnosti extends AppCompatActivity implements View.OnClickListen
                     new DialogOznameni(this, "Chyba", odpoved);
                 }
                 break;
+
             case Nastavenia.ZAUJEM:
                 if (odpoved.equals(Nastavenia.VSETKO_V_PORIADKU)) {
                     if (udaje.get("uspech") != null) {
+
                         Toast.makeText(this, udaje.get("uspech"), Toast.LENGTH_SHORT).show();
+
+                        int zaujemcovia = Integer.parseInt(pocetZaujemcov.getText().toString());
+                        zaujemcovia++;
+                        pocetZaujemcov.setText(Integer.toString(zaujemcovia));
+                        AktualizatorObsahu.udalosti().hodnota(pozicia, stavTlacidla, zaujemcovia);
 
                         zaujem.setText(getResources().getString(R.string.podrobnosti_tlacidlo_odstranit));
                         zaujem.setBackgroundColor(getResources().getColor(R.color.zaujem_tlacidlo));
@@ -137,8 +151,9 @@ public class Podrobnosti extends AppCompatActivity implements View.OnClickListen
     }
 
     private void init() {
-        this.obrazok = findViewById(R.id.obrazok_zvolenej_udalosti);
-        this.nacitavanie = findViewById(R.id.nacitavenie_zvolenej_udalosti);
+        this.udalostiUdaje = new UdalostiUdaje(this, this, getApplicationContext());
+        this.spracovanieZaujmu = findViewById(R.id.spracovanie_zaujmu);
+
         this.den = findViewById(R.id.den_zvolenej_udalosti);
         this.mesiac = findViewById(R.id.mesiac_zvolenej_udalosti);
         this.nazov = findViewById(R.id.nazov_zvolenej_udalosti);
@@ -147,42 +162,42 @@ public class Podrobnosti extends AppCompatActivity implements View.OnClickListen
         this.vstupenka = findViewById(R.id.vstupenka_zvolenej_udalosti);
         this.cas = findViewById(R.id.cas_zvolenej_udalosti);
 
-        this.spracovanieZaujmu = findViewById(R.id.spracovanie_zaujmu);
+        this.nacitavanie = findViewById(R.id.nacitavenie_zvolenej_udalosti);
+        this.obrazok = findViewById(R.id.obrazok_zvolenej_udalosti);
 
         this.zaujem = findViewById(R.id.tlacidlo_zvolenej_udalosti);
         this.zaujem.setOnClickListener(this);
 
-        this.udalostiUdaje = new UdalostiUdaje(this, this, getApplicationContext());
-
-        Bundle udaje = getIntent().getExtras();
-        nacitajUdajeZvolenejUdalosti(udaje);
+       nacitajUdajeZvolenejUdalosti();
     }
 
-    private void nacitajUdajeZvolenejUdalosti(Bundle bundle) {
-        if (bundle != null) {
-            if (bundle.getString("obrazok") != null) {
-                zaujemUdalosti = bundle.getInt("zaujemUdalosti");
+    private void nacitajUdajeZvolenejUdalosti(){
+        Bundle udaje = getIntent().getExtras();
+        if (udaje != null) {
+            pozicia = udaje.getInt("pozicia");
+            stavTlacidla = udaje.getInt("zaujemUdalosti");
 
-                new Stream(obrazok, nacitavanie, this).execute(bundle.getString("obrazok"));
+            if (Pripojenie.pripojenieExistuje(this)) {
+                udalostiUdaje.potvrdZaujem(udaje.getString("token"), udaje.getString("email"), udaje.getInt("idUdalost"));
+                spracovanieZaujmu.setVisibility(View.VISIBLE);
+            } else {
+                new Stream(obrazok, nacitavanie, this).execute(udaje.getString("obrazok"));
+                pocetZaujemcov.setText(Integer.toString(udaje.getInt("zaujemcovia")));
 
-                den.setText(bundle.getString("den"));
-                mesiac.setText(bundle.getString("mesiac").substring(0, 3) + ".");
-                nazov.setText(bundle.getString("nazov"));
-                miesto.setText(bundle.getString("mesto") + ", " + bundle.getString("ulica"));
-                pocetZaujemcov.setText(bundle.getString("zaujemcovia"));
-                vstupenka.setText(bundle.getString("vstupenka") + "€");
-                cas.setText(bundle.getString("cas"));
+                den.setText(udaje.getString("den"));
+                mesiac.setText(udaje.getString("mesiac").substring(0, 3) + ".");
+                nazov.setText(udaje.getString("nazov"));
+                miesto.setText(udaje.getString("mesto") + ", " + udaje.getString("ulica"));
+                vstupenka.setText(Float.toString(udaje.getFloat("vstupenka")) + "€");
+                cas.setText(udaje.getString("cas"));
 
-                nastavTlacidlo(zaujemUdalosti);
-            }else{
-                this.spracovanieZaujmu.setVisibility(View.VISIBLE);
-                //udalostiUdaje.potvrdZaujem(bundle.getString("token"), bundle.getString("email"), bundle.getInt("idUdalost"));
+                nastavTlacdloPodrobnosti(stavTlacidla);
             }
         }
     }
 
-    private void nastavTlacidlo(int tlacidlo){
-        if (tlacidlo == 1) {
+    private void nastavTlacdloPodrobnosti(int stavTlacidla) {
+        if (stavTlacidla == 1) {
             zaujem.setText(getResources().getString(R.string.podrobnosti_tlacidlo_odstranit));
             zaujem.setBackgroundColor(getResources().getColor(R.color.zaujem_tlacidlo));
         } else {

@@ -5,6 +5,7 @@ public class Nastavenia {
     public static final int MOD = 0;
 
     public static final String UKAZKA_APLIKACIE = "ukazka-aplikacie";
+    public static final String VSETKO_V_PORIADKU = "OK";
 
     public static final String AUTENTIFIKACIA_PRIHLASENIE = "prihlasenie";
     public static final String AUTENTIFIKACIA_ODHLASENIE = "odhlasenie";
@@ -21,6 +22,4 @@ public class Nastavenia {
     public static final String ZAUJEM_POTVRD = "zaujem_potvrd";
     public static final String ZAUJEM_ODSTRANENIE = "zaujem_odstranenie";
     public static final String ZAUJEM_ZOZNAM = "zaujem_zoznam";
-
-    public static final String VSETKO_V_PORIADKU = "OK";
 }

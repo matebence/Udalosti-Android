@@ -21,8 +21,7 @@ public class Prihlasenie extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_autentifikacia_prihlasenie, container, false);
-        init(view);
-        return view;
+        return init(view);
     }
 
     @Override
@@ -47,7 +46,7 @@ public class Prihlasenie extends Fragment implements View.OnClickListener {
         }
     }
 
-    private void init(View view) {
+    private View init(View view) {
         Button prihlasenie = view.findViewById(R.id.prihlasit_sa);
         prihlasenie.setOnClickListener(this);
 
@@ -56,5 +55,7 @@ public class Prihlasenie extends Fragment implements View.OnClickListener {
 
         this.email = view.findViewById(R.id.prihlasenie_email_vstup);
         this.heslo = view.findViewById(R.id.prihlasenie_heslo_vstup);
+
+        return view;
     }
 }

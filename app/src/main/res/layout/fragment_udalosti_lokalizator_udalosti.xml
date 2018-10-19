@@ -25,7 +25,7 @@
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <LinearLayout
-        android:id="@+id/ziadne_udalosti"
+        android:id="@+id/chyba_udalosti"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,23 +38,24 @@
         tools:ignore="UseCompoundDrawables">
 
         <ImageView
+            android:id="@+id/chyba_udalosti_obrazok"
+
             android:layout_width="@dimen/udalosti_sirka_vyska_ziadne_udalosti"
             android:layout_height="@dimen/udalosti_sirka_vyska_ziadne_udalosti"
             android:layout_gravity="center"
             android:layout_marginBottom="@dimen/udalosti_ziadne_udalosti_margin"
 
-            android:src="@drawable/ic_udalosti"
-            android:tint="@color/chyba_pozadie"
             android:contentDescription="@string/udalosti_ziadne_udalosti_popis_illustracie" />
 
         <TextView
+            android:id="@+id/chyba_udalosti_text"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
 
             android:fontFamily="@font/raleway_bold"
-            android:text="@string/udalosti_ziadne_udalosti"
             android:textSize="@dimen/udalosti_ziadne_udalosti_velkost_pisma" />
     </LinearLayout>
 

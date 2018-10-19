@@ -5,14 +5,11 @@ public class AktualizatorObsahu {
     private static AktualizatorObsahu aktualizatorObsahu;
     private Aktualizator aktualizator;
 
-    private int pozcia;
-    private int stav;
-    private int idUdalost;
-    private String karta;
+    private int pozcia, stavTlacidla, zaujemcovia;
 
     private AktualizatorObsahu() {}
 
-    public static AktualizatorObsahu stav() {
+    public static AktualizatorObsahu udalosti() {
         if(aktualizatorObsahu == null) {
             aktualizatorObsahu = new AktualizatorObsahu();
         }
@@ -23,34 +20,29 @@ public class AktualizatorObsahu {
         this.aktualizator = aktualizator;
     }
 
-    public void hodnota(int pozicia, int stav, int idUdalost, String karta) {
+    private void aktualizuj() {
+        aktualizator.aktualizujObsahUdalosti();
+    }
+
+    public void hodnota(int pozicia, int stavTlacidla, int zaujemcovia) {
         if(aktualizator != null) {
             this.pozcia = pozicia;
-            this.stav = stav;
-            this.idUdalost = idUdalost;
-            this.karta = karta;
+            this.stavTlacidla = stavTlacidla;
+            this.zaujemcovia = zaujemcovia;
 
             aktualizuj();
         }
-    }
-
-    private void aktualizuj() {
-        aktualizator.aktualizujObsahUdalosti();
     }
 
     public int getPozcia() {
         return pozcia;
     }
 
-    public int getStav() {
-        return stav;
+    public int getStavTlacidla() {
+        return stavTlacidla;
     }
 
-    public int getIdUdalost() {
-        return idUdalost;
-    }
-
-    public String getKarta() {
-        return karta;
+    public int getZaujemcovia() {
+        return zaujemcovia;
     }
 }

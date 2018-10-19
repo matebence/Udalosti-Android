@@ -137,8 +137,8 @@ public class UdalostiUdaje implements UdalostiImplementacia {
     }
 
     @Override
-    public void zaujemUdalost(String token, String email, int idUdalost) {
-        Log.v(TAG, "Metoda zaujemUdalost bola vykonana");
+    public void zaujem(String token, String email, int idUdalost) {
+        Log.v(TAG, "Metoda zaujem bola vykonana");
 
         Requesty requesty = UdalostiAdresa.initAdresu();
         requesty.zaujem(token, email, idUdalost).enqueue(new Callback<Akcia>() {
@@ -167,7 +167,7 @@ public class UdalostiUdaje implements UdalostiImplementacia {
 
     @Override
     public void potvrdZaujem(String token, String email, int idUdalost) {
-        Log.v(TAG, "Metoda odstranZaujem bola vykonana");
+        Log.v(TAG, "Metoda potvrdZaujem bola vykonana");
 
         Requesty requesty = UdalostiAdresa.initAdresu();
         requesty.potvrd(token, email, idUdalost).enqueue(new Callback<Obsah>() {
@@ -187,7 +187,7 @@ public class UdalostiUdaje implements UdalostiImplementacia {
 
     @Override
     public void odstranZaujem(String token, String email, int idUdalost) {
-        Log.v(TAG, "Metoda potvrdZaujem bola vykonana");
+        Log.v(TAG, "Metoda odstranZaujem bola vykonana");
 
         Requesty requesty = UdalostiAdresa.initAdresu();
         requesty.odstranZaujem(token, email, idUdalost).enqueue(new Callback<Akcia>() {

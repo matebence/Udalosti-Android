@@ -10,11 +10,11 @@ public class Udalost {
     private String cas;
     private String mesto;
     private String ulica;
-    private String vstupenka;
-    private String zaujemcovia;
+    private float vstupenka;
+    private int zaujemcovia;
     private int zaujem;
 
-    public Udalost(int idUdalost, String obrazok, String nazov, String den, String mesiac, String cas, String mesto, String ulica, String vstupenka, String zaujemcovia, int zaujem) {
+    public Udalost(int idUdalost, String obrazok, String nazov, String den, String mesiac, String cas, String mesto, String ulica, float vstupenka, int zaujemcovia, int zaujem) {
         this.idUdalost = idUdalost;
         this.obrazok = obrazok;
         this.nazov = nazov;
@@ -92,19 +92,19 @@ public class Udalost {
         this.ulica = ulica;
     }
 
-    public String getVstupenka() {
+    public float getVstupenka() {
         return vstupenka;
     }
 
-    public void setVstupenka(String vstupenka) {
+    public void setVstupenka(float vstupenka) {
         this.vstupenka = vstupenka;
     }
 
-    public String getZaujemcovia() {
+    public int getZaujemcovia() {
         return zaujemcovia;
     }
 
-    public void setZaujemcovia(String zaujemcovia) {
+    public void setZaujemcovia(int zaujemcovia) {
         this.zaujemcovia = zaujemcovia;
     }
 
@@ -127,8 +127,8 @@ public class Udalost {
                 ", cas='" + cas + '\'' +
                 ", mesto='" + mesto + '\'' +
                 ", ulica='" + ulica + '\'' +
-                ", vstupenka='" + vstupenka + '\'' +
-                ", zaujemcovia='" + zaujemcovia + '\'' +
+                ", vstupenka=" + vstupenka +
+                ", zaujemcovia=" + zaujemcovia +
                 ", zaujem=" + zaujem +
                 '}';
     }

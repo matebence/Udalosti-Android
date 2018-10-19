@@ -21,8 +21,7 @@ public class Registracia extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_autentifikacia_registracia, container, false);
-        init(view);
-        return view;
+        return init(view);
     }
 
     @Override
@@ -45,7 +44,7 @@ public class Registracia extends Fragment implements View.OnClickListener {
         }
     }
 
-    private void init(View view) {
+    private View init(View view) {
         Button registracia = view.findViewById(R.id.posli_registraciu);
         registracia.setOnClickListener(this);
 
@@ -53,5 +52,7 @@ public class Registracia extends Fragment implements View.OnClickListener {
         this.email = view.findViewById(R.id.registracia_email);
         this.heslo = view.findViewById(R.id.registracia_heslo);
         this.potrvd = view.findViewById(R.id.registracia_potvrd);
+
+        return view;
     }
 }

@@ -7,15 +7,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
-import com.mate.bence.udalosti.Activity.Udalosti.Podrobnosti.Aktualizator;
-import com.mate.bence.udalosti.Activity.Udalosti.Podrobnosti.AktualizatorObsahu;
 import com.mate.bence.udalosti.Activity.Udalosti.Podrobnosti.Podrobnosti;
 import com.mate.bence.udalosti.Activity.Udalosti.UdalostiUdaje;
 import com.mate.bence.udalosti.R;
@@ -31,28 +30,25 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Lokalizator extends Fragment implements KommunikaciaData, KommunikaciaOdpoved, ZvolenaUdalost, Aktualizator {
+public class Lokalizator extends Fragment implements KommunikaciaData, KommunikaciaOdpoved, ZvolenaUdalost {
 
-    private ArrayList<Integer> zmeneneUdalostiPodlaPozicie;
+    private String email, stat, okres, mesto, token;
     private List<Udalost> obsahUdalostiPodlaPozicie;
-
-    private SwipeRefreshLayout aktualizujUdalosti;
 
     private UdalostiUdaje udalostiUdaje;
     private UdalostAdapter udalostAdapter;
 
+    private SwipeRefreshLayout aktualizujUdalosti;
     private RecyclerView zoznamUdalostiPodlaPozcie;
-    private LinearLayout ziadneUdalostiPodlaPozcie;
-
-    private String email, stat, okres, mesto, token;
+    private LinearLayout chybaUdalostiPodlaPozicie;
     private ProgressBar nacitavanie;
+    private ImageView chybaUdalostiObrazok;
+    private TextView chybaUdalostiText;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_udalosti_lokalizator_udalosti, container, false);
-        init(view);
-
-        return view;
+        return init(view);
     }
 
     @Override
@@ -70,14 +66,23 @@ public class Lokalizator extends Fragment implements KommunikaciaData, Kommunika
         switch (od) {
             case Nastavenia.UDALOSTI_PODLA_POZICIE:
                 if (odpoved.equals(Nastavenia.VSETKO_V_PORIADKU)) {
+                    chybaUdalostiPodlaPozicie.setVisibility(View.GONE);
+
+                    chybaUdalostiObrazok.setBackgroundResource(R.drawable.ic_udalosti);
+                    chybaUdalostiText.setText(getResources().getString(R.string.udalosti_ziadne_udalosti));
 
                     if (udaje != null) {
-                        ziadneUdalostiPodlaPozcie.setVisibility(View.GONE);
+                        chybaUdalostiPodlaPozicie.setVisibility(View.GONE);
                         ziskajUdalosti(udaje);
                     } else {
-                        ziadneUdalostiPodlaPozcie.setVisibility(View.VISIBLE);
+                        chybaUdalostiPodlaPozicie.setVisibility(View.VISIBLE);
                     }
                     zoznamUdalostiPodlaPozcie.setItemViewCacheSize(obsahUdalostiPodlaPozicie.size());
+                }else{
+                    chybaUdalostiPodlaPozicie.setVisibility(View.VISIBLE);
+
+                    chybaUdalostiObrazok.setBackgroundResource(R.drawable.ic_wifi);
+                    chybaUdalostiText.setText(getResources().getString(R.string.chyba_ziadne_spojenie));
                 }
                 break;
         }
@@ -90,77 +95,53 @@ public class Lokalizator extends Fragment implements KommunikaciaData, Kommunika
 
     @Override
     public void podrobnostiUdalosti(View view, int pozicia) {
-        boolean zmenene = false;
         Udalost udalost = obsahUdalostiPodlaPozicie.get(pozicia);
         Intent zvolenaUdalost = new Intent(getActivity(), Podrobnosti.class);
 
-        if(!zmeneneUdalostiPodlaPozicie.isEmpty()){
-            for(int i = 0; i<zmeneneUdalostiPodlaPozicie.size();i++){
-                if(zmeneneUdalostiPodlaPozicie.get(i) == udalost.getIdUdalost()){
-                    zmeneneUdalostiPodlaPozicie.remove(i);
-                    zmenene = true;
-                }
-            }
-        }
-
-        if(!zmenene){
-            zvolenaUdalost.putExtra("pozicia", pozicia);
-            zvolenaUdalost.putExtra("karta", Lokalizator.class.getSimpleName());
-
-            zvolenaUdalost.putExtra("zaujemUdalosti", udalost.getZaujem());
-
-            zvolenaUdalost.putExtra("obrazok", udalost.getObrazok());
-            zvolenaUdalost.putExtra("nazov", udalost.getNazov());
-            zvolenaUdalost.putExtra("den", udalost.getDen());
-            zvolenaUdalost.putExtra("mesiac", udalost.getMesiac());
-            zvolenaUdalost.putExtra("cas", udalost.getCas());
-            zvolenaUdalost.putExtra("mesto", udalost.getMesto());
-            zvolenaUdalost.putExtra("ulica", udalost.getUlica());
-            zvolenaUdalost.putExtra("vstupenka", udalost.getVstupenka());
-            zvolenaUdalost.putExtra("zaujemcovia", udalost.getZaujemcovia());
-        }
+        zvolenaUdalost.putExtra("email", email);
+        zvolenaUdalost.putExtra("token", token);
 
         zvolenaUdalost.putExtra("idUdalost", udalost.getIdUdalost());
-        zvolenaUdalost.putExtra("token", token);
-        zvolenaUdalost.putExtra("email", email);
+        zvolenaUdalost.putExtra("zaujemUdalosti", udalost.getZaujem());
+        zvolenaUdalost.putExtra("pozicia", pozicia);
+
+        zvolenaUdalost.putExtra("obrazok", udalost.getObrazok());
+        zvolenaUdalost.putExtra("nazov", udalost.getNazov());
+        zvolenaUdalost.putExtra("den", udalost.getDen());
+        zvolenaUdalost.putExtra("mesiac", udalost.getMesiac());
+        zvolenaUdalost.putExtra("cas", udalost.getCas());
+        zvolenaUdalost.putExtra("mesto", udalost.getMesto());
+        zvolenaUdalost.putExtra("ulica", udalost.getUlica());
+        zvolenaUdalost.putExtra("vstupenka", udalost.getVstupenka());
+        zvolenaUdalost.putExtra("zaujemcovia", udalost.getZaujemcovia());
 
         startActivity(zvolenaUdalost);
-        AktualizatorObsahu.stav().nastav(this);
         getActivity().overridePendingTransition(R.anim.vstupit_vychod_activity, R.anim.vstupit_vchod_activity);
     }
 
-    @Override
-    public void aktualizujObsahUdalosti() {
-        Log.v("MainAct", "Lokalizator");
-
-        if(AktualizatorObsahu.stav().getKarta().equals(Lokalizator.class.getSimpleName())){
-            obsahUdalostiPodlaPozicie.get(AktualizatorObsahu.stav().getPozcia()).setZaujem(AktualizatorObsahu.stav().getStav());
-        }else{
-            zmeneneUdalostiPodlaPozicie.add(AktualizatorObsahu.stav().getIdUdalost());
-        }
-    }
-
-    private void init(View view) {
+    private View init(View view) {
         this.email = getArguments().getString("email");
         this.token = getArguments().getString("token");
+
         this.stat = getArguments().getString("stat");
         this.okres = getArguments().getString("okres");
         this.mesto = getArguments().getString("mesto");
 
         this.zoznamUdalostiPodlaPozcie = view.findViewById(R.id.zoznam_udalosti);
-        this.ziadneUdalostiPodlaPozcie = view.findViewById(R.id.ziadne_udalosti);
+        this.chybaUdalostiPodlaPozicie = view.findViewById(R.id.chyba_udalosti);
         this.nacitavanie = view.findViewById(R.id.nacitavanie);
         this.aktualizujUdalosti = view.findViewById(R.id.aktualizuj);
+        this.chybaUdalostiObrazok = view.findViewById(R.id.chyba_udalosti_obrazok);
+        this.chybaUdalostiText = view.findViewById(R.id.chyba_udalosti_text);
 
         this.aktualizujUdalosti.setOnRefreshListener(aktualizuj);
         this.aktualizujUdalosti.setColorSchemeColors(getResources().getColor(R.color.nacitavanie));
 
         this.obsahUdalostiPodlaPozicie = new ArrayList<>();
-        this.zmeneneUdalostiPodlaPozicie = new ArrayList<>();
-
         nastavZoznamUdalosti(obsahUdalostiPodlaPozicie);
 
         this.udalostiUdaje = new UdalostiUdaje(this, this, getContext());
+        return view;
     }
 
     private void ziskajUdalosti(ArrayList<Udalost> udalosti) {
@@ -173,10 +154,11 @@ public class Lokalizator extends Fragment implements KommunikaciaData, Kommunika
         PoskitovelObsahu poskitovelObsahu = new PoskitovelObsahu(getContext());
 
         udalostAdapter = new UdalostAdapter(udaje, getContext());
+        udalostAdapter.zvolenaUdalost(this);
+
         zoznamUdalostiPodlaPozcie.setLayoutManager(poskitovelObsahu);
         zoznamUdalostiPodlaPozcie.setItemAnimator(new DefaultItemAnimator());
         zoznamUdalostiPodlaPozcie.setAdapter(udalostAdapter);
-        udalostAdapter.zvolenaUdalost(this);
     }
 
     private SwipeRefreshLayout.OnRefreshListener aktualizuj = new SwipeRefreshLayout.OnRefreshListener() {
@@ -185,7 +167,7 @@ public class Lokalizator extends Fragment implements KommunikaciaData, Kommunika
             obsahUdalostiPodlaPozicie.clear();
             udalostAdapter.notifyItemRangeRemoved(0, obsahUdalostiPodlaPozicie.size());
 
-            ziadneUdalostiPodlaPozcie.setVisibility(View.GONE);
+            chybaUdalostiPodlaPozicie.setVisibility(View.GONE);
             zoznamUdalostiPodlaPozcie.setVisibility(View.GONE);
             nacitavanie.setVisibility(View.VISIBLE);
 
