@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Objavuj extends Fragment implements KommunikaciaData, KommunikaciaOdpoved, ZvolenaUdalost{
+public class Objavuj extends Fragment implements KommunikaciaData, KommunikaciaOdpoved, ZvolenaUdalost {
 
     private String email, stat, token;
     private List<Udalost> obsahUdalosti;
@@ -117,6 +117,11 @@ public class Objavuj extends Fragment implements KommunikaciaData, KommunikaciaO
 
         startActivity(zvolenaUdalost);
         getActivity().overridePendingTransition(R.anim.vstupit_vychod_activity, R.anim.vstupit_vchod_activity);
+    }
+
+    @Override
+    public void podrobnostiUdalosti(int pozicia, Udalost udalost) {
+
     }
 
     private View init(View view) {

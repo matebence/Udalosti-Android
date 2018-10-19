@@ -1,12 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-
-    android:orientation="vertical"
 
     tools:context=".Activity.Udalosti.Udalosti">
-</LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/zoznam_zaujmov"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:scrollbars="vertical" />
+
+    <LinearLayout
+        android:id="@+id/chyba_zaujmov"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+
+        android:orientation="vertical"
+
+        android:visibility="gone"
+
+        tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:id="@+id/chyba_zaujmov_obrazok"
+
+            android:layout_width="@dimen/zaujmy_ziadne_zaujmy_obrazok_sirka_vyska"
+            android:layout_height="@dimen/zaujmy_ziadne_zaujmy_obrazok_sirka_vyska"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/zaujmy_ziadne_zaujmy_obrazok_margin"
+
+            android:contentDescription="@string/zaujmy_ziadne_zaujmy_popis_illustracie" />
+
+        <TextView
+            android:id="@+id/chyba_zaujmov_text"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/raleway_bold"
+
+            android:gravity="center"
+            android:textSize="@dimen/zaujmy_ziadne_zaujmy_velkost_pisma" />
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/nacitavanie"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+
+        android:theme="@style/Nacitavanie"
+
+        android:visibility="gone"></ProgressBar>
+
+    <LinearLayout
+        android:id="@+id/spracovanie_zaujmu"
+
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerInParent="true"
+        android:background="@color/nacitavanie_pozadie"
+
+        android:gravity="center"
+
+        android:orientation="vertical"
+
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:theme="@style/Nacitavanie"></ProgressBar>
+    </LinearLayout>
+</RelativeLayout>

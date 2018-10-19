@@ -13,11 +13,11 @@ public interface UdalostiImplementacia {
 
     HashMap miestoPrihlasenia();
 
-    void zoznamZaujmov(String token, String email);
+    void zoznamZaujmov(String email, String token);
 
-    void zaujem(String token, String email, int idUdalost);
+    void zaujem(String email, String token, int idUdalost);
 
-    void potvrdZaujem(String token, String email, int idUdalost);
+    void potvrdZaujem(String email, String token, int idUdalost);
 
-    void odstranZaujem(String token, String email, int idUdalost);
+    void odstranZaujem(String email, String token, int idUdalost);
 }

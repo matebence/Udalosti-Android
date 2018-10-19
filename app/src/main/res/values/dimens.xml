@@ -56,6 +56,11 @@
     <dimen name="udalosti_ziadne_udalosti_margin">10dp</dimen>
     <dimen name="udalosti_ziadne_udalosti_velkost_pisma">20sp</dimen>
 
+    <!-- Zaujmy -->
+    <dimen name="zaujmy_ziadne_zaujmy_obrazok_sirka_vyska">90dp</dimen>
+    <dimen name="zaujmy_ziadne_zaujmy_obrazok_margin">10dp</dimen>
+    <dimen name="zaujmy_ziadne_zaujmy_velkost_pisma">20sp</dimen>
+
     <!-- Zoznam udalosti -->
     <dimen name="list_zoznam_udalosti_obsah_margin">20dp</dimen>
     <dimen name="list_zoznam_udalosti_vyska_obrazka">200dp</dimen>
@@ -70,6 +75,23 @@
     <dimen name="list_zoznam_udalosti_velkost_pisma_mesiac">20sp</dimen>
     <dimen name="list_zoznam_udalosti_velkost_pisma_den">25sp</dimen>
     <dimen name="list_zoznam_udalosti_velkost_pisma_cas">20sp</dimen>
+
+    <!-- Zoznam zaujmov -->
+    <dimen name="list_zoznam_zaujmov_hlavicka_margin_bottom_top">3dp</dimen>
+    <dimen name="list_zoznam_zaujmov_hlavicka_margin_left_right">10dp</dimen>
+    <dimen name="list_zaujmy_odstranit_sirka_vyska">25dp</dimen>
+    <dimen name="list_zaujmy_odstranit_margin">10dp</dimen>
+    <dimen name="list_zaujmy_odstranit_text_margin">20dp</dimen>
+    <dimen name="list_zaujmy_padding_top_bottom">10dp</dimen>
+    <dimen name="list_zaujmy_pozicia_sirka">0dp</dimen>
+    <dimen name="list_zaujmy_pozicia_vyska">1dp</dimen>
+    <dimen name="list_zaujmy_miesto_vyska">20dp</dimen>
+    <dimen name="list_zoznam_zaujmov_hlavicka_velkost_pisma">28sp</dimen>
+    <dimen name="list_zaujmy_odstranit_velkost_pisma">18sp</dimen>
+    <dimen name="list_zaujmy_den_velkost_pisma">40sp</dimen>
+    <dimen name="list_zaujmy_nazov_velkost_pisma">28sp</dimen>
+    <dimen name="list_zaujmy_mesto_velkost_pisma">17sp</dimen>
+    <dimen name="list_zaujmy_ulica_velkost_pisma">17sp</dimen>
 
     <!-- Podrobnosti -->
     <dimen name="podrobnosti_vyska_obrazka_aktualnej_udalosti">250dp</dimen>

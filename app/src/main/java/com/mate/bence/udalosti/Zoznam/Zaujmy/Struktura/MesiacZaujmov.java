@@ -2,7 +2,7 @@ package com.mate.bence.udalosti.Zoznam.Zaujmy.Struktura;
 
 import com.mate.bence.udalosti.Zoznam.Udalost;
 
-public class NaplanovanaUdalost extends Zoznam {
+public class MesiacZaujmov extends Zaujem {
 
     private Udalost udalost;
 
@@ -10,12 +10,12 @@ public class NaplanovanaUdalost extends Zoznam {
         return udalost;
     }
 
-    public void setInformacie(Udalost udalost) {
+    public void setUdalost(Udalost udalost) {
         this.udalost = udalost;
     }
 
     @Override
-    public int cast() {
-        return NAPLANOVANA_UDALOST;
+    public int struktura() {
+        return MESIAC_ZAUJMOV;
     }
 }

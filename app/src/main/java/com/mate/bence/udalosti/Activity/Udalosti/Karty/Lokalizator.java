@@ -119,6 +119,11 @@ public class Lokalizator extends Fragment implements KommunikaciaData, Kommunika
         getActivity().overridePendingTransition(R.anim.vstupit_vychod_activity, R.anim.vstupit_vchod_activity);
     }
 
+    @Override
+    public void podrobnostiUdalosti(int pozicia, Udalost udalost) {
+
+    }
+
     private View init(View view) {
         this.email = getArguments().getString("email");
         this.token = getArguments().getString("token");

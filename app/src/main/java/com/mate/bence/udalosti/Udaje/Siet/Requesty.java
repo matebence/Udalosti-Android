@@ -36,33 +36,6 @@ public interface Requesty {
             @Field("nova_registracia") String registracia);
 
     @FormUrlEncoded
-    @POST("udalosti/index.php/zaujmy")
-    Call<Akcia> zaujem(
-            @Field("token") String token,
-            @Field("email") String email,
-            @Field("idUdalost") int idUdalost);
-
-    @FormUrlEncoded
-    @POST("udalosti/index.php/zaujmy/potvrd")
-    Call<Obsah> potvrd(
-            @Field("token") String token,
-            @Field("email") String email,
-            @Field("idUdalost") int idUdalost);
-
-    @FormUrlEncoded
-    @POST("udalosti/index.php/zaujmy/odstran")
-    Call<Akcia> odstranZaujem(
-            @Field("token") String token,
-            @Field("email") String email,
-            @Field("idUdalost") int idUdalost);
-
-    @FormUrlEncoded
-    @POST("udalosti/index.php/zaujmy/zoznam")
-    Call<Obsah> zaujmy(
-            @Field("token") String token,
-            @Field("email") String email);
-
-    @FormUrlEncoded
     @POST("udalosti/index.php/udalosti")
     Call<Obsah> udalosti(
             @Field("email") String email,
@@ -77,6 +50,33 @@ public interface Requesty {
             @Field("okres") String okres,
             @Field("mesto") String mesto,
             @Field("token") String token);
+
+    @FormUrlEncoded
+    @POST("udalosti/index.php/zaujmy/zoznam")
+    Call<Obsah> zaujmy(
+            @Field("email") String email,
+            @Field("token") String token);
+
+    @FormUrlEncoded
+    @POST("udalosti/index.php/zaujmy")
+    Call<Akcia> zaujem(
+            @Field("email") String email,
+            @Field("token") String token,
+            @Field("idUdalost") int idUdalost);
+
+    @FormUrlEncoded
+    @POST("udalosti/index.php/zaujmy/potvrd")
+    Call<Obsah> potvrd(
+            @Field("email") String email,
+            @Field("token") String token,
+            @Field("idUdalost") int idUdalost);
+
+    @FormUrlEncoded
+    @POST("udalosti/index.php/zaujmy/odstran")
+    Call<Akcia> odstranZaujem(
+            @Field("email") String email,
+            @Field("token") String token,
+            @Field("idUdalost") int idUdalost);
 
     @GET("reverse.php")
     Call<LocationIQ> pozicia(

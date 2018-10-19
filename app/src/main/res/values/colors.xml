@@ -5,9 +5,11 @@
     <color name="farba_primarna">#00457c</color>
     <color name="farba_sekundarna">#005ba6</color>
 
+    <!--Aplikacia nacitavanie a spracovanie dat-->
     <color name="nacitavanie">#0397d6</color>
     <color name="nacitavanie_pozadie">#70000000</color>
 
+    <!--Aplikacia udalosti-->
     <color name="autentifikacia">#0397d6</color>
     <color name="chyba_pozadie">#b6b5b5</color>
     <color name="zaujem_tlacidlo">#ab2727</color>
@@ -17,6 +19,9 @@
     <color name="zoznam_miesto">#005ba6</color>
     <color name="zoznam_pozadie">#f2f2f2</color>
     <color name="zoznam_hlavicka">#eaeaea</color>
+
+    <!-- Zaujmy zoznam -->
+    <color name="zaujmy_hlavicka">#eaeaea</color>
 
     <!--Tab Layout-->
     <color name="tab_pozadie">#005ba6</color>

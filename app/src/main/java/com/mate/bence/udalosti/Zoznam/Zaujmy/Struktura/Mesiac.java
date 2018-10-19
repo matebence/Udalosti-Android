@@ -1,6 +1,6 @@
 package com.mate.bence.udalosti.Zoznam.Zaujmy.Struktura;
 
-public class Mesiac extends Zoznam {
+public class Mesiac extends Zaujem {
 
     private String mesiac;
 
@@ -13,7 +13,7 @@ public class Mesiac extends Zoznam {
     }
 
     @Override
-    public int cast() {
+    public int struktura() {
         return MESIAC;
     }
 }

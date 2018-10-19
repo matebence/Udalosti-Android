@@ -1,7 +1,5 @@
 package com.mate.bence.udalosti.Activity.Udalosti.Podrobnosti;
 
-import android.content.Intent;
-import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -33,6 +31,7 @@ public class Podrobnosti extends AppCompatActivity implements View.OnClickListen
     private ImageView obrazok;
     private Button zaujem;
 
+    private Udalost udalost;
     private UdalostiUdaje udalostiUdaje;
     private int stavTlacidla, pozicia;
 
@@ -59,11 +58,11 @@ public class Podrobnosti extends AppCompatActivity implements View.OnClickListen
                 if (udaje != null) {
                     if (stavTlacidla == 1) {
                         stavTlacidla = 0;
-                        udalostiUdaje.odstranZaujem(udaje.getString("token"), udaje.getString("email"), udaje.getInt("idUdalost"));
+                        udalostiUdaje.odstranZaujem(udaje.getString("email"), udaje.getString("token"), udaje.getInt("idUdalost"));
 
                     } else {
                         stavTlacidla = 1;
-                        udalostiUdaje.zaujem(udaje.getString("token"), udaje.getString("email"), udaje.getInt("idUdalost"));
+                        udalostiUdaje.zaujem(udaje.getString("email"), udaje.getString("token"), udaje.getInt("idUdalost"));
                     }
                 }
                 break;
@@ -78,7 +77,7 @@ public class Podrobnosti extends AppCompatActivity implements View.OnClickListen
                     if (udaje != null) {
                         if (udaje.size() == 1) {
 
-                            Udalost udalost = (Udalost) udaje.get(0);
+                            udalost = (Udalost) udaje.get(0);
                             new Stream(obrazok, nacitavanie, this).execute(udalost.getObrazok());
 
                             stavTlacidla = udalost.getZaujem();
@@ -114,7 +113,7 @@ public class Podrobnosti extends AppCompatActivity implements View.OnClickListen
                         int zaujemcovia = Integer.parseInt(pocetZaujemcov.getText().toString());
                         zaujemcovia--;
                         pocetZaujemcov.setText(Integer.toString(zaujemcovia));
-                        AktualizatorObsahu.udalosti().hodnota(pozicia, stavTlacidla, zaujemcovia);
+                        AktualizatorObsahu.zaujmy().hodnota();
 
                         zaujem.setText(getResources().getString(R.string.podrobnosti_tlacidlo_zaujem));
                         zaujem.setBackgroundColor(getResources().getColor(R.color.farba_sekundarna));
@@ -135,7 +134,7 @@ public class Podrobnosti extends AppCompatActivity implements View.OnClickListen
                         int zaujemcovia = Integer.parseInt(pocetZaujemcov.getText().toString());
                         zaujemcovia++;
                         pocetZaujemcov.setText(Integer.toString(zaujemcovia));
-                        AktualizatorObsahu.udalosti().hodnota(pozicia, stavTlacidla, zaujemcovia);
+                        AktualizatorObsahu.zaujmy().hodnota();
 
                         zaujem.setText(getResources().getString(R.string.podrobnosti_tlacidlo_odstranit));
                         zaujem.setBackgroundColor(getResources().getColor(R.color.zaujem_tlacidlo));
@@ -178,7 +177,7 @@ public class Podrobnosti extends AppCompatActivity implements View.OnClickListen
             stavTlacidla = udaje.getInt("zaujemUdalosti");
 
             if (Pripojenie.pripojenieExistuje(this)) {
-                udalostiUdaje.potvrdZaujem(udaje.getString("token"), udaje.getString("email"), udaje.getInt("idUdalost"));
+                udalostiUdaje.potvrdZaujem(udaje.getString("email"), udaje.getString("token"), udaje.getInt("idUdalost"));
                 spracovanieZaujmu.setVisibility(View.VISIBLE);
             } else {
                 new Stream(obrazok, nacitavanie, this).execute(udaje.getString("obrazok"));

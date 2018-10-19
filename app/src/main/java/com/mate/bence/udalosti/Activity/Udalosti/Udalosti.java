@@ -186,6 +186,7 @@ public class Udalosti extends AppCompatActivity implements KommunikaciaOdpoved, 
 
         objavuj.setArguments(bundle);
         lokalizator.setArguments(bundle);
+        zaujmy.setArguments(bundle);
 
         String[] karty = {getString(R.string.karta_prva), getString(R.string.karta_druha), getString(R.string.karta_tretia)};
         gestaKariet.nacitajFragment(objavuj, karty[0]);
@@ -271,6 +272,7 @@ public class Udalosti extends AppCompatActivity implements KommunikaciaOdpoved, 
 
             objavuj.setArguments(bundle);
             lokalizator.setArguments(bundle);
+            zaujmy.setArguments(bundle);
 
             switch (pozicia) {
                 case 0:

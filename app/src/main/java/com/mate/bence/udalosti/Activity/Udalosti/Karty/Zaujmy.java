@@ -1,76 +1,79 @@
 package com.mate.bence.udalosti.Activity.Udalosti.Karty;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.mate.bence.udalosti.Activity.Udalosti.Podrobnosti.Aktualizator;
+import com.mate.bence.udalosti.Activity.Udalosti.Podrobnosti.AktualizatorObsahu;
+import com.mate.bence.udalosti.Activity.Udalosti.Podrobnosti.Podrobnosti;
 import com.mate.bence.udalosti.Activity.Udalosti.UdalostiUdaje;
+import com.mate.bence.udalosti.Dialog.DialogOznameni;
 import com.mate.bence.udalosti.R;
 import com.mate.bence.udalosti.Udaje.Nastavenia.Nastavenia;
 import com.mate.bence.udalosti.Udaje.Siet.Model.KommunikaciaData;
 import com.mate.bence.udalosti.Udaje.Siet.Model.KommunikaciaOdpoved;
 import com.mate.bence.udalosti.Zoznam.PoskitovelObsahu;
 import com.mate.bence.udalosti.Zoznam.Udalost;
+import com.mate.bence.udalosti.Zoznam.Udalosti.ZvolenaUdalost;
 import com.mate.bence.udalosti.Zoznam.Zaujmy.OdstranenieZaujmu;
+import com.mate.bence.udalosti.Zoznam.Zaujmy.ZaujemAdapterGesto;
 import com.mate.bence.udalosti.Zoznam.Zaujmy.Struktura.Mesiac;
-import com.mate.bence.udalosti.Zoznam.Zaujmy.Struktura.NaplanovanaUdalost;
-import com.mate.bence.udalosti.Zoznam.Zaujmy.Struktura.Zoznam;
+import com.mate.bence.udalosti.Zoznam.Zaujmy.Struktura.MesiacZaujmov;
+import com.mate.bence.udalosti.Zoznam.Zaujmy.Struktura.Zaujem;
 import com.mate.bence.udalosti.Zoznam.Zaujmy.ZaujemAdapter;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.TreeMap;
 
-public class Zaujmy extends Fragment implements KommunikaciaData, KommunikaciaOdpoved, OdstranenieZaujmu.RecyclerItemTouchHelperListener {
+public class Zaujmy extends Fragment implements KommunikaciaData, KommunikaciaOdpoved, OdstranenieZaujmu, ZvolenaUdalost, Aktualizator {
 
     private String email, token;
 
-    private List<Udalost> naplnovaneUdalosti;
-    private List<Zoznam> skupina;
+    private List<Udalost> obsahZaujmov;
+    private List<Zaujem> mesiaceZaujmov;
 
     private UdalostiUdaje udalostiUdaje;
-    private ZaujemAdapter kalendarAdapter;
+    private ZaujemAdapter zaujemAdapter;
 
-    private RecyclerView zoznamNaplnovanychUdalosti;
-    private LinearLayout ziadneNaplanovaneUdalosti;
+    private RecyclerView zoznamZaujmov;
+    private LinearLayout chybaZaujmov, spracovanieZaujmu;
     private ProgressBar nacitavanie;
+    private ImageView chybaZaujmovObrazok;
+    private TextView chybaZaujmovText;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_udalosti_zaujmy, container, false);
-        init(view);
-
-        return view;
+        return init(view);
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
-        if (naplnovaneUdalosti.isEmpty()) {
+        if (obsahZaujmov.isEmpty()) {
             this.nacitavanie.setVisibility(View.VISIBLE);
             udalostiUdaje.zoznamZaujmov(email, token);
-        }
-    }
-
-    @Override
-    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
-        if (viewHolder instanceof ZaujemAdapter.NaplanovanaUdalostHolder) {
-
-            NaplanovanaUdalost naplanovanaUdalost = (NaplanovanaUdalost) skupina.get(position);
-
-            this.udalostiUdaje.odstranZaujem(token, email, naplanovanaUdalost.getUdalost().getIdUdalost());
-            this.kalendarAdapter.odstranNaplanovanuUdalost(viewHolder.getAdapterPosition());
         }
     }
 
@@ -79,13 +82,23 @@ public class Zaujmy extends Fragment implements KommunikaciaData, KommunikaciaOd
         switch (od) {
             case Nastavenia.ZAUJEM_ZOZNAM:
                 if (odpoved.equals(Nastavenia.VSETKO_V_PORIADKU)) {
+                    chybaZaujmov.setVisibility(View.GONE);
+
+                    chybaZaujmovObrazok.setBackgroundResource(R.drawable.ic_udalosti);
+                    chybaZaujmovText.setText(getResources().getString(R.string.zaujmy_ziadne_zaujmy));
+
                     if (udaje != null) {
-                        ziadneNaplanovaneUdalosti.setVisibility(View.GONE);
-                        ziskajNaplanovaneUdalosti(udaje);
+                        chybaZaujmov.setVisibility(View.GONE);
+                        ziskajZaujmov(udaje);
                     } else {
-                       ziadneNaplanovaneUdalosti.setVisibility(View.VISIBLE);
+                        chybaZaujmov.setVisibility(View.VISIBLE);
                     }
-                    zoznamNaplnovanychUdalosti.setItemViewCacheSize(naplnovaneUdalosti.size());
+                    zoznamZaujmov.setItemViewCacheSize(obsahZaujmov.size());
+                } else {
+                    chybaZaujmov.setVisibility(View.VISIBLE);
+
+                    chybaZaujmovObrazok.setBackgroundResource(R.drawable.ic_wifi);
+                    chybaZaujmovText.setText(getResources().getString(R.string.chyba_ziadne_spojenie));
                 }
                 break;
         }
@@ -97,85 +110,143 @@ public class Zaujmy extends Fragment implements KommunikaciaData, KommunikaciaOd
         switch (od) {
             case Nastavenia.ZAUJEM_ODSTRANENIE:
                 if (odpoved.equals(Nastavenia.VSETKO_V_PORIADKU)) {
-                    if (udaje != null) {
-                        Snackbar snackbar = null;
 
-                        if (udaje.get("uspech") != null) {
-                            snackbar = Snackbar.make(getActivity().findViewById(android.R.id.content), udaje.get("uspech"), Snackbar.LENGTH_SHORT);
-                        } else if (udaje.get("chyba") != null) {
-                            snackbar = Snackbar.make(getActivity().findViewById(android.R.id.content), udaje.get("chyba"), Snackbar.LENGTH_SHORT);
-
-                        }
-
-                        View pozadie = snackbar.getView();
-                        pozadie.setBackgroundColor(getResources().getColor(R.color.farba_primarna));
-                        snackbar.setActionTextColor(getResources().getColor(android.R.color.white));
-                        snackbar.show();
+                    if (udaje.get("uspech") != null) {
+                        Toast.makeText(getContext(), udaje.get("uspech"), Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getContext(), udaje.get("chyba"), Toast.LENGTH_SHORT).show();
                     }
+
+                } else {
+                    new DialogOznameni(getActivity(), "Chyba", odpoved);
                 }
                 break;
         }
+        this.spracovanieZaujmu.setVisibility(View.GONE);
     }
 
-    protected void ziskajNaplanovaneUdalosti(ArrayList<Udalost> udalosti) {
-        int posladnaPozicia = skupina.size() - 1;
+    @Override
+    public void podrobnostiUdalosti(int pozicia, Udalost udalost) {
+        Intent zvolenaUdalost = new Intent(getActivity(), Podrobnosti.class);
 
-        this.naplnovaneUdalosti.addAll(udalosti);
-        for (String skupina : zoSkupinovanieUdajov(udalosti).keySet()) {
-            Mesiac mesiac = new Mesiac();
-            mesiac.setMesiac(skupina);
-            this.skupina.add(mesiac);
+        zvolenaUdalost.putExtra("email", email);
+        zvolenaUdalost.putExtra("token", token);
 
-            for (Udalost informacie : zoSkupinovanieUdajov(udalosti).get(skupina)) {
-                NaplanovanaUdalost naplanovanaUdalost = new NaplanovanaUdalost();
-                naplanovanaUdalost.setInformacie(informacie);
-                this.skupina.add(naplanovanaUdalost);
-            }
+        zvolenaUdalost.putExtra("idUdalost", udalost.getIdUdalost());
+        zvolenaUdalost.putExtra("zaujemUdalosti", udalost.getZaujem());
+        zvolenaUdalost.putExtra("pozicia", pozicia);
+
+        zvolenaUdalost.putExtra("obrazok", udalost.getObrazok());
+        zvolenaUdalost.putExtra("nazov", udalost.getNazov());
+        zvolenaUdalost.putExtra("den", udalost.getDen());
+        zvolenaUdalost.putExtra("mesiac", udalost.getMesiac());
+        zvolenaUdalost.putExtra("cas", udalost.getCas());
+        zvolenaUdalost.putExtra("mesto", udalost.getMesto());
+        zvolenaUdalost.putExtra("ulica", udalost.getUlica());
+        zvolenaUdalost.putExtra("vstupenka", udalost.getVstupenka());
+        zvolenaUdalost.putExtra("zaujemcovia", udalost.getZaujemcovia());
+
+        startActivity(zvolenaUdalost);
+        getActivity().overridePendingTransition(R.anim.vstupit_vychod_activity, R.anim.vstupit_vchod_activity);
+    }
+
+    @Override
+    public void podrobnostiUdalosti(View view, int pozicia) {
+    }
+
+    @Override
+    public void odstranit(RecyclerView.ViewHolder viewHolder, int smer, int pozicia) {
+        if (viewHolder instanceof ZaujemAdapter.MesiacZaujmovHolder) {
+            MesiacZaujmov mesiacZaujmov = (MesiacZaujmov) mesiaceZaujmov.get(pozicia);
+
+            this.spracovanieZaujmu.setVisibility(View.VISIBLE);
+            this.udalostiUdaje.odstranZaujem(email, token, mesiacZaujmov.getUdalost().getIdUdalost());
+            this.zaujemAdapter.odstranNaplanovanuUdalost(viewHolder.getAdapterPosition());
         }
-
-        kalendarAdapter.notifyItemRangeInserted(posladnaPozicia, skupina.size());
     }
 
-    private void init(View view) {
+    @Override
+    public void aktualizujObsahZaujmov() {
+        mesiaceZaujmov.clear();
+        obsahZaujmov.clear();
+
+        zaujemAdapter.notifyItemRangeRemoved(0, obsahZaujmov.size());
+        udalostiUdaje.zoznamZaujmov(email, token);
+    }
+
+    private View init(View view) {
+        AktualizatorObsahu.zaujmy().nastav(this);
+
         this.email = getArguments().getString("email");
         this.token = getArguments().getString("token");
 
-        this.naplnovaneUdalosti = new ArrayList<>();
-        this.skupina = new ArrayList<>();
+        this.spracovanieZaujmu = view.findViewById(R.id.spracovanie_zaujmu);
 
-        this.zoznamNaplnovanychUdalosti = view.findViewById(R.id.zoznam_udalosti_o_ktorych_ma_pouzivatel_zaujem);
-        this.ziadneNaplanovaneUdalosti = view.findViewById(R.id.ziadne_naplanovane_udalosti);
+        this.zoznamZaujmov = view.findViewById(R.id.zoznam_zaujmov);
+        this.chybaZaujmov = view.findViewById(R.id.chyba_zaujmov);
         this.nacitavanie = view.findViewById(R.id.nacitavanie);
+        this.chybaZaujmovObrazok = view.findViewById(R.id.chyba_zaujmov_obrazok);
+        this.chybaZaujmovText = view.findViewById(R.id.chyba_zaujmov_text);
 
-        nastavZoznamNaplnovanychUdalosti();
+        this.obsahZaujmov = new ArrayList<>();
+        this.mesiaceZaujmov = new ArrayList<>();
+        nastavZoznamZaujmov();
 
         this.udalostiUdaje = new UdalostiUdaje(this, this, getContext());
+        return view;
     }
 
-    private void nastavZoznamNaplnovanychUdalosti() {
-        this.kalendarAdapter = new ZaujemAdapter(skupina);
+    protected void ziskajZaujmov(ArrayList<Udalost> zaujmy) {
+        this.obsahZaujmov.addAll(zaujmy);
+
+        for (String skupina : zoSkupinovanieUdajov(zaujmy).keySet()) {
+            Mesiac mesiac = new Mesiac();
+            mesiac.setMesiac(skupina);
+            this.mesiaceZaujmov.add(mesiac);
+
+            for (Udalost udalost : zoSkupinovanieUdajov(zaujmy).get(skupina)) {
+                MesiacZaujmov mesiacZaujmov = new MesiacZaujmov();
+                mesiacZaujmov.setUdalost(udalost);
+                this.mesiaceZaujmov.add(mesiacZaujmov);
+            }
+        }
+
+        zaujemAdapter.notifyItemRangeInserted(0, mesiaceZaujmov.size());
+    }
+
+    private void nastavZoznamZaujmov() {
         PoskitovelObsahu poskitovelObsahu = new PoskitovelObsahu(getContext());
 
-        zoznamNaplnovanychUdalosti.setLayoutManager(poskitovelObsahu);
-        zoznamNaplnovanychUdalosti.setItemAnimator(new DefaultItemAnimator());
-        zoznamNaplnovanychUdalosti.setAdapter(kalendarAdapter);
+        zaujemAdapter = new ZaujemAdapter(mesiaceZaujmov);
+        zaujemAdapter.zvolenaUdalost(this);
 
-        ItemTouchHelper.SimpleCallback gesto = new OdstranenieZaujmu(0, ItemTouchHelper.LEFT, this);
-        new ItemTouchHelper(gesto).attachToRecyclerView(zoznamNaplnovanychUdalosti);
+        zoznamZaujmov.setLayoutManager(poskitovelObsahu);
+        zoznamZaujmov.setItemAnimator(new DefaultItemAnimator());
+        zoznamZaujmov.setAdapter(zaujemAdapter);
+
+        ItemTouchHelper.SimpleCallback zaujemAdapterGesto = new ZaujemAdapterGesto(0, ItemTouchHelper.LEFT, this);
+        new ItemTouchHelper(zaujemAdapterGesto).attachToRecyclerView(zoznamZaujmov);
     }
 
     private TreeMap<String, List<Udalost>> zoSkupinovanieUdajov(List<Udalost> udaje) {
-        TreeMap<String, List<Udalost>> udalosti = new TreeMap<>();
-        for (Udalost informacie : udaje) {
-            String skupina = informacie.getMesiac();
-            if (udalosti.containsKey(skupina)) {
-                udalosti.get(skupina).add(informacie);
+        TreeMap<String, List<Udalost>> zaujem = new TreeMap<>(
+                new Comparator<String>() {
+                    public int compare(String a, String b) {
+                        return b.toLowerCase().compareTo(a.toLowerCase());
+                    }
+                }
+        );
+
+        for (Udalost udalost : udaje) {
+            String skupina = udalost.getMesiac();
+            if (zaujem.containsKey(skupina)) {
+                zaujem.get(skupina).add(udalost);
             } else {
-                List<Udalost> zoznam = new ArrayList<>();
-                zoznam.add(informacie);
-                udalosti.put(skupina, zoznam);
+                List<Udalost> zaujmy = new ArrayList<>();
+                zaujmy.add(udalost);
+                zaujem.put(skupina, zaujmy);
             }
         }
-        return udalosti;
+        return zaujem;
     }
 }

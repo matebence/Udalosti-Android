@@ -1,132 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout
+    android:id="@+id/udalosti_zaujmy"
+
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/udalosti_kalendar_riadok"
+
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+
+    tools:context=".Activity.Udalosti.Udalosti">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         tools:ignore="UselessParent">
 
         <RelativeLayout
-            android:id="@+id/udalosti_kalendar_odstranit_z_kalendara"
+            android:id="@+id/udalosti_odstranit_zaujmy"
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#c33939">
+
+            android:background="@color/zoznam_datum">
 
             <ImageView
-                android:id="@+id/udalosti_kalendar_odstranit"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:id="@+id/odstranit_zaujem_obrazok"
+
+                android:layout_width="@dimen/list_zaujmy_odstranit_sirka_vyska"
+                android:layout_height="@dimen/list_zaujmy_odstranit_sirka_vyska"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
-                android:contentDescription="Ikona pre odstránenie udalosti z kalendára"
+                android:layout_marginEnd="@dimen/list_zaujmy_odstranit_margin"
+                android:layout_marginRight="@dimen/list_zaujmy_odstranit_margin"
+
                 android:tint="@android:color/white"
-                android:src="@drawable/ic_odstranit" />
+                android:src="@drawable/ic_odstranit"
+                android:contentDescription="@string/list_zaujmy_odstranit_popis_illustracie"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_toLeftOf="@id/udalosti_kalendar_odstranit"
-                android:layout_toStartOf="@id/udalosti_kalendar_odstranit"
-                android:fontFamily="@font/raleway_regular"
-                android:text="Odstrániť"
-                android:textColor="@android:color/white"
-                android:textSize="18sp" />
+                android:layout_toLeftOf="@id/odstranit_zaujem_obrazok"
+                android:layout_toStartOf="@id/odstranit_zaujem_obrazok"
+                android:layout_marginEnd="@dimen/list_zaujmy_odstranit_text_margin"
+                android:layout_marginRight="@dimen/list_zaujmy_odstranit_text_margin"
 
+                android:text="@string/list_zaujmy_odstranit"
+                android:fontFamily="@font/raleway_regular"
+                android:textSize="@dimen/list_zaujmy_odstranit_velkost_pisma"
+                android:textColor="@android:color/white"/>
         </RelativeLayout>
 
         <LinearLayout
-            android:id="@+id/udalosti_kalendar_obsah"
+            android:id="@+id/zaujmy"
+
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
+            android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp">
+            android:paddingTop="@dimen/list_zaujmy_padding_top_bottom"
+            android:paddingBottom="@dimen/list_zaujmy_padding_top_bottom"
+
+            android:background="@android:color/white">
 
             <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="2"
-                />
+                android:layout_width="@dimen/list_zaujmy_pozicia_sirka"
+                android:layout_height="@dimen/list_zaujmy_pozicia_vyska"
+                android:layout_weight="2"/>
 
             <TextView
-                android:id="@+id/udalosti_kalendar_den"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:id="@+id/zaujmy_den"
+
+                android:layout_width="@dimen/list_zaujmy_pozicia_sirka"
+                android:layout_height="match_parent"
                 android:layout_weight="2"
+
                 android:fontFamily="@font/raleway_bold"
-                android:textColor="#c33939"
-                android:textSize="33sp" />
+                android:textSize="@dimen/list_zaujmy_den_velkost_pisma"
+                android:textColor="@color/zoznam_datum"/>
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="@dimen/list_zaujmy_pozicia_sirka"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:layout_weight="4"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_gravity="center">
 
                 <TextView
-                    android:id="@+id/udalosti_kalendar_nazov"
+                    android:id="@+id/zaujmy_nazov"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+
                     android:fontFamily="@font/raleway_medium"
-                    android:textColor="@android:color/black"
-                    android:textSize="25sp" />
+                    android:textSize="@dimen/list_zaujmy_nazov_velkost_pisma"
+                    android:textColor="@android:color/black"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_gravity="center">
 
                     <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="20dp"
-                        android:layout_weight="20dp"
+                        android:layout_width="@dimen/list_zaujmy_pozicia_sirka"
+                        android:layout_height="@dimen/list_zaujmy_miesto_vyska"
+                        android:layout_weight="20"
+
+                        android:tint="@color/zoznam_miesto"
                         android:src="@drawable/ic_podla_pozicie"
-                        android:tint="#005ba6"
-                        tools:ignore="ContentDescription" />
+                        android:contentDescription="@string/list_zaujmy_popis_obrazka_miesto" />
 
                     <TextView
-                        android:id="@+id/udalosti_kalendar_mesto"
+                        android:id="@+id/zaujmy_mesto"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:fontFamily="@font/raleway_black"
-                        android:textColor="#005ba6"
-                        android:textSize="15sp" />
+                        android:layout_gravity="center"
+
+                        android:fontFamily="@font/raleway_bold"
+                        android:textSize="@dimen/list_zaujmy_mesto_velkost_pisma"
+                        android:textColor="@color/zoznam_miesto"/>
 
                     <TextView
-                        android:id="@+id/udalosti_kalendar_miesto"
+                        android:id="@+id/zaujmy_ulica"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
                         android:layout_weight="1"
+                        android:layout_gravity="center"
+
                         android:fontFamily="@font/raleway_regular"
-                        android:textColor="@android:color/black"
-                        android:textSize="15sp" />
+                        android:textSize="@dimen/list_zaujmy_ulica_velkost_pisma"
+                        android:textColor="@android:color/black"/>
                 </LinearLayout>
             </LinearLayout>
 
             <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1"
-                />
+                android:layout_width="@dimen/list_zaujmy_pozicia_sirka"
+                android:layout_height="@dimen/list_zaujmy_pozicia_vyska"
+                android:layout_weight="1"/>
         </LinearLayout>
     </FrameLayout>
 </RelativeLayout>
-

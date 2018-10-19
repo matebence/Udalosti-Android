@@ -12,60 +12,60 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mate.bence.udalosti.R;
+import com.mate.bence.udalosti.Zoznam.Udalosti.ZvolenaUdalost;
 import com.mate.bence.udalosti.Zoznam.Zaujmy.Struktura.Mesiac;
-import com.mate.bence.udalosti.Zoznam.Zaujmy.Struktura.NaplanovanaUdalost;
-import com.mate.bence.udalosti.Zoznam.Zaujmy.Struktura.Zoznam;
+import com.mate.bence.udalosti.Zoznam.Zaujmy.Struktura.MesiacZaujmov;
+import com.mate.bence.udalosti.Zoznam.Zaujmy.Struktura.Zaujem;
 
-import java.text.DateFormatSymbols;
 import java.util.List;
 
 public class ZaujemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<Zoznam> naplanovaneUdalosti;
+    private List<Zaujem> zoznamZaujmov;
+    private ZvolenaUdalost zvolenaUdalost;
 
-    public ZaujemAdapter(List<Zoznam> naplanovaneUdalosti) {
-        this.naplanovaneUdalosti = naplanovaneUdalosti;
+    public ZaujemAdapter(List<Zaujem> zoznamZaujmov) {
+        this.zoznamZaujmov = zoznamZaujmov;
     }
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int podhlad) {
-        RecyclerView.ViewHolder zoznam = null;
-        LayoutInflater obsah = LayoutInflater.from(parent.getContext());
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int struktura) {
+        RecyclerView.ViewHolder zaujmy = null;
+        LayoutInflater zaujem = LayoutInflater.from(parent.getContext());
 
-        switch (podhlad) {
-            case Zoznam.NAPLANOVANA_UDALOST:
-                View naplaNovanaUdalost = obsah.inflate(R.layout.list_zoznam_zaujmy, parent, false);
-                zoznam = new NaplanovanaUdalostHolder(naplaNovanaUdalost);
+        switch (struktura) {
+            case Zaujem.MESIAC_ZAUJMOV:
+                View mesiacZaujmov = zaujem.inflate(R.layout.list_zoznam_zaujmy, parent, false);
+                zaujmy = new MesiacZaujmovHolder(mesiacZaujmov);
                 break;
 
-            case Zoznam.MESIAC:
-                View mesiac = obsah.inflate(R.layout.list_zoznam_zaujmy_hlavicka, parent, false);
-                zoznam = new MesiacHolder(mesiac);
+            case Zaujem.MESIAC:
+                View mesiac = zaujem.inflate(R.layout.list_zoznam_zaujmy_hlavicka, parent, false);
+                zaujmy = new MesiacHolder(mesiac);
                 break;
         }
 
-        return zoznam;
+        return zaujmy;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
         switch (viewHolder.getItemViewType()) {
-            case Zoznam.NAPLANOVANA_UDALOST:
-                NaplanovanaUdalost naplanovanaUdalost = (NaplanovanaUdalost) naplanovaneUdalosti.get(position);
-                NaplanovanaUdalostHolder naplanovanaUdalostHolder = (NaplanovanaUdalostHolder) viewHolder;
+            case Zaujem.MESIAC_ZAUJMOV:
+                MesiacZaujmov mesiacZaujmov = (MesiacZaujmov) zoznamZaujmov.get(position);
+                MesiacZaujmovHolder mesiacZaujmovHolder = (MesiacZaujmovHolder) viewHolder;
 
-                naplanovanaUdalostHolder.den.setText(naplanovanaUdalost.getUdalost().getDen());
-                naplanovanaUdalostHolder.nazov.setText(naplanovanaUdalost.getUdalost().getNazov());
-                naplanovanaUdalostHolder.mesto.setText(naplanovanaUdalost.getUdalost().getMesto());
-                naplanovanaUdalostHolder.miesto.setText(naplanovanaUdalost.getUdalost().getUlica());
+                mesiacZaujmovHolder.den.setText(mesiacZaujmov.getUdalost().getDen() + ".");
+                mesiacZaujmovHolder.nazov.setText(mesiacZaujmov.getUdalost().getNazov());
+                mesiacZaujmovHolder.mesto.setText(mesiacZaujmov.getUdalost().getMesto() + ", ");
+                mesiacZaujmovHolder.ulica.setText(mesiacZaujmov.getUdalost().getUlica());
 
-                nacitajObsah(naplanovanaUdalostHolder.kalendar);
-
+                nacitajObsah(mesiacZaujmovHolder.odstranitZaujem);
                 break;
 
-            case Zoznam.MESIAC:
-                Mesiac mesiac = (Mesiac) naplanovaneUdalosti.get(position);
+            case Zaujem.MESIAC:
+                Mesiac mesiac = (Mesiac) zoznamZaujmov.get(position);
                 MesiacHolder mesiacHolder = (MesiacHolder) viewHolder;
 
                 mesiacHolder.mesiac.setText(mesiac.getMesiac());
@@ -75,12 +75,12 @@ public class ZaujemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public int getItemCount() {
-        return naplanovaneUdalosti != null ? naplanovaneUdalosti.size() : 0;
+        return zoznamZaujmov != null ? zoznamZaujmov.size() : 0;
     }
 
     @Override
     public int getItemViewType(int position) {
-        return naplanovaneUdalosti.get(position).cast();
+        return zoznamZaujmov.get(position).struktura();
     }
 
     private void nacitajObsah(View view) {
@@ -89,37 +89,51 @@ public class ZaujemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         view.startAnimation(animacia);
     }
 
+    public void zvolenaUdalost(ZvolenaUdalost zvolenaUdalost) {
+        this.zvolenaUdalost = zvolenaUdalost;
+    }
+
+    public void odstranNaplanovanuUdalost(int pozicia) {
+        zoznamZaujmov.remove(pozicia);
+        notifyItemRemoved(pozicia);
+    }
+
     private class MesiacHolder extends RecyclerView.ViewHolder {
+
         private TextView mesiac;
 
         private MesiacHolder(View view) {
             super(view);
 
-            this.mesiac = view.findViewById(R.id.list_zoznam_hlavicka);
+            this.mesiac = view.findViewById(R.id.zaujmy_hlavicka);
         }
     }
 
-    public class NaplanovanaUdalostHolder extends RecyclerView.ViewHolder {
-        public RelativeLayout kalendar;
+    public class MesiacZaujmovHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private TextView den, nazov, mesto, miesto;
-        public LinearLayout obsah;
+        private TextView nazov, den, mesto, ulica;
+        public RelativeLayout odstranitZaujem;
+        public LinearLayout zaujem;
 
-        private NaplanovanaUdalostHolder(View view) {
+        private MesiacZaujmovHolder(View view) {
             super(view);
+            view.setOnClickListener(this);
 
-            this.den = view.findViewById(R.id.udalosti_kalendar_den);
-            this.nazov = view.findViewById(R.id.udalosti_kalendar_nazov);
-            this.miesto = view.findViewById(R.id.udalosti_kalendar_miesto);
-            this.mesto = view.findViewById(R.id.udalosti_kalendar_mesto);
+            this.den = view.findViewById(R.id.zaujmy_den);
+            this.nazov = view.findViewById(R.id.zaujmy_nazov);
+            this.mesto = view.findViewById(R.id.zaujmy_mesto);
+            this.ulica = view.findViewById(R.id.zaujmy_ulica);
 
-            this.obsah = view.findViewById(R.id.udalosti_kalendar_obsah);
-            this.kalendar = view.findViewById(R.id.udalosti_kalendar_riadok);
+            this.zaujem = view.findViewById(R.id.zaujmy);
+            this.odstranitZaujem = view.findViewById(R.id.udalosti_odstranit_zaujmy);
         }
-    }
 
-    public void odstranNaplanovanuUdalost(int pozicia) {
-        naplanovaneUdalosti.remove(pozicia);
-        notifyItemRemoved(pozicia);
+        @Override
+        public void onClick(View view) {
+            if (zvolenaUdalost != null) {
+                MesiacZaujmov mesiacZaujmov = (MesiacZaujmov) zoznamZaujmov.get(getAdapterPosition());
+                zvolenaUdalost.podrobnostiUdalosti(getAdapterPosition(), mesiacZaujmov.getUdalost());
+            }
+        }
     }
 }

@@ -78,70 +78,31 @@ public class UdalostiUdaje implements UdalostiImplementacia {
     }
 
     @Override
-    public void automatickePrihlasenieVypnute(String email) {
-        Log.v(TAG, "Metoda automatickePrihlasenieVypnute bola vykonana");
-
-        databaza.odstranPouzivatelskeUdaje(email);
-    }
-
-    @Override
-    public void odhlasenie(String email) {
-        Log.v(TAG, "Metoda odhlasenie bola vykonana");
-
-        Requesty requesty = UdalostiAdresa.initAdresu();
-        requesty.odhlasenie(email).enqueue(new Callback<Autentifikator>() {
-
-            @Override
-            public void onResponse(@NonNull Call<Autentifikator> call, @NonNull Response<Autentifikator> response) {
-                if (!(response.body().getChyba())) {
-                    odpovedeOdServera.odpovedServera(Nastavenia.VSETKO_V_PORIADKU, Nastavenia.AUTENTIFIKACIA_ODHLASENIE, null);
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<Autentifikator> call, @NonNull Throwable t) {
-                odpovedeOdServera.odpovedServera(context.getString(R.string.chyba_servera), Nastavenia.AUTENTIFIKACIA_ODHLASENIE, null);
-            }
-        });
-    }
-
-    @Override
-    public HashMap miestoPrihlasenia() {
-        Log.v(TAG, "Metoda miestoPrihlasenia bola vykonana");
-
-        HashMap<String, String> miestoPrihlasenia = databaza.vratMiestoPrihlasenia();
-        if (miestoPrihlasenia != null) {
-            return miestoPrihlasenia;
-        } else {
-            return null;
-        }
-    }
-
-    @Override
-    public void zoznamZaujmov(String token, String email) {
+    public void zoznamZaujmov(String email, String token) {
         Log.v(TAG, "Metoda zoznamZaujmov bola vykonana");
 
         Requesty requesty = UdalostiAdresa.initAdresu();
-        requesty.zaujmy(token, email).enqueue(new Callback<Obsah>() {
+        requesty.zaujmy(email, token).enqueue(new Callback<Obsah>() {
             @Override
             public void onResponse(Call<Obsah> call, Response<Obsah> response) {
                 if (response.isSuccessful()) {
+                    udajeZoServera.dataZoServera(Nastavenia.VSETKO_V_PORIADKU, Nastavenia.ZAUJEM_ZOZNAM, response.body().getUdalosti());
                 }
             }
 
             @Override
             public void onFailure(Call<Obsah> call, Throwable t) {
-                odpovedeOdServera.odpovedServera(context.getString(R.string.chyba_servera), Nastavenia.ZAUJEM_ZOZNAM, null);
+                udajeZoServera.dataZoServera(context.getString(R.string.chyba_servera), Nastavenia.ZAUJEM_ZOZNAM, null);
             }
         });
     }
 
     @Override
-    public void zaujem(String token, String email, int idUdalost) {
+    public void zaujem(String email, String token, int idUdalost) {
         Log.v(TAG, "Metoda zaujem bola vykonana");
 
         Requesty requesty = UdalostiAdresa.initAdresu();
-        requesty.zaujem(token, email, idUdalost).enqueue(new Callback<Akcia>() {
+        requesty.zaujem(email, token, idUdalost).enqueue(new Callback<Akcia>() {
             @Override
             public void onResponse(Call<Akcia> call, Response<Akcia> response) {
                 if (response.isSuccessful()) {
@@ -166,11 +127,11 @@ public class UdalostiUdaje implements UdalostiImplementacia {
     }
 
     @Override
-    public void potvrdZaujem(String token, String email, int idUdalost) {
+    public void potvrdZaujem(String email, String token, int idUdalost) {
         Log.v(TAG, "Metoda potvrdZaujem bola vykonana");
 
         Requesty requesty = UdalostiAdresa.initAdresu();
-        requesty.potvrd(token, email, idUdalost).enqueue(new Callback<Obsah>() {
+        requesty.potvrd(email, token, idUdalost).enqueue(new Callback<Obsah>() {
             @Override
             public void onResponse(Call<Obsah> call, Response<Obsah> response) {
                 if (response.isSuccessful()) {
@@ -186,11 +147,11 @@ public class UdalostiUdaje implements UdalostiImplementacia {
     }
 
     @Override
-    public void odstranZaujem(String token, String email, int idUdalost) {
+    public void odstranZaujem(String email, String token, int idUdalost) {
         Log.v(TAG, "Metoda odstranZaujem bola vykonana");
 
         Requesty requesty = UdalostiAdresa.initAdresu();
-        requesty.odstranZaujem(token, email, idUdalost).enqueue(new Callback<Akcia>() {
+        requesty.odstranZaujem(email, token, idUdalost).enqueue(new Callback<Akcia>() {
             @Override
             public void onResponse(Call<Akcia> call, Response<Akcia> response) {
                 if (response.isSuccessful()) {
@@ -210,6 +171,46 @@ public class UdalostiUdaje implements UdalostiImplementacia {
             @Override
             public void onFailure(Call<Akcia> call, Throwable t) {
                 odpovedeOdServera.odpovedServera(context.getString(R.string.chyba_servera), Nastavenia.ZAUJEM_ODSTRANENIE, null);
+            }
+        });
+    }
+
+    @Override
+    public HashMap miestoPrihlasenia() {
+        Log.v(TAG, "Metoda miestoPrihlasenia bola vykonana");
+
+        HashMap<String, String> miestoPrihlasenia = databaza.vratMiestoPrihlasenia();
+        if (miestoPrihlasenia != null) {
+            return miestoPrihlasenia;
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public void automatickePrihlasenieVypnute(String email) {
+        Log.v(TAG, "Metoda automatickePrihlasenieVypnute bola vykonana");
+
+        databaza.odstranPouzivatelskeUdaje(email);
+    }
+
+    @Override
+    public void odhlasenie(String email) {
+        Log.v(TAG, "Metoda odhlasenie bola vykonana");
+
+        Requesty requesty = UdalostiAdresa.initAdresu();
+        requesty.odhlasenie(email).enqueue(new Callback<Autentifikator>() {
+
+            @Override
+            public void onResponse(@NonNull Call<Autentifikator> call, @NonNull Response<Autentifikator> response) {
+                if (!(response.body().getChyba())) {
+                    odpovedeOdServera.odpovedServera(Nastavenia.VSETKO_V_PORIADKU, Nastavenia.AUTENTIFIKACIA_ODHLASENIE, null);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Autentifikator> call, @NonNull Throwable t) {
+                odpovedeOdServera.odpovedServera(context.getString(R.string.chyba_servera), Nastavenia.AUTENTIFIKACIA_ODHLASENIE, null);
             }
         });
     }

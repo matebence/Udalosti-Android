@@ -65,8 +65,17 @@
     <string name="udalosti_gps_tlacidlo_ano">ÁNO, ŽAPNÚŤ</string>
     <string name="udalosti_gps_tlacidlo_nie">ZRUŠIŤ</string>
 
+    <!-- Zaujmy -->
+    <string name="zaujmy_ziadne_zaujmy_popis_illustracie">Illustrácia pre chybu záujmov</string>
+    <string name="zaujmy_ziadne_zaujmy">Žiadné záujmy</string>
+
     <!-- Zoznam udalosti -->
     <string name="list_zoznam_udalosti_popis_illustracie">Obrázok udalosti</string>
+
+    <!-- Zoznam zaujmov -->
+    <string name="list_zaujmy_odstranit_popis_illustracie">Ikona pre odstránenie udalosti z kalendára</string>
+    <string name="list_zaujmy_odstranit">Odstrániť</string>
+    <string name="list_zaujmy_popis_obrazka_miesto">Illustrácia pre miesto udalosti</string>
 
     <!-- Podrobnosti -->
     <string name="podrobnosti_popis_obrazka_aktualnej_udalosti">Obrázok aktuálnej udalosti</string>
