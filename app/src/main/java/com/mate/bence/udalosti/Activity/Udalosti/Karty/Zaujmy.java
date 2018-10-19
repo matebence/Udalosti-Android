@@ -2,8 +2,11 @@ package com.mate.bence.udalosti.Activity.Udalosti.Karty;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,17 +15,23 @@ import android.widget.ProgressBar;
 
 import com.mate.bence.udalosti.Activity.Udalosti.UdalostiUdaje;
 import com.mate.bence.udalosti.R;
+import com.mate.bence.udalosti.Udaje.Nastavenia.Nastavenia;
 import com.mate.bence.udalosti.Udaje.Siet.Model.KommunikaciaData;
 import com.mate.bence.udalosti.Udaje.Siet.Model.KommunikaciaOdpoved;
+import com.mate.bence.udalosti.Zoznam.PoskitovelObsahu;
 import com.mate.bence.udalosti.Zoznam.Udalost;
+import com.mate.bence.udalosti.Zoznam.Zaujmy.OdstranenieZaujmu;
+import com.mate.bence.udalosti.Zoznam.Zaujmy.Struktura.Mesiac;
 import com.mate.bence.udalosti.Zoznam.Zaujmy.Struktura.NaplanovanaUdalost;
 import com.mate.bence.udalosti.Zoznam.Zaujmy.Struktura.Zoznam;
 import com.mate.bence.udalosti.Zoznam.Zaujmy.ZaujemAdapter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.TreeMap;
 
-public class Zaujmy extends Fragment implements KommunikaciaData, KommunikaciaOdpoved, Gesta.RecyclerItemTouchHelperListener {
+public class Zaujmy extends Fragment implements KommunikaciaData, KommunikaciaOdpoved, OdstranenieZaujmu.RecyclerItemTouchHelperListener {
 
     private String email, token;
 
@@ -45,34 +54,22 @@ public class Zaujmy extends Fragment implements KommunikaciaData, KommunikaciaOd
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        Pocet.KALENDAR_ZOZNAM_UKONCIL = Pocet.KALENDAR_ZOZNAM_POCET;
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
 
-        Pocet.KALENDAR_ZOZNAM_OD = 0;
-        if (Pocet.KALENDAR_ZOZNAM_UKONCIL != 0) {
-            Pocet.KALENDAR_ZOZNAM_OD = Pocet.KALENDAR_ZOZNAM_UKONCIL;
-            Pocet.KALENDAR_ZOZNAM_OD -= 5;
-        }
-
         if (naplnovaneUdalosti.isEmpty()) {
             this.nacitavanie.setVisibility(View.VISIBLE);
-            udalostiUdaje.zoznamNaplanovanychUdalosti(email, Pocet.KALENDAR_ZOZNAM_OD, Pocet.KALENDAR_ZOZNAM_POCET, token);
+            udalostiUdaje.zoznamZaujmov(email, token);
         }
     }
 
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
-        if (viewHolder instanceof KalendarAdapter.NaplanovanaUdalostHolder) {
+        if (viewHolder instanceof ZaujemAdapter.NaplanovanaUdalostHolder) {
 
             NaplanovanaUdalost naplanovanaUdalost = (NaplanovanaUdalost) skupina.get(position);
 
-            this.udalostiUdaje.odstranenieUdalostiKalendara(email, naplanovanaUdalost.getInformacie().getIdZaujem(), token);
+            this.udalostiUdaje.odstranZaujem(token, email, naplanovanaUdalost.getUdalost().getIdUdalost());
             this.kalendarAdapter.odstranNaplanovanuUdalost(viewHolder.getAdapterPosition());
         }
     }
@@ -80,15 +77,13 @@ public class Zaujmy extends Fragment implements KommunikaciaData, KommunikaciaOd
     @Override
     public void dataZoServera(String odpoved, String od, ArrayList udaje) {
         switch (od) {
-            case Status.UDALOSTI_KALENDAR:
-                if (odpoved.equals(Status.VSETKO_V_PORIADKU)) {
+            case Nastavenia.ZAUJEM_ZOZNAM:
+                if (odpoved.equals(Nastavenia.VSETKO_V_PORIADKU)) {
                     if (udaje != null) {
                         ziadneNaplanovaneUdalosti.setVisibility(View.GONE);
                         ziskajNaplanovaneUdalosti(udaje);
                     } else {
-                        if (!(Pocet.KALENDAR_ZOZNAM_OD > 0)) {
-                            ziadneNaplanovaneUdalosti.setVisibility(View.VISIBLE);
-                        }
+                       ziadneNaplanovaneUdalosti.setVisibility(View.VISIBLE);
                     }
                     zoznamNaplnovanychUdalosti.setItemViewCacheSize(naplnovaneUdalosti.size());
                 }
@@ -100,8 +95,8 @@ public class Zaujmy extends Fragment implements KommunikaciaData, KommunikaciaOd
     @Override
     public void odpovedServera(String odpoved, String od, HashMap<String, String> udaje) {
         switch (od) {
-            case Status.ODSTRANENIE_UDALOSTI_ZO_ZAUJMOV:
-                if (odpoved.equals(Status.VSETKO_V_PORIADKU)) {
+            case Nastavenia.ZAUJEM_ODSTRANENIE:
+                if (odpoved.equals(Nastavenia.VSETKO_V_PORIADKU)) {
                     if (udaje != null) {
                         Snackbar snackbar = null;
 
@@ -113,7 +108,7 @@ public class Zaujmy extends Fragment implements KommunikaciaData, KommunikaciaOd
                         }
 
                         View pozadie = snackbar.getView();
-                        pozadie.setBackgroundColor(getResources().getColor(R.color.toolbar));
+                        pozadie.setBackgroundColor(getResources().getColor(R.color.farba_primarna));
                         snackbar.setActionTextColor(getResources().getColor(android.R.color.white));
                         snackbar.show();
                     }
@@ -122,13 +117,7 @@ public class Zaujmy extends Fragment implements KommunikaciaData, KommunikaciaOd
         }
     }
 
-    @Override
-    public void nacitajDalsieNaplanovaneUdalosti() {
-        Pocet.KALENDAR_ZOZNAM_OD += 5;
-        udalostiUdaje.zoznamNaplanovanychUdalosti(email, Pocet.KALENDAR_ZOZNAM_OD, Pocet.KALENDAR_ZOZNAM_POCET, token);
-    }
-
-    protected void ziskajNaplanovaneUdalosti(ArrayList<Informacie> udalosti) {
+    protected void ziskajNaplanovaneUdalosti(ArrayList<Udalost> udalosti) {
         int posladnaPozicia = skupina.size() - 1;
 
         this.naplnovaneUdalosti.addAll(udalosti);
@@ -137,7 +126,7 @@ public class Zaujmy extends Fragment implements KommunikaciaData, KommunikaciaOd
             mesiac.setMesiac(skupina);
             this.skupina.add(mesiac);
 
-            for (Informacie informacie : zoSkupinovanieUdajov(udalosti).get(skupina)) {
+            for (Udalost informacie : zoSkupinovanieUdajov(udalosti).get(skupina)) {
                 NaplanovanaUdalost naplanovanaUdalost = new NaplanovanaUdalost();
                 naplanovanaUdalost.setInformacie(informacie);
                 this.skupina.add(naplanovanaUdalost);
@@ -164,25 +153,25 @@ public class Zaujmy extends Fragment implements KommunikaciaData, KommunikaciaOd
     }
 
     private void nastavZoznamNaplnovanychUdalosti() {
-        this.kalendarAdapter = new KalendarAdapter(skupina, this);
+        this.kalendarAdapter = new ZaujemAdapter(skupina);
         PoskitovelObsahu poskitovelObsahu = new PoskitovelObsahu(getContext());
 
         zoznamNaplnovanychUdalosti.setLayoutManager(poskitovelObsahu);
         zoznamNaplnovanychUdalosti.setItemAnimator(new DefaultItemAnimator());
         zoznamNaplnovanychUdalosti.setAdapter(kalendarAdapter);
 
-        ItemTouchHelper.SimpleCallback gesto = new Gesta(0, ItemTouchHelper.LEFT, this);
+        ItemTouchHelper.SimpleCallback gesto = new OdstranenieZaujmu(0, ItemTouchHelper.LEFT, this);
         new ItemTouchHelper(gesto).attachToRecyclerView(zoznamNaplnovanychUdalosti);
     }
 
-    private TreeMap<String, List<Informacie>> zoSkupinovanieUdajov(List<Informacie> udaje) {
-        TreeMap<String, List<Informacie>> udalosti = new TreeMap<>();
-        for (Informacie informacie : udaje) {
-            String skupina = informacie.getDatum();
+    private TreeMap<String, List<Udalost>> zoSkupinovanieUdajov(List<Udalost> udaje) {
+        TreeMap<String, List<Udalost>> udalosti = new TreeMap<>();
+        for (Udalost informacie : udaje) {
+            String skupina = informacie.getMesiac();
             if (udalosti.containsKey(skupina)) {
                 udalosti.get(skupina).add(informacie);
             } else {
-                List<Informacie> zoznam = new ArrayList<>();
+                List<Udalost> zoznam = new ArrayList<>();
                 zoznam.add(informacie);
                 udalosti.put(skupina, zoznam);
             }
