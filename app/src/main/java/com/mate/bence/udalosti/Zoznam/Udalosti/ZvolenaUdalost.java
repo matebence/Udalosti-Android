@@ -1,4 +1,4 @@
-package com.mate.bence.udalosti.Zoznam;
+package com.mate.bence.udalosti.Zoznam.Udalosti;
 
 import android.view.View;
 

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/udalosti_kalendar_riadok"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="UselessParent">
+
+        <RelativeLayout
+            android:id="@+id/udalosti_kalendar_odstranit_z_kalendara"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#c33939">
+
+            <ImageView
+                android:id="@+id/udalosti_kalendar_odstranit"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:contentDescription="Ikona pre odstránenie udalosti z kalendára"
+                android:tint="@android:color/white"
+                android:src="@drawable/ic_odstranit" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_toLeftOf="@id/udalosti_kalendar_odstranit"
+                android:layout_toStartOf="@id/udalosti_kalendar_odstranit"
+                android:fontFamily="@font/raleway_regular"
+                android:text="Odstrániť"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/udalosti_kalendar_obsah"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="2"
+                />
+
+            <TextView
+                android:id="@+id/udalosti_kalendar_den"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:fontFamily="@font/raleway_bold"
+                android:textColor="#c33939"
+                android:textSize="33sp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="4"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/udalosti_kalendar_nazov"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/raleway_medium"
+                    android:textColor="@android:color/black"
+                    android:textSize="25sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_weight="20dp"
+                        android:src="@drawable/ic_podla_pozicie"
+                        android:tint="#005ba6"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/udalosti_kalendar_mesto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/raleway_black"
+                        android:textColor="#005ba6"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/udalosti_kalendar_miesto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/raleway_regular"
+                        android:textColor="@android:color/black"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                />
+        </LinearLayout>
+    </FrameLayout>
+</RelativeLayout>
+

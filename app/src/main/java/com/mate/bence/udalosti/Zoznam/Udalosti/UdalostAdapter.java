@@ -1,13 +1,9 @@
-package com.mate.bence.udalosti.Zoznam;
+package com.mate.bence.udalosti.Zoznam.Udalosti;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +16,8 @@ import android.widget.TextView;
 
 import com.mate.bence.udalosti.Nastroje.Stream;
 import com.mate.bence.udalosti.R;
-import com.mate.bence.udalosti.Udaje.Siet.UdalostiAdresa;
+import com.mate.bence.udalosti.Zoznam.Udalost;
 
-import java.io.InputStream;
 import java.util.List;
 
 public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostHolder> {

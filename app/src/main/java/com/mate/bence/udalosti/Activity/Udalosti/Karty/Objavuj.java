@@ -23,8 +23,8 @@ import com.mate.bence.udalosti.Udaje.Siet.Model.KommunikaciaData;
 import com.mate.bence.udalosti.Udaje.Siet.Model.KommunikaciaOdpoved;
 import com.mate.bence.udalosti.Zoznam.PoskitovelObsahu;
 import com.mate.bence.udalosti.Zoznam.Udalost;
-import com.mate.bence.udalosti.Zoznam.UdalostAdapter;
-import com.mate.bence.udalosti.Zoznam.ZvolenaUdalost;
+import com.mate.bence.udalosti.Zoznam.Udalosti.UdalostAdapter;
+import com.mate.bence.udalosti.Zoznam.Udalosti.ZvolenaUdalost;
 
 import java.util.ArrayList;
 import java.util.HashMap;
