@@ -12,17 +12,18 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mate.bence.udalosti.R;
+import com.mate.bence.udalosti.Zoznam.Zaujmy.Struktura.Mesiac;
+import com.mate.bence.udalosti.Zoznam.Zaujmy.Struktura.NaplanovanaUdalost;
+import com.mate.bence.udalosti.Zoznam.Zaujmy.Struktura.Zoznam;
 
 import java.text.DateFormatSymbols;
+import java.util.List;
 
 public class ZaujemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<Zoznam> naplanovaneUdalosti;
 
-    private final TlacidlaGesta tlacidlaGesta;
-
-    public ZaujemAdapter(List<Zoznam> naplanovaneUdalosti, TlacidlaGesta tlacidlaGesta) {
-        this.tlacidlaGesta = tlacidlaGesta;
+    public ZaujemAdapter(List<Zoznam> naplanovaneUdalosti) {
         this.naplanovaneUdalosti = naplanovaneUdalosti;
     }
 
@@ -34,12 +35,12 @@ public class ZaujemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         switch (podhlad) {
             case Zoznam.NAPLANOVANA_UDALOST:
-                View naplaNovanaUdalost = obsah.inflate(R.layout.list_zoznam_udalosti_kalendar, parent, false);
+                View naplaNovanaUdalost = obsah.inflate(R.layout.list_zoznam_zaujmy, parent, false);
                 zoznam = new NaplanovanaUdalostHolder(naplaNovanaUdalost);
                 break;
 
             case Zoznam.MESIAC:
-                View mesiac = obsah.inflate(R.layout.list_zoznam_hlavicka, parent, false);
+                View mesiac = obsah.inflate(R.layout.list_zoznam_zaujmy_hlavicka, parent, false);
                 zoznam = new MesiacHolder(mesiac);
                 break;
         }
@@ -54,9 +55,10 @@ public class ZaujemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 NaplanovanaUdalost naplanovanaUdalost = (NaplanovanaUdalost) naplanovaneUdalosti.get(position);
                 NaplanovanaUdalostHolder naplanovanaUdalostHolder = (NaplanovanaUdalostHolder) viewHolder;
 
-                naplanovanaUdalostHolder.den.setText(nastavDenUdalosti(naplanovanaUdalost.getInformacie().getDatum()));
-                naplanovanaUdalostHolder.nazov.setText(naplanovanaUdalost.getInformacie().getNazov());
-                nastavMiestoUdalosti(naplanovanaUdalostHolder, naplanovanaUdalost.getInformacie().getMesto());
+                naplanovanaUdalostHolder.den.setText(naplanovanaUdalost.getUdalost().getDen());
+                naplanovanaUdalostHolder.nazov.setText(naplanovanaUdalost.getUdalost().getNazov());
+                naplanovanaUdalostHolder.mesto.setText(naplanovanaUdalost.getUdalost().getMesto());
+                naplanovanaUdalostHolder.miesto.setText(naplanovanaUdalost.getUdalost().getUlica());
 
                 nacitajObsah(naplanovanaUdalostHolder.kalendar);
 
@@ -66,12 +68,8 @@ public class ZaujemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 Mesiac mesiac = (Mesiac) naplanovaneUdalosti.get(position);
                 MesiacHolder mesiacHolder = (MesiacHolder) viewHolder;
 
-                mesiacHolder.mesiac.setText(nastavMesiacUdalosti(mesiac.getMesiac()));
+                mesiacHolder.mesiac.setText(mesiac.getMesiac());
                 break;
-        }
-
-        if (position == (getItemCount() - 2)) {
-            tlacidlaGesta.nacitajDalsieNaplanovaneUdalosti();
         }
     }
 
@@ -83,24 +81,6 @@ public class ZaujemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public int getItemViewType(int position) {
         return naplanovaneUdalosti.get(position).cast();
-    }
-
-    private void nastavMiestoUdalosti(NaplanovanaUdalostHolder naplanovanaUdalostHolder, String miesto) {
-        String miestoUdalosti[] = miesto.split(" ");
-        if (miestoUdalosti.length > 1) {
-            naplanovanaUdalostHolder.mesto.setText(miestoUdalosti[0]);
-            naplanovanaUdalostHolder.miesto.setText(miestoUdalosti[1]);
-        } else {
-            naplanovanaUdalostHolder.mesto.setText(miesto);
-        }
-    }
-
-    private String nastavDenUdalosti(String den) {
-        return den.substring(den.lastIndexOf("-") + 1, den.length()) + ".";
-    }
-
-    private String nastavMesiacUdalosti(String mesiac) {
-        return new DateFormatSymbols().getMonths()[Integer.parseInt(mesiac.substring(mesiac.indexOf("-") + 1, mesiac.lastIndexOf("-"))) - 1];
     }
 
     private void nacitajObsah(View view) {
