@@ -12,56 +12,56 @@
     tools:context=".Activity.Udalosti.Udalosti">
 
     <TextView
-        android:id="@+id/dialog_chyb_titul"
+        android:id="@+id/dialog_oznameni_titul"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="@dimen/dialog_chyb_margin"
-        android:layout_marginStart="@dimen/dialog_chyb_margin"
-        android:layout_marginTop="@dimen/dialog_chyb_margin"
+        android:layout_marginLeft="@dimen/dialog_oznameni_margin"
+        android:layout_marginStart="@dimen/dialog_oznameni_margin"
+        android:layout_marginTop="@dimen/dialog_oznameni_margin"
 
         android:fontFamily="@font/raleway_bold"
         android:textColor="@color/dialog_titul"
-        android:textSize="@dimen/dialog_chyb_velkost_titulu"/>
+        android:textSize="@dimen/dialog_oznameni_velkost_titulu"/>
 
     <TextView
-        android:id="@+id/dialog_chyb_text"
+        android:id="@+id/dialog_oznameni_text"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@id/dialog_chyb_titul"
-        android:layout_marginBottom="@dimen/dialog_chyb_margin"
-        android:layout_marginEnd="@dimen/dialog_chyb_margin"
-        android:layout_marginLeft="@dimen/dialog_chyb_margin"
-        android:layout_marginRight="@dimen/dialog_chyb_margin"
-        android:layout_marginStart="@dimen/dialog_chyb_margin"
-        android:layout_marginTop="@dimen/dialog_chyb_margin"
+        android:layout_below="@id/dialog_oznameni_titul"
+        android:layout_marginBottom="@dimen/dialog_oznameni_margin"
+        android:layout_marginEnd="@dimen/dialog_oznameni_margin"
+        android:layout_marginLeft="@dimen/dialog_oznameni_margin"
+        android:layout_marginRight="@dimen/dialog_oznameni_margin"
+        android:layout_marginStart="@dimen/dialog_oznameni_margin"
+        android:layout_marginTop="@dimen/dialog_oznameni_margin"
 
         android:fontFamily="@font/raleway_medium"
         android:textColor="@color/dialog_text"
-        android:textSize="@dimen/dialog_chyb_velkost_textu"/>
+        android:textSize="@dimen/dialog_oznameni_velkost_textu"/>
 
     <Button
-        android:id="@+id/dialog_chyb_zatvorit"
+        android:id="@+id/dialog_oznameni_zatvorit"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@id/dialog_chyb_text"
-        android:layout_marginBottom="@dimen/dialog_chyb_margin"
-        android:layout_marginEnd="@dimen/dialog_chyb_margin"
-        android:layout_marginRight="@dimen/dialog_chyb_margin"
+        android:layout_below="@id/dialog_oznameni_text"
+        android:layout_marginBottom="@dimen/dialog_oznameni_margin"
+        android:layout_marginEnd="@dimen/dialog_oznameni_margin"
+        android:layout_marginRight="@dimen/dialog_oznameni_margin"
 
         android:background="@android:color/transparent"
 
         android:fontFamily="@font/raleway_bold"
-        android:text="@string/dialog_chyb_zavorit"
+        android:text="@string/dialog_oznameni_zavorit"
         android:textAllCaps="true"
         android:textColor="@color/dialog_zavorit"
-        android:textSize="@dimen/dialog_chyb_velkost_tlacidla_zatvorit" />
+        android:textSize="@dimen/dialog_oznameni_velkost_tlacidla_zatvorit" />
 </RelativeLayout>

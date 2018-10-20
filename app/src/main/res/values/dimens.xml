@@ -6,11 +6,17 @@
     <dimen name="activity_aplikacia_titul_velkost_pisma">23sp</dimen>
     <dimen name="activit_karty_velkost_pisma">13sp</dimen>
 
-    <!-- Dialog chyb -->
-    <dimen name="dialog_chyb_margin">20dp</dimen>
-    <dimen name="dialog_chyb_velkost_titulu">20sp</dimen>
-    <dimen name="dialog_chyb_velkost_textu">15sp</dimen>
-    <dimen name="dialog_chyb_velkost_tlacidla_zatvorit">15sp</dimen>
+    <!-- Dialog oznameni -->
+    <dimen name="dialog_oznameni_margin">20dp</dimen>
+    <dimen name="dialog_oznameni_velkost_titulu">20sp</dimen>
+    <dimen name="dialog_oznameni_velkost_textu">15sp</dimen>
+    <dimen name="dialog_oznameni_velkost_tlacidla_zatvorit">15sp</dimen>
+
+    <!-- Dialog potvrdeni -->
+    <dimen name="dialog_potvrdeni_margin">20dp</dimen>
+    <dimen name="dialog_potvrdeni_tlacidlo_velkost_pisma">15sp</dimen>
+    <dimen name="dialog_potvrdeni_text_velkost_pisma">15sp</dimen>
+    <dimen name="dialog_potvrdeni_titul_velkost_pisma">20sp</dimen>
 
     <!-- Uvodna Obrazovka -->
     <dimen name="uvodna_obrazovka_sirka_a_vyska">220dp</dimen>

@@ -23,8 +23,11 @@ import android.widget.LinearLayout;
 
 import com.mate.bence.udalosti.Activity.Autentifikacia.Fragment.Prihlasenie;
 import com.mate.bence.udalosti.Activity.Autentifikacia.Fragment.Registracia;
+import com.mate.bence.udalosti.Activity.Udalosti.Podrobnosti.AktualizatorObsahu;
 import com.mate.bence.udalosti.Activity.Udalosti.Udalosti;
+import com.mate.bence.udalosti.Dialog.DialogOdpoved;
 import com.mate.bence.udalosti.Dialog.DialogOznameni;
+import com.mate.bence.udalosti.Dialog.DialogPotvrdeni;
 import com.mate.bence.udalosti.Nastroje.Pripojenie;
 import com.mate.bence.udalosti.R;
 import com.mate.bence.udalosti.Udaje.Nastavenia.Nastavenia;
@@ -65,24 +68,17 @@ public class Autentifikacia extends AppCompatActivity implements AutentifikaciaO
         if (Pripojenie.pripojenieExistuje(this)) {
             if(!(managerPozicie.isProviderEnabled(LocationManager.GPS_PROVIDER))){
 
-                AlertDialog.Builder nastavenieGPS = new AlertDialog.Builder(this, R.style.NastaveniaGPS);
-                nastavenieGPS.setTitle(getString(R.string.udalosti_gps_titul));
-                nastavenieGPS.setMessage(getString(R.string.udalosti_gps_text));
-
-                nastavenieGPS.setPositiveButton(getString(R.string.udalosti_gps_tlacidlo_ano), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int which) {
+                new DialogPotvrdeni(this, getString(R.string.udalosti_gps_titul), getString(R.string.udalosti_gps_text), getString(R.string.dialog_potvrdeni_gps_tlacidlo_a), getString(R.string.dialog_potvrdeni_gps_tlacidlo_b), new DialogOdpoved() {
+                    @Override
+                    public void tlacidloA() {
                         Intent nastavenia = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                         startActivity(nastavenia);
                     }
-                });
 
-                nastavenieGPS.setNegativeButton(getString(R.string.udalosti_gps_tlacidlo_nie), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
+                    @Override
+                    public void tlacidloB() {
                     }
-                });
-
-                nastavenieGPS.show();
+                }).show();
             }else{
                 this.nacitavanie.setVisibility(View.VISIBLE);
                 this.email = email;

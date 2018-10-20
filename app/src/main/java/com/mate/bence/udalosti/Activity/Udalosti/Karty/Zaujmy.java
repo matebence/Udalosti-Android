@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -22,7 +21,9 @@ import com.mate.bence.udalosti.Activity.Udalosti.Podrobnosti.Aktualizator;
 import com.mate.bence.udalosti.Activity.Udalosti.Podrobnosti.AktualizatorObsahu;
 import com.mate.bence.udalosti.Activity.Udalosti.Podrobnosti.Podrobnosti;
 import com.mate.bence.udalosti.Activity.Udalosti.UdalostiUdaje;
+import com.mate.bence.udalosti.Dialog.DialogOdpoved;
 import com.mate.bence.udalosti.Dialog.DialogOznameni;
+import com.mate.bence.udalosti.Dialog.DialogPotvrdeni;
 import com.mate.bence.udalosti.R;
 import com.mate.bence.udalosti.Udaje.Nastavenia.Nastavenia;
 import com.mate.bence.udalosti.Udaje.Siet.Model.KommunikaciaData;
@@ -38,8 +39,6 @@ import com.mate.bence.udalosti.Zoznam.Zaujmy.Struktura.Zaujem;
 import com.mate.bence.udalosti.Zoznam.Zaujmy.ZaujemAdapter;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -102,6 +101,8 @@ public class Zaujmy extends Fragment implements KommunikaciaData, KommunikaciaOd
                 }
                 break;
         }
+
+        this.spracovanieZaujmu.setVisibility(View.GONE);
         this.nacitavanie.setVisibility(View.GONE);
     }
 
@@ -111,17 +112,15 @@ public class Zaujmy extends Fragment implements KommunikaciaData, KommunikaciaOd
             case Nastavenia.ZAUJEM_ODSTRANENIE:
                 if (odpoved.equals(Nastavenia.VSETKO_V_PORIADKU)) {
 
-                    if (udaje.get("uspech") != null) {
-                        Toast.makeText(getContext(), udaje.get("uspech"), Toast.LENGTH_SHORT).show();
-                    } else {
+                    if (udaje.get("uspech") == null) {
                         Toast.makeText(getContext(), udaje.get("chyba"), Toast.LENGTH_SHORT).show();
                     }
-
                 } else {
                     new DialogOznameni(getActivity(), "Chyba", odpoved);
                 }
                 break;
         }
+
         this.spracovanieZaujmu.setVisibility(View.GONE);
     }
 
@@ -155,13 +154,24 @@ public class Zaujmy extends Fragment implements KommunikaciaData, KommunikaciaOd
     }
 
     @Override
-    public void odstranit(RecyclerView.ViewHolder viewHolder, int smer, int pozicia) {
+    public void odstranit(final RecyclerView.ViewHolder viewHolder, int smer, final int pozicia) {
         if (viewHolder instanceof ZaujemAdapter.MesiacZaujmovHolder) {
-            MesiacZaujmov mesiacZaujmov = (MesiacZaujmov) mesiaceZaujmov.get(pozicia);
+            final MesiacZaujmov mesiacZaujmov = (MesiacZaujmov) mesiaceZaujmov.get(pozicia);
+            zaujemAdapter.odstranZaujem(viewHolder.getAdapterPosition());
 
-            this.spracovanieZaujmu.setVisibility(View.VISIBLE);
-            this.udalostiUdaje.odstranZaujem(email, token, mesiacZaujmov.getUdalost().getIdUdalost());
-            this.zaujemAdapter.odstranNaplanovanuUdalost(viewHolder.getAdapterPosition());
+            new DialogPotvrdeni(getActivity(), getResources().getString(R.string.zaujmy_odstranenie_tiltul), getResources().getString(R.string.zaujmy_odstranenie_text)+" "+mesiacZaujmov.getUdalost().getNazov()+"?", getResources().getString(R.string.dialog_potvrdeni_odstranit_zaujem_a), getResources().getString(R.string.dialog_potvrdeni_odstranit_zaujem_b), new DialogOdpoved() {
+                @Override
+                public void tlacidloA() {
+                    spracovanieZaujmu.setVisibility(View.VISIBLE);
+                    udalostiUdaje.odstranZaujem(email, token, mesiacZaujmov.getUdalost().getIdUdalost());
+                }
+
+                @Override
+                public void tlacidloB() {
+                    spracovanieZaujmu.setVisibility(View.VISIBLE);
+                    AktualizatorObsahu.zaujmy().hodnota();
+                }
+            }).show();
         }
     }
 

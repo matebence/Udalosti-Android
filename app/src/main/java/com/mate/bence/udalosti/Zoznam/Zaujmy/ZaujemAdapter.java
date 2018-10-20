@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mate.bence.udalosti.R;
+import com.mate.bence.udalosti.Zoznam.Udalost;
 import com.mate.bence.udalosti.Zoznam.Udalosti.ZvolenaUdalost;
 import com.mate.bence.udalosti.Zoznam.Zaujmy.Struktura.Mesiac;
 import com.mate.bence.udalosti.Zoznam.Zaujmy.Struktura.MesiacZaujmov;
@@ -93,7 +94,7 @@ public class ZaujemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         this.zvolenaUdalost = zvolenaUdalost;
     }
 
-    public void odstranNaplanovanuUdalost(int pozicia) {
+    public void odstranZaujem(int pozicia) {
         zoznamZaujmov.remove(pozicia);
         notifyItemRemoved(pozicia);
     }

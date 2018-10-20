@@ -108,8 +108,6 @@ public class Podrobnosti extends AppCompatActivity implements View.OnClickListen
                 if (odpoved.equals(Nastavenia.VSETKO_V_PORIADKU)) {
                     if (udaje.get("uspech") != null) {
 
-                        Toast.makeText(this, udaje.get("uspech"), Toast.LENGTH_SHORT).show();
-
                         int zaujemcovia = Integer.parseInt(pocetZaujemcov.getText().toString());
                         zaujemcovia--;
                         pocetZaujemcov.setText(Integer.toString(zaujemcovia));
@@ -128,8 +126,6 @@ public class Podrobnosti extends AppCompatActivity implements View.OnClickListen
             case Nastavenia.ZAUJEM:
                 if (odpoved.equals(Nastavenia.VSETKO_V_PORIADKU)) {
                     if (udaje.get("uspech") != null) {
-
-                        Toast.makeText(this, udaje.get("uspech"), Toast.LENGTH_SHORT).show();
 
                         int zaujemcovia = Integer.parseInt(pocetZaujemcov.getText().toString());
                         zaujemcovia++;

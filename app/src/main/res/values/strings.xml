@@ -12,7 +12,11 @@
     <string name="karta_tretia">Záujmy</string>
 
     <!-- Dialog -->
-    <string name="dialog_chyb_zavorit">Zatvoriť</string>
+    <string name="dialog_oznameni_zavorit">Zatvoriť</string>
+    <string name="dialog_potvrdeni_gps_tlacidlo_a">ÁNO, ŽAPNÚŤ</string>
+    <string name="dialog_potvrdeni_gps_tlacidlo_b">ZRUŠIŤ</string>
+    <string name="dialog_potvrdeni_odstranit_zaujem_a">ÁNO, ODSTRÁNIŤ</string>
+    <string name="dialog_potvrdeni_odstranit_zaujem_b">NIE</string>
 
     <!-- Pomoc -->
     <string name="pomoc_meno">Meno</string>
@@ -62,12 +66,12 @@
     <string name="udalosti_gps_pristup">Prístup k aktuálnej pozície bol odmietnutí</string>
     <string name="udalosti_gps_titul">Nastavenia GPS</string>
     <string name="udalosti_gps_text">GPS nie je zapnutí! Chcete zapnúť teraz?</string>
-    <string name="udalosti_gps_tlacidlo_ano">ÁNO, ŽAPNÚŤ</string>
-    <string name="udalosti_gps_tlacidlo_nie">ZRUŠIŤ</string>
 
     <!-- Zaujmy -->
     <string name="zaujmy_ziadne_zaujmy_popis_illustracie">Illustrácia pre chybu záujmov</string>
     <string name="zaujmy_ziadne_zaujmy">Žiadné záujmy</string>
+    <string name="zaujmy_odstranenie_tiltul">Odstránenie záujmov</string>
+    <string name="zaujmy_odstranenie_text">Naozaj chcete odstránit záujem </string>
 
     <!-- Zoznam udalosti -->
     <string name="list_zoznam_udalosti_popis_illustracie">Obrázok udalosti</string>

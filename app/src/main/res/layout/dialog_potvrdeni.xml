@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+
+    android:background="@drawable/ac_dialog_pozadie"
+
+    tools:context=".Activity.Udalosti.Udalosti">
+
+    <TextView
+        android:id="@+id/dialog_potvrdeni_titul"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="@dimen/dialog_potvrdeni_margin"
+        android:layout_marginStart="@dimen/dialog_potvrdeni_margin"
+        android:layout_marginTop="@dimen/dialog_potvrdeni_margin"
+
+        android:fontFamily="@font/raleway_bold"
+        android:textColor="@color/dialog_titul"
+        android:textSize="@dimen/dialog_potvrdeni_titul_velkost_pisma"/>
+
+    <TextView
+        android:id="@+id/dialog_potvrdeni_text"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/dialog_potvrdeni_titul"
+        android:layout_marginBottom="@dimen/dialog_potvrdeni_margin"
+        android:layout_marginEnd="@dimen/dialog_potvrdeni_margin"
+        android:layout_marginLeft="@dimen/dialog_potvrdeni_margin"
+        android:layout_marginRight="@dimen/dialog_potvrdeni_margin"
+        android:layout_marginStart="@dimen/dialog_potvrdeni_margin"
+        android:layout_marginTop="@dimen/dialog_potvrdeni_margin"
+
+        android:fontFamily="@font/raleway_medium"
+        android:textColor="@color/dialog_text"
+        android:textSize="@dimen/dialog_potvrdeni_text_velkost_pisma"/>
+
+    <Button
+        android:id="@+id/dialog_potvrdeni_a_odpoved"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/dialog_potvrdeni_text"
+        android:layout_marginBottom="@dimen/dialog_potvrdeni_margin"
+        android:layout_marginRight="@dimen/dialog_potvrdeni_margin"
+        android:layout_marginEnd="@dimen/dialog_potvrdeni_margin"
+
+        android:background="@android:color/transparent"
+
+        android:fontFamily="@font/raleway_bold"
+        android:textAllCaps="true"
+        android:textAlignment="textEnd"
+        android:textColor="@color/dialog_zavorit"
+        android:textSize="@dimen/dialog_potvrdeni_tlacidlo_velkost_pisma"
+
+        tools:ignore="RtlCompat"/>
+
+    <Button
+        android:id="@+id/dialog_potvrdeni_b_odpoved"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_below="@id/dialog_potvrdeni_text"
+        android:layout_toLeftOf="@id/dialog_potvrdeni_a_odpoved"
+        android:layout_toStartOf="@id/dialog_potvrdeni_a_odpoved"
+        android:layout_marginRight="@dimen/dialog_potvrdeni_margin"
+        android:layout_marginEnd="@dimen/dialog_potvrdeni_margin"
+        android:background="@android:color/transparent"
+
+        android:fontFamily="@font/raleway_bold"
+        android:textAllCaps="true"
+        android:textAlignment="textEnd"
+        android:textColor="@color/dialog_zavorit"
+        android:textSize="@dimen/dialog_potvrdeni_tlacidlo_velkost_pisma"
+
+        tools:ignore="RtlCompat"/>
+</RelativeLayout>
