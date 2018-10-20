@@ -28,7 +28,6 @@
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
 
-            android:src="@drawable/obrazok_nenajdeni"
             android:contentDescription="@string/podrobnosti_popis_obrazka_aktualnej_udalosti"/>
 
         <ProgressBar
