@@ -40,10 +40,8 @@ public class Stream extends AsyncTask<String, Void, Bitmap> {
             bitmap = BitmapFactory.decodeStream(zdroj);
         } catch (Exception e) {
             bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.obrazok_nenajdeni);
-            nacitavanie.setVisibility(View.GONE);
             Log.e("Chyba ", e.getMessage());
             e.printStackTrace();
-
         }
         return bitmap;
     }

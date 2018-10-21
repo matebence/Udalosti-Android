@@ -188,6 +188,8 @@ public class Podrobnosti extends AppCompatActivity implements View.OnClickListen
 
                 nastavTlacdloPodrobnosti(stavTlacidla);
             }
+        }else{
+            new DialogOznameni(this, "Chyba", getString(R.string.chyba_ziadne_spojenie));
         }
     }
 

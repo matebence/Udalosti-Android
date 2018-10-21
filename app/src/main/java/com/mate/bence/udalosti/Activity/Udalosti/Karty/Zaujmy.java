@@ -24,6 +24,7 @@ import com.mate.bence.udalosti.Activity.Udalosti.UdalostiUdaje;
 import com.mate.bence.udalosti.Dialog.DialogOdpoved;
 import com.mate.bence.udalosti.Dialog.DialogOznameni;
 import com.mate.bence.udalosti.Dialog.DialogPotvrdeni;
+import com.mate.bence.udalosti.Nastroje.Pripojenie;
 import com.mate.bence.udalosti.R;
 import com.mate.bence.udalosti.Udaje.Nastavenia.Nastavenia;
 import com.mate.bence.udalosti.Udaje.Siet.Model.KommunikaciaData;
@@ -159,19 +160,23 @@ public class Zaujmy extends Fragment implements KommunikaciaData, KommunikaciaOd
             final MesiacZaujmov mesiacZaujmov = (MesiacZaujmov) mesiaceZaujmov.get(pozicia);
             zaujemAdapter.odstranZaujem(viewHolder.getAdapterPosition());
 
-            new DialogPotvrdeni(getActivity(), getResources().getString(R.string.zaujmy_odstranenie_tiltul), getResources().getString(R.string.zaujmy_odstranenie_text)+" "+mesiacZaujmov.getUdalost().getNazov()+"?", getResources().getString(R.string.dialog_potvrdeni_odstranit_zaujem_a), getResources().getString(R.string.dialog_potvrdeni_odstranit_zaujem_b), new DialogOdpoved() {
-                @Override
-                public void tlacidloA() {
-                    spracovanieZaujmu.setVisibility(View.VISIBLE);
-                    udalostiUdaje.odstranZaujem(email, token, mesiacZaujmov.getUdalost().getIdUdalost());
-                }
+            if (Pripojenie.pripojenieExistuje(getContext())) {
+                new DialogPotvrdeni(getActivity(), getResources().getString(R.string.zaujmy_odstranenie_tiltul), getResources().getString(R.string.zaujmy_odstranenie_text) + " " + mesiacZaujmov.getUdalost().getNazov() + "?", getResources().getString(R.string.dialog_potvrdeni_odstranit_zaujem_a), getResources().getString(R.string.dialog_potvrdeni_odstranit_zaujem_b), new DialogOdpoved() {
+                    @Override
+                    public void tlacidloA() {
+                        spracovanieZaujmu.setVisibility(View.VISIBLE);
+                        udalostiUdaje.odstranZaujem(email, token, mesiacZaujmov.getUdalost().getIdUdalost());
+                    }
 
-                @Override
-                public void tlacidloB() {
-                    spracovanieZaujmu.setVisibility(View.VISIBLE);
-                    AktualizatorObsahu.zaujmy().hodnota();
-                }
-            }).show();
+                    @Override
+                    public void tlacidloB() {
+                        spracovanieZaujmu.setVisibility(View.VISIBLE);
+                        AktualizatorObsahu.zaujmy().hodnota();
+                    }
+                }).show();
+            } else {
+                new DialogOznameni(getActivity(), "Chyba", getResources().getString(R.string.chyba_servera));
+            }
         }
     }
 
