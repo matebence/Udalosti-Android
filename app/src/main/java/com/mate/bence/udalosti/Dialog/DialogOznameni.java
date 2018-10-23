@@ -2,6 +2,7 @@ package com.mate.bence.udalosti.Dialog;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -11,7 +12,11 @@ import com.mate.bence.udalosti.R;
 
 public class DialogOznameni {
 
+    private static final String TAG = DialogOznameni.class.getName();
+
     public DialogOznameni(Activity activity, String titul, String oznamenie) {
+        Log.v(DialogOznameni.TAG, "Metoda DialogOznameni bola vykonana");
+
         final Dialog dialog = new Dialog(activity);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);

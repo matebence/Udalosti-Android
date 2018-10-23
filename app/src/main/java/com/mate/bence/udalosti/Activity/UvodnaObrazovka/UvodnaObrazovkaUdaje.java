@@ -10,6 +10,7 @@ import java.util.HashMap;
 public class UvodnaObrazovkaUdaje implements ImplementaciaUvodnaObrazovka {
 
     private static final String TAG = UvodnaObrazovkaUdaje.class.getName();
+
     private SQLiteDatabaza databaza;
 
     UvodnaObrazovkaUdaje(Context context) {
@@ -18,15 +19,15 @@ public class UvodnaObrazovkaUdaje implements ImplementaciaUvodnaObrazovka {
 
     @Override
     public boolean zistiCiPouzivatelskoKontoExistuje() {
-        Log.v(TAG, "Metoda zistiCiPouzivatelskoKontoExistuje bola vykonana");
+        Log.v(UvodnaObrazovkaUdaje.TAG, "Metoda zistiCiPouzivatelskoKontoExistuje bola vykonana");
 
-        return databaza.pouzivatelskeUdaje();
+        return this.databaza.pouzivatelskeUdaje();
     }
 
     @Override
     public HashMap prihlasPouzivatela() {
-        Log.v(TAG, "Metoda prihlasPouzivatela bola vykonana");
+        Log.v(UvodnaObrazovkaUdaje.TAG, "Metoda prihlasPouzivatela bola vykonana");
 
-        return databaza.vratAktualnehoPouzivatela();
+        return this.databaza.vratAktualnehoPouzivatela();
     }
 }

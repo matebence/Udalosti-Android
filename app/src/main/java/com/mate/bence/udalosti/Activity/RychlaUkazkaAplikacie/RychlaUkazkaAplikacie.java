@@ -10,6 +10,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,11 +26,14 @@ import com.mate.bence.udalosti.Udaje.Data.Preferencie;
 
 public class RychlaUkazkaAplikacie extends AppCompatActivity implements View.OnClickListener {
 
+    private static final String TAG = RychlaUkazkaAplikacie.class.getName();
+
     private ViewPager navigaciaObsahu;
     private LinearLayout castUkazky;
-    private int[] obsah;
     private Button preskocit, dalej;
+
     private Preferencie preferencie;
+    private int[] obsah;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +50,9 @@ public class RychlaUkazkaAplikacie extends AppCompatActivity implements View.OnC
 
         ObsahAdapter myViewPagerAdapter = new ObsahAdapter();
 
-        preferencie = new Preferencie(this);
-        navigaciaObsahu.setAdapter(myViewPagerAdapter);
-        navigaciaObsahu.addOnPageChangeListener(zmenaObsahu);
+        this.preferencie = new Preferencie(this);
+        this.navigaciaObsahu.setAdapter(myViewPagerAdapter);
+        this.navigaciaObsahu.addOnPageChangeListener(zmenaObsahu);
     }
 
     @Override
@@ -58,9 +62,9 @@ public class RychlaUkazkaAplikacie extends AppCompatActivity implements View.OnC
                 Autentifikacia();
                 break;
             case R.id.dalej:
-                int current = cast(+1);
+                int current = cast();
                 if (current < obsah.length) {
-                    navigaciaObsahu.setCurrentItem(current);
+                    this.navigaciaObsahu.setCurrentItem(current);
                 } else {
                     Autentifikacia();
                 }
@@ -69,34 +73,38 @@ public class RychlaUkazkaAplikacie extends AppCompatActivity implements View.OnC
     }
 
     private void init() {
+        Log.v(RychlaUkazkaAplikacie.TAG, "Metoda init - RychlaUkazkaAplikacie bola vykonana");
+
         this.preskocit = findViewById(R.id.preskocit);
-        preskocit.setOnClickListener(this);
+        this.preskocit.setOnClickListener(this);
 
         this.dalej = findViewById(R.id.dalej);
-        dalej.setOnClickListener(this);
+        this.dalej.setOnClickListener(this);
 
         this.navigaciaObsahu = findViewById(R.id.navigacia_obsahu);
         this.castUkazky = findViewById(R.id.navigacia);
 
-        obsah = new int[]{
+        this.obsah = new int[]{
                 R.layout.fragment_rychla_ukazka_aplikacie_cast_1,
                 R.layout.fragment_rychla_ukazka_aplikacie_cast_2,
                 R.layout.fragment_rychla_ukazka_aplikacie_cast_3};
     }
 
     private void pridajIndikatorObsahu(int currentPage) {
+        Log.v(RychlaUkazkaAplikacie.TAG, "Metoda pridajIndikatorObsahu bola vykonana");
+
         TextView[] cast = new TextView[obsah.length];
 
         int[] aktivna = getResources().getIntArray(R.array.pole_farieb_pre_aktivnu_obrazovku);
         int[] inaktivna = getResources().getIntArray(R.array.pole_farieb_pre_inaktivnu_obrazovku);
 
-        castUkazky.removeAllViews();
+        this.castUkazky.removeAllViews();
         for (int i = 0; i < cast.length; i++) {
             cast[i] = new TextView(this);
             cast[i].setText(Html.fromHtml("&#8226; "));
             cast[i].setTextSize(35);
             cast[i].setTextColor(inaktivna[currentPage]);
-            castUkazky.addView(cast[i]);
+            this.castUkazky.addView(cast[i]);
         }
 
         if (cast.length > 0)
@@ -104,6 +112,8 @@ public class RychlaUkazkaAplikacie extends AppCompatActivity implements View.OnC
     }
 
     private void zmenFarbuNaPriehladnu() {
+        Log.v(RychlaUkazkaAplikacie.TAG, "Metoda zmenFarbuNaPriehladnu bola vykonana");
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -111,12 +121,14 @@ public class RychlaUkazkaAplikacie extends AppCompatActivity implements View.OnC
         }
     }
 
-    private int cast(int i) {
-        return navigaciaObsahu.getCurrentItem() + i;
+    private int cast() {
+        Log.v(RychlaUkazkaAplikacie.TAG, "Metoda cast bola vykonana");
+
+        return this.navigaciaObsahu.getCurrentItem() + 1;
     }
 
     private void Autentifikacia() {
-        preferencie.nastavPrvyStart(false);
+        this.preferencie.nastavPrvyStart(false);
         startActivity(new Intent(RychlaUkazkaAplikacie.this, Autentifikacia.class));
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         finish();
@@ -153,10 +165,10 @@ public class RychlaUkazkaAplikacie extends AppCompatActivity implements View.OnC
         @NonNull
         @Override
         public Object instantiateItem(@NonNull ViewGroup container, int position) {
-            layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            this.layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            assert layoutInflater != null;
-            View view = layoutInflater.inflate(obsah[position], container, false);
+            assert this.layoutInflater != null;
+            View view = this.layoutInflater.inflate(obsah[position], container, false);
             container.addView(view);
 
             return view;

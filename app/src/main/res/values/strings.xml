@@ -25,10 +25,12 @@
     <string name="pomoc_potvrdte_heslo">Potvrdte heslo</string>
 
     <!-- Chyby -->
-    <string name="chyba_ziadna_siet_gps">Žiadné spojenie(WiFi/GPS)</string>
-    <string name="chyba_ziadne_spojenie">Spojenie zlyhalo</string>
-    <string name="chyba_automatickeho_prihlasenia">Prosím prihláste sa!</string>
     <string name="chyba_servera">Server je momentalne nedostupný!</string>
+    <string name="chyba_ziadna_siet_gps">Žiadné spojenie(WiFi/GPS)</string>
+    <string name="chyba_ziadne_spojenie">Žiadne spojenie!</string>
+    <string name="chyba_spojenie_zlyhalo">Spojenie zlyhalo</string>
+    <string name="chyba_pozicia_neurcena">Pozícia neurčená</string>
+    <string name="chyba_automatickeho_prihlasenia">Prosím prihláste sa!</string>
 
     <!-- Uvodna obrazovka -->
     <string name="uvodna_obrazovka_logo_popis_illustracie">Logo aplikácie Udalosti</string>

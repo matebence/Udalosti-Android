@@ -27,6 +27,7 @@ public class UdalostiUdaje implements UdalostiImplementacia {
 
     private KommunikaciaOdpoved odpovedeOdServera;
     private KommunikaciaData udajeZoServera;
+
     private SQLiteDatabaza databaza;
     private Context context;
 
@@ -39,7 +40,7 @@ public class UdalostiUdaje implements UdalostiImplementacia {
 
     @Override
     public void zoznamUdalosti(String email, String stat, String token) {
-        Log.v(TAG, "Metoda zoznamUdalosti bola vykonana");
+        Log.v(UdalostiUdaje.TAG, "Metoda zoznamUdalosti bola vykonana");
 
         Requesty requesty = UdalostiAdresa.initAdresu();
         requesty.udalosti(email, stat, token).enqueue(new Callback<Obsah>() {
@@ -58,11 +59,11 @@ public class UdalostiUdaje implements UdalostiImplementacia {
     }
 
     @Override
-    public void zoznamUdalostiPodlaPozicie(String email, String stat, String okres, String mesto, String token) {
-        Log.v(TAG, "Metoda zoznamUdalostiPodlaPozicie bola vykonana");
+    public void zoznamUdalostiPodlaPozicie(String email, String stat, String okres, String pozicia, String token) {
+        Log.v(UdalostiUdaje.TAG, "Metoda zoznamUdalostiPodlaPozicie bola vykonana");
 
         Requesty requesty = UdalostiAdresa.initAdresu();
-        requesty.udalostiPodlaPozicie(email, stat, okres, mesto, token).enqueue(new Callback<Obsah>() {
+        requesty.udalostiPodlaPozicie(email, stat, okres, pozicia, token).enqueue(new Callback<Obsah>() {
             @Override
             public void onResponse(@NonNull Call<Obsah> call, @NonNull Response<Obsah> response) {
                 if (response.isSuccessful()) {
@@ -79,19 +80,19 @@ public class UdalostiUdaje implements UdalostiImplementacia {
 
     @Override
     public void zoznamZaujmov(String email, String token) {
-        Log.v(TAG, "Metoda zoznamZaujmov bola vykonana");
+        Log.v(UdalostiUdaje.TAG, "Metoda zoznamZaujmov bola vykonana");
 
         Requesty requesty = UdalostiAdresa.initAdresu();
         requesty.zaujmy(email, token).enqueue(new Callback<Obsah>() {
             @Override
-            public void onResponse(Call<Obsah> call, Response<Obsah> response) {
+            public void onResponse(@NonNull Call<Obsah> call, @NonNull Response<Obsah> response) {
                 if (response.isSuccessful()) {
                     udajeZoServera.dataZoServera(Nastavenia.VSETKO_V_PORIADKU, Nastavenia.ZAUJEM_ZOZNAM, response.body().getUdalosti());
                 }
             }
 
             @Override
-            public void onFailure(Call<Obsah> call, Throwable t) {
+            public void onFailure(@NonNull Call<Obsah> call, @NonNull Throwable t) {
                 udajeZoServera.dataZoServera(context.getString(R.string.chyba_servera), Nastavenia.ZAUJEM_ZOZNAM, null);
             }
         });
@@ -99,12 +100,12 @@ public class UdalostiUdaje implements UdalostiImplementacia {
 
     @Override
     public void zaujem(String email, String token, int idUdalost) {
-        Log.v(TAG, "Metoda zaujem bola vykonana");
+        Log.v(UdalostiUdaje.TAG, "Metoda zaujem bola vykonana");
 
         Requesty requesty = UdalostiAdresa.initAdresu();
         requesty.zaujem(email, token, idUdalost).enqueue(new Callback<Akcia>() {
             @Override
-            public void onResponse(Call<Akcia> call, Response<Akcia> response) {
+            public void onResponse(@NonNull Call<Akcia> call, @NonNull Response<Akcia> response) {
                 if (response.isSuccessful()) {
                     HashMap<String, String> udaje = new HashMap<>();
 
@@ -120,7 +121,7 @@ public class UdalostiUdaje implements UdalostiImplementacia {
             }
 
             @Override
-            public void onFailure(Call<Akcia> call, Throwable t) {
+            public void onFailure(@NonNull Call<Akcia> call, @NonNull Throwable t) {
                 odpovedeOdServera.odpovedServera(context.getString(R.string.chyba_servera), Nastavenia.ZAUJEM, null);
             }
         });
@@ -128,19 +129,19 @@ public class UdalostiUdaje implements UdalostiImplementacia {
 
     @Override
     public void potvrdZaujem(String email, String token, int idUdalost) {
-        Log.v(TAG, "Metoda potvrdZaujem bola vykonana");
+        Log.v(UdalostiUdaje.TAG, "Metoda potvrdZaujem bola vykonana");
 
         Requesty requesty = UdalostiAdresa.initAdresu();
         requesty.potvrd(email, token, idUdalost).enqueue(new Callback<Obsah>() {
             @Override
-            public void onResponse(Call<Obsah> call, Response<Obsah> response) {
+            public void onResponse(@NonNull Call<Obsah> call, @NonNull Response<Obsah> response) {
                 if (response.isSuccessful()) {
                     udajeZoServera.dataZoServera(Nastavenia.VSETKO_V_PORIADKU, Nastavenia.ZAUJEM_POTVRD, response.body().getUdalosti());
                 }
             }
 
             @Override
-            public void onFailure(Call<Obsah> call, Throwable t) {
+            public void onFailure(@NonNull Call<Obsah> call, @NonNull Throwable t) {
                 odpovedeOdServera.odpovedServera(context.getString(R.string.chyba_servera), Nastavenia.ZAUJEM_POTVRD, null);
             }
         });
@@ -148,12 +149,12 @@ public class UdalostiUdaje implements UdalostiImplementacia {
 
     @Override
     public void odstranZaujem(String email, String token, int idUdalost) {
-        Log.v(TAG, "Metoda odstranZaujem bola vykonana");
+        Log.v(UdalostiUdaje.TAG, "Metoda odstranZaujem bola vykonana");
 
         Requesty requesty = UdalostiAdresa.initAdresu();
         requesty.odstranZaujem(email, token, idUdalost).enqueue(new Callback<Akcia>() {
             @Override
-            public void onResponse(Call<Akcia> call, Response<Akcia> response) {
+            public void onResponse(@NonNull Call<Akcia> call, @NonNull Response<Akcia> response) {
                 if (response.isSuccessful()) {
                     HashMap<String, String> udaje = new HashMap<>();
 
@@ -169,7 +170,7 @@ public class UdalostiUdaje implements UdalostiImplementacia {
             }
 
             @Override
-            public void onFailure(Call<Akcia> call, Throwable t) {
+            public void onFailure(@NonNull Call<Akcia> call, @NonNull Throwable t) {
                 odpovedeOdServera.odpovedServera(context.getString(R.string.chyba_servera), Nastavenia.ZAUJEM_ODSTRANENIE, null);
             }
         });
@@ -177,7 +178,7 @@ public class UdalostiUdaje implements UdalostiImplementacia {
 
     @Override
     public HashMap miestoPrihlasenia() {
-        Log.v(TAG, "Metoda miestoPrihlasenia bola vykonana");
+        Log.v(UdalostiUdaje.TAG, "Metoda miestoPrihlasenia bola vykonana");
 
         HashMap<String, String> miestoPrihlasenia = databaza.vratMiestoPrihlasenia();
         if (miestoPrihlasenia != null) {
@@ -189,14 +190,14 @@ public class UdalostiUdaje implements UdalostiImplementacia {
 
     @Override
     public void automatickePrihlasenieVypnute(String email) {
-        Log.v(TAG, "Metoda automatickePrihlasenieVypnute bola vykonana");
+        Log.v(UdalostiUdaje.TAG, "Metoda automatickePrihlasenieVypnute bola vykonana");
 
-        databaza.odstranPouzivatelskeUdaje(email);
+        this.databaza.odstranPouzivatelskeUdaje(email);
     }
 
     @Override
     public void odhlasenie(String email) {
-        Log.v(TAG, "Metoda odhlasenie bola vykonana");
+        Log.v(UdalostiUdaje.TAG, "Metoda odhlasenie bola vykonana");
 
         Requesty requesty = UdalostiAdresa.initAdresu();
         requesty.odhlasenie(email).enqueue(new Callback<Autentifikator>() {

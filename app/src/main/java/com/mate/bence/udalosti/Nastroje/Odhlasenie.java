@@ -38,23 +38,25 @@ public class Odhlasenie extends Service implements KommunikaciaOdpoved, Kommunik
     @Override
     public void onTaskRemoved(Intent rootIntent) {
         UdalostiUdaje udalostiUdaje = new UdalostiUdaje(this, this, getApplicationContext());
-        udalostiUdaje.odhlasenie(email);
+        udalostiUdaje.odhlasenie(this.email);
 
         try {
             TimeUnit.SECONDS.sleep(2);
         } catch (InterruptedException e) {
-            Log.v(TAG, "Pri odhlasovaní pomocou systému nastala chyba");
+            Log.v(Odhlasenie.TAG, "Pri odhlasovaní pomocou systému nastala chyba");
             e.printStackTrace();
         }
     }
 
     @Override
     public void odpovedServera(String odpoved, String od, HashMap<String, String> udaje) {
+        Log.v(Odhlasenie.TAG, "Metoda odpovedServera - Odhlasenie bola vykonana");
+
         switch (od) {
             case Nastavenia.AUTENTIFIKACIA_ODHLASENIE:
                 if (odpoved.equals(Nastavenia.VSETKO_V_PORIADKU)) {
                     stopSelf();
-                    Log.v(TAG, "Systém odhlásil");
+                    Log.v(Odhlasenie.TAG, "Systém odhlásil");
                 }
                 break;
         }

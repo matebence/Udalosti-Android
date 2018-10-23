@@ -3,6 +3,7 @@ package com.mate.bence.udalosti.Dialog;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -12,14 +13,16 @@ import com.mate.bence.udalosti.R;
 
 public class DialogPotvrdeni extends Dialog implements android.view.View.OnClickListener {
 
-    private Activity activity;
+    private static final String TAG = DialogPotvrdeni.class.getName();
+
     private DialogOdpoved dialogOdpoved;
     private String titul, text, tlacidloA, tlacidloB;
 
     public DialogPotvrdeni(Activity activity, String titul, String text, String tlacidloA, String tlacidloB, DialogOdpoved dialogOdpoved) {
         super(activity);
 
-        this.activity = activity;
+        Log.v(DialogPotvrdeni.TAG, "Metoda DialogPotvrdeni bola vykonana");
+
         this.titul = titul;
         this.text = text;
         this.tlacidloA = tlacidloA;
@@ -36,8 +39,8 @@ public class DialogPotvrdeni extends Dialog implements android.view.View.OnClick
         Button TlacidloA = findViewById(R.id.dialog_potvrdeni_a_odpoved);
         Button TlacidloB = findViewById(R.id.dialog_potvrdeni_b_odpoved);
 
-        TlacidloA.setText(tlacidloA);
-        TlacidloB.setText(tlacidloB);
+        TlacidloA.setText(this.tlacidloA);
+        TlacidloB.setText(this.tlacidloB);
 
         TlacidloA.setOnClickListener(this);
         TlacidloB.setOnClickListener(this);
@@ -45,19 +48,19 @@ public class DialogPotvrdeni extends Dialog implements android.view.View.OnClick
         TextView dialogTitul = findViewById(R.id.dialog_potvrdeni_titul);
         TextView dialogText = findViewById(R.id.dialog_potvrdeni_text);
 
-        dialogTitul.setText(titul);
-        dialogText.setText(text);
+        dialogTitul.setText(this.titul);
+        dialogText.setText(this.text);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.dialog_potvrdeni_a_odpoved:
-                dialogOdpoved.tlacidloA();
+                this.dialogOdpoved.tlacidloA();
                 dismiss();
                 break;
             case R.id.dialog_potvrdeni_b_odpoved:
-                dialogOdpoved.tlacidloB();
+                this.dialogOdpoved.tlacidloB();
                 dismiss();
                 break;
             default:

@@ -3,9 +3,15 @@ package com.mate.bence.udalosti.Nastroje;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 
 public class Pripojenie {
+
+    private static final String TAG = Pripojenie.class.getName();
+
     public static boolean pripojenieExistuje(Context context) {
+        Log.v(Pripojenie.TAG, "Metoda pripojenieExistuje bola vykonana");
+
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
         assert connectivityManager != null;

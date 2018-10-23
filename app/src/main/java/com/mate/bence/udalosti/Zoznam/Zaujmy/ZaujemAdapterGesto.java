@@ -3,15 +3,18 @@ package com.mate.bence.udalosti.Zoznam.Zaujmy;
 import android.graphics.Canvas;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.View;
 
 public class ZaujemAdapterGesto extends ItemTouchHelper.SimpleCallback {
 
+    private static final String TAG = ZaujemAdapterGesto.class.getName();
     private OdstranenieZaujmu odstranenieZaujmu;
 
     public ZaujemAdapterGesto(int dragDirs, int swipeDirs, OdstranenieZaujmu odstranenieZaujmu) {
         super(dragDirs, swipeDirs);
 
+        Log.v(ZaujemAdapterGesto.TAG, "Metoda ZaujemAdapterGesto bola vykonana");
         this.odstranenieZaujmu = odstranenieZaujmu;
     }
 

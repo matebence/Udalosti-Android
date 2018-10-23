@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,8 @@ import java.util.List;
 
 public class Objavuj extends Fragment implements KommunikaciaData, KommunikaciaOdpoved, ZvolenaUdalost {
 
+    private static final String TAG = Objavuj.class.getName();
+
     private String email, stat, token;
     private List<Udalost> obsahUdalosti;
 
@@ -55,34 +58,36 @@ public class Objavuj extends Fragment implements KommunikaciaData, KommunikaciaO
     public void onResume() {
         super.onResume();
 
-        if (obsahUdalosti.isEmpty()) {
+        if (this.obsahUdalosti.isEmpty()) {
             this.nacitavanie.setVisibility(View.VISIBLE);
-            udalostiUdaje.zoznamUdalosti(email, stat, token);
+            this.udalostiUdaje.zoznamUdalosti(this.email, this.stat, this.token);
         }
     }
 
     @Override
     public void dataZoServera(String odpoved, String od, ArrayList udaje) {
+        Log.v(Objavuj.TAG, "Metoda dataZoServera - Objavuj bola vykonana");
+
         switch (od) {
             case Nastavenia.UDALOSTI_OBJAVUJ:
                 if (odpoved.equals(Nastavenia.VSETKO_V_PORIADKU)) {
-                    chybaUdalosti.setVisibility(View.GONE);
+                    this.chybaUdalosti.setVisibility(View.GONE);
 
-                    chybaUdalostiObrazok.setBackgroundResource(R.drawable.ic_udalosti);
-                    chybaUdalostiText.setText(getResources().getString(R.string.udalosti_ziadne_udalosti));
+                    this.chybaUdalostiObrazok.setBackgroundResource(R.drawable.ic_udalosti);
+                    this.chybaUdalostiText.setText(getResources().getString(R.string.udalosti_ziadne_udalosti));
 
                     if (udaje != null) {
-                        chybaUdalosti.setVisibility(View.GONE);
+                        this.chybaUdalosti.setVisibility(View.GONE);
                         ziskajUdalosti(udaje);
                     } else {
-                        chybaUdalosti.setVisibility(View.VISIBLE);
+                        this.chybaUdalosti.setVisibility(View.VISIBLE);
                     }
-                    zoznamUdalosti.setItemViewCacheSize(obsahUdalosti.size());
+                    this.zoznamUdalosti.setItemViewCacheSize(obsahUdalosti.size());
                 }else{
-                    chybaUdalosti.setVisibility(View.VISIBLE);
+                    this.chybaUdalosti.setVisibility(View.VISIBLE);
 
-                    chybaUdalostiObrazok.setBackgroundResource(R.drawable.ic_wifi);
-                    chybaUdalostiText.setText(getResources().getString(R.string.chyba_ziadne_spojenie));
+                    this.chybaUdalostiObrazok.setBackgroundResource(R.drawable.ic_spojenie);
+                    this.chybaUdalostiText.setText(getResources().getString(R.string.chyba_spojenie_zlyhalo));
                 }
                 break;
         }
@@ -95,11 +100,13 @@ public class Objavuj extends Fragment implements KommunikaciaData, KommunikaciaO
 
     @Override
     public void podrobnostiUdalosti(View view, int pozicia) {
-        Udalost udalost = obsahUdalosti.get(pozicia);
+        Log.v(Objavuj.TAG, "Metoda dataZoServera - Objavuj bola vykonana");
+
+        Udalost udalost = this.obsahUdalosti.get(pozicia);
         Intent zvolenaUdalost = new Intent(getActivity(), Podrobnosti.class);
 
-        zvolenaUdalost.putExtra("email", email);
-        zvolenaUdalost.putExtra("token", token);
+        zvolenaUdalost.putExtra("email", this.email);
+        zvolenaUdalost.putExtra("token", this.token);
 
         zvolenaUdalost.putExtra("idUdalost", udalost.getIdUdalost());
         zvolenaUdalost.putExtra("zaujemUdalosti", udalost.getZaujem());
@@ -125,6 +132,8 @@ public class Objavuj extends Fragment implements KommunikaciaData, KommunikaciaO
     }
 
     private View init(View view) {
+        Log.v(Objavuj.TAG, "Metoda init - Objavuj bola vykonana");
+
         this.email = getArguments().getString("email");
         this.stat = getArguments().getString("stat");
         this.token = getArguments().getString("token");
@@ -140,27 +149,31 @@ public class Objavuj extends Fragment implements KommunikaciaData, KommunikaciaO
         this.aktualizujUdalosti.setColorSchemeColors(getResources().getColor(R.color.nacitavanie));
 
         this.obsahUdalosti = new ArrayList<>();
-        nastavZoznamUdalosti(obsahUdalosti);
+        nastavZoznamUdalosti(this.obsahUdalosti);
 
         this.udalostiUdaje = new UdalostiUdaje(this, this, getContext());
         return view;
     }
 
     protected void ziskajUdalosti(ArrayList<Udalost> udalosti) {
-        obsahUdalosti.addAll(udalosti);
-        udalostAdapter.notifyItemRangeInserted(0, udalosti.size());
-        zoznamUdalosti.setVisibility(View.VISIBLE);
+        Log.v(Objavuj.TAG, "Metoda ziskajUdalosti bola vykonana");
+
+        this.obsahUdalosti.addAll(udalosti);
+        this.udalostAdapter.notifyItemRangeInserted(0, udalosti.size());
+        this.zoznamUdalosti.setVisibility(View.VISIBLE);
     }
 
     private void nastavZoznamUdalosti(List<Udalost> udaje) {
+        Log.v(Objavuj.TAG, "Metoda nastavZoznamUdalosti bola vykonana");
+
         PoskitovelObsahu poskitovelObsahu = new PoskitovelObsahu(getContext());
 
-        udalostAdapter = new UdalostAdapter(udaje, getContext());
-        udalostAdapter.zvolenaUdalost(this);
+        this.udalostAdapter = new UdalostAdapter(udaje, getContext());
+        this.udalostAdapter.zvolenaUdalost(this);
 
-        zoznamUdalosti.setLayoutManager(poskitovelObsahu);
-        zoznamUdalosti.setItemAnimator(new DefaultItemAnimator());
-        zoznamUdalosti.setAdapter(udalostAdapter);
+        this.zoznamUdalosti.setLayoutManager(poskitovelObsahu);
+        this.zoznamUdalosti.setItemAnimator(new DefaultItemAnimator());
+        this.zoznamUdalosti.setAdapter(this.udalostAdapter);
     }
 
     private SwipeRefreshLayout.OnRefreshListener aktualizuj = new SwipeRefreshLayout.OnRefreshListener() {

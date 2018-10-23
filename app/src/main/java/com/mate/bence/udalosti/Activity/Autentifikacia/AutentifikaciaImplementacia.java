@@ -5,7 +5,9 @@ public interface AutentifikaciaImplementacia {
 
     void ulozPrihlasovacieUdajeDoDatabazy(String email, String heslo);
 
-    void miestoPrihlasenia(String email, String heslo, double zemepisnaSirka, double zemepisnaDlzka);
+    void miestoPrihlasenia(String email, String heslo, double zemepisnaSirka, double zemepisnaDlzka, boolean geo, boolean aktualizuj);
+
+    void miestoPrihlasenia(String email, String heslo, boolean ip);
 
     void prihlasenie(String email, String heslo);
 

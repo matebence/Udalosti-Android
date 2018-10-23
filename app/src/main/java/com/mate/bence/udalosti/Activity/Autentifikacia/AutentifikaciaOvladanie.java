@@ -1,9 +1,11 @@
 package com.mate.bence.udalosti.Activity.Autentifikacia;
 
-public interface AutentifikaciaOvladanie {
-    void tlacidloRegistrovatSa(String meno, String email, String heslo, String potvrd);
+import android.widget.EditText;
 
-    void tlacidloPrihlasitSa(String email, String heslo);
+public interface AutentifikaciaOvladanie {
+    void tlacidloRegistrovatSa(EditText meno, EditText email, EditText heslo, EditText potvrd);
+
+    void tlacidloPrihlasitSa(EditText email, EditText heslo);
 
     void registracia();
 }

@@ -13,6 +13,7 @@ import com.mate.bence.udalosti.Udaje.Siet.GeoAdresa;
 import com.mate.bence.udalosti.Udaje.Siet.Model.Autentifikator.Autentifikator;
 import com.mate.bence.udalosti.Udaje.Siet.Model.KommunikaciaOdpoved;
 import com.mate.bence.udalosti.Udaje.Siet.Model.Pozicia.LocationIQ;
+import com.mate.bence.udalosti.Udaje.Siet.Model.Pozicia.Pozicia;
 import com.mate.bence.udalosti.Udaje.Siet.Requesty;
 import com.mate.bence.udalosti.Udaje.Siet.UdalostiAdresa;
 
@@ -29,6 +30,7 @@ public class AutentifikaciaUdaje implements AutentifikaciaImplementacia {
 
     private KommunikaciaOdpoved odpovedeOdServera;
     private SQLiteDatabaza databaza;
+
     private Context context;
 
     public AutentifikaciaUdaje(KommunikaciaOdpoved odpovedeOdServera, Context context) {
@@ -38,11 +40,11 @@ public class AutentifikaciaUdaje implements AutentifikaciaImplementacia {
     }
 
     @Override
-    public void miestoPrihlasenia(final String email, final String heslo, final double zemepisnaSirka, final double zemepisnaDlzka) {
-        Log.v(TAG, "Metoda miestoPrihlasenia bola vykonana");
+    public void miestoPrihlasenia(final String email, final String heslo, double zemepisnaSirka, double zemepisnaDlzka, boolean geo, final boolean aktualizuj) {
+        Log.v(AutentifikaciaUdaje.TAG, "Metoda miestoPrihlasenia bola vykonana");
 
-        Requesty requesty = GeoAdresa.initAdresu();
-        requesty.pozicia(Nastavenia.POZICIA_TOKEN, zemepisnaSirka,zemepisnaDlzka,Nastavenia.POZICIA_FORMAT, Nastavenia.POZICIA_JAZYK).enqueue(new Callback<LocationIQ>() {
+        Requesty requesty = GeoAdresa.initAdresu(geo);
+        requesty.pozicia(Nastavenia.POZICIA_TOKEN, zemepisnaSirka, zemepisnaDlzka, Nastavenia.POZICIA_FORMAT, Nastavenia.POZICIA_JAZYK).enqueue(new Callback<LocationIQ>() {
 
             @Override
             public void onResponse(@NonNull Call<LocationIQ> call, @NonNull Response<LocationIQ> response) {
@@ -55,12 +57,7 @@ public class AutentifikaciaUdaje implements AutentifikaciaImplementacia {
                         pozicia = response.body().getPozicia().getPozicia();
                     }
                     if (response.body().getPozicia().getOkres() != null) {
-                        String nepotrebnaCastInformacie = "okres ";
-                        okres = response.body().getPozicia().getOkres().substring(nepotrebnaCastInformacie.length(),response.body().getPozicia().getOkres().length());
-                    }else{
-                        if (response.body().getPozicia().getOkresMesta() != null) {
-                            okres = response.body().getPozicia().getOkresMesta();
-                        }
+                        okres = response.body().getPozicia().getOkres();
                     }
                     if (response.body().getPozicia().getKraj() != null) {
                         kraj = response.body().getPozicia().getKraj();
@@ -81,7 +78,12 @@ public class AutentifikaciaUdaje implements AutentifikaciaImplementacia {
                         databaza.noveMiestoPrihlasenia(new Miesto(pozicia, okres, kraj, psc, stat, znakStatu));
                     }
                 }
-                prihlasenie(email, heslo);
+
+                if (aktualizuj) {
+                    odpovedeOdServera.odpovedServera(Nastavenia.VSETKO_V_PORIADKU, Nastavenia.UDALOSTI_AKTUALIZUJ, null);
+                } else {
+                    prihlasenie(email, heslo);
+                }
             }
 
             @Override
@@ -92,8 +94,42 @@ public class AutentifikaciaUdaje implements AutentifikaciaImplementacia {
     }
 
     @Override
+    public void miestoPrihlasenia(final String email, final String heslo, boolean ip) {
+        Log.v(AutentifikaciaUdaje.TAG, "Metoda miestoPrihlasenia bola vykonana");
+
+        Requesty requesty = GeoAdresa.initAdresu(ip);
+        requesty.pozicia().enqueue(new Callback<Pozicia>() {
+
+            @Override
+            public void onResponse(@NonNull Call<Pozicia> call, @NonNull Response<Pozicia> response) {
+                GeoAdresa.initNanovo();
+                String stat = "";
+
+                if (response.body() != null) {
+                    if (response.body().getStat() != null) {
+                        if ((response.body().getStat().equals("Slovakia")) || (response.body().getStat().equals("Slovak Republic")))
+                            stat = "Slovensko";
+                    }
+                    if (databaza.miestoPrihlasenia()) {
+                        databaza.aktualizujMiestoPrihlasenia(new Miesto(null, null, null, null, stat, null));
+                    } else {
+                        databaza.noveMiestoPrihlasenia(new Miesto(null, null, null, null, stat, null));
+                    }
+                }
+
+                prihlasenie(email, heslo);
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Pozicia> call, @NonNull Throwable t) {
+                odpovedeOdServera.odpovedServera(context.getString(R.string.chyba_servera), Nastavenia.AUTENTIFIKACIA_PRIHLASENIE, null);
+            }
+        });
+    }
+
+    @Override
     public void prihlasenie(final String email, final String heslo) {
-        Log.v(TAG, "Metoda prihlasenie bola vykonana");
+        Log.v(AutentifikaciaUdaje.TAG, "Metoda prihlasenie bola vykonana");
 
         Requesty requesty = UdalostiAdresa.initAdresu();
         requesty.prihlasenie(email, heslo, UUID.randomUUID().toString()).enqueue(new Callback<Autentifikator>() {
@@ -101,6 +137,7 @@ public class AutentifikaciaUdaje implements AutentifikaciaImplementacia {
             @Override
             public void onResponse(@NonNull Call<Autentifikator> call, @NonNull Response<Autentifikator> response) {
                 HashMap<String, String> udaje = new HashMap<>();
+                assert response.body() != null;
                 if (response.body().getChyba()) {
                     udaje.put("email", email);
                     if (response.body().getValidacia().getEmail() != null) {
@@ -128,7 +165,7 @@ public class AutentifikaciaUdaje implements AutentifikaciaImplementacia {
 
     @Override
     public void registracia(String meno, String email, String heslo, String potvrd) {
-        Log.v(TAG, "Metoda registracia bola vykonana");
+        Log.v(AutentifikaciaUdaje.TAG, "Metoda registracia bola vykonana");
 
         Requesty requesty = UdalostiAdresa.initAdresu();
         requesty.registracia(meno, email, heslo, potvrd, UUID.randomUUID().toString()).enqueue(new Callback<Autentifikator>() {
@@ -136,6 +173,7 @@ public class AutentifikaciaUdaje implements AutentifikaciaImplementacia {
             public void onResponse(@NonNull Call<Autentifikator> call, @NonNull Response<Autentifikator> response) {
                 GeoAdresa.initNanovo();
 
+                assert response.body() != null;
                 if (response.body().getChyba()) {
                     if (response.body().getValidacia().getOznam() != null) {
                         odpovedeOdServera.odpovedServera(response.body().getValidacia().getOznam(), Nastavenia.AUTENTIFIKACIA_REGISTRACIA, null);
@@ -162,19 +200,19 @@ public class AutentifikaciaUdaje implements AutentifikaciaImplementacia {
 
     @Override
     public void ulozPrihlasovacieUdajeDoDatabazy(String email, String heslo) {
-        Log.v(TAG, "Metoda ulozPrihlasovacieUdajeDoDatabazy bola vykonana");
+        Log.v(AutentifikaciaUdaje.TAG, "Metoda ulozPrihlasovacieUdajeDoDatabazy bola vykonana");
 
-        if (databaza.pouzivatelskeUdaje()) {
-            databaza.aktualizujPouzivatelskeUdaje(new Pouzivatel(email, heslo));
+        if (this.databaza.pouzivatelskeUdaje()) {
+            this.databaza.aktualizujPouzivatelskeUdaje(new Pouzivatel(email, heslo));
         } else {
-            databaza.novePouzivatelskeUdaje(new Pouzivatel(email, heslo));
+            this.databaza.novePouzivatelskeUdaje(new Pouzivatel(email, heslo));
         }
     }
 
     @Override
     public void ucetJeNePristupny(String email) {
-        Log.v(TAG, "Metoda ucetJeNePristupny bola vykonana");
+        Log.v(AutentifikaciaUdaje.TAG, "Metoda ucetJeNePristupny bola vykonana");
 
-        databaza.odstranPouzivatelskeUdaje(email);
+        this.databaza.odstranPouzivatelskeUdaje(email);
     }
 }

@@ -11,6 +11,8 @@ public class PoskitovelObsahu extends LinearLayoutManager {
 
     public PoskitovelObsahu(Context context) {
         super(context);
+
+        Log.v(PoskitovelObsahu.TAG, "Metoda PoskitovelObsahu bola vykonana");
     }
 
     @Override
@@ -18,7 +20,7 @@ public class PoskitovelObsahu extends LinearLayoutManager {
         try {
             super.onLayoutChildren(recycler, state);
         } catch (IndexOutOfBoundsException e) {
-            Log.e(TAG, "Pri poskitovanie obsahu nastala chyba");
+            Log.e(PoskitovelObsahu.TAG, "Pri poskitovanie obsahu nastala chyba");
         }
     }
 }

@@ -4,6 +4,7 @@ import com.mate.bence.udalosti.Udaje.Siet.Model.Akcia.Akcia;
 import com.mate.bence.udalosti.Udaje.Siet.Model.Autentifikator.Autentifikator;
 import com.mate.bence.udalosti.Udaje.Siet.Model.Obsah.Obsah;
 import com.mate.bence.udalosti.Udaje.Siet.Model.Pozicia.LocationIQ;
+import com.mate.bence.udalosti.Udaje.Siet.Model.Pozicia.Pozicia;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -85,4 +86,7 @@ public interface Requesty {
             @Query("lon") double zemepisnaDlzka,
             @Query("format") String format,
             @Query("accept-language") String jazyk);
+
+    @GET("json")
+    Call<Pozicia> pozicia();
 }

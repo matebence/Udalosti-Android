@@ -47,8 +47,9 @@ import java.util.TreeMap;
 
 public class Zaujmy extends Fragment implements KommunikaciaData, KommunikaciaOdpoved, OdstranenieZaujmu, ZvolenaUdalost, Aktualizator {
 
-    private String email, token;
+    private static final String TAG = Zaujmy.class.getName();
 
+    private String email, token;
     private List<Udalost> obsahZaujmov;
     private List<Zaujem> mesiaceZaujmov;
 
@@ -71,34 +72,36 @@ public class Zaujmy extends Fragment implements KommunikaciaData, KommunikaciaOd
     public void onResume() {
         super.onResume();
 
-        if (obsahZaujmov.isEmpty()) {
+        if (this.obsahZaujmov.isEmpty()) {
             this.nacitavanie.setVisibility(View.VISIBLE);
-            udalostiUdaje.zoznamZaujmov(email, token);
+            this.udalostiUdaje.zoznamZaujmov(this.email, this.token);
         }
     }
 
     @Override
     public void dataZoServera(String odpoved, String od, ArrayList udaje) {
+        Log.v(Zaujmy.TAG, "Metoda dataZoServera - Zaujmy bola vykonana");
+
         switch (od) {
             case Nastavenia.ZAUJEM_ZOZNAM:
                 if (odpoved.equals(Nastavenia.VSETKO_V_PORIADKU)) {
-                    chybaZaujmov.setVisibility(View.GONE);
+                    this.chybaZaujmov.setVisibility(View.GONE);
 
-                    chybaZaujmovObrazok.setBackgroundResource(R.drawable.ic_udalosti);
-                    chybaZaujmovText.setText(getResources().getString(R.string.zaujmy_ziadne_zaujmy));
+                    this.chybaZaujmovObrazok.setBackgroundResource(R.drawable.ic_udalosti);
+                    this.chybaZaujmovText.setText(getResources().getString(R.string.zaujmy_ziadne_zaujmy));
 
                     if (udaje != null) {
-                        chybaZaujmov.setVisibility(View.GONE);
-                        ziskajZaujmov(udaje);
+                        this.chybaZaujmov.setVisibility(View.GONE);
+                        ziskajZaujmy(udaje);
                     } else {
-                        chybaZaujmov.setVisibility(View.VISIBLE);
+                        this.chybaZaujmov.setVisibility(View.VISIBLE);
                     }
-                    zoznamZaujmov.setItemViewCacheSize(obsahZaujmov.size());
+                    this.zoznamZaujmov.setItemViewCacheSize(obsahZaujmov.size());
                 } else {
-                    chybaZaujmov.setVisibility(View.VISIBLE);
+                    this.chybaZaujmov.setVisibility(View.VISIBLE);
 
-                    chybaZaujmovObrazok.setBackgroundResource(R.drawable.ic_wifi);
-                    chybaZaujmovText.setText(getResources().getString(R.string.chyba_ziadne_spojenie));
+                    this.chybaZaujmovObrazok.setBackgroundResource(R.drawable.ic_spojenie);
+                    this.chybaZaujmovText.setText(getResources().getString(R.string.chyba_spojenie_zlyhalo));
                 }
                 break;
         }
@@ -109,6 +112,8 @@ public class Zaujmy extends Fragment implements KommunikaciaData, KommunikaciaOd
 
     @Override
     public void odpovedServera(String odpoved, String od, HashMap<String, String> udaje) {
+        Log.v(Zaujmy.TAG, "Metoda odpovedServera - Zaujmy bola vykonana");
+
         switch (od) {
             case Nastavenia.ZAUJEM_ODSTRANENIE:
                 if (odpoved.equals(Nastavenia.VSETKO_V_PORIADKU)) {
@@ -127,10 +132,12 @@ public class Zaujmy extends Fragment implements KommunikaciaData, KommunikaciaOd
 
     @Override
     public void podrobnostiUdalosti(int pozicia, Udalost udalost) {
+        Log.v(Zaujmy.TAG, "Metoda podrobnostiUdalosti - Zaujmy bola vykonana");
+
         Intent zvolenaUdalost = new Intent(getActivity(), Podrobnosti.class);
 
-        zvolenaUdalost.putExtra("email", email);
-        zvolenaUdalost.putExtra("token", token);
+        zvolenaUdalost.putExtra("email", this.email);
+        zvolenaUdalost.putExtra("token", this.token);
 
         zvolenaUdalost.putExtra("idUdalost", udalost.getIdUdalost());
         zvolenaUdalost.putExtra("zaujemUdalosti", udalost.getZaujem());
@@ -156,9 +163,11 @@ public class Zaujmy extends Fragment implements KommunikaciaData, KommunikaciaOd
 
     @Override
     public void odstranit(final RecyclerView.ViewHolder viewHolder, int smer, final int pozicia) {
+        Log.v(Zaujmy.TAG, "Metoda odstranit - Zaujmy bola vykonana");
+
         if (viewHolder instanceof ZaujemAdapter.MesiacZaujmovHolder) {
-            final MesiacZaujmov mesiacZaujmov = (MesiacZaujmov) mesiaceZaujmov.get(pozicia);
-            zaujemAdapter.odstranZaujem(viewHolder.getAdapterPosition());
+            final MesiacZaujmov mesiacZaujmov = (MesiacZaujmov) this.mesiaceZaujmov.get(pozicia);
+            this.zaujemAdapter.odstranZaujem(viewHolder.getAdapterPosition());
 
             if (Pripojenie.pripojenieExistuje(getContext())) {
                 new DialogPotvrdeni(getActivity(), getResources().getString(R.string.zaujmy_odstranenie_tiltul), getResources().getString(R.string.zaujmy_odstranenie_text) + " " + mesiacZaujmov.getUdalost().getNazov() + "?", getResources().getString(R.string.dialog_potvrdeni_odstranit_zaujem_a), getResources().getString(R.string.dialog_potvrdeni_odstranit_zaujem_b), new DialogOdpoved() {
@@ -182,14 +191,18 @@ public class Zaujmy extends Fragment implements KommunikaciaData, KommunikaciaOd
 
     @Override
     public void aktualizujObsahZaujmov() {
-        mesiaceZaujmov.clear();
-        obsahZaujmov.clear();
+        Log.v(Zaujmy.TAG, "Metoda aktualizujObsahZaujmov - Zaujmy bola vykonana");
 
-        zaujemAdapter.notifyItemRangeRemoved(0, obsahZaujmov.size());
-        udalostiUdaje.zoznamZaujmov(email, token);
+        this.mesiaceZaujmov.clear();
+        this.obsahZaujmov.clear();
+
+        this.zaujemAdapter.notifyItemRangeRemoved(0, this.obsahZaujmov.size());
+        this.udalostiUdaje.zoznamZaujmov(this.email, this.token);
     }
 
     private View init(View view) {
+        Log.v(Zaujmy.TAG, "Metoda init - Zaujmy bola vykonana");
+
         AktualizatorObsahu.zaujmy().nastav(this);
 
         this.email = getArguments().getString("email");
@@ -211,7 +224,9 @@ public class Zaujmy extends Fragment implements KommunikaciaData, KommunikaciaOd
         return view;
     }
 
-    protected void ziskajZaujmov(ArrayList<Udalost> zaujmy) {
+    protected void ziskajZaujmy(ArrayList<Udalost> zaujmy) {
+        Log.v(Zaujmy.TAG, "Metoda ziskajZaujmy bola vykonana");
+
         this.obsahZaujmov.addAll(zaujmy);
 
         for (String skupina : zoSkupinovanieUdajov(zaujmy).keySet()) {
@@ -226,24 +241,28 @@ public class Zaujmy extends Fragment implements KommunikaciaData, KommunikaciaOd
             }
         }
 
-        zaujemAdapter.notifyItemRangeInserted(0, mesiaceZaujmov.size());
+        this.zaujemAdapter.notifyItemRangeInserted(0, mesiaceZaujmov.size());
     }
 
     private void nastavZoznamZaujmov() {
+        Log.v(Zaujmy.TAG, "Metoda nastavZoznamZaujmov bola vykonana");
+
         PoskitovelObsahu poskitovelObsahu = new PoskitovelObsahu(getContext());
 
-        zaujemAdapter = new ZaujemAdapter(mesiaceZaujmov);
-        zaujemAdapter.zvolenaUdalost(this);
+        this.zaujemAdapter = new ZaujemAdapter(mesiaceZaujmov);
+        this.zaujemAdapter.zvolenaUdalost(this);
 
-        zoznamZaujmov.setLayoutManager(poskitovelObsahu);
-        zoznamZaujmov.setItemAnimator(new DefaultItemAnimator());
-        zoznamZaujmov.setAdapter(zaujemAdapter);
+        this.zoznamZaujmov.setLayoutManager(poskitovelObsahu);
+        this.zoznamZaujmov.setItemAnimator(new DefaultItemAnimator());
+        this.zoznamZaujmov.setAdapter(this.zaujemAdapter);
 
         ItemTouchHelper.SimpleCallback zaujemAdapterGesto = new ZaujemAdapterGesto(0, ItemTouchHelper.LEFT, this);
         new ItemTouchHelper(zaujemAdapterGesto).attachToRecyclerView(zoznamZaujmov);
     }
 
     private TreeMap<String, List<Udalost>> zoSkupinovanieUdajov(List<Udalost> udaje) {
+        Log.v(Zaujmy.TAG, "Metoda zoSkupinovanieUdajov bola vykonana");
+
         TreeMap<String, List<Udalost>> zaujem = new TreeMap<>(
                 new Comparator<String>() {
                     public int compare(String a, String b) {

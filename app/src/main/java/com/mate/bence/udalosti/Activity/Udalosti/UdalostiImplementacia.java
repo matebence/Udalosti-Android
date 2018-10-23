@@ -5,7 +5,7 @@ import java.util.HashMap;
 public interface UdalostiImplementacia {
     void zoznamUdalosti(String email, String stat, String token);
 
-    void zoznamUdalostiPodlaPozicie(String email, String stat, String okres, String mesto, String token);
+    void zoznamUdalostiPodlaPozicie(String email, String stat, String okres, String pozicia, String token);
 
     void automatickePrihlasenieVypnute(String email);
 

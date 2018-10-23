@@ -3,6 +3,7 @@ package com.mate.bence.udalosti.Activity.Autentifikacia.Fragment;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.mate.bence.udalosti.R;
 public class Prihlasenie extends Fragment implements View.OnClickListener {
 
     private static final String TAG = Prihlasenie.class.getName();
+
     private AutentifikaciaOvladanie autentifikaciaOvladanie;
     private EditText email, heslo;
 
@@ -28,9 +30,9 @@ public class Prihlasenie extends Fragment implements View.OnClickListener {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            autentifikaciaOvladanie = (AutentifikaciaOvladanie) activity;
+            this.autentifikaciaOvladanie = (AutentifikaciaOvladanie) activity;
         } catch (ClassCastException e) {
-            throw new ClassCastException(TAG + " Interface AutentifikaciaOvladanie nie je implementovana");
+            throw new ClassCastException(Prihlasenie.TAG + " Interface AutentifikaciaOvladanie nie je implementovana");
         }
     }
 
@@ -38,15 +40,20 @@ public class Prihlasenie extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.prihlasit_sa:
-                autentifikaciaOvladanie.tlacidloPrihlasitSa(email.getText().toString(), heslo.getText().toString());
+                this.email.setFocusable(false);
+                this.heslo.setFocusable(false);
+                this.autentifikaciaOvladanie.tlacidloPrihlasitSa(this.email, this.heslo);
+
                 break;
             case R.id.registrovat_sa:
-                autentifikaciaOvladanie.registracia();
+                this.autentifikaciaOvladanie.registracia();
                 break;
         }
     }
 
     private View init(View view) {
+        Log.v(Prihlasenie.TAG, "Metoda init - Prihlasenie bola vykonana");
+
         Button prihlasenie = view.findViewById(R.id.prihlasit_sa);
         prihlasenie.setOnClickListener(this);
 

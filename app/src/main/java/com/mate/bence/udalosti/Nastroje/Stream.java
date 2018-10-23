@@ -1,5 +1,6 @@
 package com.mate.bence.udalosti.Nastroje;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,11 +17,18 @@ import java.io.InputStream;
 
 public class Stream extends AsyncTask<String, Void, Bitmap> {
 
+    private static final String TAG = Stream.class.getName();
+
+    @SuppressLint("StaticFieldLeak")
     private ImageView obrazok;
+    @SuppressLint("StaticFieldLeak")
     private ProgressBar nacitavanie;
+    @SuppressLint("StaticFieldLeak")
     private Context context;
 
     public Stream(ImageView obrazok, ProgressBar nacitavanie, Context context) {
+        Log.v(Stream.TAG, "Metoda Stream bola vykonana");
+
         this.obrazok = obrazok;
         this.context = context;
         this.nacitavanie = nacitavanie;
@@ -29,7 +37,7 @@ public class Stream extends AsyncTask<String, Void, Bitmap> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        nacitavanie.setVisibility(View.VISIBLE);
+        this.nacitavanie.setVisibility(View.VISIBLE);
     }
 
     protected Bitmap doInBackground(String... adresa) {
@@ -39,7 +47,7 @@ public class Stream extends AsyncTask<String, Void, Bitmap> {
             InputStream zdroj = new java.net.URL(adresaObrazka).openStream();
             bitmap = BitmapFactory.decodeStream(zdroj);
         } catch (Exception e) {
-            bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.obrazok_nenajdeni);
+            bitmap = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.obrazok_nenajdeni);
             Log.e("Chyba ", e.getMessage());
             e.printStackTrace();
         }
@@ -47,7 +55,7 @@ public class Stream extends AsyncTask<String, Void, Bitmap> {
     }
 
     protected void onPostExecute(Bitmap result) {
-        nacitavanie.setVisibility(View.GONE);
-        obrazok.setImageBitmap(result);
+        this.nacitavanie.setVisibility(View.GONE);
+        this.obrazok.setImageBitmap(result);
     }
 }

@@ -1,22 +1,22 @@
 package com.mate.bence.udalosti.Udaje.Data;
 
-public class SQLiteTabulky {
+class SQLiteTabulky {
 
-    public static class Miesto {
-        public static final String NAZOV_TABULKY = "miesto";
-        public static final String ID_STLPCA = "_id";
-        public static final String POZICIA = "pozicia";
-        public static final String OKRES = "okres";
-        public static final String KRAJ = "kraj";
-        public static final String PSC = "psc";
-        public static final String STAT = "stat";
-        public static final String ZNAK_STATU = "znak_statu";
+    static class Miesto {
+        static final String NAZOV_TABULKY = "miesto";
+        static final String ID_STLPCA = "_id";
+        static final String POZICIA = "pozicia";
+        static final String OKRES = "okres";
+        static final String KRAJ = "kraj";
+        static final String PSC = "psc";
+        static final String STAT = "stat";
+        static final String ZNAK_STATU = "znak_statu";
     }
 
-    public static class Pouzivatel {
-        public static final String NAZOV_TABULKY = "pouzivatel";
-        public static final String ID_STLPCA = "_id";
-        public static final String EMAIL = "email";
-        public static final String HESLO = "heslo";
+    static class Pouzivatel {
+        static final String NAZOV_TABULKY = "pouzivatel";
+        static final String ID_STLPCA = "_id";
+        static final String EMAIL = "email";
+        static final String HESLO = "heslo";
     }
 }

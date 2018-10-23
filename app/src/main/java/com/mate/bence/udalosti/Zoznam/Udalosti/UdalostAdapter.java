@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,11 +23,15 @@ import java.util.List;
 
 public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostHolder> {
 
+    private static final String TAG = UdalostAdapter.class.getName();
+
     private List<Udalost> zoznamUdalosti;
     private ZvolenaUdalost zvolenaUdalost;
     private Context context;
 
     public UdalostAdapter(List<Udalost> zoznamUdalosti, Context context) {
+        Log.v(UdalostAdapter.TAG, "Metoda UdalostAdapter bola vykonana");
+
         this.context = context;
         this.zoznamUdalosti = zoznamUdalosti;
     }
@@ -63,12 +68,16 @@ public class UdalostAdapter extends RecyclerView.Adapter<UdalostAdapter.UdalostH
     }
 
     private void nacitajObsah(View view) {
+        Log.v(UdalostAdapter.TAG, "Metoda nacitajObsah bola vykonana");
+
         ScaleAnimation animacia = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         animacia.setDuration(350);
         view.startAnimation(animacia);
     }
 
     public void zvolenaUdalost(ZvolenaUdalost zvolenaUdalost) {
+        Log.v(UdalostAdapter.TAG, "Metoda zvolenaUdalost bola vykonana");
+
         this.zvolenaUdalost = zvolenaUdalost;
     }
 

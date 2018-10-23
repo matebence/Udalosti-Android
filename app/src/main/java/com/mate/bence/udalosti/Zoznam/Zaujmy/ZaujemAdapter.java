@@ -1,7 +1,9 @@
 package com.mate.bence.udalosti.Zoznam.Zaujmy;
 
+import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +14,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mate.bence.udalosti.R;
-import com.mate.bence.udalosti.Zoznam.Udalost;
 import com.mate.bence.udalosti.Zoznam.Udalosti.ZvolenaUdalost;
 import com.mate.bence.udalosti.Zoznam.Zaujmy.Struktura.Mesiac;
 import com.mate.bence.udalosti.Zoznam.Zaujmy.Struktura.MesiacZaujmov;
@@ -22,10 +23,14 @@ import java.util.List;
 
 public class ZaujemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    private static final String TAG = ZaujemAdapter.class.getName();
+
     private List<Zaujem> zoznamZaujmov;
     private ZvolenaUdalost zvolenaUdalost;
 
     public ZaujemAdapter(List<Zaujem> zoznamZaujmov) {
+        Log.v(ZaujemAdapter.TAG, "Metoda ZaujemAdapter bola vykonana");
+
         this.zoznamZaujmov = zoznamZaujmov;
     }
 
@@ -50,6 +55,7 @@ public class ZaujemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         return zaujmy;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
         switch (viewHolder.getItemViewType()) {
@@ -76,26 +82,32 @@ public class ZaujemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public int getItemCount() {
-        return zoznamZaujmov != null ? zoznamZaujmov.size() : 0;
+        return this.zoznamZaujmov != null ? this.zoznamZaujmov.size() : 0;
     }
 
     @Override
     public int getItemViewType(int position) {
-        return zoznamZaujmov.get(position).struktura();
+        return this.zoznamZaujmov.get(position).struktura();
     }
 
     private void nacitajObsah(View view) {
+        Log.v(ZaujemAdapter.TAG, "Metoda nacitajObsah bola vykonana");
+
         ScaleAnimation animacia = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         animacia.setDuration(350);
         view.startAnimation(animacia);
     }
 
     public void zvolenaUdalost(ZvolenaUdalost zvolenaUdalost) {
+        Log.v(ZaujemAdapter.TAG, "Metoda zvolenaUdalost bola vykonana");
+
         this.zvolenaUdalost = zvolenaUdalost;
     }
 
     public void odstranZaujem(int pozicia) {
-        zoznamZaujmov.remove(pozicia);
+        Log.v(ZaujemAdapter.TAG, "Metoda odstranZaujem bola vykonana");
+
+        this.zoznamZaujmov.remove(pozicia);
         notifyItemRemoved(pozicia);
     }
 
@@ -112,8 +124,8 @@ public class ZaujemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     public class MesiacZaujmovHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+        RelativeLayout odstranitZaujem;
         private TextView nazov, den, mesto, ulica;
-        public RelativeLayout odstranitZaujem;
         public LinearLayout zaujem;
 
         private MesiacZaujmovHolder(View view) {

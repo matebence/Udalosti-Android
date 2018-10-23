@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.mate.bence.udalosti.Udaje.Data.Tabulky.Miesto;
 import com.mate.bence.udalosti.Udaje.Data.Tabulky.Pouzivatel;
@@ -14,11 +15,13 @@ import java.util.HashMap;
 
 public class SQLiteDatabaza extends SQLiteOpenHelper implements SQLDateImplementacia{
 
+    private static final String TAG = SQLiteDatabaza.class.getName();
+
     private static final int VERZIA_DATABAZY = 1;
     private static final String NAZOV_DATABAZY = "udalosti";
 
     public SQLiteDatabaza(Context context) {
-        super(context, NAZOV_DATABAZY, null, VERZIA_DATABAZY);
+        super(context, SQLiteDatabaza.NAZOV_DATABAZY, null, SQLiteDatabaza.VERZIA_DATABAZY);
     }
 
     @Override
@@ -52,6 +55,8 @@ public class SQLiteDatabaza extends SQLiteOpenHelper implements SQLDateImplement
     }
 
     public void novePouzivatelskeUdaje(Pouzivatel pouzivatel) {
+        Log.v(SQLiteDatabaza.TAG, "Metoda novePouzivatelskeUdaje bola vykonana");
+
         ContentValues data = new ContentValues();
         data.put(SQLiteTabulky.Pouzivatel.EMAIL, pouzivatel.getEmail());
         data.put(SQLiteTabulky.Pouzivatel.HESLO, pouzivatel.getHeslo());
@@ -61,6 +66,8 @@ public class SQLiteDatabaza extends SQLiteOpenHelper implements SQLDateImplement
     }
 
     public void aktualizujPouzivatelskeUdaje(Pouzivatel pouzivatel) {
+        Log.v(SQLiteDatabaza.TAG, "Metoda aktualizujPouzivatelskeUdaje bola vykonana");
+
         ContentValues data = new ContentValues();
         data.put(SQLiteTabulky.Pouzivatel.EMAIL, pouzivatel.getEmail());
         data.put(SQLiteTabulky.Pouzivatel.HESLO, pouzivatel.getHeslo());
@@ -73,6 +80,8 @@ public class SQLiteDatabaza extends SQLiteOpenHelper implements SQLDateImplement
     }
 
     public void odstranPouzivatelskeUdaje(String email) {
+        Log.v(SQLiteDatabaza.TAG, "Metoda odstranPouzivatelskeUdaje bola vykonana");
+
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         sqLiteDatabase.delete(
                 SQLiteTabulky.Pouzivatel.NAZOV_TABULKY,
@@ -81,6 +90,8 @@ public class SQLiteDatabaza extends SQLiteOpenHelper implements SQLDateImplement
     }
 
     public boolean pouzivatelskeUdaje() {
+        Log.v(SQLiteDatabaza.TAG, "Metoda pouzivatelskeUdaje bola vykonana");
+
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         String[] stlpce = {SQLiteTabulky.Pouzivatel.EMAIL};
         @SuppressLint("Recycle")
@@ -100,6 +111,8 @@ public class SQLiteDatabaza extends SQLiteOpenHelper implements SQLDateImplement
     }
 
     public HashMap<String, String> vratAktualnehoPouzivatela() {
+        Log.v(SQLiteDatabaza.TAG, "Metoda vratAktualnehoPouzivatela bola vykonana");
+
         HashMap<String, String> pouzivatelskeUdaje;
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         String[] stlpce = {SQLiteTabulky.Pouzivatel.EMAIL, SQLiteTabulky.Pouzivatel.HESLO};
@@ -125,6 +138,8 @@ public class SQLiteDatabaza extends SQLiteOpenHelper implements SQLDateImplement
     }
 
     public void noveMiestoPrihlasenia(Miesto miesto) {
+        Log.v(SQLiteDatabaza.TAG, "Metoda noveMiestoPrihlasenia bola vykonana");
+
         ContentValues data = new ContentValues();
         data.put(SQLiteTabulky.Miesto.POZICIA, miesto.getPozicia());
         data.put(SQLiteTabulky.Miesto.OKRES, miesto.getOkres());
@@ -138,6 +153,8 @@ public class SQLiteDatabaza extends SQLiteOpenHelper implements SQLDateImplement
     }
 
     public void aktualizujMiestoPrihlasenia(Miesto miesto) {
+        Log.v(SQLiteDatabaza.TAG, "Metoda aktualizujMiestoPrihlasenia bola vykonana");
+
         int idMiesto = 1;
         ContentValues data = new ContentValues();
         data.put(SQLiteTabulky.Miesto.POZICIA, miesto.getPozicia());
@@ -155,6 +172,8 @@ public class SQLiteDatabaza extends SQLiteOpenHelper implements SQLDateImplement
     }
 
     public boolean miestoPrihlasenia() {
+        Log.v(SQLiteDatabaza.TAG, "Metoda miestoPrihlasenia bola vykonana");
+
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         String[] stlpce = {SQLiteTabulky.Miesto.STAT};
         @SuppressLint("Recycle")
@@ -174,6 +193,8 @@ public class SQLiteDatabaza extends SQLiteOpenHelper implements SQLDateImplement
     }
 
     public HashMap<String, String> vratMiestoPrihlasenia() {
+        Log.v(SQLiteDatabaza.TAG, "Metoda vratMiestoPrihlasenia bola vykonana");
+
         HashMap<String, String> miestoPrihlasenia;
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         String[] stlpce = {SQLiteTabulky.Miesto.POZICIA, SQLiteTabulky.Miesto.OKRES,

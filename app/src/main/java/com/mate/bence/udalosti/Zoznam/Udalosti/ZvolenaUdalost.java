@@ -6,5 +6,6 @@ import com.mate.bence.udalosti.Zoznam.Udalost;
 
 public interface ZvolenaUdalost {
     void podrobnostiUdalosti(View view, int pozicia);
+
     void podrobnostiUdalosti(int pozicia, Udalost udalost);
 }

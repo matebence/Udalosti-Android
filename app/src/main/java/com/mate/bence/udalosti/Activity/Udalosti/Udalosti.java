@@ -11,6 +11,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -30,17 +31,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Udalosti extends AppCompatActivity implements KommunikaciaOdpoved, KommunikaciaData {
+public class Udalosti extends AppCompatActivity implements KommunikaciaOdpoved, KommunikaciaData, UdalostiPanel {
 
-    private UdalostiUdaje udalostiUdaje;
+    private static final String TAG = Udalosti.class.getName();
 
     public TextView titul;
     private FragmentManager fragmentManager;
 
-    private String email, token;
+    private String email, heslo, token;
+    private boolean odhlasenieZoServera = false;
+
+    private UdalostiUdaje udalostiUdaje;
     private HashMap<String, String> miestoPrihlasenia;
 
-    private boolean odhlasenieZoServera = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +52,7 @@ public class Udalosti extends AppCompatActivity implements KommunikaciaOdpoved, 
 
         if (pristup()) {
             this.udalostiUdaje = new UdalostiUdaje(this, this, getApplicationContext());
-            this.miestoPrihlasenia = udalostiUdaje.miestoPrihlasenia();
+            this.miestoPrihlasenia = this.udalostiUdaje.miestoPrihlasenia();
             this.fragmentManager = getSupportFragmentManager();
 
             spustiBezpecneOdhlasenie();
@@ -60,8 +63,9 @@ public class Udalosti extends AppCompatActivity implements KommunikaciaOdpoved, 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
         this.odhlasenieZoServera = true;
-        udalostiUdaje.odhlasenie(email);
+        this.udalostiUdaje.odhlasenie(this.email);
     }
 
     @Override
@@ -75,7 +79,7 @@ public class Udalosti extends AppCompatActivity implements KommunikaciaOdpoved, 
         int id = item.getItemId();
         switch (id) {
             case R.id.odhlasit_sa:
-                udalostiUdaje.odhlasenie(email);
+                this.udalostiUdaje.odhlasenie(email);
                 return true;
         }
         return false;
@@ -83,12 +87,14 @@ public class Udalosti extends AppCompatActivity implements KommunikaciaOdpoved, 
 
     @Override
     public void odpovedServera(String odpoved, String od, HashMap<String, String> udaje) {
+        Log.v(Udalosti.TAG, "Metoda odpovedServera - Udalosti bola vykonana");
+
         switch (od) {
             case Nastavenia.AUTENTIFIKACIA_ODHLASENIE:
                 Intent data = getIntent();
-                if (!(odhlasenieZoServera)) {
+                if (!(this.odhlasenieZoServera)) {
                     if ((data != null) && (odpoved.equals(Nastavenia.VSETKO_V_PORIADKU))) {
-                        udalostiUdaje.automatickePrihlasenieVypnute(email);
+                        this.udalostiUdaje.automatickePrihlasenieVypnute(this.email);
 
                         data.removeExtra("email");
                         data.removeExtra("heslo");
@@ -111,7 +117,17 @@ public class Udalosti extends AppCompatActivity implements KommunikaciaOdpoved, 
     public void dataZoServera(String odpoved, String od, ArrayList udaje) {
     }
 
+    @Override
+    public void aktualizujPanel(String pozicia) {
+        Log.v(Udalosti.TAG, "Metoda aktualizujPanel - Udalosti bola vykonana");
+
+        this.miestoPrihlasenia.put("pozicia", udalostiUdaje.miestoPrihlasenia().get("pozicia").toString());
+        this.titul.setText(nastavTitulKariet(getApplicationContext().getString(R.string.udalosti_okolie)+" " + pozicia));
+    }
+
     public void init() {
+        Log.v(Udalosti.TAG, "Metoda init - Udalosti bola vykonana");
+
         this.titul = findViewById(R.id.titulok);
         this.titul.setText(miestoPrihlasenia.get("stat"));
 
@@ -129,6 +145,8 @@ public class Udalosti extends AppCompatActivity implements KommunikaciaOdpoved, 
     }
 
     private boolean pristup() {
+        Log.v(Udalosti.TAG, "Metoda pristup bola vykonana");
+
         Bundle udaje = getIntent().getExtras();
         if (udaje != null) {
             if ((udaje.getString("email") == null) || (udaje.getString("heslo") == null) ||
@@ -144,6 +162,7 @@ public class Udalosti extends AppCompatActivity implements KommunikaciaOdpoved, 
                 finish();
             } else {
                 this.email = udaje.getString("email");
+                this.heslo = udaje.getString("heslo");
                 this.token = udaje.getString("token");
             }
             return true;
@@ -153,17 +172,23 @@ public class Udalosti extends AppCompatActivity implements KommunikaciaOdpoved, 
     }
 
     private void spustiBezpecneOdhlasenie() {
+        Log.v(Udalosti.TAG, "Metoda spustiBezpecneOdhlasenie bola vykonana");
+
         Intent bezpecneOdhlasenie = new Intent(getApplicationContext(), Odhlasenie.class);
-        bezpecneOdhlasenie.putExtra("email", email);
+        bezpecneOdhlasenie.putExtra("email", this.email);
         startService(bezpecneOdhlasenie);
     }
 
     private void nastavToolbar(Toolbar toolBar) {
+        Log.v(Udalosti.TAG, "Metoda nastavToolbar bola vykonana");
+
         setSupportActionBar(toolBar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
     private void nastavIkonyKartov(TabLayout karty) {
+        Log.v(Udalosti.TAG, "Metoda nastavIkonyKartov bola vykonana");
+
         int ikonyKartov[] = {R.drawable.ic_objavuj, R.drawable.ic_podla_pozicie, R.drawable.ic_zaujmy};
         for (int i = 0; i < karty.getTabCount(); i++) {
             karty.getTabAt(i).setIcon(ikonyKartov[i]);
@@ -171,18 +196,21 @@ public class Udalosti extends AppCompatActivity implements KommunikaciaOdpoved, 
     }
 
     private void nastavKarty(ViewPager viewPager) {
-        GestaKariet gestaKariet = new GestaKariet(fragmentManager);
+        Log.v(Udalosti.TAG, "Metoda nastavKarty bola vykonana");
+
+        GestaKariet gestaKariet = new GestaKariet(this.fragmentManager);
 
         Bundle bundle = new Bundle();
         Objavuj objavuj = new Objavuj();
         Lokalizator lokalizator = new Lokalizator();
         Zaujmy zaujmy = new Zaujmy();
 
-        bundle.putString("stat", miestoPrihlasenia.get("stat"));
-        bundle.putString("okres", miestoPrihlasenia.get("okres"));
-        bundle.putString("mesto", miestoPrihlasenia.get("mesto"));
-        bundle.putString("email", email);
-        bundle.putString("token", token);
+        bundle.putString("stat", this.miestoPrihlasenia.get("stat"));
+        bundle.putString("okres", this.miestoPrihlasenia.get("okres"));
+        bundle.putString("pozicia", this.miestoPrihlasenia.get("pozicia"));
+        bundle.putString("email", this.email);
+        bundle.putString("heslo", this.heslo);
+        bundle.putString("token", this.token);
 
         objavuj.setArguments(bundle);
         lokalizator.setArguments(bundle);
@@ -198,11 +226,13 @@ public class Udalosti extends AppCompatActivity implements KommunikaciaOdpoved, 
     }
 
     private String nastavTitulKariet(String nazov){
+        Log.v(Udalosti.TAG, "Metoda nastavTitulKariet bola vykonana");
+
         String[] strArray = nazov.split(" ");
         StringBuilder titul = new StringBuilder();
         for (String s : strArray) {
             String prvePismeno = s.substring(0, 1).toUpperCase() + s.substring(1);
-            titul.append(prvePismeno + " ");
+            titul.append(prvePismeno).append(" ");
         }
         return titul.toString();
     }
@@ -221,6 +251,8 @@ public class Udalosti extends AppCompatActivity implements KommunikaciaOdpoved, 
                         titul.setText(nastavTitulKariet(miestoPrihlasenia.get("okres")));
                     } else if (miestoPrihlasenia.get("kraj") != null) {
                         titul.setText(nastavTitulKariet(miestoPrihlasenia.get("kraj")));
+                    }else{
+                        titul.setText(getString(R.string.chyba_pozicia_neurcena));
                     }
                     break;
                 case 2:
@@ -266,7 +298,7 @@ public class Udalosti extends AppCompatActivity implements KommunikaciaOdpoved, 
 
             bundle.putString("stat", miestoPrihlasenia.get("stat"));
             bundle.putString("okres", miestoPrihlasenia.get("okres"));
-            bundle.putString("mesto", miestoPrihlasenia.get("mesto"));
+            bundle.putString("pozicia", miestoPrihlasenia.get("pozicia"));
             bundle.putString("email", email);
             bundle.putString("token", token);
 
@@ -287,17 +319,17 @@ public class Udalosti extends AppCompatActivity implements KommunikaciaOdpoved, 
 
         @Override
         public int getCount() {
-            return fragmenty.size();
+            return this.fragmenty.size();
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return nazvyFragmentov.get(position);
+            return this.nazvyFragmentov.get(position);
         }
 
         void nacitajFragment(Fragment fragment, String titul) {
-            fragmenty.add(fragment);
-            nazvyFragmentov.add(titul);
+            this.fragmenty.add(fragment);
+            this.nazvyFragmentov.add(titul);
         }
     }
 }
