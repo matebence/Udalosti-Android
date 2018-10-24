@@ -142,7 +142,7 @@ public class UdalostiUdaje implements UdalostiImplementacia {
 
             @Override
             public void onFailure(@NonNull Call<Obsah> call, @NonNull Throwable t) {
-                odpovedeOdServera.odpovedServera(context.getString(R.string.chyba_servera), Nastavenia.ZAUJEM_POTVRD, null);
+                udajeZoServera.dataZoServera(context.getString(R.string.chyba_servera), Nastavenia.ZAUJEM_POTVRD, null);
             }
         });
     }
