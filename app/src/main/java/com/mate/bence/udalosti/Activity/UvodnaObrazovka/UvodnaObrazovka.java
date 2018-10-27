@@ -95,7 +95,7 @@ public class UvodnaObrazovka extends AppCompatActivity implements KommunikaciaOd
                 } else {
                     podlaSpravnosti = new Intent(UvodnaObrazovka.this, Autentifikacia.class);
                     podlaSpravnosti.putExtra("neUspesnePrihlasenie", true);
-                    if (udaje.get("email") != null) {
+                    if (udaje != null) {
                         podlaSpravnosti.putExtra("email", udaje.get("email"));
                     }
                 }

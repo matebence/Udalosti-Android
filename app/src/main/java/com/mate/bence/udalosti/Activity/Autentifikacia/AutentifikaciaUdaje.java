@@ -158,7 +158,9 @@ public class AutentifikaciaUdaje implements AutentifikaciaImplementacia {
 
             @Override
             public void onFailure(@NonNull Call<Autentifikator> call, @NonNull Throwable t) {
-                odpovedeOdServera.odpovedServera(context.getString(R.string.chyba_servera), Nastavenia.AUTENTIFIKACIA_PRIHLASENIE, null);
+                HashMap<String, String> udaje = new HashMap<>();
+                udaje.put("email", email);
+                odpovedeOdServera.odpovedServera(context.getString(R.string.chyba_servera), Nastavenia.AUTENTIFIKACIA_PRIHLASENIE, udaje);
             }
         });
     }
