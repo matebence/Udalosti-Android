@@ -92,9 +92,14 @@ public class Zaujmy extends Fragment implements KommunikaciaData, KommunikaciaOd
 
                     if (udaje != null) {
                         this.chybaZaujmov.setVisibility(View.GONE);
+                        this.zoznamZaujmov.setVisibility(View.VISIBLE);
+
                         ziskajZaujmy(udaje);
                     } else {
                         this.chybaZaujmov.setVisibility(View.VISIBLE);
+                        this.chybaZaujmovText.setText(getResources().getString(R.string.zaujmy_ziadne_zaujmy));
+
+                        this.zoznamZaujmov.setVisibility(View.GONE);
                     }
                     this.zoznamZaujmov.setItemViewCacheSize(obsahZaujmov.size());
                 } else {

@@ -9,7 +9,7 @@ public class UdalostiAdresa {
     private UdalostiAdresa() {
     }
 
-    private static final String ADRESA = "https://bmate18.student.ki.fpv.ukf.sk/";
+    private static final String ADRESA = "http://app-udalosti.8u.cz/index.php/";
 
     public static Requesty initAdresu() {
         Log.v(UdalostiAdresa.TAG, "Metoda UdalostiAdresa initAdresu bola vykonana");

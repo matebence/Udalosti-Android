@@ -41,7 +41,10 @@ public class Stream extends AsyncTask<String, Void, Bitmap> {
     }
 
     protected Bitmap doInBackground(String... adresa) {
-        String adresaObrazka = UdalostiAdresa.getAdresa() + "udalosti" + "/" + adresa[0];
+        String adresaObrazka =
+                UdalostiAdresa.getAdresa()
+                        .substring(0,UdalostiAdresa.getAdresa().length()-"index.php/".length()) + adresa[0];
+
         Bitmap bitmap;
         try {
             InputStream zdroj = new java.net.URL(adresaObrazka).openStream();

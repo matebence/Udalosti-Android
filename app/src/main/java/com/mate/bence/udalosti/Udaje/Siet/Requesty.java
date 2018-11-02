@@ -16,19 +16,19 @@ import retrofit2.http.Query;
 public interface Requesty {
 
     @FormUrlEncoded
-    @POST("udalosti/index.php/prihlasenie/prihlasit")
+    @POST("prihlasenie/prihlasit")
     Call<Autentifikator> prihlasenie(
             @Field("email") String email,
             @Field("heslo") String heslo,
             @Field("pokus_o_prihlasenie") String prihlasenie);
 
     @FormUrlEncoded
-    @POST("udalosti/index.php/prihlasenie/odhlasit")
+    @POST("prihlasenie/odhlasit")
     Call<Autentifikator> odhlasenie(
             @Field("email") String email);
 
     @FormUrlEncoded
-    @POST("udalosti/index.php/registracia")
+    @POST("registracia")
     Call<Autentifikator> registracia(
             @Field("meno") String meno,
             @Field("email") String email,
@@ -37,14 +37,14 @@ public interface Requesty {
             @Field("nova_registracia") String registracia);
 
     @FormUrlEncoded
-    @POST("udalosti/index.php/udalosti")
+    @POST("udalosti")
     Call<Obsah> udalosti(
             @Field("email") String email,
             @Field("stat") String stat,
             @Field("token") String token);
 
     @FormUrlEncoded
-    @POST("udalosti/index.php/udalosti/zoznam_podla_pozicie")
+    @POST("udalosti/zoznam_podla_pozicie")
     Call<Obsah> udalostiPodlaPozicie(
             @Field("email") String email,
             @Field("stat") String stat,
@@ -53,27 +53,27 @@ public interface Requesty {
             @Field("token") String token);
 
     @FormUrlEncoded
-    @POST("udalosti/index.php/zaujmy/zoznam")
+    @POST("zaujmy/zoznam")
     Call<Obsah> zaujmy(
             @Field("email") String email,
             @Field("token") String token);
 
     @FormUrlEncoded
-    @POST("udalosti/index.php/zaujmy")
+    @POST("zaujmy")
     Call<Akcia> zaujem(
             @Field("email") String email,
             @Field("token") String token,
             @Field("idUdalost") int idUdalost);
 
     @FormUrlEncoded
-    @POST("udalosti/index.php/zaujmy/potvrd")
+    @POST("zaujmy/potvrd")
     Call<Obsah> potvrd(
             @Field("email") String email,
             @Field("token") String token,
             @Field("idUdalost") int idUdalost);
 
     @FormUrlEncoded
-    @POST("udalosti/index.php/zaujmy/odstran")
+    @POST("zaujmy/odstran")
     Call<Akcia> odstranZaujem(
             @Field("email") String email,
             @Field("token") String token,
