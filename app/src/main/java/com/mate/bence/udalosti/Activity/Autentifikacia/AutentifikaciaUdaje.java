@@ -55,21 +55,33 @@ public class AutentifikaciaUdaje implements AutentifikaciaImplementacia {
                 if (response.body() != null) {
                     if (response.body().getPozicia().getPozicia() != null) {
                         pozicia = response.body().getPozicia().getPozicia();
+                    }else{
+                        pozicia = "pozicia neurcena";
                     }
                     if (response.body().getPozicia().getOkres() != null) {
                         okres = response.body().getPozicia().getOkres();
+                    }else{
+                        okres = "okres neurcena";
                     }
                     if (response.body().getPozicia().getKraj() != null) {
                         kraj = response.body().getPozicia().getKraj();
+                    }else{
+                        kraj = "kraj neurcena";
                     }
                     if (response.body().getPozicia().getPsc() != null) {
                         psc = response.body().getPozicia().getPsc();
+                    }else{
+                        psc = "psc neurcena";
                     }
                     if (response.body().getPozicia().getStat() != null) {
                         stat = response.body().getPozicia().getStat();
+                    }else{
+                        stat = "stat neurcena";
                     }
                     if (response.body().getPozicia().getZnakStatu() != null) {
                         znakStatu = response.body().getPozicia().getZnakStatu();
+                    }else{
+                        znakStatu = "znakStatu neurcena";
                     }
 
                     if (databaza.miestoPrihlasenia()) {
@@ -103,17 +115,12 @@ public class AutentifikaciaUdaje implements AutentifikaciaImplementacia {
             @Override
             public void onResponse(@NonNull Call<Pozicia> call, @NonNull Response<Pozicia> response) {
                 GeoAdresa.initNanovo();
-                String stat = "";
 
                 if (response.body() != null) {
-                    if (response.body().getStat() != null) {
-                        if ((response.body().getStat().equals("Slovakia")) || (response.body().getStat().equals("Slovak Republic")))
-                            stat = "Slovensko";
-                    }
                     if (databaza.miestoPrihlasenia()) {
-                        databaza.aktualizujMiestoPrihlasenia(new Miesto(null, null, null, null, stat, null));
+                        databaza.aktualizujMiestoPrihlasenia(new Miesto(null, null, null, null, response.body().getStat(), null));
                     } else {
-                        databaza.noveMiestoPrihlasenia(new Miesto(null, null, null, null, stat, null));
+                        databaza.noveMiestoPrihlasenia(new Miesto(null, null, null, null, response.body().getStat(), null));
                     }
                 }
 
