@@ -48,13 +48,14 @@ _GRADLE <br />
 <p float="left">
 <img src="https://i.imgur.com/iomM2G7.png" alt="Screenshoot Udalosti 4" width="200"/>
 <img src="https://i.imgur.com/rvIwZps.png" alt="Screenshoot Udalosti 5" width="200"/>
-<img src="https://i.imgur.com/MNFuEdh.png" alt="Screenshoot Udalosti 6" width="200"/>
+<img src="https://i.imgur.com/AfYJU6C.png" alt="Screenshoot Udalosti 6" width="200"/>
+
 </p>
 <br />
 <p float="left">
-<img src="https://i.imgur.com/wSCF968.png" alt="Screenshoot Udalosti 7" width="200"/>
-<img src="https://i.imgur.com/a0UQZN9.png" alt="Screenshoot Udalosti 8" width="200"/>
-<img src="https://i.imgur.com/AfYJU6C.png" alt="Screenshoot Udalosti 9" width="200"/>
+<img src="https://i.imgur.com/MNFuEdh.png" alt="Screenshoot Udalosti 7" width="200"/>
+<img src="https://i.imgur.com/wSCF968.png" alt="Screenshoot Udalosti 8" width="200"/>
+<img src="https://i.imgur.com/a0UQZN9.png" alt="Screenshoot Udalosti 9" width="200"/>
 </p>
 <br />
 <p float="left">
