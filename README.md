@@ -1,11 +1,11 @@
-# Aplikácia Udalosti platforma Android
+# Udalosti - Android
 
-Inštalačný súbor .apk sa nachádza v priečinku <br />
+The .apk installation file is located in the folder: <br />
 Udalosti\app\build\outputs\apk\debug\app-debug.apk <br />
 
 
 
-# Štruktúra aplikácie
+# Application structure
 
 __.idea<br />
 __app<br />
@@ -20,7 +20,7 @@ README.md<br />
 
 
 
-## Použité technológie
+## Technologies
 
 _Java <br />
 	__Threading <br />
@@ -37,7 +37,7 @@ _GRADLE <br />
 
 
 
-## Screenshooty aplikácie
+## Screenshots
 
 <p float="left">
 <img src="https://i.imgur.com/gLR611B.png" alt="Screenshoot Udalosti 1" width="200"/>
