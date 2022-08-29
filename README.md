@@ -60,5 +60,5 @@ _GRADLE <br />
 <br />
 <p float="left">
 <img src="https://raw.githubusercontent.com/matebence/Udalosti-Android/master/docs/10.png" alt="Screenshoot Udalosti 10" width="200"/>
-<img src="https://raw.githubusercontent.com/matebence/Udalosti-Android/master/docs/111.png" alt="Screenshoot Udalosti 11" width="200"/>
+<img src="https://raw.githubusercontent.com/matebence/Udalosti-Android/master/docs/11.png" alt="Screenshoot Udalosti 11" width="200"/>
 </p>
