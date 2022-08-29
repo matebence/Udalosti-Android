@@ -40,25 +40,25 @@ _GRADLE <br />
 ## Screenshots
 
 <p float="left">
-<img src="https://i.imgur.com/gLR611B.png" alt="Screenshoot Udalosti 1" width="200"/>
-<img src="https://i.imgur.com/AOJUYy6.png" alt="Screenshoot Udalosti 2" width="200"/>
-<img src="https://i.imgur.com/F3HyqMe.png" alt="Screenshoot Udalosti 3" width="200"/>
+<img src="https://raw.githubusercontent.com/matebence/Udalosti-Android/master/docs/1.png" alt="Screenshoot Udalosti 1" width="200"/>
+<img src="https://raw.githubusercontent.com/matebence/Udalosti-Android/master/docs/2.png" alt="Screenshoot Udalosti 2" width="200"/>
+<img src="https://raw.githubusercontent.com/matebence/Udalosti-Android/master/docs/3.png" alt="Screenshoot Udalosti 3" width="200"/>
 </p>
 <br />
 <p float="left">
-<img src="https://i.imgur.com/iomM2G7.png" alt="Screenshoot Udalosti 4" width="200"/>
-<img src="https://i.imgur.com/rvIwZps.png" alt="Screenshoot Udalosti 5" width="200"/>
-<img src="https://i.imgur.com/AfYJU6C.png" alt="Screenshoot Udalosti 6" width="200"/>
+<img src="https://raw.githubusercontent.com/matebence/Udalosti-Android/master/docs/4.png" alt="Screenshoot Udalosti 4" width="200"/>
+<img src="https://raw.githubusercontent.com/matebence/Udalosti-Android/master/docs/5.png" alt="Screenshoot Udalosti 5" width="200"/>
+<img src="https://raw.githubusercontent.com/matebence/Udalosti-Android/master/docs/6.png" alt="Screenshoot Udalosti 6" width="200"/>
 
 </p>
 <br />
 <p float="left">
-<img src="https://i.imgur.com/MNFuEdh.png" alt="Screenshoot Udalosti 7" width="200"/>
-<img src="https://i.imgur.com/wSCF968.png" alt="Screenshoot Udalosti 8" width="200"/>
-<img src="https://i.imgur.com/a0UQZN9.png" alt="Screenshoot Udalosti 9" width="200"/>
+<img src="https://raw.githubusercontent.com/matebence/Udalosti-Android/master/docs/7.jpg" alt="Screenshoot Udalosti 7" width="200"/>
+<img src="https://raw.githubusercontent.com/matebence/Udalosti-Android/master/docs/8.png" alt="Screenshoot Udalosti 8" width="200"/>
+<img src="https://raw.githubusercontent.com/matebence/Udalosti-Android/master/docs/9.png" alt="Screenshoot Udalosti 9" width="200"/>
 </p>
 <br />
 <p float="left">
-<img src="https://i.imgur.com/8T4L0DC.png" alt="Screenshoot Udalosti 10" width="200"/>
-<img src="https://i.imgur.com/BglqqV8.png" alt="Screenshoot Udalosti 11" width="200"/>
+<img src="https://raw.githubusercontent.com/matebence/Udalosti-Android/master/docs/10.png" alt="Screenshoot Udalosti 10" width="200"/>
+<img src="https://raw.githubusercontent.com/matebence/Udalosti-Android/master/docs/111.png" alt="Screenshoot Udalosti 11" width="200"/>
 </p>
